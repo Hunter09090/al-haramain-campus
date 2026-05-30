@@ -3,19 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>নোটিশ | আল-হারামাইন</title>
+    <title>নোটিশ বোর্ড | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f"
+        };
+        initializeApp(firebaseConfig);
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (!user) { window.location.href = "login.html"; }
+        });
+    </script>
 </head>
-<body class="bg-slate-900 text-white min-h-screen">
-    <nav class="bg-slate-950 p-4 flex justify-between items-center">
-        <h1 class="font-bold text-lg">আল-হারামাইন ক্যাম্পাস</h1>
-        <a href="index.html" class="text-green-400">Back to Home</a>
-    </nav>
-    <div class="max-w-2xl mx-auto mt-10 p-6 bg-slate-800 rounded-xl shadow-lg">
-        <h2 class="text-2xl font-bold text-green-400 mb-4">নোটিশ বোর্ড</h2>
-        <p class="text-lg leading-relaxed">
-            পবিত্র ঈদুল আযহার বন্ধ শেষে আগামী ০৬-০৬-২০২৬ তারিখ রোজ শনিবার হতে মাদ্রাসার কার্যক্রম যথাযথ শুরু হবে। মাদ্রাসার খোলার তারিখে সকলকে নির্দিষ্ট সময়ে উপস্থিত হওয়ার জন্য অনুরোধ করা হলো।
-        </p>
+<body class="bg-slate-900 text-white min-h-screen p-4">
+
+    <div class="max-w-2xl mx-auto mb-6">
+        <a href="dashboard.html" class="text-green-400 hover:text-green-300 font-bold">← ড্যাশবোর্ডে ফিরুন</a>
     </div>
+
+    <div class="max-w-2xl mx-auto space-y-4">
+        <h2 class="text-2xl font-bold text-green-400 mb-6 text-center">নোটিশ বোর্ড</h2>
+
+        <div class="bg-slate-800 p-6 rounded-2xl border-l-4 border-green-500 shadow-lg">
+            <h3 class="font-bold text-lg text-green-300">মাদ্রাসার কার্যক্রম শুরু সংক্রান্ত নোটিশ</h3>
+            <p class="text-slate-300 mt-2">পবিত্র ঈদুল আযহার বন্ধ শেষে আগামী ০৬-০৬-২০২৬ রোজ শনিবার হতে মাদ্রাসার কার্যক্রম যথাযথভাবে শুরু হবে, ইন শা আল্লাহ। সকল শিক্ষার্থীকে নির্ধারিত সময়ে মাদ্রাসায় উপস্থিত থাকার জন্য অনুরোধ করা হলো।</p>
+            <span class="text-xs text-slate-500 block mt-4">প্রকাশিত: ৩০ মে, ২০২৬</span>
+        </div>
+
+        <div class="bg-slate-800 p-6 rounded-2xl border-l-4 border-yellow-500 shadow-lg">
+            <h3 class="font-bold text-lg text-yellow-300">অর্ধ-বার্ষিক পরীক্ষার সময়সূচী</h3>
+            <p class="text-slate-300 mt-2">আগামী ১০ জুন ২০২৬ থেকে অর্ধ-বার্ষিক পরীক্ষা শুরু হবে। বিস্তারিত রুটিন পরীক্ষার নোটিশ বোর্ডে দেওয়া হলো।</p>
+            <span class="text-xs text-slate-500 block mt-4">প্রকাশিত: ৩০ মে, ২০২৬</span>
+        </div>
+    </div>
+
 </body>
 </html>
