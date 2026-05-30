@@ -5,20 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>যোগাযোগ | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        // আপনার Firebase Console থেকে কপি করা কোডটি এখানে বসান
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        // সিকিউরিটি গার্ড: লগইন করা না থাকলে login.html এ পাঠিয়ে দেবে
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "login.html";
+            }
+        });
+    </script>
 </head>
 <body class="bg-slate-900 text-white min-h-screen">
-    <nav class="bg-slate-950 p-4 flex justify-between items-center">
+    
+    <nav class="bg-slate-950 p-4 flex justify-between items-center shadow-md">
         <h1 class="font-bold text-lg">আল-হারামাইন ক্যাম্পাস</h1>
-        <a href="index.html" class="text-green-400">Back to Home</a>
+        <a href="index.html" class="text-green-400 hover:text-green-300 transition">Back to Home</a>
     </nav>
-    <div class="max-w-2xl mx-auto mt-10 p-6 bg-slate-800 rounded-xl shadow-lg">
+
+    <div class="max-w-2xl mx-auto mt-10 p-6 bg-slate-800 rounded-xl shadow-lg border border-slate-700">
         <h2 class="text-2xl font-bold text-green-400 mb-6">যোগাযোগের ঠিকানা</h2>
-        <div class="space-y-4">
+        <div class="space-y-4 text-slate-300">
             <p><strong>মাদ্রাসার নাম:</strong> আল হারামাইন মডেল মাদ্রাসা</p>
             <p><strong>ঠিকানা:</strong> সোনার পাড়া, উখিয়া, কক্সবাজার।</p>
             <p><strong>পরিচালক:</strong> +8801813979114</p>
             <p><strong>অফিস:</strong> 01811178674</p>
         </div>
     </div>
+
 </body>
 </html>
