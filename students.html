@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>চতুর্থ শ্রেণী - শিক্ষার্থী তালিকা</title>
+    <title>শিক্ষার্থী তালিকা - আল-হারমাইন ডিজিটাল ক্যাম্পাস</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-5">
 
     <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">চতুর্থ শ্রেণীর শিক্ষার্থী তালিকা</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">শিক্ষার্থী তালিকা</h2>
         
+        <div class="flex justify-center gap-2 mb-6" id="filter-buttons">
+            <button onclick="renderTable('সব')" class="bg-blue-600 text-white px-4 py-2 rounded">সব শ্রেণী</button>
+            <button onclick="renderTable('চতুর্থ')" class="bg-gray-500 text-white px-4 py-2 rounded">চতুর্থ</button>
+            <button onclick="renderTable('পঞ্চম')" class="bg-gray-500 text-white px-4 py-2 rounded">পঞ্চম</button>
+        </div>
+
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
@@ -27,30 +33,37 @@
     </div>
 
     <script>
-        // এখানে আপনার সব শিক্ষার্থীদের নাম আছে
-        const students = [
-            "ফাতেমা ইসলাম", "নুসরাত ইসলাম ফারিহা", "নাজিফা", "মোহাম্মদ নুর হোছাইন", "ফারিয়া তাসনিম কেয়া", 
-            "আনিকা বিনতে দিদার", "মোহাম্মদ ফরহাদ", "আলিয়া সুলতানা রিফা", "দেলোয়ার হোসেন", "আরিফা হোসনা", 
-            "হালিমা নূরী", "জান্নাতুল মাওয়া তাসনিম", "সানজিদা সোলতানা লিমা", "শরাফ উদ্দিন মারজুক", "সিহাম", 
-            "মো: আকিব", "তানজিনা আফরিন নিহা", "সাহরিয়া সালমা লুবাবা", "সোমাইয়া আক্তার", "মো: রাজভীর হোছাইন", 
-            "মোহাম্মদ আবিদ", "মাহিয়া নাসরিন কাফি", "মো: হোছাইন", "মোশাররফ হোসেন মোর্শেদ", "মাহবুব বিন সাইফ মাহিন", 
-            "আবছানা নুর নাবিয়া", "সায়েদ মোহাম্মদ মাহিদ", "ইউসুফ মোহাম্মদ আলফাত", "নুসরাত জাহান সাফিয়া", "সাদিয়া আক্তার", 
-            "মো: ইশমাম", "মোহাম্মদ রিদয়ান", "শাহরিয়া সুলতানা শামিকা", "নুসরাত জাহান ইলা", "ওসমান সরওয়ার", 
-            "আয়েশা ছিদ্দিকা মুনতাহা", "সুমাইয়া আক্তার", "মোহাম্মদ মুবিন", "আব্দু রাফাত ওসামা", "মোহাম্মদ ইলহাম", 
-            "সাবরিনা জামান ফারিহা"
+        // এখানে আপনার সব শিক্ষার্থীদের তথ্য যোগ করবেন
+        const allStudents = [
+            { name: "ফাতেমা ইসলাম", class: "চতুর্থ" },
+            { name: "নুসরাত ইসলাম ফারিহা", class: "চতুর্থ" },
+            { name: "নাজিফা", class: "চতুর্থ" },
+            // আপনি এখানে নতুন ডাটা যোগ করতে পারবেন
+            { name: "রহিম", class: "পঞ্চম" },
+            { name: "করিম", class: "পঞ্চম" }
         ];
 
-        const tableBody = document.getElementById('student-table');
+        function renderTable(filterClass) {
+            const tableBody = document.getElementById('student-table');
+            tableBody.innerHTML = "";
 
-        students.forEach((name, index) => {
-            tableBody.innerHTML += `
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="p-4 border">${index + 1}</td>
-                    <td class="p-4 border font-medium">${name}</td>
-                    <td class="p-4 border">চতুর্থ</td>
-                </tr>
-            `;
-        });
+            const filteredStudents = (filterClass === 'সব') 
+                ? allStudents 
+                : allStudents.filter(s => s.class === filterClass);
+
+            filteredStudents.forEach((student, index) => {
+                tableBody.innerHTML += `
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-4 border">${index + 1}</td>
+                        <td class="p-4 border font-medium">${student.name}</td>
+                        <td class="p-4 border">${student.class}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // পেজ লোড হওয়ার সময় সব ডাটা দেখাবে
+        renderTable('সব');
     </script>
 </body>
 </html>
