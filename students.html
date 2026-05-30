@@ -5,64 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>শিক্ষার্থী তালিকা - আল-হারমাইন ডিজিটাল ক্যাম্পাস</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+        body { font-family: 'Hind Siliguri', sans-serif; }
+    </style>
 </head>
-<body class="bg-gray-100 p-5">
+<body class="bg-slate-50 p-4 md:p-8">
 
-    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">শিক্ষার্থী তালিকা</h2>
-        
-        <div class="flex justify-center gap-2 mb-6" id="filter-buttons">
-            <button onclick="renderTable('সব')" class="bg-blue-600 text-white px-4 py-2 rounded">সব শ্রেণী</button>
-            <button onclick="renderTable('চতুর্থ')" class="bg-gray-500 text-white px-4 py-2 rounded">চতুর্থ</button>
-            <button onclick="renderTable('পঞ্চম')" class="bg-gray-500 text-white px-4 py-2 rounded">পঞ্চম</button>
-        </div>
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-slate-100">
+            <h1 class="text-3xl font-bold mb-8 text-center text-indigo-700">শিক্ষার্থী ডাটাবেস</h1>
+            
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="filter-buttons">
+                <button onclick="renderTable('সব')" class="filter-btn bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold transition hover:bg-indigo-700">সব শিক্ষার্থী</button>
+                <button onclick="renderTable('দ্বিতীয়')" class="filter-btn bg-slate-200 text-slate-700 px-5 py-2 rounded-full font-semibold transition hover:bg-indigo-100">দ্বিতীয়</button>
+                <button onclick="renderTable('তৃতীয়')" class="filter-btn bg-slate-200 text-slate-700 px-5 py-2 rounded-full font-semibold transition hover:bg-indigo-100">তৃতীয়</button>
+                <button onclick="renderTable('চতুর্থ')" class="filter-btn bg-slate-200 text-slate-700 px-5 py-2 rounded-full font-semibold transition hover:bg-indigo-100">চতুর্থ</button>
+                <button onclick="renderTable('পঞ্চম')" class="filter-btn bg-slate-200 text-slate-700 px-5 py-2 rounded-full font-semibold transition hover:bg-indigo-100">পঞ্চম</button>
+                <button onclick="renderTable('ষষ্ঠ')" class="filter-btn bg-slate-200 text-slate-700 px-5 py-2 rounded-full font-semibold transition hover:bg-indigo-100">ষষ্ঠ</button>
+            </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-blue-600 text-white">
-                        <th class="p-4 border">ক্রমিক</th>
-                        <th class="p-4 border">শিক্ষার্থীর নাম</th>
-                        <th class="p-4 border">শ্রেণী</th>
-                    </tr>
-                </thead>
-                <tbody id="student-table" class="text-gray-700">
-                    </tbody>
-            </table>
+            <div class="overflow-hidden rounded-xl border border-slate-200">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th class="p-4 text-slate-600 font-bold">রোল</th>
+                            <th class="p-4 text-slate-600 font-bold">শিক্ষার্থীর নাম</th>
+                            <th class="p-4 text-slate-600 font-bold">শ্রেণী</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table" class="divide-y divide-slate-100">
+                        </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
-        // এখানে আপনার সব শিক্ষার্থীদের তথ্য যোগ করবেন
         const allStudents = [
-            { name: "ফাতেমা ইসলাম", class: "চতুর্থ" },
-            { name: "নুসরাত ইসলাম ফারিহা", class: "চতুর্থ" },
-            { name: "নাজিফা", class: "চতুর্থ" },
-            // আপনি এখানে নতুন ডাটা যোগ করতে পারবেন
-            { name: "রহিম", class: "পঞ্চম" },
-            { name: "করিম", class: "পঞ্চম" }
+            // দ্বিতীয় শ্রেণী (তালিকা অনুযায়ী)
+            { roll: "01", name: "সুমাইয়া মুস্তারীন মীরা", class: "দ্বিতীয়" }, { roll: "02", name: "তসলিমা জান্নাত মোমো", class: "দ্বিতীয়" }, { roll: "03", name: "তাসফিয়া নূর আষ্ফা", class: "দ্বিতীয়" }, { roll: "04", name: "আতিফ ফয়সাল", class: "দ্বিতীয়" }, { roll: "05", name: "মোহাম্মদ আনাছুল করিম", class: "দ্বিতীয়" }, { roll: "06", name: "মুসররত নূর ওয়াজিহা", class: "দ্বিতীয়" }, { roll: "07", name: "মো: আবরার", class: "দ্বিতীয়" }, { roll: "08", name: "মোহাম্মদ সাঈদ", class: "দ্বিতীয়" }, { roll: "09", name: "জুমাইনা বিনতে জসিম", class: "দ্বিতীয়" }, { roll: "10", name: "মো: ইমরান", class: "দ্বিতীয়" }, { roll: "11", name: "সাবিনা ইয়াসমিন রিয়ামনি", class: "দ্বিতীয়" }, { roll: "12", name: "মো: মুস্তাকিম", class: "দ্বিতীয়" }, { roll: "13", name: "মরিয়ম জান্নাত শোভা", class: "দ্বিতীয়" }, { roll: "14", name: "সারমিন সুলতানা মিম", class: "দ্বিতীয়" }, { roll: "15", name: "ছামিহা জান্নাত মিমরা", class: "দ্বিতীয়" }, { roll: "16", name: "ফাতেমা", class: "দ্বিতীয়" }, { roll: "17", name: "আব্দুল্লাহ আল আমিন", class: "দ্বিতীয়" }, { roll: "18", name: "সোহান", class: "দ্বিতীয়" }, { roll: "19", name: "শহিদুল ইসলাম মুবিন", class: "দ্বিতীয়" }, { roll: "20", name: "আফসানা জয়নাদ", class: "দ্বিতীয়" }, { roll: "21", name: "মো: এহসানুল করিম", class: "দ্বিতীয়" }, { roll: "22", name: "জান্নাতুল মাওয়া", class: "দ্বিতীয়" }, { roll: "23", name: "শাহাদাত মোস্তফা", class: "দ্বিতীয়" }, { roll: "24", name: "জান্নাতুল নাঈম", class: "দ্বিতীয়" }, { roll: "25", name: "রাইছা রহমান", class: "দ্বিতীয়" }, { roll: "26", name: "শাহিন", class: "দ্বিতীয়" }, { roll: "27", name: "মো: ওমর", class: "দ্বিতীয়" }, { roll: "28", name: "মোহাম্মদ ওয়াহিদ", class: "দ্বিতীয়" }, { roll: "29", name: "তারেকুল ইসলাম", class: "দ্বিতীয়" }, { roll: "30", name: "মো: শাওন উদ্দিন", class: "দ্বিতীয়" }, { roll: "31", name: "আলিয়া তাবাচ্ছুম ইশা", class: "দ্বিতীয়" }, { roll: "32", name: "আনিকা মণি", class: "দ্বিতীয়" }, { roll: "33", name: "সায়েদুল করিম রাফি", class: "দ্বিতীয়" }, { roll: "34", name: "মো: বেলাল হোসেন", class: "দ্বিতীয়" }, { roll: "35", name: "ইসরাত জাহান রাইছা", class: "দ্বিতীয়" }, { roll: "36", name: "আন্দুর রহমান", class: "দ্বিতীয়" }, { roll: "37", name: "আমেনা হোসেন আরা", class: "দ্বিতীয়" }, { roll: "38", name: "সুমাইয়া জান্নাত সাদিয়া", class: "দ্বিতীয়" }, { roll: "39", name: "মো: তানভীর হোসেন", class: "দ্বিতীয়" }, { roll: "40", name: "আনাস", class: "দ্বিতীয়" }, { roll: "41", name: "মিমহা", class: "দ্বিতীয়" }, { roll: "42", name: "জান্নাতুল মাওয়া শিফা", class: "দ্বিতীয়" }, { roll: "43", name: "মিনা আক্তার সুমি", class: "দ্বিতীয়" }, { roll: "44", name: "মোহাম্মদ ইব্রাহিম", class: "দ্বিতীয়" }, { roll: "45", name: "রেশমা", class: "দ্বিতীয়" }, { roll: "46", name: "আকলিমা জাহান সুফফা", class: "দ্বিতীয়" }, { roll: "47", name: "মোহাম্মদ ফয়েজ হাসান", class: "দ্বিতীয়" }, { roll: "48", name: "মো: আশরাফুল ইসলাম", class: "দ্বিতীয়" }, { roll: "49", name: "ইমরুল হাসান", class: "দ্বিতীয়" }, { roll: "50", name: "মরিয়াম", class: "দ্বিতীয়" }, { roll: "51", name: "মোহাম্মদ ইউছুফ হোছন", class: "দ্বিতীয়" }, { roll: "52", name: "মো: নূর আবরার", class: "দ্বিতীয়" }, { roll: "53", name: "আরিফা আক্তার রুপা", class: "দ্বিতীয়" }, { roll: "54", name: "হাফছা নূরী", class: "দ্বিতীয়" }, { roll: "55", name: "আপনান মো: ইরাম", class: "দ্বিতীয়" }, { roll: "56", name: "জান্নাতুল ফেরদৌস", class: "দ্বিতীয়" }, { roll: "57", name: "ইয়াছমিন আক্তার", class: "দ্বিতীয়" }, { roll: "58", name: "তাসনিম সোলতানা মিম", class: "দ্বিতীয়" }, { roll: "59", name: "মোহাম্মদ তানিফ নূর", class: "দ্বিতীয়" }, { roll: "60", name: "সুমাইয়া ছিদ্দিকা", class: "দ্বিতীয়" }, { roll: "61", name: "ইশিতা নূর ইশা", class: "দ্বিতীয়" }, { roll: "62", name: "মোহাম্মদ সালমান", class: "দ্বিতীয়" }, { roll: "63", name: "মো: ইব্রাহীম", class: "দ্বিতীয়" }, { roll: "64", name: "ইয়াছিন আক্তার লিজা", class: "দ্বিতীয়" }, { roll: "65", name: "মো: আলী", class: "দ্বিতীয়" }, { roll: "66", name: "মোহাম্মদ সোহরাব", class: "দ্বিতীয়" }, { roll: "67", name: "মো: সাইমুন নূর", class: "দ্বিতীয়" }, { roll: "68", name: "আবু ছালেহ", class: "দ্বিতীয়" }, { roll: "69", name: "সাইফুল ইসলাম", class: "দ্বিতীয়" }, { roll: "70", name: "নূর হোসাইন", class: "দ্বিতীয়" }, { roll: "71", name: "ছাফিয়াতুল জান্নাত", class: "দ্বিতীয়" }, { roll: "72", name: "আইমান ইসলাম নওরিন", class: "দ্বিতীয়" }, { roll: "73", name: "আবরার রহমান রায়ান", class: "দ্বিতীয়" }, { roll: "74", name: "সজরাতুল ইয়ামিন", class: "দ্বিতীয়" }, { roll: "75", name: "নূর সুফিয়ান সাদি", class: "দ্বিতীয়" }, { roll: "76", name: "মো: আবুল আহাদ", class: "দ্বিতীয়" }, { roll: "77", name: "শারমিন সুলতানা রাফিয়া", class: "দ্বিতীয়" }, { roll: "78", name: "মরিয়ম সুলতানা (উর্পা)", class: "দ্বিতীয়" }, { roll: "79", name: "উম্মে রাউজা", class: "দ্বিতীয়" }, { roll: "80", name: "মো: আয়ান", class: "দ্বিতীয়" }, { roll: "81", name: "সাদিয়া", class: "দ্বিতীয়" }, { roll: "82", name: "সামিহা বিনতে জুনাঈদ", class: "দ্বিতীয়" }, { roll: "83", name: "মো: ইব্রাহীম", class: "দ্বিতীয়" }, { roll: "84", name: "ফাতেমা জান্নাত মীম", class: "দ্বিতীয়" },
+            
+            // তৃতীয় শ্রেণী
+            { roll: "01", name: "মো: শরীফ আল হোসাইন", class: "তৃতীয়" }, { roll: "02", name: "তাসকিন হোসাইন", class: "তৃতীয়" }, { roll: "03", name: "মাইমুনা", class: "তৃতীয়" }, { roll: "04", name: "বশির আহমদ", class: "তৃতীয়" }, { roll: "05", name: "মো: কামরুল ইসলাম", class: "তৃতীয়" }, { roll: "06", name: "মো: রিফাত", class: "তৃতীয়" }, { roll: "07", name: "সোমাইয়া কাউছার", class: "তৃতীয়" }, { roll: "08", name: "মোহাম্মদ আহনাফ তাজুয়ার", class: "তৃতীয়" }, { roll: "09", name: "মো: আয়মান নূর", class: "তৃতীয়" }, { roll: "10", name: "নুসরাত ফারিহা নূরী", class: "তৃতীয়" }, { roll: "11", name: "সামিয়া জান্নাত", class: "তৃতীয়" }, { roll: "12", name: "রাদিয়া নূর রাইছা", class: "তৃতীয়" }, { roll: "13", name: "তাসকির কবির রাফিয়া", class: "তৃতীয়" }, { roll: "14", name: "ওমরি তাসফি সোহা", class: "তৃতীয়" }, { roll: "15", name: "রেশমা কাউছার মাসি", class: "তৃতীয়" }, { roll: "16", name: "মো: হৃদয়", class: "তৃতীয়" }, { roll: "17", name: "উম্মে হাবিবা শরীফা", class: "তৃতীয়" }, { roll: "18", name: "হাবিবুর রহমান হাবিব", class: "তৃতীয়" }, { roll: "19", name: "রুহিদুল ইসলাম রাহিত", class: "তৃতীয়" }, { roll: "20", name: "হামিদা সোলতানা", class: "তৃতীয়" }, { roll: "21", name: "হাবিবুর রহমান", class: "তৃতীয়" }, { roll: "22", name: "মো: আল আমিন", class: "তৃতীয়" }, { roll: "23", name: "ইয়াছির ইবনে জসিম", class: "তৃতীয়" }, { roll: "24", name: "সিদরাতুল মোনতাহা", class: "তৃতীয়" }, { roll: "25", name: "রুমা আক্তার", class: "তৃতীয়" }, { roll: "26", name: "আলবিন জান্নাত তাজিম", class: "তৃতীয়" }, { roll: "27", name: "জান্নাতুল মাওয়া ইসমা", class: "তৃতীয়" }, { roll: "28", name: "সামিহা কামাল রাহি", class: "তৃতীয়" }, { roll: "29", name: "মোহাম্মদ নাবিল", class: "তৃতীয়" }, { roll: "30", name: "নুসরাত ফারিহা নূরী", class: "তৃতীয়" }, { roll: "31", name: "তৌহিদুল ইসলাম", class: "তৃতীয়" }, { roll: "32", name: "আলিফা জান্নাত মিম", class: "তৃতীয়" }, { roll: "33", name: "মো: হাবিব", class: "তৃতীয়" }, { roll: "34", name: "উম্মে সালমা", class: "তৃতীয়" }, { roll: "35", name: "জান্নাতুল ফেরদৌস", class: "তৃতীয়" }, { roll: "36", name: "তাসমিন সোলতানা", class: "তৃতীয়" }, { roll: "37", name: "মো: কবির রেজা", class: "তৃতীয়" }, { roll: "38", name: "মোহাম্মদ ইব্রাহিম", class: "তৃতীয়" }, { roll: "39", name: "মো: আদনান শাহরিয়ান আবির", class: "তৃতীয়" }, { roll: "40", name: "সুমাইয়া আক্তার", class: "তৃতীয়" }, { roll: "41", name: "মোহাম্মদ ইরফান", class: "তৃতীয়" }, { roll: "42", name: "সিফাতুল ইসলাম রাহাত", class: "তৃতীয়" }, { roll: "43", name: "আসমাঈল হুসনা", class: "তৃতীয়" }, { roll: "44", name: "মো: আনাস", class: "তৃতীয়" }, { roll: "45", name: "তুষা", class: "তৃতীয়" },
+
+            // চতুর্থ শ্রেণী
+            { roll: "01", name: "ফাতেমা ইসলাম", class: "চতুর্থ" }, { roll: "02", name: "নুসরাত ইসলাম ফারিহা", class: "চতুর্থ" }, { roll: "03", name: "নাজিফা", class: "চতুর্থ" }, { roll: "04", name: "মোহাম্মদ নূর হোছাইন", class: "চতুর্থ" }, { roll: "05", name: "ফারিয়া তাসনিম কেয়া", class: "চতুর্থ" }, { roll: "06", name: "আনিকা বিনতে দিদার", class: "চতুর্থ" }, { roll: "07", name: "মোহাম্মদ ফরহাদ", class: "চতুর্থ" }, { roll: "08", name: "আলিয়া সুলতানা রিফা", class: "চতুর্থ" }, { roll: "09", name: "দেলোয়ার হোসেন", class: "চতুর্থ" }, { roll: "10", name: "আরিফা হোসনা", class: "চতুর্থ" }, { roll: "11", name: "হালিমা নূরী", class: "চতুর্থ" }, { roll: "12", name: "জান্নাতুল মাওয়া তাসনিম", class: "চতুর্থ" }, { roll: "13", name: "সানজিদা সোলতানা লিমা", class: "চতুর্থ" }, { roll: "14", name: "শরাফ উদ্দিন মারজুক", class: "চতুর্থ" }, { roll: "15", name: "সিহাম", class: "চতুর্থ" }, { roll: "16", name: "মো: আকিব", class: "চতুর্থ" }, { roll: "17", name: "তানজিনা আফরিন নিহা", class: "চতুর্থ" }, { roll: "18", name: "সাহরিয়া সালমা লুবাবা", class: "চতুর্থ" }, { roll: "19", name: "সোমাইয়া আক্তার", class: "চতুর্থ" }, { roll: "20", name: "মো: রাজভীর হোছাইন", class: "চতুর্থ" }, { roll: "21", name: "মোহাম্মদ আবিদ", class: "চতুর্থ" }, { roll: "22", name: "মাহিয়া নাসরিন কাফি", class: "চতুর্থ" }, { roll: "23", name: "মো: হোছাইন", class: "চতুর্থ" }, { roll: "24", name: "মোশাররফ হোসেন মোর্শেদ", class: "চতুর্থ" }, { roll: "25", name: "মাহবুব বিন সাইফ মাহিন", class: "চতুর্থ" }, { roll: "26", name: "আবছানা নুর নাবিয়া", class: "চতুর্থ" }, { roll: "27", name: "সায়েদ মোহাম্মদ মাহিদ", class: "চতুর্থ" }, { roll: "28", name: "ইউসুফ মোহাম্মদ আলফাত", class: "চতুর্থ" }, { roll: "29", name: "নুসরাত জাহান সাফিয়া", class: "চতুর্থ" }, { roll: "30", name: "সাদিয়া আক্তার", class: "চতুর্থ" }, { roll: "31", name: "মো: ইশমাম", class: "চতুর্থ" }, { roll: "32", name: "মোহাম্মদ রিদয়ান", class: "চতুর্থ" }, { roll: "33", name: "শাহরিয়া সুলতানা শামিকা", class: "চতুর্থ" }, { roll: "34", name: "নুসরাত জাহান ইলা", class: "চতুর্থ" }, { roll: "35", name: "ওসমান সরওয়ার", class: "চতুর্থ" }, { roll: "36", name: "আয়েশা ছিদ্দিকা মুনতাহা", class: "চতুর্থ" }, { roll: "37", name: "সুমাইয়া আক্তার", class: "চতুর্থ" }, { roll: "38", name: "মোহাম্মদ মুবিন", class: "চতুর্থ" }, { roll: "39", name: "আব্দুল রাফাত ওসামা", class: "চতুর্থ" }, { roll: "40", name: "মোহাম্মদ ইলহাম", class: "চতুর্থ" }, { roll: "41", name: "সাবরিনা জামান ফারিহা", class: "চতুর্থ" },
+
+            // পঞ্চম শ্রেণী
+            { roll: "01", name: "সানজিদা আফরীন সান", class: "পঞ্চম" }, { roll: "02", name: "নিলুফার ইয়াছমিন জাইমা", class: "পঞ্চম" }, { roll: "03", name: "রুসিফা", class: "পঞ্চম" }, { roll: "04", name: "শাহরিয়া কানিজ মুক্তা", class: "পঞ্চম" }, { roll: "05", name: "আরিফুল ইসলাম আরিফ", class: "পঞ্চম" }, { roll: "06", name: "আলিফা", class: "পঞ্চম" }, { roll: "07", name: "মালিহা তা:রাইফা মণি", class: "পঞ্চম" }, { roll: "08", name: "তাহাসানুল ইসলাম তাওসিফ", class: "পঞ্চম" }, { roll: "09", name: "মোহসেনা আক্তার", class: "পঞ্চম" }, { roll: "10", name: "নুসরাত ফারিয়া হানান", class: "পঞ্চম" }, { roll: "11", name: "সালমা খানম লিলি", class: "পঞ্চম" }, { roll: "12", name: "হাসনা নূর", class: "পঞ্চম" }, { roll: "13", name: "উম্মে সালমা", class: "পঞ্চম" }, { roll: "14", name: "জেরিন বিনতে সায়েদ", class: "পঞ্চম" }, { roll: "15", name: "মো: রবিউর রহমান রবি", class: "পঞ্চম" }, { roll: "16", name: "সায়েমা সোলতানা", class: "পঞ্চম" }, { roll: "17", name: "রিয়াজুল ইসলাম রাব্বি", class: "পঞ্চম" }, { roll: "18", name: "মোহাম্মদ রবি", class: "পঞ্চম" }, { roll: "19", name: "জিসান মোহাম্মদ ফাহিম", class: "পঞ্চম" }, { roll: "20", name: "নুসরাত জাহান রাইসা", class: "পঞ্চম" }, { roll: "21", name: "নূরে জান্নাত নাহিয়া", class: "পঞ্চম" }, { roll: "22", name: "তাসলিমা জান্নাত সুমাইয়া", class: "পঞ্চম" }, { roll: "23", name: "আবু কায়েস মোহাম্মদ হানিফ", class: "পঞ্চম" }, { roll: "24", name: "তাছনিয়া হোসেন তানিকা", class: "পঞ্চম" }, { roll: "26", name: "মো: রিদুয়ান", class: "পঞ্চম" }, { roll: "27", name: "মরিয়ম বেগম", class: "পঞ্চম" }, { roll: "28", name: "আব্দুল হামিদ", class: "পঞ্চম" }, { roll: "29", name: "আব্দুল্লাহ আল তাসিন", class: "পঞ্চম" },
+
+            // ষষ্ঠ শ্রেণী
+            { roll: "01", name: "ইতমামুল হক ইরাম", class: "ষষ্ঠ" }, { roll: "02", name: "ফাতেমা আক্তার নোহিমনি", class: "ষষ্ঠ" }, { roll: "03", name: "মরিয়ম জান্নাত আলিশা", class: "ষষ্ঠ" }, { roll: "04", name: "মোহাম্মদ হাবিব", class: "ষষ্ঠ" }, { roll: "05", name: "আবেদা সোলতানা ছোঁয়াদ", class: "ষষ্ঠ" }, { roll: "06", name: "মোহাম্মদ জিহাদ", class: "ষষ্ঠ" }, { roll: "07", name: "তানজিনা নূরী ইশ্যা", class: "ষষ্ঠ" }, { roll: "08", name: "মোহাম্মদ শাকিল", class: "ষষ্ঠ" }, { roll: "09", name: "মোহাম্মদ ইসমাইল", class: "ষষ্ঠ" }, { roll: "10", name: "মঈনুদ্দিন", class: "ষষ্ঠ" }, { roll: "11", name: "মোহাম্মদ হামীম", class: "ষষ্ঠ" }, { roll: "12", name: "হালিমা তুস সাদিয়া", class: "ষষ্ঠ" }, { roll: "13", name: "মোহাম্মদ তকি উদ্দিন", class: "ষষ্ঠ" }, { roll: "14", name: "উর্মি", class: "ষষ্ঠ" }, { roll: "15", name: "মো: হাফিজুর রহমান", class: "ষষ্ঠ" }, { roll: "16", name: "আফসানা জয় তুনজি", class: "ষষ্ঠ" }, { roll: "17", name: "তানিয়া", class: "ষষ্ঠ" }, { roll: "18", name: "মাসনুনা আক্তার", class: "ষষ্ঠ" }, { roll: "19", name: "ফারিহা তাসনিম আবিহা", class: "ষষ্ঠ" }, { roll: "20", name: "তাওহিদুল আলম", class: "ষষ্ঠ" }, { roll: "21", name: "সামিয়া আক্তার", class: "ষষ্ঠ" }, { roll: "22", name: "রাহামাহ ইয়াছমিন সাফা", class: "ষষ্ঠ" }, { roll: "23", name: "হালিমা তুস সাদিয়া", class: "ষষ্ঠ" }, { roll: "26", name: "মেহেদি হাসান", class: "ষষ্ঠ" }
         ];
 
         function renderTable(filterClass) {
             const tableBody = document.getElementById('student-table');
             tableBody.innerHTML = "";
+            
+            // বাটন স্টাইল পরিবর্তন
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-slate-200', 'text-slate-700');
+                if(btn.innerText.includes(filterClass)) {
+                    btn.classList.add('bg-indigo-600', 'text-white');
+                    btn.classList.remove('bg-slate-200', 'text-slate-700');
+                }
+            });
 
             const filteredStudents = (filterClass === 'সব') 
                 ? allStudents 
                 : allStudents.filter(s => s.class === filterClass);
 
-            filteredStudents.forEach((student, index) => {
+            filteredStudents.forEach((student) => {
                 tableBody.innerHTML += `
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="p-4 border">${index + 1}</td>
-                        <td class="p-4 border font-medium">${student.name}</td>
-                        <td class="p-4 border">${student.class}</td>
+                    <tr class="hover:bg-indigo-50 transition">
+                        <td class="p-4 text-slate-700 font-medium">${student.roll}</td>
+                        <td class="p-4 text-slate-900 font-semibold">${student.name}</td>
+                        <td class="p-4 text-slate-600">${student.class}</td>
                     </tr>
                 `;
             });
         }
 
-        // পেজ লোড হওয়ার সময় সব ডাটা দেখাবে
         renderTable('সব');
     </script>
 </body>
