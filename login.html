@@ -1,15 +1,71 @@
-<button id="signupBtn" class="w-full bg-blue-600 py-3 rounded font-bold mt-4">Create New Account</button>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন ও রেজিস্ট্রেশন | আল-হারামাইন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-emerald-900 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm p-8 rounded-3xl shadow-2xl">
+        <h2 id="formTitle" class="text-2xl font-bold text-emerald-900 mb-6 text-center">লগইন করুন</h2>
+        
+        <input type="email" id="email" placeholder="আপনার ইমেইল" class="w-full p-3 mb-4 rounded-xl border border-gray-300 outline-none focus:ring-2 focus:ring-emerald-500">
+        <input type="password" id="password" placeholder="পাসওয়ার্ড" class="w-full p-3 mb-6 rounded-xl border border-gray-300 outline-none focus:ring-2 focus:ring-emerald-500">
+        
+        <button id="mainBtn" class="w-full bg-emerald-800 text-white py-3 rounded-xl font-bold mb-4 hover:bg-emerald-900 transition">লগইন করুন</button>
+        <button id="googleBtn" class="w-full bg-gray-100 py-3 rounded-xl font-bold hover:bg-gray-200 transition">গুগল দিয়ে লগইন</button>
+        
+        <button id="toggleBtn" class="w-full mt-6 text-emerald-700 font-bold hover:underline">নতুন অ্যাকাউন্ট তৈরি করুন</button>
+    </div>
 
-<script type="module">
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-    // ... (firebaseConfig এবং auth আগের মতোই থাকবে) ...
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-    // নতুন ইউজার রেজিস্ট্রেশন (Sign Up)
-    document.getElementById('signupBtn').addEventListener('click', () => {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(() => alert("একাউন্ট তৈরি হয়েছে! এখন লগইন করুন।"))
-            .catch((err) => alert("Error: " + err.message));
-    });
-</script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f",
+            measurementId: "G-LSMDHF5TDY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        let isLogin = true;
+
+        const mainBtn = document.getElementById('mainBtn');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const formTitle = document.getElementById('formTitle');
+
+        toggleBtn.addEventListener('click', () => {
+            isLogin = !isLogin;
+            formTitle.innerText = isLogin ? "লগইন করুন" : "রেজিস্ট্রেশন করুন";
+            mainBtn.innerText = isLogin ? "লগইন করুন" : "অ্যাকাউন্ট তৈরি করুন";
+            toggleBtn.innerText = isLogin ? "নতুন অ্যাকাউন্ট তৈরি করুন" : "লগইন করুন";
+        });
+
+        mainBtn.addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (isLogin) {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then(() => window.location.href = "dashboard.html")
+                    .catch(() => alert("ভুল ইমেইল বা পাসওয়ার্ড!"));
+            } else {
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then(() => { alert("অ্যাকাউন্ট তৈরি হয়েছে! এখন লগইন করুন।"); location.reload(); })
+                    .catch(err => alert(err.message));
+            }
+        });
+
+        document.getElementById('googleBtn').addEventListener('click', () => {
+            signInWithPopup(auth, provider).then(() => window.location.href = "dashboard.html");
+        });
+    </script>
+</body>
+</html>
