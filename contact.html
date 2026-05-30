@@ -10,20 +10,21 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-        // আপনার Firebase Console থেকে কপি করা কোডটি এখানে বসান
+        // Firebase কনফিগারেশন
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f",
+            measurementId: "G-LSMDHF5TDY"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
 
-        // সিকিউরিটি গার্ড: লগইন করা না থাকলে login.html এ পাঠিয়ে দেবে
+        // সিকিউরিটি গার্ড: লগইন না থাকলে সরাসরি login.html এ পাঠিয়ে দেবে
         onAuthStateChanged(auth, (user) => {
             if (!user) {
                 window.location.href = "login.html";
