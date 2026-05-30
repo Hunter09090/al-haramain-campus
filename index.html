@@ -5,31 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al Haramain Digital Campus</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-900 text-white">
 
-    <nav class="p-6 flex justify-between items-center bg-slate-950">
+    <nav class="bg-slate-950 p-6 flex justify-between items-center shadow-lg">
         <h1 class="text-xl font-bold">Al Haramain Digital Campus</h1>
+        
+        <button class="md:hidden text-white text-2xl" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+            ☰
+        </button>
+
         <ul class="hidden md:flex space-x-6 text-gray-300">
-            <li><a href="#" class="hover:text-green-400">Home</a></li>
+            <li><a href="index.html" class="hover:text-green-400">Home</a></li>
             <li><a href="#" class="hover:text-green-400">Students</a></li>
             <li><a href="#" class="hover:text-green-400">Results</a></li>
-            <li><a href="#" class="hover:text-green-400">Notice</a></li>
             <li><a href="login.html" class="bg-green-500 text-white px-4 py-2 rounded">Login</a></li>
         </ul>
     </nav>
 
+    <div id="mobileMenu" class="hidden md:hidden bg-slate-900 p-4 text-center border-b border-slate-700">
+        <a href="index.html" class="block py-2 text-gray-300">Home</a>
+        <a href="#" class="block py-2 text-gray-300">Students</a>
+        <a href="#" class="block py-2 text-gray-300">Results</a>
+        <a href="login.html" class="block py-2 text-green-500 font-bold">Login</a>
+    </div>
+
     <section class="h-screen flex flex-col justify-center items-center text-center p-6 bg-gradient-to-b from-slate-900 to-green-900">
-        <h2 class="text-5xl md:text-6xl font-extrabold mb-6">Welcome To <br> Al Haramain Digital Campus</h2>
-        <p class="text-xl text-gray-300 mb-10">Smart Islamic Modern Education Platform</p>
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-6">Welcome To <br> Al Haramain Digital Campus</h2>
+        <p class="text-lg md:text-xl text-gray-300 mb-10">Smart Islamic Modern Education Platform</p>
         
-        <div class="bg-green-500 p-8 rounded-2xl w-full max-w-sm shadow-2xl">
+        <div class="bg-green-500 p-6 rounded-2xl w-full max-w-xs shadow-2xl">
             <p class="mb-4 font-semibold text-lg">Explore Now</p>
-            <a href="login.html" class="block bg-white text-green-700 py-3 rounded-lg font-bold hover:bg-gray-100">Student Login</a>
+            <a href="login.html" class="block bg-white text-green-700 py-3 rounded-lg font-bold hover:bg-gray-100 transition">Student Login</a>
         </div>
     </section>
 
-    <script src="script.js"></script>
 </body>
 </html>
