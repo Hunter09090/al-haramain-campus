@@ -1,17 +1,15 @@
-/* কাস্টম ফন্ট এবং স্মুথ ট্রানজিশন */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&display=swap');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Hind Siliguri', sans-serif;
 }
 
-nav {
-    border-bottom: 4px solid #064e3b;
+/* ন্যাভবার এনিমেশন */
+nav a {
+    transition: all 0.3s ease-in-out;
 }
 
-button {
-    transition: all 0.3s ease;
-}
-
+/* বাটন হোভার ইফেক্ট */
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
 }
