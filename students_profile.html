@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>শিক্ষার্থী তালিকা | আল-হারামাইন</title>
+    <title>শিক্ষার্থীদের তালিকা - আল-হারমাইন ডিজিটাল ক্যাম্পাস</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 min-h-screen p-4 md:p-8">
+<body class="bg-gray-100 p-5">
 
-    <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-emerald-900 mb-6 text-center">শিক্ষার্থী তালিকা</h2>
-
-        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="নাম বা রোল দিয়ে খুঁজুন..." 
-            class="w-full p-4 mb-6 rounded-xl border border-gray-300 shadow-sm outline-none focus:ring-2 focus:ring-emerald-500">
-
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <table class="w-full text-left" id="studentTable">
-                <thead class="bg-emerald-800 text-white">
-                    <tr>
-                        <th class="p-4">রোল</th>
-                        <th class="p-4">নাম</th>
-                        <th class="p-4">শ্রেণী</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody" class="divide-y divide-gray-200">
-                    </tbody>
-            </table>
-        </div>
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">শিক্ষার্থীদের তথ্য তালিকা</h2>
+        
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-blue-600 text-white">
+                    <th class="p-4 border">রোল</th>
+                    <th class="p-4 border">নাম</th>
+                    <th class="p-4 border">শ্রেণী</th>
+                </tr>
+            </thead>
+            <tbody id="student-table" class="text-gray-700">
+                </tbody>
+        </table>
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+        // আপনার কনফিগ
         const firebaseConfig = {
             apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
             authDomain: "al-haramain-digital-campus.firebaseapp.com",
@@ -43,18 +39,19 @@
             measurementId: "G-LSMDHF5TDY"
         };
 
+        // Firebase ইনিশিয়ালাইজ করা
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
         // ডাটাবেস থেকে ডাটা আনা
-        async function loadData() {
+        const studentTable = document.getElementById('student-table');
+        
+        async function fetchStudents() {
             const querySnapshot = await getDocs(collection(db, "students"));
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = ""; 
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                tbody.innerHTML += `
-                    <tr>
+                studentTable.innerHTML += `
+                    <tr class="border-b hover:bg-gray-50">
                         <td class="p-4">${data.roll}</td>
                         <td class="p-4">${data.name}</td>
                         <td class="p-4">${data.class}</td>
@@ -63,17 +60,7 @@
             });
         }
 
-        loadData();
-
-        // সার্চ ফিল্টার লজিক
-        window.filterTable = function() {
-            let input = document.getElementById("searchInput").value.toLowerCase();
-            let rows = document.getElementById("tableBody").getElementsByTagName("tr");
-            for (let i = 0; i < rows.length; i++) {
-                let text = rows[i].textContent.toLowerCase();
-                rows[i].style.display = text.includes(input) ? "" : "none";
-            }
-        }
+        fetchStudents();
     </script>
 </body>
 </html>
