@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শিক্ষার্থীদের তালিকা - আল-হারমাইন ডিজিটাল ক্যাম্পাস</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; }
+        .table-container { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen pb-10">
+
+    <header class="bg-blue-700 text-white py-10 shadow-lg mb-8">
+        <div class="max-w-5xl mx-auto px-5 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">আল-হারমাইন ডিজিটাল ক্যাম্পাস</h1>
+            <p class="text-blue-100 opacity-90">আমাদের শিক্ষার্থীদের ডিজিটাল তথ্য ভাণ্ডার</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-5">
+        
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 table-container">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                <div class="text-left">
+                    <h2 class="text-2xl font-bold text-gray-800">শিক্ষার্থীদের তথ্য তালিকা</h2>
+                    <p class="text-gray-500 text-sm mt-1" id="student-count">মোট শিক্ষার্থী: ০ জন</p>
+                </div>
+                
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="searchInput" placeholder="নাম বা রোল লিখে খুঁজুন..." 
+                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+                    <span class="absolute left-3 top-2.5 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-100">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-blue-50 text-blue-800 border-b-2 border-blue-200">
+                            <th class="p-4 font-semibold">রোল নম্বর</th>
+                            <th class="p-4 font-semibold">শিক্ষার্থীর নাম</th>
+                            <th class="p-4 font-semibold">শ্রেণী</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table" class="divide-y divide-gray-100">
+                        <tr>
+                            <td colspan="3" class="p-10 text-center text-gray-500">
+                                <div class="animate-pulse flex flex-col items-center">
+                                    <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+                                    তথ্য লোড হচ্ছে, দয়া করে অপেক্ষা করুন...
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="noDataMessage" class="hidden py-10 text-center text-gray-500 italic">
+                কোনো শিক্ষার্থীর তথ্য পাওয়া যায়নি!
+            </div>
+
+        </div>
+
+        <footer class="mt-8 text-center text-gray-400 text-sm">
+            &copy; ২০২৪ আল-হারমাইন ডিজিটাল ক্যাম্পাস - সর্বস্বত্ব সংরক্ষিত
+        </footer>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        // আপনার সঠিক Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f",
+            measurementId: "G-LSMDHF5TDY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const studentTable = document.getElementById('student-table');
+        const studentCountText = document.getElementById('student-count');
+        const searchInput = document.getElementById('searchInput');
+        let studentsList = []; // ডাটা জমা রাখার জন্য
+
+        async function fetchStudents() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "students"));
+                studentTable.innerHTML = "";
+                studentsList = [];
+
+                querySnapshot.forEach((doc) => {
+                    studentsList.push(doc.data());
+                });
+
+                displayStudents(studentsList);
+                
+            } catch (error) {
+                console.error("Error: ", error);
+                studentTable.innerHTML = `<tr><td colspan="3" class="p-10 text-center text-red-500">ডাটাবেসে সংযোগ করতে ব্যর্থ! অনুগ্রহ করে ডাটাবেসের Rules চেক করুন।</td></tr>`;
+            }
+        }
+
+        // টেবিল দেখানোর ফাংশন
+        function displayStudents(students) {
+            studentTable.innerHTML = "";
+            studentCountText.innerText = `মোট শিক্ষার্থী: ${students.length} জন`;
+
+            if (students.length === 0) {
+                document.getElementById('noDataMessage').classList.remove('hidden');
+            } else {
+                document.getElementById('noDataMessage').classList.add('hidden');
+                students.forEach((data) => {
+                    studentTable.innerHTML += `
+                        <tr class="hover:bg-blue-50 transition border-b border-gray-50">
+                            <td class="p-4 font-bold text-blue-600">${data.roll || 'নেই'}</td>
+                            <td class="p-4 text-gray-800 font-medium">${data.name || 'নাম নেই'}</td>
+                            <td class="p-4"><span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600">${data.class || 'শ্রেণী নেই'}</span></td>
+                        </tr>
+                    `;
+                });
+            }
+        }
+
+        // সার্চ করার লজিক
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = studentsList.filter(s => 
+                (s.name && s.name.toLowerCase().includes(val)) || 
+                (s.roll && s.roll.toString().includes(val))
+            );
+            displayStudents(filtered);
+        });
+
+        fetchStudents();
+    </script>
+</body>
+</html>
