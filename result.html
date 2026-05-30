@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ফলাফল | আল-হারামাইন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f"
+        };
+        initializeApp(firebaseConfig);
+        onAuthStateChanged(getAuth(), (user) => {
+            if (!user) { window.location.href = "login.html"; }
+        });
+    </script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen p-4">
+
+    <div class="max-w-md mx-auto mb-6">
+        <a href="dashboard.html" class="text-green-400 hover:text-green-300 font-bold">← ড্যাশবোর্ডে ফিরুন</a>
+    </div>
+
+    <div class="max-w-md mx-auto bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-700">
+        <h2 class="text-2xl font-bold text-green-400 mb-6 text-center">পরীক্ষার ফলাফল</h2>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-slate-400 mb-2">রোল নম্বর লিখুন</label>
+                <input type="text" id="roll" placeholder="আপনার রোল নম্বর" class="w-full bg-slate-900 border border-slate-600 p-3 rounded-xl focus:border-green-500 outline-none">
+            </div>
+            <button onclick="checkResult()" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition">ফলাফল দেখুন</button>
+        </div>
+
+        <div id="resultOutput" class="mt-6 p-4 bg-slate-900 rounded-xl border border-slate-700 hidden">
+            </div>
+    </div>
+
+    <script>
+        function checkResult() {
+            const roll = document.getElementById('roll').value;
+            const output = document.getElementById('resultOutput');
+            
+            // আপাতত একটি ডেমো রেজাল্ট সিস্টেম
+            if(roll === "101") {
+                output.innerHTML = "<p class='text-green-400 font-bold'>নাম: মোঃ আব্দুর রহমান</p><p>ফলাফল: উত্তীর্ণ (জিপিএ: ৫.০০)</p>";
+                output.classList.remove('hidden');
+            } else {
+                output.innerHTML = "<p class='text-red-400'>দুঃখিত! রোল নম্বরটি পাওয়া যায়নি।</p>";
+                output.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
