@@ -1,66 +1,32 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আল-হারামাইন ডিজিটাল ক্যাম্পাস | হোম</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: 'Hind Siliguri', sans-serif; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আল-হারামাইন ডিজিটাল ক্যাম্পাস</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-center p-6">
 
-    <nav class="bg-emerald-900 p-4 sticky top-0 z-50 shadow-lg">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-white font-bold text-xl">আল-হারামাইন ক্যাম্পাস</h1>
-            <button class="md:hidden text-white text-2xl" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">☰</button>
-            <div class="hidden md:flex space-x-6 text-white">
-                <a href="index.html" class="hover:text-emerald-300">হোম</a>
-                <a href="students.html" class="hover:text-emerald-300">শিক্ষার্থী</a>
-                <a href="teachers.html" class="hover:text-emerald-300">শিক্ষক</a>
-                <a href="results.html" class="hover:text-emerald-300">রেজাল্ট</a>
-                <a href="notice.html" class="hover:text-emerald-300">নোটিশ</a>
-                <a href="contact.html" class="hover:text-emerald-300">যোগাযোগ</a>
-                <a href="login.html" class="bg-amber-500 px-4 py-1 rounded text-emerald-900 font-bold">লগইন</a>
-            </div>
-        </div>
-        <div id="mobileMenu" class="hidden md:hidden bg-emerald-800 mt-4 p-4 text-white text-center space-y-3">
-            <a href="index.html" class="block">হোম</a>
-            <a href="students.html" class="block">শিক্ষার্থী</a>
-            <a href="teachers.html" class="block">শিক্ষক</a>
-            <a href="results.html" class="block">রেজাল্ট</a>
-            <a href="notice.html" class="block">নোটিশ</a>
-            <a href="contact.html" class="block">যোগাযোগ</a>
-            <a href="login.html" class="block bg-amber-500 text-emerald-900 font-bold py-2 rounded">লগইন</a>
-        </div>
-    </nav>
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-emerald-400 mb-4">আল-হারামাইন ডিজিটাল ক্যাম্পাস</h1>
+        <p class="text-xl text-slate-300">Smart Islamic Modern Education Platform</p>
+    </div>
 
-    <header class="bg-emerald-800 text-white py-20 px-6 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">আল-হারামাইন ডিজিটাল ক্যাম্পাস</h1>
-        <p class="text-emerald-100 text-lg mb-8">আধুনিক প্রযুক্তি ও নৈতিক শিক্ষার সমন্বয়ে একটি শ্রেষ্ঠ বিদ্যাপীঠ</p>
-        <a href="login.html" class="bg-amber-500 hover:bg-amber-400 text-emerald-900 px-8 py-3 rounded-full font-bold text-lg shadow-lg">ড্যাশবোর্ডে প্রবেশ করুন</a>
-    </header>
+    <div class="w-full max-w-xs">
+        <a href="login.html" class="block bg-emerald-600 hover:bg-emerald-500 text-white p-6 rounded-3xl shadow-2xl transition duration-300 transform hover:scale-105 border-b-4 border-emerald-800 text-center">
+            <span class="text-2xl font-bold block mb-1">Explore Now</span>
+            <span class="text-sm font-light uppercase tracking-widest text-emerald-100">Student Login</span>
+        </a>
+    </div>
 
-    <main class="max-w-6xl mx-auto py-12 px-6 grid md:grid-cols-3 gap-8">
-        <a href="students.html" class="bg-white p-8 rounded-2xl shadow-md border-b-4 border-emerald-600 text-center hover:scale-105 transition">
-            <h3 class="text-xl font-bold mb-2">শিক্ষার্থী প্রোফাইল</h3>
-            <p class="text-slate-500">শিক্ষার্থীদের তথ্য ও তালিকা</p>
-        </a>
-        <a href="teachers.html" class="bg-white p-8 rounded-2xl shadow-md border-b-4 border-emerald-600 text-center hover:scale-105 transition">
-            <h3 class="text-xl font-bold mb-2">শিক্ষক পরিচিতি</h3>
-            <p class="text-slate-500">আমাদের সম্মানিত শিক্ষকবৃন্দ</p>
-        </a>
-        <a href="results.html" class="bg-white p-8 rounded-2xl shadow-md border-b-4 border-emerald-600 text-center hover:scale-105 transition">
-            <h3 class="text-xl font-bold mb-2">পরীক্ষার ফলাফল</h3>
-            <p class="text-slate-500">ফলাফল ও সেমিস্টার তথ্য</p>
-        </a>
-    </main>
-
-    <footer class="bg-slate-900 text-slate-400 py-8 text-center mt-10">
-        <p>© ২০২৬ আল-হারামাইন মডেল মাদ্রাসা, উখিয়া, কক্সবাজার।</p>
-    </footer>
+    <footer class="absolute bottom-6 text-slate-500 text-sm">
+        <p>&copy; ২০২৬ আল-হারামাইন মডেল মাদ্রাসা, উখিয়া, কক্সবাজার।</p>
+    </footer>
 
 </body>
 </html>
