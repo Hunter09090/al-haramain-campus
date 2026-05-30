@@ -1,15 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&display=swap');
-
 body {
-    font-family: 'Hind Siliguri', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
-
-/* ন্যাভবার এনিমেশন */
-nav a {
-    transition: all 0.3s ease-in-out;
-}
-
-/* বাটন হোভার ইফেক্ট */
-button:hover {
-    transform: translateY(-3px);
+/* বাটনে সুন্দর হোভার ইফেক্ট */
+button, a {
+    transition: 0.3s ease;
 }
