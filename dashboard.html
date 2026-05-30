@@ -3,36 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | আল-হারামাইন</title>
+    <title>ড্যাশবোর্ড | আল-হারামাইন ডিজিটাল ক্যাম্পাস</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-900 text-white min-h-screen p-6">
     
-    <div class="max-w-4xl mx-auto">
-        <div class="flex justify-between items-center mb-8 bg-slate-800 p-6 rounded-2xl shadow-lg">
-            <h1 class="text-2xl font-bold text-green-400">শিক্ষার্থী ড্যাশবোর্ড</h1>
-            <button id="logoutBtn" class="bg-red-600 px-4 py-2 rounded font-bold hover:bg-red-700 transition">লগ আউট</button>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
-                <h3 class="text-green-400 font-bold">আমার রেজাল্ট</h3>
-                <p class="mt-2 text-gray-300">সেমিস্টার ফাইনাল: ৩.৮০</p>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
-                <h3 class="text-green-400 font-bold">ক্লাস রুটিন</h3>
-                <p class="mt-2 text-gray-300">আগামীকাল সকাল ৯টা</p>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
-                <h3 class="text-green-400 font-bold">নোটিশ বোর্ড</h3>
-                <p class="mt-2 text-gray-300">আগামীকাল ক্যাম্পাস ছুটি</p>
-            </div>
-        </div>
-    </div>
-
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
@@ -45,24 +21,59 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+        const auth = getAuth();
 
-        // লগইন করা আছে কি না চেক করা
         onAuthStateChanged(auth, (user) => {
             if (!user) {
-                // লগইন করা না থাকলে লগইন পেজে পাঠিয়ে দেবে
                 window.location.href = "login.html";
             }
         });
 
-        // লগ আউট ফাংশন
-        document.getElementById('logoutBtn').addEventListener('click', () => {
+        // লগআউট ফাংশন
+        window.logout = () => {
             signOut(auth).then(() => {
                 window.location.href = "login.html";
-            }).catch((error) => {
-                alert("লগ আউট ব্যর্থ হয়েছে!");
             });
-        });
+        };
     </script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+
+    <nav class="bg-slate-950 p-4 flex justify-between items-center shadow-lg">
+        <h1 class="font-bold text-xl text-green-400">ড্যাশবোর্ড</h1>
+        <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm transition">লগ আউট</button>
+    </nav>
+
+    <div class="max-w-4xl mx-auto p-6">
+        <h2 class="text-2xl font-semibold mb-6 text-center">স্বাগতম, ডিজিটাল ক্যাম্পাসে!</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="students.html" class="block bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-green-500 transition">
+                <h3 class="text-xl font-bold text-green-400">শিক্ষার্থী তালিকা</h3>
+                <p class="text-slate-400">সকল শিক্ষার্থীদের তথ্য দেখুন</p>
+            </a>
+            
+            <a href="teachers.html" class="block bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-green-500 transition">
+                <h3 class="text-xl font-bold text-green-400">শিক্ষক পরিচিতি</h3>
+                <p class="text-slate-400">সম্মানিত শিক্ষকবৃন্দের তালিকা</p>
+            </a>
+
+            <a href="results.html" class="block bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-green-500 transition">
+                <h3 class="text-xl font-bold text-green-400">পরীক্ষার ফলাফল</h3>
+                <p class="text-slate-400">ফলাফল ও সেমিস্টার তথ্য</p>
+            </a>
+
+            <a href="notices.html" class="block bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-green-500 transition">
+                <h3 class="text-xl font-bold text-green-400">নোটিশ বোর্ড</h3>
+                <p class="text-slate-400">সাম্প্রতিক খবর ও নোটিশ</p>
+            </a>
+
+            <a href="contact.html" class="block bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-green-500 transition md:col-span-2">
+                <h3 class="text-xl font-bold text-green-400">যোগাযোগ</h3>
+                <p class="text-slate-400">সরাসরি যোগাযোগ করুন</p>
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>
