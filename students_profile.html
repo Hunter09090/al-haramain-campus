@@ -2,21 +2,52 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>শিক্ষার্থী প্রোফাইল | আল-হারামাইন</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমার প্রোফাইল | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 p-6">
-    <div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
-        <h2 class="text-2xl font-bold text-emerald-800 mb-6 border-b pb-4">আমার প্রোফাইল</h2>
+<body class="bg-slate-50 min-h-screen p-6">
+    <div class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-8 border-t-8 border-emerald-800">
+        <h2 class="text-2xl font-bold text-emerald-900 mb-6 text-center">শিক্ষার্থী প্রোফাইল</h2>
         
-        <div id="profileDetails" class="space-y-4">
-            <p><strong>নাম:</strong> <span id="userName">লোড হচ্ছে...</span></p>
-            <p><strong>রোল:</strong> <span id="userRoll">---</span></p>
-            <p><strong>ক্লাস:</strong> <span id="userClass">---</span></p>
-            <p><strong>ইমেইল:</strong> <span id="userEmail">---</span></p>
+        <div id="profileData" class="space-y-4 text-slate-700">
+            <div class="bg-slate-100 p-4 rounded-xl"><strong>নাম:</strong> <span id="name">লোড হচ্ছে...</span></div>
+            <div class="bg-slate-100 p-4 rounded-xl"><strong>রোল:</strong> <span id="roll">---</span></div>
+            <div class="bg-slate-100 p-4 rounded-xl"><strong>ক্লাস:</strong> <span id="class">---</span></div>
+            <div class="bg-slate-100 p-4 rounded-xl"><strong>ইমেইল:</strong> <span id="email">---</span></div>
         </div>
-        
-        <button onclick="window.history.back()" class="mt-8 bg-emerald-600 text-white px-6 py-2 rounded-lg">ফিরে যান</button>
+
+        <a href="dashboard.html" class="block text-center mt-8 bg-emerald-800 text-white py-3 rounded-xl font-bold">ড্যাশবোর্ডে ফিরে যান</a>
     </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        const firebaseConfig = { /* আপনার কনফিগ আগের মতোই থাকবে */ };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const docRef = doc(db, "students", user.email);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('name').innerText = data.name;
+                    document.getElementById('roll').innerText = data.roll;
+                    document.getElementById('class').innerText = data.class;
+                    document.getElementById('email').innerText = user.email;
+                } else {
+                    alert("আপনার তথ্য এখনো ডাটাবেসে যোগ করা হয়নি!");
+                }
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+    </script>
 </body>
 </html>
