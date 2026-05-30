@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>শিক্ষার্থীদের তালিকা - আল-হারমাইন ডিজিটাল ক্যাম্পাস</title>
+    <title>শিক্ষার্থী তালিকা - আল-হারমাইন ডিজিটাল ক্যাম্পাস</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-5">
@@ -11,6 +11,12 @@
     <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">শিক্ষার্থীদের তথ্য তালিকা</h2>
         
+        <div class="flex justify-center gap-2 mb-6" id="filter-buttons">
+            <button onclick="filterStudents('all')" class="bg-blue-600 text-white px-4 py-2 rounded">সব</button>
+            <button onclick="filterStudents('৫ম')" class="bg-gray-500 text-white px-4 py-2 rounded">৫ম শ্রেণী</button>
+            <button onclick="filterStudents('৪র্থ')" class="bg-gray-500 text-white px-4 py-2 rounded">৪র্থ শ্রেণী</button>
+        </div>
+
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
@@ -21,7 +27,8 @@
                     </tr>
                 </thead>
                 <tbody id="student-table" class="text-gray-700">
-                    </tbody>
+                    <tr><td colspan="3" class="p-4 text-center">তথ্য লোড হচ্ছে...</td></tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -30,7 +37,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-        // আপনার Firebase কনফিগ
         const firebaseConfig = {
             apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
             authDomain: "al-haramain-digital-campus.firebaseapp.com",
@@ -41,29 +47,41 @@
             measurementId: "G-LSMDHF5TDY"
         };
 
-        // Firebase শুরু করা
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const studentTable = document.getElementById('student-table');
         
+        let allStudents = []; // সব ছাত্রের লিস্ট এখানে জমা থাকবে
+
         async function fetchStudents() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "students"));
-                studentTable.innerHTML = ""; // লোডিং মেসেজ মুছে দেওয়া
-                
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    studentTable.innerHTML += `
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="p-4 border">${data.roll || 'N/A'}</td>
-                            <td class="p-4 border">${data.name || 'N/A'}</td>
-                            <td class="p-4 border">${data.class || 'N/A'}</td>
-                        </tr>
-                    `;
-                });
-            } catch (error) {
-                console.error("ডাটা আনতে সমস্যা হচ্ছে: ", error);
-                studentTable.innerHTML = "<tr><td colspan='3' class='p-4 text-center text-red-500'>ডাটা লোড করতে সমস্যা হয়েছে।</td></tr>";
+            const querySnapshot = await getDocs(collection(db, "students"));
+            allStudents = [];
+            querySnapshot.forEach((doc) => {
+                allStudents.push(doc.data());
+            });
+            renderTable(allStudents);
+        }
+
+        function renderTable(students) {
+            const table = document.getElementById('student-table');
+            table.innerHTML = "";
+            students.forEach(data => {
+                table.innerHTML += `
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-4 border">${data.roll || '-'}</td>
+                        <td class="p-4 border">${data.name || '-'}</td>
+                        <td class="p-4 border font-bold">${data.class || '-'}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // ফিল্টার করার ফাংশন
+        window.filterStudents = function(className) {
+            if (className === 'all') {
+                renderTable(allStudents);
+            } else {
+                const filtered = allStudents.filter(s => s.class === className);
+                renderTable(filtered);
             }
         }
 
