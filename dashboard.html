@@ -1,13 +1,68 @@
-<script type="module">
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-    const auth = getAuth();
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | আল-হারামাইন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen p-6">
+    
+    <div class="max-w-4xl mx-auto">
+        <div class="flex justify-between items-center mb-8 bg-slate-800 p-6 rounded-2xl shadow-lg">
+            <h1 class="text-2xl font-bold text-green-400">শিক্ষার্থী ড্যাশবোর্ড</h1>
+            <button id="logoutBtn" class="bg-red-600 px-4 py-2 rounded font-bold hover:bg-red-700 transition">লগ আউট</button>
+        </div>
 
-    // চেক করবে ইউজার লগইন করা কি না
-    onAuthStateChanged(auth, (user) => {
-        if (!user) {
-            // লগইন করা না থাকলে সরাসরি লগইন পেজে পাঠিয়ে দেবে
-            alert("অনুগ্রহ করে আগে লগইন করুন!");
-            window.location.href = "login.html";
-        }
-    });
-</script>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
+                <h3 class="text-green-400 font-bold">আমার রেজাল্ট</h3>
+                <p class="mt-2 text-gray-300">সেমিস্টার ফাইনাল: ৩.৮০</p>
+            </div>
+            <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
+                <h3 class="text-green-400 font-bold">ক্লাস রুটিন</h3>
+                <p class="mt-2 text-gray-300">আগামীকাল সকাল ৯টা</p>
+            </div>
+            <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
+                <h3 class="text-green-400 font-bold">নোটিশ বোর্ড</h3>
+                <p class="mt-2 text-gray-300">আগামীকাল ক্যাম্পাস ছুটি</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f",
+            measurementId: "G-LSMDHF5TDY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // লগইন করা আছে কি না চেক করা
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // লগইন করা না থাকলে লগইন পেজে পাঠিয়ে দেবে
+                window.location.href = "login.html";
+            }
+        });
+
+        // লগ আউট ফাংশন
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = "login.html";
+            }).catch((error) => {
+                alert("লগ আউট ব্যর্থ হয়েছে!");
+            });
+        });
+    </script>
+</body>
+</html>
