@@ -1,8 +1,1 @@
-// ওয়েবসাইট লোড হওয়ার সময় একটি সুন্দর কনসোল মেসেজ
-console.log("আল-হারামাইন ক্যাম্পাস ওয়েবসাইট লোড হয়েছে");
-
-// বাটন বা ফর্ম সাবমিট করার সময় ছোট এনিমেশন
-document.querySelector('form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('এটি একটি ডেমো লগইন! ডেটাবেস কানেকশনের কাজ চলছে...');
-});
+console.log("Welcome to Al Haramain Digital Campus Website!");
