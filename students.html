@@ -3,89 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>শিক্ষার্থী তালিকা - আল-হারমাইন ডিজিটাল ক্যাম্পাস</title>
+    <title>চতুর্থ শ্রেণী - শিক্ষার্থী তালিকা</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-5">
 
     <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">শিক্ষার্থীদের তথ্য তালিকা</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">চতুর্থ শ্রেণীর শিক্ষার্থী তালিকা</h2>
         
-        <div class="flex justify-center gap-2 mb-6" id="filter-buttons">
-            <button onclick="filterStudents('all')" class="bg-blue-600 text-white px-4 py-2 rounded">সব</button>
-            <button onclick="filterStudents('৫ম')" class="bg-gray-500 text-white px-4 py-2 rounded">৫ম শ্রেণী</button>
-            <button onclick="filterStudents('৪র্থ')" class="bg-gray-500 text-white px-4 py-2 rounded">৪র্থ শ্রেণী</button>
-        </div>
-
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-blue-600 text-white">
-                        <th class="p-4 border">রোল</th>
-                        <th class="p-4 border">নাম</th>
+                        <th class="p-4 border">ক্রমিক</th>
+                        <th class="p-4 border">শিক্ষার্থীর নাম</th>
                         <th class="p-4 border">শ্রেণী</th>
                     </tr>
                 </thead>
                 <tbody id="student-table" class="text-gray-700">
-                    <tr><td colspan="3" class="p-4 text-center">তথ্য লোড হচ্ছে...</td></tr>
-                </tbody>
+                    </tbody>
             </table>
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    <script>
+        // এখানে আপনার সব শিক্ষার্থীদের নাম আছে
+        const students = [
+            "ফাতেমা ইসলাম", "নুসরাত ইসলাম ফারিহা", "নাজিফা", "মোহাম্মদ নুর হোছাইন", "ফারিয়া তাসনিম কেয়া", 
+            "আনিকা বিনতে দিদার", "মোহাম্মদ ফরহাদ", "আলিয়া সুলতানা রিফা", "দেলোয়ার হোসেন", "আরিফা হোসনা", 
+            "হালিমা নূরী", "জান্নাতুল মাওয়া তাসনিম", "সানজিদা সোলতানা লিমা", "শরাফ উদ্দিন মারজুক", "সিহাম", 
+            "মো: আকিব", "তানজিনা আফরিন নিহা", "সাহরিয়া সালমা লুবাবা", "সোমাইয়া আক্তার", "মো: রাজভীর হোছাইন", 
+            "মোহাম্মদ আবিদ", "মাহিয়া নাসরিন কাফি", "মো: হোছাইন", "মোশাররফ হোসেন মোর্শেদ", "মাহবুব বিন সাইফ মাহিন", 
+            "আবছানা নুর নাবিয়া", "সায়েদ মোহাম্মদ মাহিদ", "ইউসুফ মোহাম্মদ আলফাত", "নুসরাত জাহান সাফিয়া", "সাদিয়া আক্তার", 
+            "মো: ইশমাম", "মোহাম্মদ রিদয়ান", "শাহরিয়া সুলতানা শামিকা", "নুসরাত জাহান ইলা", "ওসমান সরওয়ার", 
+            "আয়েশা ছিদ্দিকা মুনতাহা", "সুমাইয়া আক্তার", "মোহাম্মদ মুবিন", "আব্দু রাফাত ওসামা", "মোহাম্মদ ইলহাম", 
+            "সাবরিনা জামান ফারিহা"
+        ];
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
-            authDomain: "al-haramain-digital-campus.firebaseapp.com",
-            projectId: "al-haramain-digital-campus",
-            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
-            messagingSenderId: "306805947710",
-            appId: "1:306805947710:web:d0ed996b453928767a406f",
-            measurementId: "G-LSMDHF5TDY"
-        };
+        const tableBody = document.getElementById('student-table');
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
-        let allStudents = []; // সব ছাত্রের লিস্ট এখানে জমা থাকবে
-
-        async function fetchStudents() {
-            const querySnapshot = await getDocs(collection(db, "students"));
-            allStudents = [];
-            querySnapshot.forEach((doc) => {
-                allStudents.push(doc.data());
-            });
-            renderTable(allStudents);
-        }
-
-        function renderTable(students) {
-            const table = document.getElementById('student-table');
-            table.innerHTML = "";
-            students.forEach(data => {
-                table.innerHTML += `
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="p-4 border">${data.roll || '-'}</td>
-                        <td class="p-4 border">${data.name || '-'}</td>
-                        <td class="p-4 border font-bold">${data.class || '-'}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        // ফিল্টার করার ফাংশন
-        window.filterStudents = function(className) {
-            if (className === 'all') {
-                renderTable(allStudents);
-            } else {
-                const filtered = allStudents.filter(s => s.class === className);
-                renderTable(filtered);
-            }
-        }
-
-        fetchStudents();
+        students.forEach((name, index) => {
+            tableBody.innerHTML += `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-4 border">${index + 1}</td>
+                    <td class="p-4 border font-medium">${name}</td>
+                    <td class="p-4 border">চতুর্থ</td>
+                </tr>
+            `;
+        });
     </script>
 </body>
 </html>
