@@ -9,23 +9,46 @@
     <div class="bg-slate-800 p-8 rounded-2xl w-full max-w-sm shadow-xl text-center">
         <h2 class="text-2xl font-bold mb-6 text-green-400">Student Login</h2>
         
-        <input type="text" id="userId" placeholder="User ID" class="w-full p-3 mb-4 rounded bg-slate-700 text-white border border-slate-600 focus:border-green-500 outline-none">
-        <input type="password" id="password" placeholder="Password" class="w-full p-3 mb-6 rounded bg-slate-700 text-white border border-slate-600 focus:border-green-500 outline-none">
+        <input type="email" id="email" placeholder="Email" class="w-full p-3 mb-4 rounded bg-slate-700 text-white border border-slate-600 outline-none">
+        <input type="password" id="password" placeholder="Password" class="w-full p-3 mb-6 rounded bg-slate-700 text-white border border-slate-600 outline-none">
+        <button id="emailLoginBtn" class="w-full bg-green-500 py-3 rounded font-bold hover:bg-green-600 text-white mb-4">Login with Email</button>
         
-        <button onclick="checkLogin()" class="w-full bg-green-500 py-3 rounded font-bold hover:bg-green-600 transition">Login Now</button>
+        <button id="googleLoginBtn" class="w-full bg-white py-3 rounded font-bold hover:bg-gray-200 text-slate-900">Login with Google</button>
     </div>
 
-    <script>
-        function checkLogin() {
-            let pass = document.getElementById('password').value;
-            // এখানে পাসওয়ার্ড চেক করা হচ্ছে
-            if(pass === "123") {
-                alert("লগইন সফল!");
-                window.location.href = "index.html";
-            } else {
-                alert("ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।");
-            }
-        }
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f",
+            measurementId: "G-LSMDHF5TDY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Email Login Logic
+        document.getElementById('emailLoginBtn').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => { alert("লগইন সফল!"); window.location.href = "index.html"; })
+                .catch((err) => alert("Error: " + err.message));
+        });
+
+        // Google Login Logic
+        document.getElementById('googleLoginBtn').addEventListener('click', () => {
+            signInWithPopup(auth, provider)
+                .then(() => { alert("Google লগইন সফল!"); window.location.href = "index.html"; })
+                .catch((err) => alert("Error: " + err.message));
+        });
     </script>
 </body>
 </html>
