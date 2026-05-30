@@ -20,7 +20,8 @@
                 </tr>
             </thead>
             <tbody id="student-table" class="text-gray-700">
-                </tbody>
+                <tr><td colspan="3" class="p-4 text-center">ডাটা লোড হচ্ছে...</td></tr>
+            </tbody>
         </table>
     </div>
 
@@ -28,7 +29,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-        // আপনার কনফিগ
         const firebaseConfig = {
             apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
             authDomain: "al-haramain-digital-campus.firebaseapp.com",
@@ -39,25 +39,33 @@
             measurementId: "G-LSMDHF5TDY"
         };
 
-        // Firebase ইনিশিয়ালাইজ করা
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-        // ডাটাবেস থেকে ডাটা আনা
         const studentTable = document.getElementById('student-table');
         
         async function fetchStudents() {
-            const querySnapshot = await getDocs(collection(db, "students"));
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                studentTable.innerHTML += `
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="p-4">${data.roll}</td>
-                        <td class="p-4">${data.name}</td>
-                        <td class="p-4">${data.class}</td>
-                    </tr>
-                `;
-            });
+            try {
+                const querySnapshot = await getDocs(collection(db, "students"));
+                studentTable.innerHTML = ""; // লোডিং মেসেজ মুছে ফেলার জন্য
+                
+                if (querySnapshot.empty) {
+                    studentTable.innerHTML = "<tr><td colspan='3' class='p-4 text-center'>কোনো শিক্ষার্থী পাওয়া যায়নি।</td></tr>";
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    studentTable.innerHTML += `
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-4">${data.roll || 'N/A'}</td>
+                            <td class="p-4">${data.name || 'N/A'}</td>
+                            <td class="p-4">${data.class || 'N/A'}</td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error fetching: ", error);
+                studentTable.innerHTML = "<tr><td colspan='3' class='p-4 text-center text-red-500'>ডাটা লোড করতে সমস্যা হয়েছে। সিকিউরিটি রুলস চেক করুন।</td></tr>";
+            }
         }
 
         fetchStudents();
