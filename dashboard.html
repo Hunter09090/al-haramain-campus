@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>শিক্ষার্থী ড্যাশবোর্ড</title>
+    <title>ড্যাশবোর্ড | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -21,9 +21,7 @@
         const auth = getAuth();
 
         onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                window.location.href = "login.html";
-            }
+            if (!user) { window.location.href = "login.html"; }
         });
 
         window.logout = () => {
@@ -33,41 +31,40 @@
 </head>
 <body class="bg-slate-900 text-white min-h-screen">
 
-    <header class="bg-slate-950 p-6 flex justify-between items-center shadow-lg sticky top-0">
+    <header class="bg-slate-950 p-6 flex justify-between items-center shadow-lg sticky top-0 z-50">
         <h1 class="text-xl font-bold text-green-400">ড্যাশবোর্ড</h1>
         <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm transition">লগ আউট</button>
     </header>
 
-    <div class="max-w-md mx-auto p-4 space-y-6">
+    <div class="max-w-md mx-auto p-4 space-y-4">
         
-        <div class="bg-gradient-to-r from-emerald-800 to-emerald-600 p-6 rounded-2xl shadow-xl">
-            <h2 class="text-lg font-semibold opacity-90">শিক্ষার্থীর প্রোফাইল</h2>
-            <div class="mt-4 space-y-1">
-                <p>নাম: <span class="font-bold">আব্দুর রহমান</span></p>
-                <p>রোল: <span class="font-bold">১০১</span></p>
-                <p>শ্রেণি: <span class="font-bold">পঞ্চম</span></p>
-            </div>
+        <div class="grid grid-cols-2 gap-4">
+            <a href="students.html" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
+                <span class="block text-4xl mb-2">🎓</span>
+                <span class="font-bold">শিক্ষার্থীগণ</span>
+            </a>
+            
+            <a href="results.html" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
+                <span class="block text-4xl mb-2">📝</span>
+                <span class="font-bold">ফলাফল</span>
+            </a>
+            
+            <a href="routine.html" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
+                <span class="block text-4xl mb-2">📅</span>
+                <span class="font-bold">রুটিন</span>
+            </a>
+
+            <a href="notices.html" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
+                <span class="block text-4xl mb-2">📢</span>
+                <span class="font-bold">নোটিশ</span>
+            </a>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
-            <a href="students.html" class="bg-slate-800 p-5 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
-                <span class="block text-3xl mb-2">🎓</span>
-                <span class="text-sm font-semibold">প্রোফাইল</span>
-            </a>
-            <a href="routine.html" class="bg-slate-800 p-5 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
-                <span class="block text-3xl mb-2">📅</span>
-                <span class="text-sm font-semibold">রুটিন</span>
-            </a>
-            <a href="results.html" class="bg-slate-800 p-5 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
-                <span class="block text-3xl mb-2">📝</span>
-                <span class="text-sm font-semibold">ফলাফল</span>
-            </a>
-            <a href="notices.html" class="bg-slate-800 p-5 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
-                <span class="block text-3xl mb-2">📢</span>
-                <span class="text-sm font-semibold">নোটিশ</span>
-            </a>
-        </div>
-        
+        <a href="teachers.html" class="block w-full bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
+            <span class="block text-4xl mb-2">👨‍🏫</span>
+            <span class="font-bold text-lg">শিক্ষক মহোদয়গণ</span>
+        </a>
+
         <a href="contact.html" class="block w-full bg-slate-800 p-4 rounded-2xl border border-slate-700 text-center hover:border-green-500 transition">
             যোগাযোগ ও সহযোগিতা
         </a>
