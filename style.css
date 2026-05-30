@@ -1,0 +1,17 @@
+/* কাস্টম ফন্ট এবং স্মুথ ট্রানজিশন */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav {
+    border-bottom: 4px solid #064e3b;
+}
+
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
