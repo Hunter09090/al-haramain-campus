@@ -1,44 +1,13 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <title>ড্যাশবোর্ড | আল-হারামাইন</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-900 text-white p-6">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold text-green-400">শিক্ষার্থী ড্যাশবোর্ড</h1>
-            <button id="logoutBtn" class="bg-red-600 px-4 py-2 rounded hover:bg-red-700">লগ আউট</button>
-        </div>
+<script type="module">
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+    const auth = getAuth();
 
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                <h3 class="text-green-400 font-bold">আমার রেজাল্ট</h3>
-                <p class="mt-2">সেমিস্টার ফাইনাল: ৩.৮০</p>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                <h3 class="text-green-400 font-bold">ক্লাস রুটিন</h3>
-                <p class="mt-2">আগামীকাল সকাল ৯টা</p>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                <h3 class="text-green-400 font-bold">নোটিশ বোর্ড</h3>
-                <p class="mt-2">আগামীকাল ক্যাম্পাস ছুটি</p>
-            </div>
-        </div>
-    </div>
-
-    <script type="module">
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-        
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (!user) { window.location.href = "login.html"; }
-        });
-
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            signOut(auth).then(() => { window.location.href = "login.html"; });
-        });
-    </script>
-</body>
-</html>
+    // চেক করবে ইউজার লগইন করা কি না
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            // লগইন করা না থাকলে সরাসরি লগইন পেজে পাঠিয়ে দেবে
+            alert("অনুগ্রহ করে আগে লগইন করুন!");
+            window.location.href = "login.html";
+        }
+    });
+</script>
