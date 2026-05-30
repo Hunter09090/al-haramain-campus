@@ -2,33 +2,36 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>শিক্ষার্থী তথ্য খুঁজুন | আল-হারামাইন</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শিক্ষার্থী তালিকা | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 min-h-screen p-6">
-    <div class="max-w-2xl mx-auto">
-        <div class="bg-white p-6 rounded-2xl shadow-lg mb-8 border-t-4 border-emerald-600">
-            <h2 class="text-xl font-bold text-emerald-900 mb-4">শিক্ষার্থী তথ্য খুঁজুন</h2>
-            <div class="flex flex-col md:flex-row gap-4">
-                <input type="text" id="searchInput" placeholder="নাম বা রোল নম্বর লিখুন..." class="flex-1 p-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
-                <button onclick="searchStudent()" class="bg-emerald-800 text-white px-8 py-3 rounded-xl font-bold hover:bg-emerald-900">খুঁজুন</button>
-            </div>
-        </div>
+<body class="bg-slate-50 min-h-screen p-4 md:p-8">
 
-        <div id="resultCard" class="hidden bg-white p-8 rounded-2xl shadow-xl border-l-8 border-emerald-500">
-            <h3 class="text-2xl font-bold text-emerald-900 mb-6">শিক্ষার্থী প্রোফাইল</h3>
-            <div class="space-y-4">
-                <p><strong>নাম:</strong> <span id="resName"></span></p>
-                <p><strong>রোল:</strong> <span id="resRoll"></span></p>
-                <p><strong>শ্রেণী:</strong> <span id="resClass"></span></p>
-                <p><strong>অন্যান্য তথ্য:</strong> <span id="resInfo"></span></p>
-            </div>
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-emerald-900 mb-6 text-center">শিক্ষার্থী তালিকা</h2>
+
+        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="নাম বা রোল দিয়ে খুঁজুন..." 
+            class="w-full p-4 mb-6 rounded-xl border border-gray-300 shadow-sm outline-none focus:ring-2 focus:ring-emerald-500">
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <table class="w-full text-left" id="studentTable">
+                <thead class="bg-emerald-800 text-white">
+                    <tr>
+                        <th class="p-4">রোল</th>
+                        <th class="p-4">নাম</th>
+                        <th class="p-4">শ্রেণী</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody" class="divide-y divide-gray-200">
+                    </tbody>
+            </table>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
@@ -39,31 +42,38 @@
             appId: "1:306805947710:web:d0ed996b453928767a406f",
             measurementId: "G-LSMDHF5TDY"
         };
+
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        window.searchStudent = async () => {
-            const keyword = document.getElementById('searchInput').value;
-            const studentsRef = collection(db, "students");
-            const q = query(studentsRef, where("name", "==", keyword)); // এখানে রোল দিয়েও সার্চ করা যাবে
-            
-            const querySnapshot = await getDocs(q);
-            const resultCard = document.getElementById('resultCard');
+        // ডাটাবেস থেকে ডাটা আনা
+        async function loadData() {
+            const querySnapshot = await getDocs(collection(db, "students"));
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = ""; 
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="p-4">${data.roll}</td>
+                        <td class="p-4">${data.name}</td>
+                        <td class="p-4">${data.class}</td>
+                    </tr>
+                `;
+            });
+        }
 
-            if (!querySnapshot.empty) {
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    document.getElementById('resName').innerText = data.name;
-                    document.getElementById('resRoll').innerText = data.roll;
-                    document.getElementById('resClass').innerText = data.class;
-                    document.getElementById('resInfo').innerText = data.info || "প্রযোজ্য নয়";
-                    resultCard.classList.remove('hidden');
-                });
-            } else {
-                alert("দুঃখিত! এই নামে কোনো শিক্ষার্থী পাওয়া যায়নি।");
-                resultCard.classList.add('hidden');
+        loadData();
+
+        // সার্চ ফিল্টার লজিক
+        window.filterTable = function() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let rows = document.getElementById("tableBody").getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                let text = rows[i].textContent.toLowerCase();
+                rows[i].style.display = text.includes(input) ? "" : "none";
             }
-        };
+        }
     </script>
 </body>
 </html>
