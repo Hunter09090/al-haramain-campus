@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ক্লাস রুটিন | আল-হারামাইন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f"
+        };
+        initializeApp(firebaseConfig);
+        onAuthStateChanged(getAuth(), (user) => {
+            if (!user) { window.location.href = "login.html"; }
+        });
+    </script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center p-6">
+
+    <div class="w-full max-w-2xl mb-8">
+        <a href="dashboard.html" class="text-green-400 hover:text-green-300 font-bold">← ড্যাশবোর্ডে ফিরুন</a>
+    </div>
+
+    <div class="w-full max-w-2xl bg-slate-800 p-10 rounded-3xl border border-slate-700 shadow-2xl text-center">
+        <div class="mb-6">
+            <span class="text-6xl">📅</span>
+        </div>
+        <h2 class="text-3xl font-bold text-white mb-4">ক্লাস রুটিন</h2>
+        <div class="h-1 w-20 bg-green-500 mx-auto rounded-full mb-8"></div>
+        
+        <p class="text-xl text-slate-300 mb-6 italic">
+            "খুব শীঘ্রই রুটিন আপলোড করা হবে।"
+        </p>
+        
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700/50">
+            <p class="text-sm text-slate-500">
+                কর্তৃপক্ষ রুটিন আপডেট করার সাথে সাথে আপনি এখানে তা দেখতে পাবেন। অনুগ্রহ করে আমাদের সাথেই থাকুন।
+            </p>
+        </div>
+    </div>
+
+    <div class="mt-12 text-slate-600 text-sm">
+        &copy; ২০২৬ আল-হারামাইন ডিজিটাল ক্যাম্পাস
+    </div>
+
+</body>
+</html>
