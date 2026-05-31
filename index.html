@@ -8,61 +8,88 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;700&display=swap');
-        body { font-family: 'Hind Siliguri', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #f1f5f9; }
     </style>
 </head>
 <body class="pb-10">
 
-    <!-- হেডার: লোগো ও প্রতিষ্ঠানের তথ্য -->
-    <header class="bg-white p-4 shadow-sm border-b flex items-center space-x-4">
-        <div class="w-16 h-16 bg-green-800 rounded-lg flex items-center justify-center text-white font-bold text-xl">LOGO</div>
+    <!-- হেডার -->
+    <header class="bg-white p-4 shadow-sm border-b flex justify-between items-center sticky top-0 z-50">
         <div>
             <h1 class="text-lg font-bold text-gray-900">আল-হারামাইন মডেল মাদ্রাসা</h1>
-            <p class="text-sm text-gray-600">EST: 2013 | Reg: 0207079303</p>
+            <p class="text-sm text-gray-500">EST: ২০১৩ | Reg: ০২০৭০৭৯৩০৩</p>
         </div>
+        <button onclick="toggleMenu()" class="text-2xl p-2"><i class="fas fa-bars"></i></button>
     </header>
+
+    <!-- থ্রি-ডট মেনু -->
+    <nav id="mobileMenu" class="hidden bg-blue-900 text-white p-4">
+        <a href="index.html" class="block py-2 border-b border-blue-700">হোম (Home)</a>
+        <a href="about.html" class="block py-2 border-b border-blue-700">আমাদের সম্পর্কে (About Us)</a>
+        <a href="contact.html" class="block py-2 border-b border-blue-700">যোগাযোগ (Contact)</a>
+        <a href="https://www.facebook.com/profile.php?id=61571161346418" target="_blank" class="block py-2">ফেসবুক পেজ (Facebook Page)</a>
+    </nav>
 
     <!-- হাদিস সেকশন -->
     <section class="p-4">
-        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded shadow-sm">
-            <p class="text-center text-gray-700 italic">"এখানে হাদিসের বাণী বা গুরুত্বপূর্ণ কোনো বার্তা প্রদর্শন করা হবে।"</p>
+        <div class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded shadow-sm text-gray-700 italic text-center">
+            "এখানে হাদিসের বাণী বা গুরুত্বপূর্ণ কোনো বার্তা প্রদর্শন করা হবে।"
         </div>
     </section>
 
-    <!-- পরিচালকের বাণী বাটন -->
-    <section class="px-4 mb-8">
-        <button onclick="openModal()" class="w-full flex items-center justify-between bg-white border border-gray-200 p-4 rounded shadow-sm hover:bg-gray-50 transition">
-            <span class="font-bold text-gray-800">পরিচালকের বাণী</span>
+    <!-- পরিচালকের বাণী -->
+    <section class="px-4 mb-6">
+        <button onclick="openModal()" class="w-full flex items-center justify-between bg-white border border-gray-200 p-4 rounded shadow-md hover:bg-gray-50 transition">
+            <span class="font-bold text-gray-800 text-lg">পরিচালকের বাণী</span>
             <span class="text-sm text-blue-600 font-bold underline">Read more</span>
         </button>
     </section>
 
-    <!-- বাটন মেনুসমূহ -->
+    <!-- রঙিন বাটন মেনু -->
     <section class="px-4 space-y-3">
-        <a href="exclusive.html" class="block bg-orange-500 text-white p-4 rounded shadow-md flex justify-between items-center"><span>Exclusive ✨</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="students.html" class="block bg-blue-500 text-white p-4 rounded shadow-md flex justify-between items-center"><span>শিক্ষার্থীগণ</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="teachers.html" class="block bg-green-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>শিক্ষকগণ</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="notice.html" class="block bg-red-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>নোটিশ</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="result.html" class="block bg-purple-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>ফলাফল</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="contact.html" class="block bg-teal-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>যোগাযোগ সহযোগিতা</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="gallery.html" class="block bg-indigo-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>ফটো গ্যালারি</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="ict.html" class="block bg-pink-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>ICT Department</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="activities.html" class="block bg-yellow-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>Co curricular activities</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="calendar.html" class="block bg-gray-600 text-white p-4 rounded shadow-md flex justify-between items-center"><span>Academic calendar</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="profile.html" class="block bg-sky-700 text-white p-4 rounded shadow-md flex justify-between items-center"><span>Student profile</span> <i class="fas fa-chevron-right"></i></a>
-        <a href="login.html" class="block bg-emerald-700 text-white p-4 rounded shadow-md flex justify-between items-center"><span>Teacher's login</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-orange-500 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>Exclusive ✨</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-blue-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>শিক্ষার্থীগণ</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-green-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>শিক্ষকগণ</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-red-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>নোটিশ</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-purple-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>ফলাফল</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-teal-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>যোগাযোগ সহযোগিতা</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-indigo-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>ফটো গ্যালারি</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-pink-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>ICT Department</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-yellow-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>Co curricular activities</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-gray-700 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>Academic calendar</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-sky-700 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>Student info/ profile</span> <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="block bg-emerald-700 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>Teacher's login</span> <i class="fas fa-chevron-right"></i></a>
     </section>
 
-    <!-- পপ-আপ মডাল -->
-    <div id="msgModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-xl p-6 relative">
-            <button onclick="closeModal()" class="absolute top-2 right-4 text-2xl">&times;</button>
-            <h2 class="text-xl font-bold mb-4">পরিচালকের বাণী</h2>
-            <p class="text-gray-600 leading-relaxed text-justify">এখানে আপনার দেওয়া বাণীটি প্রদর্শিত হবে...</p>
+    <!-- ম্যাপ ও ফুটার -->
+    <footer class="mt-10 px-4">
+        <h3 class="font-bold text-gray-800 mb-2 underline">আমাদের অবস্থান:</h3>
+        <div class="w-full h-56 rounded-lg overflow-hidden shadow-md mb-6">
+            <iframe src="https://www.google.com/maps?q=21.2823287,92.0572184&output=embed" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        
+        <a href="https://www.facebook.com/profile.php?id=61571161346418" target="_blank" class="block bg-blue-800 text-white p-5 rounded-lg shadow-xl text-center text-2xl mb-6 hover:bg-blue-900">
+            <i class="fab fa-facebook"></i> ফেসবুক পেজে ভিজিট করুন
+        </a>
+
+        <div class="bg-gray-800 text-white p-6 rounded-lg text-center text-sm">
+            <p>ঠিকানা: পূর্ব সোনারপাড়া, উখিয়া, কক্সবাজার</p>
+            <p>ফোন: ০১৮১১-১৭৮৬৭৪, ০১৮১৩-৯৭৯১১৪</p>
+            <p>ইমেইল: alharamainidealnoraniacademy@gmail.com</p>
+        </div>
+    </footer>
+
+    <!-- পরিচালকের বাণী মডাল -->
+    <div id="msgModal" class="fixed inset-0 z-[100] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 relative">
+            <button onclick="closeModal()" class="absolute top-2 right-4 text-3xl">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 text-blue-900">পরিচালকের বাণী</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">এখানে আপনার দেওয়া বাণীটি প্রদর্শিত হবে...</p>
         </div>
     </div>
 
     <script>
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('hidden'); }
         function openModal() { document.getElementById('msgModal').classList.remove('hidden'); }
         function closeModal() { document.getElementById('msgModal').classList.add('hidden'); }
     </script>
