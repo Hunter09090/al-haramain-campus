@@ -5,47 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>যোগাযোগ | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-
-        // Firebase কনফিগারেশন
-        const firebaseConfig = {
-            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
-            authDomain: "al-haramain-digital-campus.firebaseapp.com",
-            projectId: "al-haramain-digital-campus",
-            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
-            messagingSenderId: "306805947710",
-            appId: "1:306805947710:web:d0ed996b453928767a406f",
-            measurementId: "G-LSMDHF5TDY"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth();
-
-        // সিকিউরিটি গার্ড: লগইন না থাকলে সরাসরি login.html এ পাঠিয়ে দেবে
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                window.location.href = "login.html";
-            }
-        });
-    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+        body { font-family: 'Hind Siliguri', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-900 text-white min-h-screen">
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8">
     
-    <nav class="bg-slate-950 p-4 flex justify-between items-center shadow-md">
-        <h1 class="font-bold text-lg">আল-হারামাইন ক্যাম্পাস</h1>
-        <a href="index.html" class="text-green-400 hover:text-green-300 transition">Back to Home</a>
-    </nav>
+    <div class="max-w-2xl mx-auto mb-8">
+        <a href="index.html" class="flex items-center text-green-400 hover:text-green-300 font-bold transition">
+            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            হোম পেজে ফিরুন
+        </a>
+    </div>
 
-    <div class="max-w-2xl mx-auto mt-10 p-6 bg-slate-800 rounded-xl shadow-lg border border-slate-700">
-        <h2 class="text-2xl font-bold text-green-400 mb-6">যোগাযোগের ঠিকানা</h2>
-        <div class="space-y-4 text-slate-300">
-            <p><strong>মাদ্রাসার নাম:</strong> আল হারামাইন মডেল মাদ্রাসা</p>
-            <p><strong>ঠিকানা:</strong> সোনার পাড়া, উখিয়া, কক্সবাজার।</p>
-            <p><strong>পরিচালক:</strong> +8801813979114</p>
-            <p><strong>অফিস:</strong> 01811178674</p>
+    <div class="max-w-2xl mx-auto bg-slate-800 p-8 md:p-10 rounded-3xl shadow-2xl border border-slate-700">
+        <h2 class="text-3xl font-bold text-green-400 mb-8 text-center">যোগাযোগের ঠিকানা</h2>
+        
+        <div class="space-y-6">
+            <div class="flex items-start gap-4">
+                <div class="text-green-400 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM7 9a1 1 0 112 0 1 1 0 01-2 0zm3.5 0a1 1 0 112 0 1 1 0 01-2 0zM10 14a3 3 0 00-2.23-1.03 1 1 0 010-1.94A5 5 0 0113 14H10z"></path></svg></div>
+                <div>
+                    <p class="text-sm text-slate-400">মাদ্রাসার নাম</p>
+                    <p class="font-bold text-lg">আল হারামাইন মডেল মাদ্রাসা</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="text-green-400 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg></div>
+                <div>
+                    <p class="text-sm text-slate-400">ঠিকানা</p>
+                    <p class="font-bold text-lg">সোনার পাড়া, উখিয়া, কক্সবাজার।</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="text-green-400 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg></div>
+                <div>
+                    <p class="text-sm text-slate-400">মোবাইল নম্বর</p>
+                    <p class="font-bold text-lg">পরিচালক: <a href="tel:+8801813979114" class="hover:text-green-400 transition">+8801813979114</a></p>
+                    <p class="font-bold text-lg">অফিস: <a href="tel:+8801811178674" class="hover:text-green-400 transition">01811178674</a></p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="text-green-400 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg></div>
+                <div>
+                    <p class="text-sm text-slate-400">ইমেইল</p>
+                    <a href="mailto:info@alharamain.edu" class="font-bold text-lg text-green-400 hover:underline">info@alharamain.edu</a>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="text-green-400 mt-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"></path></svg></div>
+                <div>
+                    <p class="text-sm text-slate-400">ফেসবুক পেজ</p>
+                    <a href="#" target="_blank" class="font-bold text-lg text-green-400 hover:underline">আমাদের ফেসবুক পেজ ভিজিট করুন</a>
+                </div>
+            </div>
         </div>
     </div>
 
