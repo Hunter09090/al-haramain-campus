@@ -5,23 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ফলাফল | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
-            authDomain: "al-haramain-digital-campus.firebaseapp.com",
-            projectId: "al-haramain-digital-campus",
-            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
-            messagingSenderId: "306805947710",
-            appId: "1:306805947710:web:d0ed996b453928767a406f"
-        };
-        initializeApp(firebaseConfig);
-        onAuthStateChanged(getAuth(), (user) => {
-            if (!user) { window.location.href = "login.html"; }
-        });
-    </script>
 </head>
 <body class="bg-slate-900 text-white min-h-screen p-4">
 
