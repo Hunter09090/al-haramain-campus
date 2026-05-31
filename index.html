@@ -9,44 +9,48 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;700&display=swap');
         body { font-family: 'Hind Siliguri', sans-serif; background-color: #f1f5f9; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-item { animation: fadeInUp 0.8s ease-out forwards; }
     </style>
 </head>
 <body class="pb-10">
 
-    <!-- হেডার -->
-    <header class="bg-white p-4 shadow-sm border-b flex justify-between items-center sticky top-0 z-50">
+    <header class="bg-white p-4 shadow-sm border-b flex justify-between items-center sticky top-0 z-50 animate-item">
         <div>
             <h1 class="text-lg font-bold text-gray-900">আল-হারামাইন মডেল মাদ্রাসা</h1>
-            <p class="text-sm text-gray-500">EST: 2013 | Reg: 0207079303</p>
+            <p class="text-sm text-gray-500">EST: ২০১৩ | Reg: ০২০৭০৭৯৩০৩</p>
         </div>
         <button onclick="toggleMenu()" class="text-2xl p-2"><i class="fas fa-bars"></i></button>
     </header>
 
-    <!-- থ্রি-ডট মেনু -->
-    <nav id="mobileMenu" class="hidden bg-blue-900 text-white p-4">
+    <nav id="mobileMenu" class="hidden bg-blue-900 text-white p-4 animate-item">
         <a href="index.html" class="block py-2 border-b border-blue-700">হোম (Home)</a>
         <a href="about.html" class="block py-2 border-b border-blue-700">আমাদের সম্পর্কে (About Us)</a>
         <a href="contact.html" class="block py-2 border-b border-blue-700">যোগাযোগ (Contact)</a>
-        <a href="https://www.facebook.com/profile.php?id=61571161346418" target="_blank" class="block py-2">ফেসবুক পেজ (Facebook Page)</a>
+        <a href="https://www.facebook.com/profile.php?id=61571161346418" target="_blank" class="block py-2">ফেসবুক পেজ</a>
     </nav>
 
-    <!-- হাদিস সেকশন -->
-    <section class="p-4">
+    <section class="p-4 animate-item">
         <div class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded shadow-sm text-gray-800 text-center font-medium">
             "দ্বীনের জ্ঞান অর্জন করা প্রত্যেক মুসলমানের উপর ফরজ।"
         </div>
     </section>
 
-    <!-- পরিচালকের বাণী বাটন -->
-    <section class="px-4 mb-6">
-        <button onclick="openModal()" class="w-full flex items-center justify-between bg-white border border-gray-200 p-4 rounded shadow-md hover:bg-gray-50 transition">
-            <span class="font-bold text-gray-800 text-lg">পরিচালকের বাণী</span>
-            <span class="text-sm text-blue-600 font-bold underline">Read more</span>
-        </button>
+    <!-- পরিচালকের বাণী কার্ড -->
+    <section class="px-4 mb-6 animate-item">
+        <div onclick="openModal()" class="bg-white p-4 rounded-lg shadow-md border flex items-center justify-between cursor-pointer hover:bg-gray-50 transition">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-envelope-open-text text-2xl text-green-600"></i>
+                <div>
+                    <h2 class="font-bold text-gray-800">পরিচালকের বাণী</h2>
+                    <p class="text-xs text-gray-500">বিস্তারিত পড়তে ক্লিক করুন</p>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </div>
     </section>
 
-    <!-- রঙিন বাটন মেনু -->
-    <section class="px-4 space-y-3">
+    <section class="px-4 space-y-3 animate-item">
         <a href="#" class="block bg-orange-500 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>Exclusive ✨</span> <i class="fas fa-chevron-right"></i></a>
         <a href="#" class="block bg-blue-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>শিক্ষার্থীগণ</span> <i class="fas fa-chevron-right"></i></a>
         <a href="#" class="block bg-green-600 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>শিক্ষকগণ</span> <i class="fas fa-chevron-right"></i></a>
@@ -61,32 +65,24 @@
         <a href="#" class="block bg-emerald-700 text-white p-4 rounded-lg shadow-lg flex justify-between items-center font-bold"><span>Teacher's login</span> <i class="fas fa-chevron-right"></i></a>
     </section>
 
-    <!-- যোগাযোগ ও ম্যাপ সেকশন -->
-    <footer class="mt-10 px-4 space-y-3">
+    <footer class="mt-10 px-4 space-y-3 animate-item">
         <h3 class="font-bold text-gray-800 mb-2">আমাদের অবস্থান:</h3>
         <div class="w-full h-56 rounded-lg overflow-hidden shadow-md">
             <iframe src="https://www.google.com/maps?q=21.2823287,92.0572184&output=embed" width="100%" height="100%" frameborder="0"></iframe>
         </div>
-        
         <a href="https://www.facebook.com/profile.php?id=61571161346418" target="_blank" class="block bg-blue-800 text-white p-4 rounded-lg text-center font-bold shadow-lg"><i class="fab fa-facebook mr-2"></i> ফেসবুক পেজে ভিজিট করুন</a>
         <a href="mailto:alharamainidealnoraniacademy@gmail.com" class="block bg-red-600 text-white p-4 rounded-lg text-center font-bold shadow-lg"><i class="fas fa-envelope mr-2"></i> ইমেইল করুন</a>
         <a href="#" class="block bg-gray-800 text-white p-4 rounded-lg text-center font-bold shadow-lg"><i class="fas fa-map-marker-alt mr-2"></i> পূর্ব সোনারপাড়া, উখিয়া, কক্সবাজার</a>
         <a href="tel:01811178674" class="block bg-green-700 text-white p-4 rounded-lg text-center font-bold shadow-lg"><i class="fas fa-phone-alt mr-2"></i> ফোন: ০১৮১১-১৭৮৬৭৪</a>
     </footer>
 
-    <!-- পরিচালকের বাণী মডাল -->
     <div id="msgModal" class="fixed inset-0 z-[100] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
-            <button onclick="closeModal()" class="absolute top-4 right-6 text-3xl text-gray-500 hover:text-black">&times;</button>
+            <button onclick="closeModal()" class="absolute top-4 right-6 text-3xl">&times;</button>
             <h2 class="text-2xl font-bold mb-4 text-blue-900 border-b pb-2">পরিচালকের বাণী</h2>
             <div class="text-gray-700 leading-relaxed text-justify space-y-4">
-                <p class="font-bold text-center">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-                <p>সমস্ত প্রশংসা মহান আল্লাহ তায়ালার জন্য, যিনি জ্ঞান অর্জনকে মানব জীবনের অন্যতম শ্রেষ্ঠ ইবাদত হিসেবে নির্ধারণ করেছেন। দরুদ ও সালাম বর্ষিত হোক মহানবী হযরত মুহাম্মদ (সা.)-এর প্রতি, যিনি সমগ্র মানবজাতির জন্য জ্ঞান, নৈতিকতা ও আদর্শের উজ্জ্বল দৃষ্টান্ত।</p>
-                <p>আল হারামাইন মডেল মাদ্রাসা প্রতিষ্ঠার মূল লক্ষ্য হলো শিক্ষার্থীদেরকে ইসলামী মূল্যবোধ, নৈতিক চরিত্র ও আধুনিক জ্ঞানের সমন্বয়ে আদর্শ মানুষ হিসেবে গড়ে তোলা। আমরা বিশ্বাস করি, একজন শিক্ষার্থীর প্রকৃত সফলতা কেবল পরীক্ষার ফলাফলের মধ্যে সীমাবদ্ধ নয়; বরং তার চরিত্র, মানবিক গুণাবলি, নৈতিকতা ও সমাজের প্রতি দায়বদ্ধতার মধ্যেই নিহিত।</p>
-                <p>আমাদের মাদ্রাসায় কুরআন-সুন্নাহভিত্তিক শিক্ষা, সাধারণ শিক্ষা, তথ্যপ্রযুক্তি জ্ঞান এবং সহশিক্ষা কার্যক্রমের সমন্বয়ের মাধ্যমে শিক্ষার্থীদের একটি সুন্দর ও সমৃদ্ধ ভবিষ্যৎ গড়ার প্রচেষ্টা অব্যাহত রয়েছে।</p>
-                <p>সম্মানিত অভিভাবক, শিক্ষক ও শুভানুধ্যায়ীদের আন্তরিক সহযোগিতা ও দোয়ার মাধ্যমে আমরা আমাদের এই শিক্ষাসেবামূলক কার্যক্রমকে আরও এগিয়ে নিতে চাই। আপনাদের সহযোগিতা ও পরামর্শ আমাদের পথচলাকে আরও সমৃদ্ধ করবে, ইন শা আল্লাহ।</p>
-                <p>মহান আল্লাহ তায়ালা আমাদের সকল প্রচেষ্টা কবুল করুন এবং আমাদের শিক্ষার্থীদেরকে দ্বীন ও দুনিয়ার কল্যাণে সফলতার শিখরে পৌঁছে দিন। আমিন।</p>
-                <p class="font-bold mt-4 text-blue-900">মোহাম্মদ জুনাইদ বোগদাদি<br>পরিচালক, আল হারামাইন মডেল মাদ্রাসা</p>
+                <p>সমস্ত প্রশংসা মহান আল্লাহ তায়ালার জন্য... আল-হারামাইন মডেল মাদ্রাসা প্রতিষ্ঠার মূল লক্ষ্য হলো নৈতিকতা ও আধুনিক জ্ঞানের সমন্বয়...</p>
+                <p class="font-bold">মোহাম্মদ জুনাইদ বোগদাদি</p>
             </div>
         </div>
     </div>
