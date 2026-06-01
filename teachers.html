@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>শিক্ষক মহোদয়গণ | আল-হারামাইন</title>
+    <title>শিক্ষক মহোদয়গণ | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -19,19 +19,25 @@
         };
         initializeApp(firebaseConfig);
         const auth = getAuth();
+        
         onAuthStateChanged(auth, (user) => {
-            if (!user) { window.location.href = "login.html"; }
+            if (!user) { 
+                window.location.href = "login.html"; 
+            } else {
+                // ইউজার লগইন করা থাকলে পেজটি দৃশ্যমান হবে
+                document.body.classList.remove('invisible');
+            }
         });
     </script>
 </head>
-<body class="bg-slate-900 text-white min-h-screen p-4">
+<body class="bg-slate-900 text-white min-h-screen p-4 invisible">
 
     <div class="max-w-3xl mx-auto mb-6">
         <a href="dashboard.html" class="text-green-400 hover:text-green-300 font-bold">← ড্যাশবোর্ডে ফিরুন</a>
     </div>
 
     <div class="max-w-3xl mx-auto bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700">
-        <h2 class="text-2xl font-bold text-green-400 mb-6 text-center">আমাদের সম্মানিত শিক্ষক মহোদয়গণ</h2>
+        <h2 class="text-2xl font-bold text-green-400 mb-6 text-center">আমাদের সম্মানিত শিক্ষক মহোদয়গণ</h2>
         
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
@@ -48,7 +54,7 @@
                     <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">পরীক্ষা নিয়ন্ত্রক</td><td class="p-3">মুহাম্মদ নোমান</td></tr>
                     <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">নূরানি মোয়াল্লেম</td><td class="p-3">নুরুল কবির</td></tr>
                     <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">নূরানি মোয়াল্লেম</td><td class="p-3">মো: কামাল</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">সহকারী শিক্ষক</td><td class="p-3">ফারহানা ইয়াসমিন হেনা</td></tr>
+                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">सहকারী শিক্ষক</td><td class="p-3">ফারহানা ইয়াসমিন হেনা</td></tr>
                     <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">সহকারী শিক্ষক</td><td class="p-3">তারেকুর রহমান</td></tr>
                     <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">নূরানি মোয়াল্লেম</td><td class="p-3">মো: মনির</td></tr>
                     <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">সহকারী শিক্ষক</td><td class="p-3">আকতার হোসেন</td></tr>
