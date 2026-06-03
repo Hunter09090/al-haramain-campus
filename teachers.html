@@ -5,37 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>শিক্ষক মহোদয়গণ | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
-            authDomain: "al-haramain-digital-campus.firebaseapp.com",
-            projectId: "al-haramain-digital-campus",
-            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
-            messagingSenderId: "306805947710",
-            appId: "1:306805947710:web:d0ed996b453928767a406f"
-        };
-        initializeApp(firebaseConfig);
-        const auth = getAuth();
-        
-        onAuthStateChanged(auth, (user) => {
-            if (!user) { 
-                window.location.href = "login.html"; 
-            } else {
-                // ইউজার লগইন করা থাকলে পেজটি দৃশ্যমান হবে
-                document.body.classList.remove('invisible');
-            }
-        });
-    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+        body { font-family: 'Hind Siliguri', sans-serif; }
+    </style>
 </head>
 <body class="bg-slate-900 text-white min-h-screen p-4 invisible">
 
-    <div class="max-w-3xl mx-auto mb-6">
+    <!-- ড্যাশবোর্ডে ফেরার লিঙ্ক ও নতুন শিক্ষক যুক্ত করার বাটন -->
+    <div class="max-w-3xl mx-auto mb-6 flex justify-between items-center">
         <a href="dashboard.html" class="text-green-400 hover:text-green-300 font-bold">← ড্যাশবোর্ডে ফিরুন</a>
+        <button onclick="openAddModal()" class="bg-green-600 hover:bg-green-500 text-slate-950 text-sm font-bold px-4 py-2 rounded-xl transition">
+            ＋ নতুন শিক্ষক যুক্ত করুন
+        </button>
     </div>
 
+    <!-- শিক্ষক তালিকা টেবিল -->
     <div class="max-w-3xl mx-auto bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700">
         <h2 class="text-2xl font-bold text-green-400 mb-6 text-center">আমাদের সম্মানিত শিক্ষক মহোদয়গণ</h2>
         
@@ -45,24 +30,213 @@
                     <tr class="text-green-300 border-b border-slate-600">
                         <th class="p-3">পদবি</th>
                         <th class="p-3">নাম</th>
+                        <th class="p-3 text-center">অ্যাকশন</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-200">
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">প্রতিষ্ঠাতা, পরিচালক</td><td class="p-3">মোহাম্মদ জুনাইদ বোগদাদি</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">প্রধান শিক্ষক</td><td class="p-3">জামাল আহমদ রেজভী</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">সহ-প্রধান শিক্ষক</td><td class="p-3">মো: নেজাম উদ্দীন</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">পরীক্ষা নিয়ন্ত্রক</td><td class="p-3">মুহাম্মদ নোমান</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">নূরানি মোয়াল্লেম</td><td class="p-3">নুরুল কবির</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">নূরানি মোয়াল্লেম</td><td class="p-3">মো: কামাল</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">सहকারী শিক্ষক</td><td class="p-3">ফারহানা ইয়াসমিন হেনা</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">সহকারী শিক্ষক</td><td class="p-3">তারেকুর রহমান</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">নূরানি মোয়াল্লেম</td><td class="p-3">মো: মনির</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">সহকারী শিক্ষক</td><td class="p-3">আকতার হোসেন</td></tr>
-                    <tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">সহকারী শিক্ষক</td><td class="p-3">আয়েশা সিদ্দিকা তোফা</td></tr>
-                    <tr class="hover:bg-slate-700/50"><td class="p-3 font-semibold text-green-400">দপ্তরী</td><td class="p-3">নুরুল কবির</td></tr>
+                <tbody id="teachers-table-body" class="text-gray-200">
+                    <tr>
+                        <td colspan="3" class="p-4 text-center text-slate-500">শিক্ষক তালিকা লোড হচ্ছে...</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <!-- এডিট / ডিলিট / অ্যাড করার মডাল (Modal) -->
+    <div id="teacher-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-sm border border-slate-700 shadow-2xl">
+            <h3 id="modal-title" class="text-lg font-bold mb-4 text-green-400">শিক্ষকের তথ্য সংশোধন</h3>
+            
+            <input type="hidden" id="teacher-doc-id">
+            
+            <div class="mb-3">
+                <label class="block text-xs text-slate-400 mb-1">শিক্ষকের নাম</label>
+                <input type="text" id="teacher-name" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500">
+            </div>
+            
+            <div class="mb-5">
+                <label class="block text-xs text-slate-400 mb-1">পদবি</label>
+                <input type="text" id="teacher-designation" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500">
+            </div>
+
+            <!-- বোতাম সমূহ -->
+            <div class="flex justify-between gap-2 text-sm">
+                <button id="delete-teacher-btn" class="px-3 py-2 bg-red-950 text-red-400 border border-red-800/50 hover:bg-red-900 hover:text-white rounded-xl font-semibold transition hidden">
+                    মুছে ফেলুন
+                </button>
+                <div class="flex gap-2 ml-auto">
+                    <button onclick="closeModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition">বাতিল</button>
+                    <button id="save-teacher-btn" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-xl font-semibold transition text-slate-950">সংরক্ষণ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase স্ক্রিপ্ট -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore(app);
+
+        let isEditMode = false;
+
+        // অথেন্টিকেশন চেক
+        onAuthStateChanged(auth, (user) => {
+            if (!user) { 
+                window.location.href = "login.html"; 
+            } else {
+                document.body.classList.remove('invisible');
+                loadTeachersData();
+            }
+        });
+
+        // ফায়ারবেস থেকে শিক্ষকদের ডাটা রেন্ডার করা
+        async function loadTeachersData() {
+            const tableBody = document.getElementById("teachers-table-body");
+            try {
+                const querySnapshot = await getDocs(collection(db, "teachers"));
+                tableBody.innerHTML = "";
+
+                if(querySnapshot.empty) {
+                    tableBody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-500">কোনো তথ্য পাওয়া যায়নি।</td></tr>`;
+                    return;
+                }
+
+                querySnapshot.forEach((docSnap) => {
+                    const teacher = docSnap.data();
+                    const docId = docSnap.id;
+
+                    const row = document.createElement("tr");
+                    row.className = "border-b border-slate-700 hover:bg-slate-700/50 transition";
+                    row.innerHTML = `
+                        <td class="p-3 font-semibold text-green-400">${teacher.designation}</td>
+                        <td class="p-3">${teacher.name}</td>
+                        <td class="p-3 text-center">
+                            <button class="edit-t-btn text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded-lg hover:bg-green-500 hover:text-slate-950 transition"
+                                    data-id="${docId}" data-name="${teacher.name}" data-designation="${teacher.designation}">
+                                এডিট
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // এডিট বাটনে ইভেন্ট লিসেনার সেট
+                document.querySelectorAll('.edit-t-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        openEditModal(
+                            e.target.getAttribute('data-id'),
+                            e.target.getAttribute('data-name'),
+                            e.target.getAttribute('data-designation')
+                        );
+                    });
+                });
+
+            } catch (err) {
+                console.error(err);
+                tableBody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-red-400">ডাটা লোড করতে ব্যর্থ।</td></tr>`;
+            }
+        }
+
+        // নতুন শিক্ষক যুক্ত করার মডাল মোড
+        window.openAddModal = () => {
+            isEditMode = false;
+            document.getElementById("modal-title").innerText = "নতুন শিক্ষক যুক্ত করুন";
+            document.getElementById("teacher-doc-id").value = "";
+            document.getElementById("teacher-name").value = "";
+            document.getElementById("teacher-designation").value = "";
+            document.getElementById("delete-teacher-btn").classList.add("hidden");
+            document.getElementById("teacher-modal").classList.remove("hidden");
+        }
+
+        // এডিট করার মডাল মোড
+        function openEditModal(id, name, designation) {
+            isEditMode = true;
+            document.getElementById("modal-title").innerText = "শিক্ষকের তথ্য সংশোধন";
+            document.getElementById("teacher-doc-id").value = id;
+            document.getElementById("teacher-name").value = name;
+            document.getElementById("teacher-designation").value = designation;
+            document.getElementById("delete-teacher-btn").classList.remove("hidden");
+            document.getElementById("teacher-modal").classList.remove("hidden");
+
+            // ডিলিট অ্যাকশন সেটআপ
+            const delBtn = document.getElementById("delete-teacher-btn");
+            const newDelBtn = delBtn.cloneNode(true);
+            delBtn.parentNode.replaceChild(newDelBtn, delBtn);
+            newDelBtn.addEventListener("click", () => deleteTeacher(id));
+        }
+
+        // তথ্য সংরক্ষণ বা নতুন যোগ করা
+        async function saveTeacherData() {
+            const id = document.getElementById("teacher-doc-id").value;
+            const name = document.getElementById("teacher-name").value;
+            const designation = document.getElementById("teacher-designation").value;
+            const saveBtn = document.getElementById("save-teacher-btn");
+
+            if(!name || !designation) { return alert("সব ঘর পূরণ করুন!"); }
+            saveBtn.innerText = "সংরক্ষণ হচ্ছে...";
+            saveBtn.disabled = true;
+
+            try {
+                if(isEditMode) {
+                    // তথ্য আপডেট
+                    await updateDoc(doc(db, "teachers", id), { name, designation });
+                } else {
+                    // নতুন শিক্ষক যোগ (র্যান্ডম আইডি জেনারেট করে)
+                    const newDocId = "t_" + Date.now();
+                    await setDoc(doc(db, "teachers", newDocId), { name, designation });
+                }
+                alert("সফলভাবে সংরক্ষিত হয়েছে! 🎉");
+                closeModal();
+                loadTeachersData();
+            } catch (err) {
+                console.error(err);
+                alert("ত্রুটি হয়েছে!");
+            } finally {
+                saveBtn.innerText = "সংরক্ষণ";
+                saveBtn.disabled = false;
+            }
+        }
+
+        // শিক্ষক অপসারণ (Delete)
+        async function deleteTeacher(id) {
+            if(!confirm("আপনি কি নিশ্চিত যে এই শিক্ষকের তথ্য চিরতরে মুছে ফেলবেন?")) { return; }
+            const delBtn = document.getElementById("delete-teacher-btn");
+            delBtn.innerText = "মুছছে...";
+            delBtn.disabled = true;
+
+            try {
+                await deleteDoc(doc(db, "teachers", id));
+                alert("তথ্যটি মুছে ফেলা হয়েছে। 🗑️");
+                closeModal();
+                loadTeachersData();
+            } catch (err) {
+                console.error(err);
+                alert("মুছে ফেলা যায়নি।");
+            } finally {
+                delBtn.innerText = "মুছে ফেলুন";
+                delBtn.disabled = false;
+            }
+        }
+
+        window.closeModal = () => {
+            document.getElementById("teacher-modal").classList.add("hidden");
+        };
+
+        document.getElementById("save-teacher-btn").addEventListener("click", saveTeacherData);
+    </script>
 </body>
 </html>
