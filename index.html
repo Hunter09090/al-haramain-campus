@@ -62,9 +62,12 @@
     </div>
 
     <header class="bg-blue-900 text-white p-4 shadow-md border-b border-blue-800 flex justify-between items-center sticky top-0 z-50 animate-item">
-        <div>
-            <h1 class="text-lg font-bold text-white">আল-হারামাইন মডেল মাদ্রাসা</h1>
-            <p class="text-sm text-blue-200">EST: 2013 | Reg: 020707903</p>
+        <div class="flex items-center space-x-3">
+            <img src="https://lh3.googleusercontent.com/d/1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz" alt="মাদ্রাসা লোগো" class="w-10 h-10 object-contain rounded-full bg-white p-1">
+            <div>
+                <h1 class="text-lg font-bold text-white leading-tight">আল-হারামাইন মডেল মাদ্রাসা</h1>
+                <p class="text-xs text-blue-200">EST: 2013 | Reg: 020707903</p>
+            </div>
         </div>
         <button onclick="toggleMenu()" class="text-2xl p-2 text-white hover:text-blue-200 transition"><i class="fas fa-bars"></i></button>
     </header>
@@ -84,7 +87,6 @@
 
     <section class="px-4 mb-6 animate-item">
         <div class="bg-white p-3 rounded-xl shadow-md border">
-            <!-- ইমেজ আইকনটি এখান থেকে বাদ দেওয়া হয়েছে -->
             <div class="swiper mainGallerySwiper rounded-lg overflow-hidden aspect-[16/10] bg-slate-100 relative mt-1">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
@@ -122,20 +124,31 @@
         </div>
     </section>
 
-    <section class="px-4 mb-3 animate-item">
-        <div onclick="openModal()" class="bg-white p-4 rounded-lg shadow-md border flex items-center justify-between cursor-pointer hover:bg-gray-50 transition">
-            <div class="flex items-center space-x-3">
-                <i class="fas fa-envelope-open-text text-2xl text-green-600"></i>
-                <div>
-                    <h2 class="font-bold text-gray-800">পরিচালকের বাণী</h2>
-                    <p class="text-xs text-gray-500">বিস্তারিত পড়তে ক্লিক করুন</p>
+    <section class="px-4 mb-4 animate-item">
+        <div class="bg-white rounded-xl shadow-md border overflow-hidden">
+            <div class="bg-emerald-700 text-white px-4 py-2.5 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="https://lh3.googleusercontent.com/d/1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz" alt="মাদ্রাসা লোগো" class="w-6 h-6 object-contain rounded-full bg-white p-0.5">
+                    <span class="text-sm font-bold tracking-wide">পরিচালকের বাণী</span>
                 </div>
+                <span class="text-xs font-bold tracking-wider text-emerald-100">MESSAGE</span>
             </div>
-            <i class="fas fa-chevron-right text-gray-400"></i>
+            
+            <div class="p-5 flex flex-col items-center text-center bg-gray-50">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-emerald-600/20 shadow-inner mb-3">
+                    <img src="https://lh3.googleusercontent.com/d/1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X" alt="মাওলানা মোহাম্মদ জুনাইদ বোগদাদি" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-gray-800 font-bold text-base">মাওলানা মোহাম্মদ জুনাইদ বোগদাদি</h3>
+                <p class="text-xs text-emerald-700 font-medium mt-0.5">পরিচালক, আল-হারামাইন মডেল মাদ্রাসা</p>
+            </div>
+            
+            <div onclick="openModal()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-center py-3 font-bold text-sm cursor-pointer hover:from-purple-700 hover:to-indigo-700 transition flex items-center justify-center space-x-2 shadow-inner">
+                <span>Read Message</span>
+                <i class="fas fa-arrow-right text-xs"></i>
+            </div>
         </div>
     </section>
 
-    <!-- নতুন প্রধান শিক্ষকের বাণী বাটন -->
     <section class="px-4 mb-6 animate-item">
         <div onclick="openPrincipalModal()" class="bg-white p-4 rounded-lg shadow-md border flex items-center justify-between cursor-pointer hover:bg-gray-50 transition">
             <div class="flex items-center space-x-3">
@@ -271,7 +284,6 @@
         </div>
     </footer>
 
-    <!-- শুভেচ্ছা বাণী মডাল -->
     <div id="welcomeModal" class="fixed inset-0 z-[100] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closeWelcomeModal()" class="absolute top-4 right-6 text-3xl text-gray-500 hover:text-black">×</button>
@@ -284,14 +296,13 @@
         </div>
     </div>
 
-    <!-- পরিচালকের বাণী মডাল -->
     <div id="msgModal" class="fixed inset-0 z-[100] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal()" class="absolute top-4 right-6 text-3xl text-gray-500 hover:text-black">×</button>
             <h2 class="text-2xl font-bold mb-4 text-blue-900 border-b pb-2">পরিচালকের বাণী</h2>
             <div class="text-gray-700 leading-relaxed text-justify space-y-4">
                 <p class="font-bold text-center text-gray-800">"বিসমিল্লাহির রাহমানির রাহিম"</p>
-                <p>সমস্ত প্রশংসা মহান আল্লাহ তায়ালার জন্য, যিনি জ্ঞান অর্জনকে মানব জীবনের অন্যতম শ্রেষ্ঠ ইবাদত হিসেবে নির্ধারণ করেছেন। দরুদ ও সালাম বর্ষিত হোক মহানবী হযরত মুহাম্মদ (সা.)-এর প্রতি, যিনি সমগ্র মানবজাতির জন্য জ্ঞান, নৈতিকতা ও আদেশর উজ্জ্বল দৃষ্টান্ত।</p>
+                <p>সমস্ত প্রশংসা মহান আল্লাহ তায়ালার জন্য, যিনি জ্ঞান অর্জনকে মানব জীবনের অন্যতম শ্রেষ্ঠ ইবাদত হিসেবে নির্ধারণ করেছেন। দরুদ ও সালাম বর্ষিত হোক মহানবী হযরত মুহাম্মদ (সা.)-এর প্রতি, যিনি সমগ্র মানবজাতির জন্য জ্ঞান, নৈতিকতা ও আদেশর উজ্জ্বল দৃষ্টান্ত Kish।</p>
                 <p>আল হারামাইন মডেল মাদ্রাসা প্রতিষ্ঠার মূল লক্ষ্য হলো শিক্ষার্থীদেরকে ইসলামী মূল্যবোধ, নৈতিক চরিত্র ও আধুনিক জ্ঞানের সমন্বয়ে আদেশ মানুষ হিসেবে গড়ে তোলা।</p>
                 <p>সম্মানিত অভিভাবক, শিক্ষক ও শুভানুধ্যায়ীদের আন্তরিক সহযোগিতা ও দোয়ার মাধ্যমে আমরা আমাদের এই শিক্ষাসেবামূলক কার্যক্রমকে আরও এগিয়ে নিতে চাই। আপনাদের সহযোগিতা আমাদের পথচলাকে আরও সমৃদ্ধ করবে, ইন শা আল্লাহ।</p>
                 <p class="font-bold mt-4 text-blue-900">মোহাম্মদ জুনাইদ বোগদাদি<br>পরিচালক, আল হারামাইন মডেল মাদ্রাসা</p>
@@ -299,7 +310,6 @@
         </div>
     </div>
 
-    <!-- নতুন প্রধান শিক্ষকের বাণী মডাল (পপ-আপ) -->
     <div id="principalModal" class="fixed inset-0 z-[100] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closePrincipalModal()" class="absolute top-4 right-6 text-3xl text-gray-500 hover:text-black">×</button>
