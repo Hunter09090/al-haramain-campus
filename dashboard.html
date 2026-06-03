@@ -29,7 +29,7 @@
             
             <a href="result.html" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition">
                 <span class="block text-4xl mb-2">📝</span>
-                <span class="font-bold">فলাফল এন্ট্রি</span>
+                <span class="font-bold">ফলাফল এন্ট্রি</span>
             </a>
             <a href="routine.html" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition">
                 <span class="block text-4xl mb-2">📅</span>
@@ -78,7 +78,7 @@
 
     <div id="edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
         <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-sm border border-slate-700 shadow-2xl">
-            <h3 class="text-lg font-bold mb-4 text-green-400">তথ্য সংশোধন করুন</h3>
+            <h3 class="text-lg font-bold mb-4 text-green-400">তথ্য সংশোধন / অপসারণ</h3>
             
             <input type="hidden" id="edit-doc-id">
             
@@ -97,9 +97,14 @@
                 <input type="text" id="edit-class" class="w-full bg-slate-900/50 border border-slate-800 rounded-xl p-2 text-slate-500 text-sm focus:outline-none" readonly>
             </div>
 
-            <div class="flex justify-end gap-2 text-sm">
-                <button onclick="closeModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition">বাতিল</button>
-                <button id="save-btn" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-xl font-semibold transition text-slate-950">সংরক্ষণ</button>
+            <div class="flex justify-between gap-2 text-sm">
+                <button id="delete-btn" class="px-3 py-2 bg-red-950 text-red-400 border border-red-800/50 hover:bg-red-900 hover:text-white rounded-xl font-semibold transition">
+                    মুছে ফেলুন
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="closeModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition">বাতিল</button>
+                    <button id="save-btn" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-xl font-semibold transition text-slate-950">সংরক্ষণ</button>
+                </div>
             </div>
         </div>
     </div>
@@ -107,7 +112,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
@@ -122,16 +127,16 @@
         const auth = getAuth();
         const db = getFirestore(app);
 
-        // লগইন চেক ও ইউজার ইমেইল শো করা
+        // লগইন ভেরিফিকেশন
         onAuthStateChanged(auth, (user) => {
             if (!user) { window.location.href = "login.html"; }
             else {
                 document.getElementById("userEmail").innerText = user.email;
-                loadStudentsData(); // ব্যাকগ্রাউন্ডে ডাটা লোড করে রাখা হচ্ছে
+                loadStudentsData();
             }
         });
 
-        // লগআউট ফাংশন
+        // লগআউট
         window.logout = () => {
             signOut(auth).then(() => { window.location.href = "login.html"; });
         };
@@ -168,7 +173,7 @@
                     tableBody.appendChild(row);
                 });
 
-                // এডিট বাটনগুলোতে ক্লিক লিসেনার অ্যাড
+                // এডিট বাটনে ইভেন্ট লিসেনার অ্যাড
                 document.querySelectorAll('.edit-action-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         openEditModal(
@@ -193,6 +198,13 @@
             document.getElementById("edit-roll").value = roll;
             document.getElementById("edit-class").value = sClass;
             document.getElementById("edit-modal").classList.remove("hidden");
+
+            // ডিলিট বাটনের জন্য ইভেন্ট লিসেনার ম্যানেজমেন্ট (ওল্ড লিসেনার রিমুভ ট্রিক)
+            const deleteBtn = document.getElementById("delete-btn");
+            const newDeleteBtn = deleteBtn.cloneNode(true);
+            deleteBtn.parentNode.replaceChild(newDeleteBtn, deleteBtn);
+            
+            newDeleteBtn.addEventListener("click", () => deleteStudentData(id));
         }
 
         // ডাটাবেজে তথ্য আপডেট করার ফাংশন
@@ -214,7 +226,7 @@
                 });
                 alert("তথ্য সফলভাবে আপডেট হয়েছে! 🎉");
                 closeModal();
-                loadStudentsData(); // টেবিল রিফ্রেশ
+                loadStudentsData(); 
             } catch (err) {
                 console.error(err);
                 alert("আপডেট ব্যর্থ হয়েছে।");
@@ -224,7 +236,29 @@
             }
         }
 
-        // এইচটিএমএল বাটন ক্লিকের জন্য গ্লোবাল ম্যাপিং
+        // ডাটাবেজ থেকে শিক্ষার্থী মুছে ফেলার ফাংশন
+        async function deleteStudentData(id) {
+            if(!confirm("আপনি কি নিশ্চিত যে এই শিক্ষার্থীর সকল তথ্য ডাটাবেজ থেকে চিরতরে মুছে ফেলতে চান?")) { return; }
+            
+            const deleteBtn = document.getElementById("delete-btn");
+            deleteBtn.innerText = "মুছছে...";
+            deleteBtn.disabled = true;
+
+            try {
+                await deleteDoc(doc(db, "students", id));
+                alert("শিক্ষার্থীর তথ্য ডাটাবেজ থেকে মুছে ফেলা হয়েছে! 🗑️");
+                closeModal();
+                loadStudentsData(); 
+            } catch (err) {
+                console.error(err);
+                alert("ডাটা মুছতে সমস্যা হয়েছে।");
+            } finally {
+                deleteBtn.innerText = "মুছে ফেলুন";
+                deleteBtn.disabled = false;
+            }
+        }
+
+        // গ্লোবাল ফাংশন
         window.toggleStudentSection = () => {
             const section = document.getElementById("student-manager-section");
             section.classList.toggle("hidden");
