@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>শিক্ষক ডাটা আপলোডার - আল-হারামাইন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white p-8 flex flex-col items-center justify-center min-h-screen">
+    <div class="max-w-md w-full bg-slate-800 p-8 rounded-2xl shadow-2xl text-center border border-slate-700">
+        <h1 class="text-2xl font-bold mb-4 text-green-400">Firebase শিক্ষক আপলোডার</h1>
+        <div id="status-box" class="bg-slate-700 p-4 rounded-xl text-lg font-semibold text-yellow-400 mb-6">
+            অপেক্ষা করুন, প্রসেস শুরু হচ্ছে...
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const teachersList = [
+            { id: "t01", designation: "প্রতিষ্ঠাতা, পরিচালক", name: "মোহাম্মদ জুনাইদ বোগদাদি" },
+            { id: "t02", designation: "প্রধান শিক্ষক", name: "জামাল আহমদ রেজভী" },
+            { id: "t03", designation: "সহ-প্রধান শিক্ষক", name: "মো: নেজাম উদ্দীন" },
+            { id: "t04", designation: "পরীক্ষা নিয়ন্ত্রক", name: "মুহাম্মদ নোমান" },
+            { id: "t05", designation: "নূরানি মোয়াল্লেম", name: "নুরুল কবির" },
+            { id: "t06", designation: "নূরানি মোয়াল্লেম", name: "মো: কামাল" },
+            { id: "t07", designation: "সহকারী শিক্ষক", name: "ফারহানা ইয়াসমিন হেনা" },
+            { id: "t08", designation: "সহকারী শিক্ষক", name: "তারেকুর রহমান" },
+            { id: "t09", designation: "নূরানি মোয়াল্লেম", name: "মো: মনির" },
+            { id: "t10", designation: "সহকারী শিক্ষক", name: "আকতার হোসেন" },
+            { id: "t11", designation: "সহকারী শিক্ষক", name: "আয়েশা সিদ্দিকা তোফা" },
+            { id: "t12", designation: "দপ্তরী", name: "নুরুল কবির" }
+        ];
+
+        async function uploadTeachers() {
+            const statusBox = document.getElementById("status-box");
+            try {
+                for (let t of teachersList) {
+                    await setDoc(doc(db, "teachers", t.id), {
+                        designation: t.designation,
+                        name: t.name
+                    });
+                }
+                statusBox.innerText = "অভিনন্দন! সব শিক্ষকের ডাটা ফায়ারবেসে সফলভাবে আপলোড হয়েছে! 🎉";
+                statusBox.className = "bg-emerald-950 text-emerald-400 p-4 rounded-xl text-lg font-semibold border border-emerald-500 mb-6";
+            } catch (error) {
+                statusBox.innerText = "ত্রুটি ঘটেছে! আবার চেষ্টা করুন।";
+                console.error(error);
+            }
+        }
+        window.onload = uploadTeachers;
+    </script>
+</body>
+</html>
