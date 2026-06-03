@@ -5,53 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>টিচার ড্যাশবোর্ড | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
-            authDomain: "al-haramain-digital-campus.firebaseapp.com",
-            projectId: "al-haramain-digital-campus",
-            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
-            messagingSenderId: "306805947710",
-            appId: "1:306805947710:web:d0ed996b453928767a406f"
-        };
-        
-        initializeApp(firebaseConfig);
-        const auth = getAuth();
-
-        onAuthStateChanged(auth, (user) => {
-            if (!user) { window.location.href = "login.html"; }
-            else {
-                document.getElementById("userEmail").innerText = user.email;
-            }
-        });
-
-        window.logout = () => {
-            signOut(auth).then(() => { window.location.href = "login.html"; });
-        };
-    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+        body { font-family: 'Hind Siliguri', sans-serif; }
+    </style>
 </head>
 <body class="bg-slate-900 text-white min-h-screen">
 
     <header class="bg-slate-950 p-6 flex justify-between items-center shadow-lg border-b border-slate-800">
         <div>
             <h1 class="text-xl font-bold text-green-400">শিক্ষক ড্যাশবোর্ড</h1>
-            <p id="userEmail" class="text-xs text-slate-400 mt-1"></p>
+            <p id="userEmail" class="text-xs text-slate-400 mt-1">লোডিং...</p>
         </div>
         <button onclick="logout()" class="bg-red-900/30 border border-red-700 text-red-400 hover:bg-red-900 px-4 py-2 rounded-xl text-sm transition">লগ আউট</button>
     </header>
 
     <div class="max-w-2xl mx-auto p-4 mt-6">
         <div class="grid grid-cols-2 gap-4 mb-4">
-            <a href="students.html" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition">
+            <button onclick="toggleStudentSection()" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition focus:outline-none">
                 <span class="block text-4xl mb-2">🎓</span>
-                <span class="font-bold">শিক্ষার্থী তথ্য</span>
-            </a>
+                <span class="font-bold block">শিক্ষার্থী তথ্য</span>
+            </button>
+            
             <a href="result.html" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition">
                 <span class="block text-4xl mb-2">📝</span>
-                <span class="font-bold">ফলাফল এন্ট্রি</span>
+                <span class="font-bold">فলাফল এন্ট্রি</span>
             </a>
             <a href="routine.html" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition">
                 <span class="block text-4xl mb-2">📅</span>
@@ -68,10 +46,198 @@
             <span class="font-bold text-lg">শিক্ষক তালিকা</span>
         </a>
 
-        <a href="contact.html" class="block w-full bg-slate-900 border border-slate-800 p-4 rounded-2xl text-center text-slate-500 hover:text-green-400 transition text-sm">
+        <div id="student-manager-section" class="hidden mt-8 bg-slate-950 p-4 rounded-3xl border border-slate-800 shadow-2xl">
+            <h2 class="text-lg font-bold text-green-400 mb-4 flex items-center justify-between">
+                <span>📋 ফায়ারবেস শিক্ষার্থী তালিকা</span>
+                <button onclick="toggleStudentSection()" class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded-lg hover:bg-slate-700">বন্ধ করুন</button>
+            </h2>
+            
+            <div class="overflow-x-auto rounded-2xl border border-slate-800">
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <tr class="bg-slate-900 text-slate-400 border-b border-slate-800">
+                            <th class="p-3">শ্রেণী</th>
+                            <th class="p-3">রোল</th>
+                            <th class="p-3">নাম</th>
+                            <th class="p-3 text-center">অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table-body">
+                        <tr>
+                            <td colspan="4" class="p-4 text-center text-slate-500">ডাটা লোড হচ্ছে...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <a href="contact.html" class="block w-full bg-slate-900 border border-slate-800 p-4 rounded-2xl text-center text-slate-500 hover:text-green-400 transition text-sm mt-6">
             প্রযুক্তিগত সহায়তা ও যোগাযোগ
         </a>
     </div>
 
+    <div id="edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-sm border border-slate-700 shadow-2xl">
+            <h3 class="text-lg font-bold mb-4 text-green-400">তথ্য সংশোধন করুন</h3>
+            
+            <input type="hidden" id="edit-doc-id">
+            
+            <div class="mb-3">
+                <label class="block text-xs text-slate-400 mb-1">শিক্ষার্থীর নাম</label>
+                <input type="text" id="edit-name" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500">
+            </div>
+            
+            <div class="mb-3">
+                <label class="block text-xs text-slate-400 mb-1">রোল নম্বর</label>
+                <input type="text" id="edit-roll" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500">
+            </div>
+
+            <div class="mb-5">
+                <label class="block text-xs text-slate-400 mb-1">শ্রেণী (পরিবর্তনযোগ্য নয়)</label>
+                <input type="text" id="edit-class" class="w-full bg-slate-900/50 border border-slate-800 rounded-xl p-2 text-slate-500 text-sm focus:outline-none" readonly>
+            </div>
+
+            <div class="flex justify-end gap-2 text-sm">
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition">বাতিল</button>
+                <button id="save-btn" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-xl font-semibold transition text-slate-950">সংরক্ষণ</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+            authDomain: "al-haramain-digital-campus.firebaseapp.com",
+            projectId: "al-haramain-digital-campus",
+            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
+            messagingSenderId: "306805947710",
+            appId: "1:306805947710:web:d0ed996b453928767a406f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore(app);
+
+        // লগইন চেক ও ইউজার ইমেইল শো করা
+        onAuthStateChanged(auth, (user) => {
+            if (!user) { window.location.href = "login.html"; }
+            else {
+                document.getElementById("userEmail").innerText = user.email;
+                loadStudentsData(); // ব্যাকগ্রাউন্ডে ডাটা লোড করে রাখা হচ্ছে
+            }
+        });
+
+        // লগআউট ফাংশন
+        window.logout = () => {
+            signOut(auth).then(() => { window.location.href = "login.html"; });
+        };
+
+        // ফায়ারবেস থেকে ডাটা রিড করে টেবিলে সাজানো
+        async function loadStudentsData() {
+            const tableBody = document.getElementById("student-table-body");
+            try {
+                const querySnapshot = await getDocs(collection(db, "students"));
+                tableBody.innerHTML = ""; 
+
+                if(querySnapshot.empty) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">কোনো ডাটা পাওয়া যায়নি।</td></tr>`;
+                    return;
+                }
+
+                querySnapshot.forEach((documentSnapshot) => {
+                    const student = documentSnapshot.data();
+                    const docId = documentSnapshot.id;
+
+                    const row = document.createElement("tr");
+                    row.className = "border-b border-slate-900 hover:bg-slate-900/40 transition";
+                    row.innerHTML = `
+                        <td class="p-3 text-slate-400">${student.class}</td>
+                        <td class="p-3">${student.roll}</td>
+                        <td class="p-3 font-medium text-slate-200">${student.name}</td>
+                        <td class="p-3 text-center">
+                            <button class="edit-action-btn text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded-lg hover:bg-green-500 hover:text-slate-950 transition" 
+                                    data-id="${docId}" data-name="${student.name}" data-roll="${student.roll}" data-class="${student.class}">
+                                এডিট
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // এডিট বাটনগুলোতে ক্লিক লিসেনার অ্যাড
+                document.querySelectorAll('.edit-action-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        openEditModal(
+                            e.target.getAttribute('data-id'),
+                            e.target.getAttribute('data-name'),
+                            e.target.getAttribute('data-roll'),
+                            e.target.getAttribute('data-class')
+                        );
+                    });
+                });
+
+            } catch (error) {
+                console.error("ডাটা লোড ত্রুটি: ", error);
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400">ডাটা লোড করা যায়নি।</td></tr>`;
+            }
+        }
+
+        // মডাল ওপেন করার ফাংশন
+        function openEditModal(id, name, roll, sClass) {
+            document.getElementById("edit-doc-id").value = id;
+            document.getElementById("edit-name").value = name;
+            document.getElementById("edit-roll").value = roll;
+            document.getElementById("edit-class").value = sClass;
+            document.getElementById("edit-modal").classList.remove("hidden");
+        }
+
+        // ডাটাবেজে তথ্য আপডেট করার ফাংশন
+        async function saveUpdatedData() {
+            const id = document.getElementById("edit-doc-id").value;
+            const newName = document.getElementById("edit-name").value;
+            const newRoll = document.getElementById("edit-roll").value;
+            const saveBtn = document.getElementById("save-btn");
+
+            if(!newName || !newRoll) { return alert("সব ঘর পূরণ করুন!"); }
+
+            saveBtn.innerText = "সেভ হচ্ছে...";
+            saveBtn.disabled = true;
+
+            try {
+                await updateDoc(doc(db, "students", id), {
+                    name: newName,
+                    roll: newRoll
+                });
+                alert("তথ্য সফলভাবে আপডেট হয়েছে! 🎉");
+                closeModal();
+                loadStudentsData(); // টেবিল রিফ্রেশ
+            } catch (err) {
+                console.error(err);
+                alert("আপডেট ব্যর্থ হয়েছে।");
+            } finally {
+                saveBtn.innerText = "সংরক্ষণ";
+                saveBtn.disabled = false;
+            }
+        }
+
+        // এইচটিএমএল বাটন ক্লিকের জন্য গ্লোবাল ম্যাপিং
+        window.toggleStudentSection = () => {
+            const section = document.getElementById("student-manager-section");
+            section.classList.toggle("hidden");
+            if(!section.classList.contains("hidden")) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        window.closeModal = () => {
+            document.getElementById("edit-modal").classList.add("hidden");
+        };
+
+        document.getElementById("save-btn").addEventListener("click", saveUpdatedData);
+    </script>
 </body>
 </html>
