@@ -5,67 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ফলাফল | আল-হারামাইন</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap');
+        body { font-family: 'Hind Siliguri', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-900 text-white min-h-screen p-4">
+<body class="bg-slate-900 text-white min-h-screen p-4 flex flex-col justify-between">
 
-    <div class="max-w-xl mx-auto mb-6">
-        <a href="index.html" class="text-green-400 font-bold hover:underline">← হোম পেজে ফিরুন</a>
-    </div>
-
-    <div class="max-w-xl mx-auto bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl">
-        <h2 class="text-2xl font-bold text-green-400 mb-6 text-center">পরীক্ষার ফলাফল</h2>
-        
-        <div class="space-y-4">
-            <div>
-                <label class="block text-slate-400 mb-1">শ্রেণী নির্বাচন</label>
-                <select id="class" class="w-full bg-slate-900 border border-slate-600 p-3 rounded-xl focus:border-green-500 outline-none">
-                    <option value="">শ্রেণী বেছে নিন</option>
-                    <option value="১ম শ্রেণী">১ম শ্রেণী</option>
-                    <option value="২য় শ্রেণী">২য় শ্রেণী</option>
-                    <option value="৩য় শ্রেণী">৩য় শ্রেণী</option>
-                    <option value="৪র্থ শ্রেণী">৪র্থ শ্রেণী</option>
-                    <option value="৫ম শ্রেণী">৫ম শ্রেণী</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-slate-400 mb-1">পরীক্ষার নাম</label>
-                <select id="examName" class="w-full bg-slate-900 border border-slate-600 p-3 rounded-xl focus:border-green-500 outline-none">
-                    <option value="">পরীক্ষা নির্বাচন করুন</option>
-                    <option value="প্রথম সাময়িক পরীক্ষা">প্রথম সাময়িক পরীক্ষা</option>
-                    <option value="দ্বিতীয় সাময়িক পরীক্ষা">দ্বিতীয় সাময়িক পরীক্ষা</option>
-                     <option value="অর্ধ বার্ষিক পরীক্ষা">অর্ধ বার্ষিক পরীক্ষা</option>
-                    <option value="বার্ষিক পরীক্ষা">বার্ষিক পরীক্ষা</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-slate-400 mb-1">রোল নম্বর</label>
-                <input type="number" id="roll" placeholder="রোল নম্বর লিখুন" class="w-full bg-slate-900 border border-slate-600 p-3 rounded-xl focus:border-green-500 outline-none">
-            </div>
-
-            <button onclick="searchResult()" class="w-full bg-green-600 hover:bg-green-500 font-bold py-3 rounded-xl transition">ফলাফল দেখুন</button>
+    <div class="w-full">
+        <div class="max-w-xl mx-auto mb-6 mt-4">
+            <a href="index.html" class="text-green-400 font-bold hover:underline flex items-center gap-1">
+                <i class="fas fa-arrow-left text-sm"></i> হোম পেজে ফিরুন
+            </a>
         </div>
 
-        <div id="resultOutput" class="mt-6 p-4 bg-slate-900 rounded-xl border border-slate-700 hidden">
+        <div class="max-w-xl mx-auto bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 shadow-xl">
+            <h2 class="text-2xl font-bold text-green-400 mb-6 text-center flex items-center justify-center gap-2">
+                <i class="fas fa-graduation-cap"></i> পরীক্ষার ফলাফল অনুসন্ধান
+            </h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-slate-400 mb-1 text-sm">শ্রেণী নির্বাচন করুন</label>
+                    <select id="class" class="w-full bg-slate-900 border border-slate-600 p-3 rounded-xl focus:border-green-500 outline-none text-sm">
+                        <option value="">... শ্রেণী বেছে নিন ...</option>
+                        <option value="১ম শ্রেণী">১ম শ্রেণী</option>
+                        <option value="২য় শ্রেণী">২য় শ্রেণী</option>
+                        <option value="৩য় শ্রেণী">৩য় শ্রেণী</option>
+                        <option value="৪র্থ শ্রেণী">৪র্থ শ্রেণী</option>
+                        <option value="৫ম শ্রেণী">৫ম শ্রেণী</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-slate-400 mb-1 text-sm">পরীক্ষার নাম</label>
+                    <select id="examName" class="w-full bg-slate-900 border border-slate-600 p-3 rounded-xl focus:border-green-500 outline-none text-sm">
+                        <option value="">... পরীক্ষা নির্বাচন করুন ...</option>
+                        <option value="প্রথম সাময়িক পরীক্ষা">প্রথম সাময়িক পরীক্ষা</option>
+                        <option value="দ্বিতীয় সাময়িক পরীক্ষা">দ্বিতীয় সাময়িক পরীক্ষা</option>
+                        <option value="অর্ধ বার্ষিক পরীক্ষা">অর্ধ বার্ষিক পরীক্ষা</option>
+                        <option value="বার্ষিক পরীক্ষা">বার্ষিক পরীক্ষা</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-slate-400 mb-1 text-sm">রোল নম্বর</label>
+                    <input type="number" id="roll" placeholder="রোল নম্বর লিখুন (যেমন: 1, 2, 3...)" class="w-full bg-slate-900 border border-slate-600 p-3 rounded-xl focus:border-green-500 outline-none text-sm">
+                </div>
+
+                <button onclick="searchResult()" class="w-full bg-green-600 hover:bg-green-500 font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 text-base shadow-lg">
+                    <i class="fas fa-search"></i> ফলাফল দেখুন
+                </button>
+            </div>
+
+            <div id="resultOutput" class="mt-6 p-5 bg-slate-900 rounded-xl border border-slate-700 hidden">
+            </div>
         </div>
     </div>
+
+    <p class="text-center text-xs text-slate-500 my-6">
+        © 2026 আল-হারামাইন মডেল মাদ্রাসা। সর্বস্বত্ব সংরক্ষিত।
+    </p>
 
     <script>
+        // কোডের ভেতরের ডেমো ফলাফল ডাটাবেজ (১ম থেকে ৫ম শ্রেণী - প্রতিটির ৫ জন করে)
+        const demoResults = [
+            // ১ম শ্রেণী
+            { roll: "1", name: "আবরার ফাহিম", class: "১ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "5.00", pdf: "https://example.com/pdf/class1-roll1.pdf" },
+            { roll: "2", name: "আফরিন সুলতানা", class: "১ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.85", pdf: "https://example.com/pdf/class1-roll2.pdf" },
+            { roll: "3", name: "মোহাম্মদ আলি", class: "১ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.50", pdf: "https://example.com/pdf/class1-roll3.pdf" },
+            { roll: "4", name: "রাইসা ইসলাম", class: "১ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.20", pdf: "https://example.com/pdf/class1-roll4.pdf" },
+            { roll: "5", name: "তাহসান khan", class: "১ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.00", pdf: "https://example.com/pdf/class1-roll5.pdf" },
+            
+            // ২য় শ্রেণী
+            { roll: "1", name: "নুসরাত জাহান", class: "২য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "5.00", pdf: "https://example.com/pdf/class2-roll1.pdf" },
+            { roll: "2", name: "ইমতিয়াজ আহমেদ", class: "২য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.90", pdf: "https://example.com/pdf/class2-roll2.pdf" },
+            { roll: "3", name: "সাদিয়া আফরিন", class: "২য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.70", pdf: "https://example.com/pdf/class2-roll3.pdf" },
+            { roll: "4", name: "ফারহান তানভীর", class: "২য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.40", pdf: "https://example.com/pdf/class2-roll4.pdf" },
+            { roll: "5", name: "মেহজাবিন চৌধুরী", class: "২য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.10", pdf: "https://example.com/pdf/class2-roll5.pdf" },
+            
+            // ৩য় শ্রেণী
+            { roll: "1", name: "তাসনিমুল হাসান", class: "৩য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "5.00", pdf: "https://example.com/pdf/class3-roll1.pdf" },
+            { roll: "2", name: "আরিফা আক্তার", class: "৩য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.80", pdf: "https://example.com/pdf/class3-roll2.pdf" },
+            { roll: "3", name: "মাহিন ইসলাম", class: "৩য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.65", pdf: "https://example.com/pdf/class3-roll3.pdf" },
+            { roll: "4", name: "জেনিফার রহমান", class: "৩য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.30", pdf: "https://example.com/pdf/class3-roll4.pdf" },
+            { roll: "5", name: "সালমান ফারসি", class: "৩য় শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "3.95", pdf: "https://example.com/pdf/class3-roll5.pdf" },
+            
+            // ৪র্থ শ্রেণী
+            { roll: "1", name: "রাইয়ান চৌধুরী", class: "৪র্থ শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "5.00", pdf: "https://example.com/pdf/class4-roll1.pdf" },
+            { roll: "2", name: "সামিয়া জান্নাত", class: "৪র্থ শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.95", pdf: "https://example.com/pdf/class4-roll2.pdf" },
+            { roll: "3", name: "আহনাফ তাহমিদ", class: "৪র্থ শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.60", pdf: "https://example.com/pdf/class4-roll3.pdf" },
+            { roll: "4", name: "লাবিবা করিম", class: "৪র্থ শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.45", pdf: "https://example.com/pdf/class4-roll4.pdf" },
+            { roll: "5", name: "ইশরাক জামান", class: "৪র্থ শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.15", pdf: "https://example.com/pdf/class4-roll5.pdf" },
+            
+            // ৫ম শ্রেণী
+            { roll: "1", name: "ইতমামুল হক ইরাম", class: "৫ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "5.00", pdf: "https://example.com/pdf/class5-roll1.pdf" },
+            { roll: "2", name: "বিনতাশা হোসেন বুশরা", class: "৫ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "5.00", pdf: "https://example.com/pdf/class5-roll2.pdf" },
+            { roll: "3", name: "ফাতেমা আক্তার", class: "৫ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.90", pdf: "https://example.com/pdf/class5-roll3.pdf" },
+            { roll: "4", name: "মোহাম্মদ শাকিল", class: "৫ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.80", pdf: "https://example.com/pdf/class5-roll4.pdf" },
+            { roll: "5", name: "তানজিল হোসেন", class: "৫ম শ্রেণী", exam: "বার্ষিক পরীক্ষা", gpa: "4.50", pdf: "https://example.com/pdf/class5-roll5.pdf" }
+        ];
+
         function searchResult() {
-            const exam = document.getElementById('examName').value;
-            const roll = document.getElementById('roll').value;
+            const selectedClass = document.getElementById('class').value;
+            const selectedExam = document.getElementById('examName').value;
+            const inputRoll = document.getElementById('roll').value.trim();
             const output = document.getElementById('resultOutput');
             
-            if(!exam || !roll) {
-                alert("দয়া করে পরীক্ষার নাম ও রোল নম্বর পূরণ করুন");
+            // ফিল্ড খালি থাকলে ওয়ার্নিং
+            if(!selectedClass || !selectedExam || !inputRoll) {
+                alert("দয়া করে শ্রেণী, পরীক্ষার নাম ও রোল নম্বর সঠিকভাবে পূরণ করুন");
                 return;
             }
 
-            output.innerHTML = `<p class='text-green-400 font-bold'>${exam}</p>
-                                <p>রোল নম্বর: ${roll}</p>
-                                <p class='text-yellow-400 mt-2'>ফলাফল প্রক্রিয়াদিন...</p>`;
+            // লোডিং অ্যানিমেশন
             output.classList.remove('hidden');
+            output.innerHTML = `
+                <div class="flex items-center justify-center py-4 space-x-2">
+                    <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                    <span class="text-xs text-slate-400 pl-2">ফলাফল খোঁজা হচ্ছে...</span>
+                </div>`;
+
+            // ফিল্টার করে সঠিক শিক্ষার্থী খুঁজে বের করা
+            setTimeout(() => {
+                const studentFound = demoResults.find(s => s.roll === inputRoll && s.class === selectedClass && s.exam === selectedExam);
+
+                if (studentFound) {
+                    output.innerHTML = `
+                        <div class="border-b border-slate-700 pb-3 mb-3">
+                            <span class="bg-green-600/20 text-green-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">${studentFound.exam}</span>
+                            <h3 class="text-lg font-bold mt-2 text-slate-100"><i class="far fa-user text-slate-400 mr-1"></i> নাম: ${studentFound.name}</h3>
+                        </div>
+                        <div class="space-y-2 text-sm text-slate-300">
+                            <p><span class="text-slate-500">শ্রেণী:</span> ${studentFound.class}</p>
+                            <p><span class="text-slate-500">রোল নম্বর:</span> ${studentFound.roll}</p>
+                            <p class="text-base font-bold"><span class="text-slate-500 font-normal text-sm">প্রাপ্ত ফলাফল (GPA):</span> <span class="text-yellow-400">${studentFound.gpa}</span></p>
+                        </div>
+                        
+                        <div class="mt-5 pt-4 border-t border-slate-800">
+                            <a href="${studentFound.pdf}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-sm shadow">
+                                <i class="fas fa-file-pdf"></i> মূল মার্কশিট (PDF) ডাউনলোড করুন
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    // তথ্য না মিললে এরর মেসেজ
+                    output.innerHTML = `
+                        <div class="text-center py-4">
+                            <i class="fas fa-exclamation-triangle text-amber-500 text-2xl mb-2"></i>
+                            <p class="text-amber-400 font-bold">ফলাফল পাওয়া যায়নি!</p>
+                            <p class="text-[11px] text-slate-400 mt-1">নোট: ডেমো হিসেবে শুধুমাত্র 'বার্ষিক পরীক্ষা' এবং রোল ১ থেকে ৫ এর রেজাল্ট দেওয়া আছে।</p>
+                        </div>`;
+                }
+            }, 800); // ৮০০ মিলি-সেকেন্ড পর লোডিং শেষ হবে
         }
     </script>
 </body>
