@@ -1,4 +1,13 @@
-// সব মডাল খোলার সাধারণ ফাংশন
+// ১. পেজ লোড হওয়ার সাথে সাথে মডাল লুকানো নিশ্চিত করা
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('infoModal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+});
+
+// ২. সব মডাল খোলার সাধারণ ফাংশন
 window.showModal = function(title, iconHtml, bgClass, bodyContent) {
     const modal = document.getElementById('infoModal');
     const mTitle = document.getElementById('modalTitle');
@@ -16,7 +25,7 @@ window.showModal = function(title, iconHtml, bgClass, bodyContent) {
     }
 }
 
-// মডাল বন্ধ করার ফাংশন
+// ৩. মডাল বন্ধ করার ফাংশন
 window.closeInfoModal = function() {
     const modal = document.getElementById('infoModal');
     if (modal) {
@@ -26,7 +35,7 @@ window.closeInfoModal = function() {
     }
 }
 
-// নির্দিষ্ট বাটনগুলোর জন্য ফাংশন
+// ৪. নির্দিষ্ট বাটনগুলোর জন্য ফাংশন
 window.openWelcomeModal = function() {
     showModal('শুভেচ্ছা বাণী', '<i class="fas fa-handshake"></i>', 'bg-blue-100 text-blue-600', '<p>আল-হারামাইন মডেল মাদ্রাসায় আপনাকে স্বাগতম। আমরা মানসম্মত দ্বীনি ও আধুনিক শিক্ষার সমন্বয়ে গড়ে তুলছি আগামীর প্রজন্ম।</p>');
 }
