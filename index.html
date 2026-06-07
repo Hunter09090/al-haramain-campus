@@ -12,6 +12,7 @@
 </head>
 <body class="pb-10">
 
+    <!-- স্প্ল্যাশ স্ক্রিন -->
     <div id="splash-screen">
         <div class="text-center px-6 splash-text">
             <div class="mb-4 text-white text-5xl"><i class="fas fa-mosque"></i></div>
@@ -26,6 +27,7 @@
         </div>
     </div>
 
+    <!-- হেডার -->
     <header class="bg-blue-900 text-white p-4 shadow-md border-b border-blue-800 flex justify-between items-center sticky top-0 z-50 animate-item">
         <div class="flex items-center space-x-3">
             <img src="https://lh3.googleusercontent.com/d/1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz" alt="মাদ্রাসা লোগো" class="w-10 h-10 object-contain rounded-full bg-white p-1">
@@ -37,6 +39,7 @@
         <button onclick="toggleMenu()" class="text-2xl p-2 text-white hover:text-blue-200 transition"><i class="fas fa-bars"></i></button>
     </header>
 
+    <!-- নেভিগেশন -->
     <nav id="mobileMenu" class="hidden bg-blue-950 text-white p-4 animate-item">
         <a href="index.html" class="block py-2 border-b border-blue-800">হোম (Home)</a>
         <a href="about.html" class="block py-2 border-b border-blue-800">আমাদের সম্পর্কে (About Us)</a>
@@ -44,12 +47,14 @@
         <a href="https://www.facebook.com/profile.php?id=61571161346418" target="_blank" class="block py-2">ফেসবুক পেজ</a>
     </nav>
 
+    <!-- বাণী সেকশন -->
     <section class="p-4 animate-item">
         <div class="bg-teal-50 border-l-4 border-teal-600 p-6 md:p-8 rounded-lg shadow-md text-gray-800 text-center font-bold text-lg md:text-xl leading-relaxed">
             "দ্বীনের জ্ঞান অর্জন করা প্রত্যেক মুসলমানের উপর ফরজ।"
         </div>
     </section>
 
+    <!-- গ্যালারি -->
     <section class="px-4 mb-6 animate-item">
         <div class="bg-white p-3 rounded-xl shadow-md border">
             <div class="swiper mainGallerySwiper rounded-lg overflow-hidden aspect-[16/10] bg-slate-100 relative mt-1">
@@ -66,6 +71,47 @@
         </div>
     </section>
 
+    <!-- বাণীসমূহ -->
+    <section class="px-4 mb-3 animate-item">
+        <div onclick="showDataModal('bani', 'welcome')" class="bg-white p-4 rounded-lg shadow-md border flex items-center justify-between cursor-pointer hover:bg-gray-50 transition">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-handshake text-2xl text-blue-600"></i>
+                <div>
+                    <h2 class="font-bold text-gray-800">শুভেচ্ছা বাণী</h2>
+                    <p class="text-xs text-gray-500">বিস্তারিত পড়তে ক্লিক করুন</p>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </div>
+    </section>
+
+    <section class="px-4 mb-4 animate-item">
+        <div class="bg-white rounded-xl shadow-md border overflow-hidden">
+            <div class="bg-emerald-700 text-white px-4 py-2.5 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="https://lh3.googleusercontent.com/d/1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz" alt="মাদ্রাসা লোগো" class="w-6 h-6 object-contain rounded-full bg-white p-0.5">
+                    <span class="text-sm font-bold tracking-wide">পরিচালকের বাণী</span>
+                </div>
+            </div>
+            <div class="p-5 flex flex-col items-center text-center bg-gray-50">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-emerald-600/20 shadow-inner mb-3">
+                    <img src="https://lh3.googleusercontent.com/d/1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X" alt="মাওলানা" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-gray-800 font-bold text-base">মাওলানা মোহাম্মদ জুনাইদ বোগদাদি</h3>
+            </div>
+            <div onclick="showDataModal('bani', 'director')" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-center py-3 font-bold text-sm cursor-pointer hover:from-purple-700 hover:to-indigo-700 transition">Read Message</div>
+        </div>
+    </section>
+
+    <!-- অর্জন এবং বিভাগসমূহ -->
+    <section class="px-4 mb-6 animate-item">
+        <h2 class="text-2xl font-bold text-blue-900 mb-3"><i class="fas fa-trophy text-amber-500"></i> আমাদের অর্জন সমূহ</h2>
+        <div class="space-y-4">
+            <div onclick="showDataModal('achieve', 'board')" class="bg-white p-5 rounded-xl shadow border cursor-pointer">বোর্ড সমাপনী পরীক্ষা</div>
+            <div onclick="showDataModal('achieve', 'govt')" class="bg-white p-5 rounded-xl shadow border cursor-pointer">ইবতেদায়ী সরকারি বৃত্তি</div>
+        </div>
+    </section>
+
     <!-- বাটনসমূহ -->
     <section class="px-4 mb-6 animate-item">
         <div class="space-y-2">
@@ -73,34 +119,20 @@
             <a href="teachers.html" class="block w-full bg-green-600 text-white p-3 rounded-lg shadow font-bold text-center">শিক্ষকগণ</a>
             <a href="notice.html" class="block w-full bg-red-600 text-white p-3 rounded-lg shadow font-bold text-center">নোটিশ</a>
             <a href="result.html" class="block w-full bg-purple-600 text-white p-3 rounded-lg shadow font-bold text-center">ফলাফল</a>
-            <a href="support.html" class="block w-full bg-teal-600 text-white p-3 rounded-lg shadow font-bold text-center">যোগাযোগ সংশোধিত</a>
-            <a href="routine.html" class="block w-full bg-indigo-600 text-white p-3 rounded-lg shadow font-bold text-center">রুটিন গ্যালারি</a>
-            <a href="student-profile.html" class="block w-full bg-sky-700 text-white p-3 rounded-lg shadow font-bold text-center">Student profile</a>
-            <a href="teacher-login.html" class="block w-full bg-emerald-700 text-white p-3 rounded-lg shadow font-bold text-center">Teacher's login</a>
+            <a href="support.html" class="block w-full bg-teal-600 text-white p-3 rounded-lg shadow font-bold text-center">যোগাযোগ</a>
         </div>
     </section>
 
-    <!-- বাণী ও বিভাগসমূহ -->
-    <!-- (এখানে আপনার আগের বাণী, অর্জন এবং বিভাগসমূহের কোডগুলো আছে যা আপনি দিয়েছেন) -->
-
-    <footer class="mt-10 px-4 space-y-3 animate-item">
-        <h3 class="font-bold text-gray-800 mb-2">আমাদের অবস্থান:</h3>
-        <div class="w-full h-56 rounded-lg overflow-hidden shadow-md">
-            <iframe src="https://www.google.com/maps?q=21.2823287,92.0572184&output=embed" width="100%" height="100%" frameborder="0"></iframe>
-        </div>
-    </footer>
-
+    <!-- মডাল কন্টেইনার -->
     <div id="infoModal" class="fixed inset-0 bg-black/60 z-[10000] hidden flex items-center justify-center p-4">
-        <div class="modal-container animate-item">
-            <div class="modal-header flex items-center gap-3 mb-4">
-                <div id="modalIcon" class="w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-inner"></div>
-                <h3 id="modalTitle" class="font-bold text-gray-800 text-xl"></h3>
-            </div>
-            <div id="modalBody" class="modal-content mb-4 text-sm text-gray-700"></div>
-            <button onclick="closeInfoModal()" class="w-full bg-gray-800 text-white font-bold py-2 rounded-xl">বন্ধ করুন</button>
+        <div class="bg-white w-full max-w-lg rounded-2xl p-6 relative">
+            <h3 id="modalTitle" class="font-bold text-xl mb-2"></h3>
+            <div id="modalBody" class="text-gray-700 mb-4"></div>
+            <button onclick="closeInfoModal()" class="w-full bg-gray-800 text-white py-2 rounded-xl">বন্ধ করুন</button>
         </div>
     </div>
 
+    <!-- স্ক্রিপ্ট লিঙ্ক -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/modals/Bani.js"></script>
     <script src="js/modals/Achievements.js"></script>
