@@ -227,8 +227,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==========================================
-       Console Message
-    ========================================== */
+   Console Message
+========================================== */
 
-    console.log(
-        "Al Haramain Model Madrasah Website Loaded Successfully
+console.log("Al Haramain Model Madrasah Website Loaded Successfully");
+
+});
