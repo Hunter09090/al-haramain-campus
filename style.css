@@ -1397,3 +1397,351 @@ left:140%;
 /* ==========================================================
    END PART-4
 ========================================================== */
+/* ==========================================================
+   BREAKING NEWS
+========================================================== */
+
+.breaking-news{
+
+    background:var(--primary);
+
+    padding:14px 0;
+
+}
+
+.breaking-wrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    background:#fff;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.breaking-title{
+
+    background:var(--primary-dark);
+
+    color:#fff;
+
+    padding:16px 24px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+.breaking-title i{
+
+    color:var(--secondary);
+
+}
+
+.breaking-wrapper marquee{
+
+    color:var(--black);
+
+    font-weight:600;
+
+    padding-right:20px;
+
+}
+
+
+/* ==========================================================
+   DIRECTOR SECTION
+========================================================== */
+
+.director{
+
+    padding:100px 0;
+
+}
+
+.director-grid{
+
+    display:grid;
+
+    grid-template-columns:420px 1fr;
+
+    gap:70px;
+
+    align-items:center;
+
+}
+
+.director-image{
+
+    position:relative;
+
+}
+
+.director-image img{
+
+    width:100%;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow-lg);
+
+    transition:.4s;
+
+}
+
+.director-image img:hover{
+
+    transform:scale(1.03);
+
+}
+
+.section-tag{
+
+    display:inline-block;
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+    padding:8px 20px;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+.director-content h2{
+
+    font-size:40px;
+
+    color:var(--primary-dark);
+
+    margin-bottom:25px;
+
+}
+
+.director-content p{
+
+    font-size:17px;
+
+    color:var(--gray);
+
+    margin-bottom:18px;
+
+    text-align:justify;
+
+}
+
+
+/* ==========================================================
+   STATISTICS
+========================================================== */
+
+.statistics{
+
+    background:var(--gradient-primary);
+
+    padding:90px 0;
+
+}
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+.stat-card{
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:20px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.35s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-10px);
+
+    background:rgba(255,255,255,.18);
+
+}
+
+.stat-card h2{
+
+    font-size:42px;
+
+    margin-bottom:12px;
+
+    color:var(--secondary);
+
+}
+
+.stat-card p{
+
+    font-size:18px;
+
+}
+
+
+/* ==========================================================
+   DEPARTMENTS
+========================================================== */
+
+.departments{
+
+    padding:100px 0;
+
+}
+
+.department-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+}
+
+.department-grid .card{
+
+    text-align:center;
+
+    padding:40px 25px;
+
+    border-top:5px solid var(--primary);
+
+    border-radius:22px;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+}
+
+.department-grid .card:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+    transform:translateY(-12px);
+
+}
+
+.department-grid h3{
+
+    font-size:24px;
+
+    line-height:1.5;
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:991px){
+
+.director-grid{
+
+    grid-template-columns:1fr;
+
+    gap:40px;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.director-content{
+
+    text-align:center;
+
+}
+
+.director-content p{
+
+    text-align:left;
+
+}
+
+}
+
+
+@media(max-width:768px){
+
+.breaking-wrapper{
+
+    flex-direction:column;
+
+    border-radius:15px;
+
+}
+
+.breaking-title{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.director-content h2{
+
+    font-size:30px;
+
+}
+
+.department-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}
