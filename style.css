@@ -2943,3 +2943,208 @@ height:220px;
 ========================================================== */
 
 @media(max-width:
+/* ==========================================================
+   HOME TEACHERS SECTION
+========================================================== */
+
+.teachers-home{
+
+    padding:100px 0;
+
+    background:#ffffff;
+
+}
+
+.teacher-home-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+    margin-top:50px;
+
+}
+
+.teacher-home-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+    border-bottom:5px solid var(--primary);
+
+}
+
+.teacher-home-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.teacher-home-card img{
+
+    width:100%;
+
+    height:320px;
+
+    object-fit:cover;
+
+    transition:.5s;
+
+}
+
+.teacher-home-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+.teacher-home-card h3{
+
+    margin:20px 15px 10px;
+
+    font-size:24px;
+
+    color:var(--primary-dark);
+
+}
+
+.teacher-home-card span{
+
+    display:inline-block;
+
+    margin-bottom:25px;
+
+    padding:8px 18px;
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+    border-radius:30px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+
+
+/* ==========================================================
+   DIRECTOR CARD
+========================================================== */
+
+.teacher-home-card:first-child{
+
+    border:3px solid #FFD700;
+
+    position:relative;
+
+}
+
+.teacher-home-card:first-child::before{
+
+    content:"👑 পরিচালক";
+
+    position:absolute;
+
+    top:15px;
+
+    left:15px;
+
+    background:#FFD700;
+
+    color:#000;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    z-index:10;
+
+}
+
+
+
+/* ==========================================================
+   ANIMATION
+========================================================== */
+
+.teacher-home-card{
+
+    animation:fadeUp .8s ease;
+
+}
+
+.teacher-home-card:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.teacher-home-card:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+.teacher-home-card:nth-child(4){
+
+    animation-delay:.6s;
+
+}
+
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:992px){
+
+.teacher-home-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.teacher-home-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.teacher-home-card img{
+
+height:280px;
+
+}
+
+.teacher-home-card h3{
+
+font-size:22px;
+
+}
+
+}
