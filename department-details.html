@@ -3,27 +3,26 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>বিভাগের বিস্তারিত | আল হারামাইন মডেল মাদ্রাসা</title>
+    <title>বিভাগের বিস্তারিত | আল হারামাইন মডেল মাদ্রাসা</title>
 
-<meta
-name="description"
-content="আল হারামাইন মডেল মাদ্রাসার প্রতিটি বিভাগের বিস্তারিত তথ্য।">
+    <meta name="description"
+          content="আল হারামাইন মডেল মাদ্রাসার প্রতিটি বিভাগের বিস্তারিত তথ্য।">
 
-<link rel="stylesheet" href="variables.css">
+    <meta name="keywords"
+          content="আল হারামাইন মডেল মাদ্রাসা, বিভাগ, হিফজ, নূরানী, দাখিল">
 
-<link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
 
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="responsive.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -35,59 +34,55 @@ HEADER
 
 <div id="header"></div>
 
-
-
 <!-- ===========================
 PAGE HERO
 =========================== -->
 
 <section class="page-hero">
 
-<div class="page-overlay"></div>
+    <div class="page-overlay"></div>
 
-<div class="container">
+    <div class="container">
 
-<div class="page-content">
+        <div class="page-content">
 
-<h1 id="departmentTitle">
+            <h1 id="departmentTitle">
 
-বিভাগের বিস্তারিত
+                বিভাগের বিস্তারিত
 
-</h1>
+            </h1>
 
-<p>
+            <p>
 
-<a href="index.html">
+                <a href="index.html">
 
-হোম
+                    হোম
 
-</a>
+                </a>
 
-<i class="fa-solid fa-angle-right"></i>
+                <i class="fa-solid fa-angle-right"></i>
 
-<a href="departments.html">
+                <a href="departments.html">
 
-বিভাগসমূহ
+                    বিভাগসমূহ
 
-</a>
+                </a>
 
-<i class="fa-solid fa-angle-right"></i>
+                <i class="fa-solid fa-angle-right"></i>
 
-<span id="departmentBread">
+                <span id="departmentBread">
 
-বিভাগ
+                    বিভাগ
 
-</span>
+                </span>
 
-</p>
+            </p>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </section>
-
-
 
 <!-- ===========================
 DEPARTMENT DETAILS
@@ -95,281 +90,120 @@ DEPARTMENT DETAILS
 
 <section class="department-details">
 
-<div class="container">
+    <div class="container">
 
-<div class="department-banner">
+        <!-- Banner -->
 
-<img
+        <div class="department-banner">
 
-id="departmentImage"
+            <img id="departmentImage"
 
-src="https://placehold.co/1200x650?text=Department"
+                 src="https://placehold.co/1200x650?text=Department"
 
-alt="Department">
+                 alt="Department">
 
-</div>
+        </div>
 
+        <!-- Name & Description -->
 
+        <div class="department-info-box">
 
-<div class="department-info-box">
+            <span class="department-badge">
 
-<h2 id="departmentName">
+                বিভাগ
 
-হিফজ বালক বিভাগ
+            </span>
 
-</h2>
+            <h2 id="departmentName">
 
-<p id="departmentDescription">
+                বিভাগের নাম
 
-এখানে বিভাগের সম্পূর্ণ পরিচিতি থাকবে।
+            </h2>
 
-বর্তমানে এটি Demo লেখা।
+            <p id="departmentDescription">
 
-পরে Firebase থেকে এই তথ্য স্বয়ংক্রিয়ভাবে আসবে।
+                এখানে বিভাগের সম্পূর্ণ পরিচিতি দেখানো হবে।
+                পরবর্তীতে এই তথ্য Firebase Database থেকে
+                স্বয়ংক্রিয়ভাবে লোড হবে।
 
-</p>
+            </p>
 
-</div>
+        </div>
 
+        <!-- Statistics -->
 
+        <div class="department-stats">
 
-<div class="department-stats">
+            <div class="stat-box">
 
-<div class="stat-box">
+                <i class="fa-solid fa-users"></i>
 
-<i class="fa-solid fa-users"></i>
+                <h3 id="teacherCount">
 
-<h3 id="teacherCount">
+                    ০
 
-১২
+                </h3>
 
-</h3>
+                <p>
 
-<p>
+                    শিক্ষক
 
-শিক্ষক
+                </p>
 
-</p>
+            </div>
 
-</div>
+            <div class="stat-box">
 
+                <i class="fa-solid fa-user-graduate"></i>
 
+                <h3 id="studentCount">
 
-<div class="stat-box">
+                    ০
 
-<i class="fa-solid fa-user-graduate"></i>
+                </h3>
 
-<h3 id="studentCount">
+                <p>
 
-৫০০
+                    শিক্ষার্থী
 
-</h3>
+                </p>
 
-<p>
+            </div>
 
-শিক্ষার্থী
+            <div class="stat-box">
 
-</p>
+                <i class="fa-solid fa-calendar-days"></i>
 
-</div>
+                <h3 id="departmentYear">
 
+                    ২০১৩
 
+                </h3>
 
-<div class="stat-box">
+                <p>
 
-<i class="fa-solid fa-calendar-days"></i>
+                    প্রতিষ্ঠা সাল
 
-<h3>
+                </p>
 
-২০১৩
+            </div>
 
-</h3>
+            <div class="stat-box">
 
-<p>
+                <i class="fa-solid fa-book-open"></i>
 
-প্রতিষ্ঠা
+                <h3 id="departmentType">
 
-</p>
+                    পূর্ণকালীন
 
-</div>
+                </h3>
 
+                <p>
 
+                    শিক্ষা কার্যক্রম
 
-<div class="stat-box">
+                </p>
 
-<i class="fa-solid fa-book-open"></i>
+            </div>
 
-<h3>
-
-পূর্ণকালীন
-
-</h3>
-
-<p>
-
-শিক্ষা কার্যক্রম
-
-</p>
-
-</div>
-
-</div>
-<!-- ==========================================================
-MISSION & OBJECTIVES
-========================================================== -->
-
-<div class="department-features">
-
-    <div class="feature-card">
-
-        <i class="fa-solid fa-bullseye"></i>
-
-        <h3>লক্ষ্য</h3>
-
-        <p id="departmentMission">
-
-            শিক্ষার্থীদের কুরআন, সুন্নাহ ও উত্তম চরিত্রের আলোকে
-            আদর্শ মানুষ হিসেবে গড়ে তোলা।
-
-        </p>
-
-    </div>
-
-    <div class="feature-card">
-
-        <i class="fa-solid fa-lightbulb"></i>
-
-        <h3>উদ্দেশ্য</h3>
-
-        <p id="departmentObjective">
-
-            যুগোপযোগী দ্বীনি ও নৈতিক শিক্ষা প্রদান করে
-            সমাজ ও রাষ্ট্রের জন্য যোগ্য নাগরিক তৈরি করা।
-
-        </p>
-
-    </div>
-
-</div>
-
-
-
-<!-- ==========================================================
-CURRICULUM
-========================================================== -->
-
-<div class="department-curriculum">
-
-    <h2>
-
-        <i class="fa-solid fa-book-quran"></i>
-
-        পাঠ্যক্রম
-
-    </h2>
-
-    <ul id="departmentCurriculum">
-
-        <li>পবিত্র কুরআন শিক্ষা</li>
-
-        <li>তাজবীদ শিক্ষা</li>
-
-        <li>হাদীস শিক্ষা</li>
-
-        <li>আকীদা ও ফিকহ</li>
-
-        <li>আরবি ভাষা শিক্ষা</li>
-
-        <li>নৈতিক ও চারিত্রিক শিক্ষা</li>
-
-    </ul>
-
-</div>
-
-
-
-<!-- ==========================================================
-CLASS TIME
-========================================================== -->
-
-<div class="department-time">
-
-    <h2>
-
-        <i class="fa-solid fa-clock"></i>
-
-        ক্লাসের সময়সূচী
-
-    </h2>
-
-    <table class="schedule-table">
-
-        <tr>
-
-            <th>দিন</th>
-
-            <th>সময়</th>
-
-        </tr>
-
-        <tr>
-
-            <td>শনিবার - বৃহস্পতিবার</td>
-
-            <td>সকাল ৮:০০ - বিকাল ৪:০০</td>
-
-        </tr>
-
-        <tr>
-
-            <td>শুক্রবার</td>
-
-            <td>সাপ্তাহিক ছুটি</td>
-
-        </tr>
-
-    </table>
-
-</div>
-
-
-
-<!-- ==========================================================
-CALL TO ACTION
-========================================================== -->
-
-<div class="department-action">
-
-    <a href="admission.html" class="btn btn-primary">
-
-        <i class="fa-solid fa-user-plus"></i>
-
-        অনলাইনে ভর্তি আবেদন
-
-    </a>
-
-    <a href="departments.html" class="btn btn-outline">
-
-        <i class="fa-solid fa-arrow-left"></i>
-
-        সকল বিভাগে ফিরে যান
-
-    </a>
-
-</div>
-<!-- ==========================================================
-FOOTER
-========================================================== -->
-
-<div id="footer"></div>
-
-<!-- ==========================================================
-JAVASCRIPT FILES
-========================================================== -->
-
-<script src="include.js"></script>
-<script src="app.js"></script>
-<script src="department-details.js"></script>
-
-</body>
-</html>
+        </div>
