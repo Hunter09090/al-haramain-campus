@@ -273,3 +273,340 @@ section{
 }
 
 /* ========= TEXT ========= */
+/* ==========================================================
+   TOP BAR
+========================================================== */
+
+.top-bar{
+
+    background:var(--primary-dark);
+
+    color:#fff;
+
+    font-size:14px;
+
+}
+
+.top-bar .container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    min-height:45px;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.top-left,
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.top-bar i{
+
+    color:var(--secondary);
+
+    margin-right:6px;
+
+}
+
+.top-right a{
+
+    transition:var(--transition);
+
+}
+
+.top-right a:hover{
+
+    color:var(--secondary);
+
+}
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.header{
+
+    position:sticky;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    z-index:1000;
+
+    background:#fff;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+
+}
+
+.header.scrolled{
+
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+
+}
+
+.navbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    min-height:78px;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.logo img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+}
+
+.logo-text h1{
+
+    font-size:24px;
+
+    color:var(--primary-dark);
+
+    line-height:1.2;
+
+}
+
+.logo-text p{
+
+    font-size:13px;
+
+    color:var(--gray);
+
+}
+
+
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+.nav-menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
+}
+
+.nav-menu li{
+
+    position:relative;
+
+}
+
+.nav-menu a{
+
+    color:var(--black);
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.nav-menu a:hover{
+
+    color:var(--primary);
+
+}
+
+.nav-menu .active{
+
+    color:var(--primary);
+
+}
+
+
+/* ==========================================================
+   DROPDOWN
+========================================================== */
+
+.dropdown{
+
+    position:absolute;
+
+    top:130%;
+
+    left:0;
+
+    background:#fff;
+
+    min-width:240px;
+
+    border-radius:15px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    overflow:hidden;
+
+}
+
+.dropdown li{
+
+    width:100%;
+
+}
+
+.dropdown a{
+
+    display:block;
+
+    padding:14px 18px;
+
+    font-size:15px;
+
+}
+
+.dropdown a:hover{
+
+    background:var(--primary-light);
+
+}
+
+.nav-menu li:hover .dropdown{
+
+    opacity:1;
+
+    visibility:visible;
+
+    top:100%;
+
+}
+
+
+/* ==========================================================
+   NAV BUTTON
+========================================================== */
+
+.nav-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+/* ==========================================================
+   MOBILE MENU BUTTON
+========================================================== */
+
+.menu-toggle{
+
+    display:none;
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:10px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    font-size:22px;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+}
+
+
+/* ==========================================================
+   STICKY EFFECT
+========================================================== */
+
+.sticky{
+
+    animation:fadeDown .4s;
+
+}
+
+
+/* ==========================================================
+   NAV HOVER EFFECT
+========================================================== */
+
+.nav-menu a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-8px;
+
+    width:0;
+
+    height:3px;
+
+    background:var(--primary);
+
+    transition:.3s;
+
+    border-radius:10px;
+
+}
+
+.nav-menu li:hover>a::after{
+
+    width:100%;
+
+}
