@@ -1,1 +1,126 @@
 
+/* ==========================================================
+   AL HARAMAIN MODEL MADRASA
+   VARIABLES.CSS
+   Version: 1.0
+========================================================== */
+
+:root{
+
+/* Theme Colors */
+
+--primary:#0B8F45;
+--primary-dark:#066633;
+--primary-light:#EAF8F0;
+
+--secondary:#FFD54F;
+
+--white:#FFFFFF;
+
+--black:#111827;
+
+--gray:#6B7280;
+
+--light:#F8FAFC;
+
+--border:#E5E7EB;
+
+--danger:#DC2626;
+
+--success:#16A34A;
+
+--warning:#F59E0B;
+
+--info:#2563EB;
+
+
+/* Gradient */
+
+--gradient-primary:
+linear-gradient(
+135deg,
+#0B8F45,
+#14AE5C
+);
+
+--gradient-dark:
+linear-gradient(
+135deg,
+#065F46,
+#0B8F45
+);
+
+
+/* Shadow */
+
+--shadow-sm:
+0 2px 8px rgba(0,0,0,.08);
+
+--shadow-md:
+0 10px 25px rgba(0,0,0,.10);
+
+--shadow-lg:
+0 20px 40px rgba(0,0,0,.15);
+
+
+/* Radius */
+
+--radius-sm:8px;
+
+--radius-md:14px;
+
+--radius-lg:22px;
+
+--radius-xl:30px;
+
+
+/* Transition */
+
+--transition:.35s ease;
+
+
+/* Container */
+
+--container:1280px;
+
+
+/* Header */
+
+--header-height:75px;
+
+
+/* Z-index */
+
+--z-navbar:1000;
+
+--z-modal:5000;
+
+--z-loader:9999;
+
+
+/* Font */
+
+--font:
+"Segoe UI",
+Roboto,
+Arial,
+sans-serif;
+
+}
+
+
+/* Dark Mode */
+
+.dark{
+
+--white:#111827;
+
+--black:#FFFFFF;
+
+--light:#1F2937;
+
+--border:#374151;
+
+--gray:#D1D5DB;
+
+}
