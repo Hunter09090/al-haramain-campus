@@ -1,7 +1,275 @@
-body {
-    font-family: 'Segoe UI', sans-serif;
+/* ==========================================================
+   AL HARAMAIN MODEL MADRASA
+   STYLE.CSS
+   Version: 1.0
+========================================================== */
+
+/* ========= GOOGLE FONT ========= */
+
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+
+/* ========= RESET ========= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-/* বাটনে সুন্দর হোভার ইফেক্ট */
-button, a {
-    transition: 0.3s ease;
+
+html{
+    scroll-behavior:smooth;
 }
+
+body{
+
+    font-family:'Hind Siliguri',sans-serif;
+
+    background:var(--white);
+
+    color:var(--black);
+
+    line-height:1.7;
+
+    overflow-x:hidden;
+
+}
+
+/* ========= SELECTION ========= */
+
+::selection{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+/* ========= SCROLLBAR ========= */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f2f2f2;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary-dark);
+
+}
+
+/* ========= LINKS ========= */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+/* ========= LIST ========= */
+
+ul{
+
+    list-style:none;
+
+}
+
+/* ========= IMAGE ========= */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+/* ========= BUTTON ========= */
+
+button{
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+}
+
+/* ========= INPUT ========= */
+
+input,
+textarea,
+select{
+
+    font-family:inherit;
+
+    outline:none;
+
+}
+
+/* ========= CONTAINER ========= */
+
+.container{
+
+    width:100%;
+
+    max-width:var(--container);
+
+    margin:auto;
+
+    padding:0 20px;
+
+}
+
+/* ========= SECTION ========= */
+
+section{
+
+    padding:80px 0;
+
+}
+
+/* ========= TITLES ========= */
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+.section-title h2{
+
+    font-size:38px;
+
+    color:var(--primary-dark);
+
+    margin-bottom:12px;
+
+}
+
+.section-title p{
+
+    color:var(--gray);
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+/* ========= GRID ========= */
+
+.grid{
+
+    display:grid;
+
+    gap:30px;
+
+}
+
+/* ========= BUTTON ========= */
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:14px 30px;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.btn-primary{
+
+    background:var(--gradient-primary);
+
+    color:#fff;
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.btn-outline{
+
+    border:2px solid var(--primary);
+
+    color:var(--primary);
+
+    background:transparent;
+
+}
+
+.btn-outline:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+/* ========= CARD ========= */
+
+.card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+/* ========= TEXT ========= */
