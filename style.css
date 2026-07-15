@@ -3995,3 +3995,368 @@ font-size:16px;
 }
 
 }
+/* ==========================================================
+   ADMIN PANEL
+========================================================== */
+
+.admin-dashboard-body{
+    margin:0;
+    display:flex;
+    background:#f4f7fb;
+    font-family:inherit;
+}
+
+/* ==========================
+SIDEBAR
+========================== */
+
+.admin-sidebar{
+    width:280px;
+    min-height:100vh;
+    background:#0f172a;
+    color:#fff;
+    position:fixed;
+    left:0;
+    top:0;
+    overflow-y:auto;
+}
+
+.admin-brand{
+    text-align:center;
+    padding:30px 20px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.admin-brand i{
+    font-size:45px;
+    margin-bottom:10px;
+    color:#22c55e;
+}
+
+.admin-brand h2{
+    margin:10px 0 5px;
+}
+
+.admin-brand p{
+    font-size:14px;
+    color:#cbd5e1;
+}
+
+/* ==========================
+PROFILE
+========================== */
+
+.admin-profile{
+    text-align:center;
+    padding:25px 15px;
+}
+
+.admin-avatar{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border-radius:50%;
+    background:#22c55e;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    color:#fff;
+    margin-bottom:15px;
+}
+
+/* ==========================
+MENU
+========================== */
+
+.admin-menu ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.admin-menu li{
+    margin:6px 12px;
+}
+
+.admin-menu a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    color:#fff;
+    text-decoration:none;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.admin-menu a:hover,
+.admin-menu a.active{
+    background:#22c55e;
+}
+
+/* ==========================
+MAIN
+========================== */
+
+.admin-main{
+    margin-left:280px;
+    width:calc(100% - 280px);
+    padding:30px;
+}
+
+/* ==========================
+HEADER
+========================== */
+
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.admin-header h1{
+    margin:0;
+    font-size:34px;
+}
+
+.admin-date{
+    background:#fff;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* ==========================
+CARDS
+========================== */
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:35px;
+}
+
+.dashboard-card{
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-6px);
+}
+
+.dashboard-card i{
+    font-size:38px;
+    color:#16a34a;
+    margin-bottom:15px;
+}
+
+.dashboard-card h2{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+/* ==========================
+QUICK ACTION
+========================== */
+
+.action-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.action-card{
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    text-decoration:none;
+    color:#333;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.action-card:hover{
+    transform:translateY(-6px);
+}
+
+.action-card i{
+    font-size:35px;
+    color:#16a34a;
+    margin-bottom:15px;
+}
+
+/* ==========================
+BOX
+========================== */
+
+.dashboard-section{
+    margin-top:35px;
+}
+
+.dashboard-box{
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.box-header{
+    margin-bottom:20px;
+}
+
+.dashboard-item{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.dashboard-item:last-child{
+    border-bottom:none;
+}
+
+/* ==========================
+STATUS
+========================== */
+
+.status-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.status-item{
+    display:flex;
+    justify-content:space-between;
+}
+
+.status-online{
+    color:#16a34a;
+    font-weight:700;
+}
+
+/* ==========================
+TABLE
+========================== */
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.admin-table td{
+    border:1px solid #eee;
+    padding:14px;
+}
+
+/* ==========================
+ADMIN INFO
+========================== */
+
+.admin-info p{
+    margin:15px 0;
+}
+
+/* ==========================
+LOGIN PAGE
+========================== */
+
+.admin-body{
+    background:#eef4f8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.admin-login-card{
+    width:100%;
+    max-width:430px;
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.admin-logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.admin-logo i{
+    font-size:55px;
+    color:#16a34a;
+    margin-bottom:15px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.admin-login-btn{
+    width:100%;
+    margin-top:15px;
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:992px){
+
+.admin-sidebar{
+    position:relative;
+    width:100%;
+    min-height:auto;
+}
+
+.admin-main{
+    width:100%;
+    margin-left:0;
+}
+
+.admin-dashboard-body{
+    display:block;
+}
+
+}
+
+@media(max-width:768px){
+
+.admin-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.dashboard-item,
+.status-item{
+    flex-direction:column;
+    gap:8px;
+}
+
+}
