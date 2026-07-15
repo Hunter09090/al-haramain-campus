@@ -1,1 +1,158 @@
 
+<!DOCTYPE html>
+
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login | Al Haramain Digital Campus</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="animations.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body class="admin-body">
+
+<!-- ==========================================================
+ADMIN LOGIN
+========================================================== -->
+
+<section class="admin-login-section">
+
+<div class="admin-login-card">
+
+<div class="admin-logo">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<h2>
+
+Admin Panel
+
+</h2>
+
+<p>
+
+Al Haramain Ideal Norani Academy
+
+</p>
+
+</div>
+
+<form id="loginForm">
+
+<div class="input-group">
+
+<label>
+
+<i class="fa-solid fa-envelope"></i>
+
+ইমেইল
+
+</label>
+
+<input
+
+type="email"
+
+id="adminEmail"
+
+placeholder="Admin Email"
+
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+<i class="fa-solid fa-lock"></i>
+
+পাসওয়ার্ড
+
+</label>
+
+<input
+
+type="password"
+
+id="adminPassword"
+
+placeholder="Password"
+
+required>
+
+</div>
+
+<div class="remember-box">
+
+<label>
+
+<input type="checkbox">
+
+Remember Me
+
+</label>
+
+</div>
+
+<button
+type="submit"
+class="btn btn-primary admin-login-btn">
+
+<i class="fa-solid fa-right-to-bracket"></i>
+
+Login
+
+</button>
+
+<div id="loginMessage"></div>
+
+</form>
+
+</div>
+
+</section>
+<!-- ==========================================================
+FIREBASE SDK
+========================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+<!-- ==========================================================
+FIREBASE CONFIG
+========================================================== -->
+
+<script src="firebase-config.js"></script>
+
+<!-- ==========================================================
+FIREBASE FUNCTIONS
+========================================================== -->
+
+<script src="firebase.js"></script>
+
+<!-- ==========================================================
+ADMIN LOGIN SCRIPT
+========================================================== -->
+
+<script src="admin-login.js"></script>
+
+</body>
+
+</html>
