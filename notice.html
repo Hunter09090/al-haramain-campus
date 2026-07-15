@@ -1,95 +1,328 @@
-<!DOCTYPE html>  
-<html lang="bn">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>নোটিশ বোর্ড | আল-হারামাইন</title>  
-    <script src="https://cdn.tailwindcss.com"></script>  
-    <style>  
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');  
-        body { font-family: 'Hind Siliguri', sans-serif; }  
-    </style>  
-</head>  
-<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8">  
+<!DOCTYPE html>
 
-<div class="max-w-2xl mx-auto mb-8 flex justify-between items-center">  
-    <a href="index.html" class="flex items-center text-green-400 hover:text-green-300 font-bold transition">  
-        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>  
-        হোম পেজে ফিরুন  
-    </a>  
-</div>  
+<html lang="bn">
 
-<div class="max-w-2xl mx-auto">  
-    <div class="text-center mb-10">  
-        <h2 class="text-3xl font-bold text-green-400 mb-2">নোটিশ বোর্ড</h2>  
-        <div class="w-20 h-1 bg-green-500 mx-auto rounded-full"></div>  
-    </div>  
+<head>
 
-    <!-- নোটিশ বোর্ড মেইন কন্টেইনার (লাইভ ডাটা লোড হবে) -->
-    <div id="noticeContainer" class="space-y-6">  
-        <div class="text-center text-slate-400 py-8">নোটিশ লোড হচ্ছে...</div>
-    </div>  
-</div>  
+<meta charset="UTF-8">
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    // ফায়ারবেস কনফিগারেশন 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
-        authDomain: "al-haramain-digital-campus.firebaseapp.com",
-        projectId: "al-haramain-digital-campus",
-        storageBucket: "al-haramain-digital-campus.firebasestorage.app",
-        messagingSenderId: "306805947710",
-        appId: "1:306805947710:web:d0ed996b453928767a406f"
-    };
+<title>নোটিশ | আল হারামাইন আইডিয়াল নূরানী একাডেমি</title>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+<link rel="stylesheet" href="style.css">
 
-    const noticeContainer = document.getElementById('noticeContainer');
+<link rel="stylesheet" href="animations.css">
 
-    // ফায়ারস্টোর থেকে রিয়েল-টাইম নোটিশ ডাটা রিড করা (Timestamp অনুযায়ী সাজানো)
-    const q = query(collection(db, "notices"), orderBy("timestamp", "desc"));
-    
-    onSnapshot(q, (snapshot) => {
-        noticeContainer.innerHTML = "";
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-        if (snapshot.empty) {
-            noticeContainer.innerHTML = `<div class="text-center text-slate-500 py-8 text-lg">বর্তমানে কোনো নোটিশ নেই।</div>`;
-            return;
-        }
+</head>
 
-        snapshot.forEach((documentSnapshot) => {
-            const notice = documentSnapshot.data();
-            
-            const noticeCard = `
-                <div class="bg-slate-800 p-6 md:p-8 rounded-3xl border border-slate-700 shadow-2xl hover:border-green-500/30 transition-all duration-300">  
-                    <div class="flex items-center mb-4">  
-                        <div class="bg-green-500/10 p-3 rounded-2xl mr-4">  
-                            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h6a3 3 0 013 3v1a3 3 0 01-3 3H9.414l-2.586 2.586A4.001 4.001 0 015.436 13.683z"></path></svg>  
-                        </div>  
-                        <h3 class="font-bold text-xl text-white">${notice.title || 'শিরোনামহীন'}</h3>  
-                    </div>  
+<body>
 
-                    <p class="text-slate-300 text-lg leading-relaxed mb-6 border-l-2 border-green-500 pl-4 whitespace-pre-line">
-                        ${notice.content || ''}
-                    </p>  
+<!-- ==========================
+HEADER
+========================== -->
 
-                    <div class="flex flex-wrap justify-between items-center text-sm">  
-                        <span class="bg-slate-700 px-3 py-1 rounded-lg text-slate-400">আল-হারামাইন ডিজিটাল ক্যাম্পাস</span>  
-                        <span class="text-green-500 font-bold">প্রকাশিত: ${notice.publishDate || ''}</span>  
-                    </div>  
-                </div>
-            `;
-            noticeContainer.insertAdjacentHTML('beforeend', noticeCard);
-        });
-    }, (error) => {
-        console.error("নোটিশ লোড করতে সমস্যা হয়েছে: ", error);
-        noticeContainer.innerHTML = `<div class="text-center text-red-400 py-8">নোটিশ লোড করতে সমস্যা হচ্ছে। পরে চেষ্টা করুন।</div>`;
-    });
-</script>
+<div id="header"></div>
 
-</body>  
-</html>
+<!-- ==========================
+PAGE HERO
+========================== -->
+
+<section class="page-hero">
+
+<div class="page-overlay"></div>
+
+<div class="container">
+
+<div class="page-content">
+
+<h1>নোটিশ বোর্ড</h1>
+
+<p>
+
+<a href="index.html">হোম</a>
+
+<i class="fa-solid fa-angle-right"></i>
+
+<span>নোটিশ</span>
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+NOTICE SECTION
+========================== -->
+
+<section class="notice-section">
+
+<div class="container">
+
+<div class="section-header">
+
+<span class="section-subtitle">
+
+Notice Board
+
+</span>
+
+<h2>
+
+সর্বশেষ নোটিশসমূহ
+
+</h2>
+
+<p>
+
+মাদ্রাসার সকল গুরুত্বপূর্ণ নোটিশ, ভর্তি বিজ্ঞপ্তি, পরীক্ষা সংক্রান্ত তথ্য ও অন্যান্য ঘোষণা এখানে প্রকাশ করা হবে।
+
+</p>
+
+</div>
+
+<!-- Search -->
+
+<div class="notice-search">
+
+<input
+
+type="text"
+
+id="noticeSearch"
+
+placeholder="নোটিশ খুঁজুন...">
+
+<button>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</button>
+
+</div>
+
+<!-- Notice List -->
+
+<div class="notice-list">
+    <!-- ==========================================================
+IMPORTANT NOTICE
+========================================================== -->
+
+<div class="notice-card important">
+
+    <div class="notice-date">
+
+        <span class="day">১৫</span>
+
+        <span class="month">জানুয়ারি</span>
+
+    </div>
+
+    <div class="notice-content">
+
+        <div class="notice-top">
+
+            <span class="notice-category important-tag">
+
+                গুরুত্বপূর্ণ
+
+            </span>
+
+            <span class="notice-new">
+
+                NEW
+
+            </span>
+
+        </div>
+
+        <h3>
+
+            ২০২৬ শিক্ষাবর্ষে ভর্তি কার্যক্রম শুরু
+
+        </h3>
+
+        <p>
+
+            আল হারামাইন আইডিয়াল নূরানী একাডেমিতে
+            ২০২৬ শিক্ষাবর্ষে সকল বিভাগে ভর্তি কার্যক্রম শুরু হয়েছে।
+            আগ্রহী অভিভাবকগণ অফিসে যোগাযোগ করুন অথবা
+            অনলাইনে আবেদন করতে পারবেন।
+
+        </p>
+
+        <div class="notice-footer">
+
+            <span>
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                প্রকাশের তারিখ : ১৫ জানুয়ারি ২০২৬
+
+            </span>
+
+            <div class="notice-buttons">
+
+                <a href="#" class="btn btn-primary">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                    বিস্তারিত
+
+                </a>
+
+                <a href="#" class="btn btn-outline">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    PDF
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+NOTICE CARD 02
+========================================================== -->
+
+<div class="notice-card">
+
+    <div class="notice-date">
+
+        <span class="day">১০</span>
+
+        <span class="month">জানুয়ারি</span>
+
+    </div>
+
+    <div class="notice-content">
+
+        <div class="notice-top">
+
+            <span class="notice-category">
+
+                পরীক্ষা
+
+            </span>
+
+        </div>
+
+        <h3>
+
+            মাসিক পরীক্ষার সময়সূচী প্রকাশ
+
+        </h3>
+
+        <p>
+
+            সকল বিভাগের জানুয়ারি মাসের পরীক্ষার
+            রুটিন প্রকাশ করা হয়েছে।
+            শিক্ষার্থীদের নির্ধারিত সময়ে পরীক্ষায় অংশগ্রহণ করতে হবে।
+
+        </p>
+
+        <div class="notice-footer">
+
+            <span>
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                ১০ জানুয়ারি ২০২৬
+
+            </span>
+
+            <div class="notice-buttons">
+
+                <a href="#" class="btn btn-primary">
+
+                    বিস্তারিত
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+NOTICE CARD 03
+========================================================== -->
+
+<div class="notice-card">
+
+    <div class="notice-date">
+
+        <span class="day">০৫</span>
+
+        <span class="month">জানুয়ারি</span>
+
+    </div>
+
+    <div class="notice-content">
+
+        <div class="notice-top">
+
+            <span class="notice-category">
+
+                সাধারণ
+
+            </span>
+
+        </div>
+
+        <h3>
+
+            নতুন শিক্ষার্থীদের ওরিয়েন্টেশন
+
+        </h3>
+
+        <p>
+
+            নতুন ভর্তি হওয়া শিক্ষার্থীদের জন্য
+            পরিচিতিমূলক ক্লাস ও দিকনির্দেশনা প্রদান করা হবে।
+
+        </p>
+
+        <div class="notice-footer">
+
+            <span>
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                ০৫ জানুয়ারি ২০২৬
+
+            </span>
+
+            <div class="notice-buttons">
+
+                <a href="#" class="btn btn-primary">
+
+                    বিস্তারিত
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
