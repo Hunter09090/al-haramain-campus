@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="bn">
 
 <head>
@@ -14,7 +13,8 @@
 
 <link rel="stylesheet" href="animations.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -38,15 +38,27 @@ PAGE HERO
 
 <div class="page-content">
 
-<h1>নোটিশ বোর্ড</h1>
+<h1>
+
+নোটিশ বোর্ড
+
+</h1>
 
 <p>
 
-<a href="index.html">হোম</a>
+<a href="index.html">
+
+হোম
+
+</a>
 
 <i class="fa-solid fa-angle-right"></i>
 
-<span>নোটিশ</span>
+<span>
+
+নোটিশ
+
+</span>
 
 </p>
 
@@ -80,7 +92,8 @@ Notice Board
 
 <p>
 
-মাদ্রাসার সকল গুরুত্বপূর্ণ নোটিশ, ভর্তি বিজ্ঞপ্তি, পরীক্ষা সংক্রান্ত তথ্য ও অন্যান্য ঘোষণা এখানে প্রকাশ করা হবে।
+মাদ্রাসার সকল গুরুত্বপূর্ণ নোটিশ, ভর্তি বিজ্ঞপ্তি,
+পরীক্ষা সংক্রান্ত তথ্য এবং অন্যান্য ঘোষণা এখানে প্রকাশিত হবে।
 
 </p>
 
@@ -91,14 +104,11 @@ Notice Board
 <div class="notice-search">
 
 <input
-
 type="text"
-
 id="noticeSearch"
-
 placeholder="নোটিশ খুঁজুন...">
 
-<button>
+<button id="searchBtn">
 
 <i class="fa-solid fa-magnifying-glass"></i>
 
@@ -108,259 +118,97 @@ placeholder="নোটিশ খুঁজুন...">
 
 <!-- Notice List -->
 
-<div class="notice-list">
-    <!-- ==========================================================
-IMPORTANT NOTICE
-========================================================== -->
+<div
+class="notice-list"
+id="noticeList">
 
-<div class="notice-card important">
+<!-- Firebase Notice এখানে Auto Load হবে -->
 
-    <div class="notice-date">
+<div class="loading-box">
 
-        <span class="day">১৫</span>
+<i class="fa-solid fa-spinner fa-spin"></i>
 
-        <span class="month">জানুয়ারি</span>
+<p>
 
-    </div>
+নোটিশ লোড হচ্ছে...
 
-    <div class="notice-content">
-
-        <div class="notice-top">
-
-            <span class="notice-category important-tag">
-
-                গুরুত্বপূর্ণ
-
-            </span>
-
-            <span class="notice-new">
-
-                NEW
-
-            </span>
-
-        </div>
-
-        <h3>
-
-            ২০২৬ শিক্ষাবর্ষে ভর্তি কার্যক্রম শুরু
-
-        </h3>
-
-        <p>
-
-            আল হারামাইন আইডিয়াল নূরানী একাডেমিতে
-            ২০২৬ শিক্ষাবর্ষে সকল বিভাগে ভর্তি কার্যক্রম শুরু হয়েছে।
-            আগ্রহী অভিভাবকগণ অফিসে যোগাযোগ করুন অথবা
-            অনলাইনে আবেদন করতে পারবেন।
-
-        </p>
-
-        <div class="notice-footer">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                প্রকাশের তারিখ : ১৫ জানুয়ারি ২০২৬
-
-            </span>
-
-            <div class="notice-buttons">
-
-                <a href="#" class="btn btn-primary">
-
-                    <i class="fa-solid fa-eye"></i>
-
-                    বিস্তারিত
-
-                </a>
-
-                <a href="#" class="btn btn-outline">
-
-                    <i class="fa-solid fa-download"></i>
-
-                    PDF
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+</p>
 
 </div>
 
+</div>
 
+<!-- Empty -->
 
-<!-- ==========================================================
-NOTICE CARD 02
-========================================================== -->
+<div
+class="notice-empty"
+id="noticeEmpty"
+style="display:none;">
 
-<div class="notice-card">
+<i class="fa-regular fa-folder-open"></i>
 
-    <div class="notice-date">
+<h3>
 
-        <span class="day">১০</span>
+কোন নোটিশ পাওয়া যায়নি
 
-        <span class="month">জানুয়ারি</span>
+</h3>
 
-    </div>
+<p>
 
-    <div class="notice-content">
+বর্তমানে কোনো নোটিশ প্রকাশ করা হয়নি।
 
-        <div class="notice-top">
-
-            <span class="notice-category">
-
-                পরীক্ষা
-
-            </span>
-
-        </div>
-
-        <h3>
-
-            মাসিক পরীক্ষার সময়সূচী প্রকাশ
-
-        </h3>
-
-        <p>
-
-            সকল বিভাগের জানুয়ারি মাসের পরীক্ষার
-            রুটিন প্রকাশ করা হয়েছে।
-            শিক্ষার্থীদের নির্ধারিত সময়ে পরীক্ষায় অংশগ্রহণ করতে হবে।
-
-        </p>
-
-        <div class="notice-footer">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ১০ জানুয়ারি ২০২৬
-
-            </span>
-
-            <div class="notice-buttons">
-
-                <a href="#" class="btn btn-primary">
-
-                    বিস্তারিত
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+</p>
 
 </div>
 
-
-
-<!-- ==========================================================
-NOTICE CARD 03
-========================================================== -->
-
-<div class="notice-card">
-
-    <div class="notice-date">
-
-        <span class="day">০৫</span>
-
-        <span class="month">জানুয়ারি</span>
-
-    </div>
-
-    <div class="notice-content">
-
-        <div class="notice-top">
-
-            <span class="notice-category">
-
-                সাধারণ
-
-            </span>
-
-        </div>
-
-        <h3>
-
-            নতুন শিক্ষার্থীদের ওরিয়েন্টেশন
-
-        </h3>
-
-        <p>
-
-            নতুন ভর্তি হওয়া শিক্ষার্থীদের জন্য
-            পরিচিতিমূলক ক্লাস ও দিকনির্দেশনা প্রদান করা হবে।
-
-        </p>
-
-        <div class="notice-footer">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ০৫ জানুয়ারি ২০২৬
-
-            </span>
-
-            <div class="notice-buttons">
-
-                <a href="#" class="btn btn-primary">
-
-                    বিস্তারিত
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </div>
-<!-- ==========================================================
-LOAD MORE
-========================================================== -->
 
-</div> <!-- notice-list -->
+</section>
+<!-- ==========================
+NOTICE FILTER
+========================== -->
 
-<div class="notice-pagination">
+<div class="notice-filter">
 
-    <a href="#" class="page-btn active">1</a>
+<button class="filter-btn active" data-filter="all">
 
-    <a href="#" class="page-btn">2</a>
+সব নোটিশ
 
-    <a href="#" class="page-btn">3</a>
+</button>
 
-    <a href="#" class="page-btn">
+<button class="filter-btn" data-filter="important">
 
-        <i class="fa-solid fa-angle-right"></i>
+গুরুত্বপূর্ণ
 
-    </a>
+</button>
+
+<button class="filter-btn" data-filter="admission">
+
+ভর্তি
+
+</button>
+
+<button class="filter-btn" data-filter="exam">
+
+পরীক্ষা
+
+</button>
+
+<button class="filter-btn" data-filter="general">
+
+সাধারণ
+
+</button>
 
 </div>
 
-<!-- Empty State (Future Use) -->
+<!-- ==========================
+NOTICE PAGINATION
+========================== -->
 
-<div class="notice-empty" style="display:none;">
-
-    <i class="fa-regular fa-folder-open"></i>
-
-    <h3>কোন নোটিশ পাওয়া যায়নি</h3>
-
-    <p>
-
-        বর্তমানে এই ক্যাটাগরিতে কোনো নোটিশ প্রকাশ করা হয়নি।
-
-    </p>
+<div
+id="pagination"
+class="notice-pagination">
 
 </div>
 
@@ -368,74 +216,185 @@ LOAD MORE
 
 </section>
 
-<!-- ==========================================================
-CALL TO ACTION
-========================================================== -->
+<!-- ==========================
+NEWSLETTER
+========================== -->
 
-<section class="notice-cta">
+<section class="newsletter">
 
-    <div class="container">
+<div class="container">
 
-        <div class="cta-box">
+<div class="newsletter-content">
 
-            <h2>
+<h2>
 
-                গুরুত্বপূর্ণ নোটিশ মিস করবেন না
+সবশেষ নোটিশ সবার আগে জানতে চান?
 
-            </h2>
+</h2>
 
-            <p>
+<p>
 
-                আমাদের Facebook Page অনুসরণ করুন অথবা
-                WhatsApp-এর মাধ্যমে যোগাযোগ করুন।
+আমাদের অফিসিয়াল ফেসবুক পেজ ও ওয়েবসাইট নিয়মিত ভিজিট করুন।
 
-            </p>
+</p>
 
-            <div class="cta-buttons">
+<a
+href="https://facebook.com/"
+target="_blank"
+class="btn-primary">
 
-                <a href="https://www.facebook.com/profile.php?id=61571161346418"
-                   target="_blank"
-                   class="btn btn-primary">
+<i class="fa-brands fa-facebook"></i>
 
-                    <i class="fa-brands fa-facebook-f"></i>
+Facebook Page
 
-                    Facebook Page
+</a>
 
-                </a>
+</div>
 
-                <a href="https://wa.me/8801811178674"
-                   target="_blank"
-                   class="btn btn-outline">
-
-                    <i class="fa-brands fa-whatsapp"></i>
-
-                    WhatsApp
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-<!-- ==========================================================
+<!-- ==========================
 FOOTER
-========================================================== -->
+========================== -->
 
 <div id="footer"></div>
 
-<!-- ==========================================================
-JAVASCRIPT FILES
-========================================================== -->
+<!-- ==========================
+FIREBASE SDK
+========================== -->
 
-<script src="include.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script src="firebase.js"></script>
+
+<!-- ==========================
+MAIN SCRIPT
+========================== -->
 
 <script src="app.js"></script>
 
 <script src="notice.js"></script>
+<!-- ==========================
+BACK TO TOP
+========================== -->
+
+<button id="backToTop" class="back-to-top">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- ==========================
+LOADING OVERLAY
+========================== -->
+
+<div id="pageLoader" class="page-loader">
+
+<div class="loader-circle"></div>
+
+<p>
+
+Loading...
+
+</p>
+
+</div>
+
+<!-- ==========================
+FIREBASE READY
+========================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const loader = document.getElementById("pageLoader");
+
+    if (loader) {
+
+        setTimeout(function () {
+
+            loader.style.opacity = "0";
+
+            setTimeout(function () {
+
+                loader.style.display = "none";
+
+            }, 400);
+
+        }, 500);
+
+    }
+
+});
+
+</script>
+
+<!-- ==========================
+BACK TO TOP
+========================== -->
+
+<script>
+
+const backBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", function () {
+
+    if (window.scrollY > 300) {
+
+        backBtn.classList.add("show");
+
+    } else {
+
+        backBtn.classList.remove("show");
+
+    }
+
+});
+
+backBtn.addEventListener("click", function () {
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+});
+
+</script>
+
+<!-- ==========================
+LOAD HEADER & FOOTER
+========================== -->
+
+<script>
+
+fetch("header.html")
+.then(res => res.text())
+.then(data => {
+
+    document.getElementById("header").innerHTML = data;
+
+});
+
+fetch("footer.html")
+.then(res => res.text())
+.then(data => {
+
+    document.getElementById("footer").innerHTML = data;
+
+});
+
+</script>
 
 </body>
 
