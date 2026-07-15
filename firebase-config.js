@@ -1,21 +1,23 @@
 /* ==========================================================
    AL HARAMAIN IDEAL NORANI ACADEMY
-   Firebase Configuration
+   FIREBASE CONFIGURATION
 ========================================================== */
 
 const firebaseConfig = {
 
-    apiKey: "YOUR_API_KEY",
+    apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
 
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    authDomain: "al-haramain-digital-campus.firebaseapp.com",
 
-    projectId: "YOUR_PROJECT_ID",
+    projectId: "al-haramain-digital-campus",
 
-    storageBucket: "YOUR_PROJECT.appspot.com",
+    storageBucket: "al-haramain-digital-campus.firebasestorage.app",
 
-    messagingSenderId: "YOUR_SENDER_ID",
+    messagingSenderId: "306805947710",
 
-    appId: "YOUR_APP_ID"
+    appId: "1:306805947710:web:d0ed996b453928767a406f",
+
+    measurementId: "G-LSMDHF5TDY"
 
 };
 
@@ -25,10 +27,26 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.firestore();
+/* ==========================================================
+   FIREBASE SERVICES
+========================================================== */
 
 const auth = firebase.auth();
 
+const db = firebase.firestore();
+
 const storage = firebase.storage();
 
-console.log("Firebase Connected Successfully");
+/* ==========================================================
+   SUCCESS MESSAGE
+========================================================== */
+
+console.log("✅ Firebase Connected Successfully");
+
+console.log("Project :", firebaseConfig.projectId);
+
+console.log("Firestore Ready");
+
+console.log("Authentication Ready");
+
+console.log("Storage Ready");
