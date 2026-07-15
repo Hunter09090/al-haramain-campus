@@ -1,51 +1,104 @@
 "use strict";
 
 /* ==========================================================
-NOTICE SYSTEM V2
+   NOTICE SYSTEM V3
+========================================================== */
+
+/* ==========================================================
+   DOM
 ========================================================== */
 
 const noticeList = document.getElementById("noticeList");
-const noticeEmpty = document.getElementById("noticeEmpty");
 const noticeSearch = document.getElementById("noticeSearch");
-
-let allNotices = [];
-let filteredNotices = [];
+const noticeEmpty = document.getElementById("noticeEmpty");
 
 /* ==========================================================
-LOAD NOTICE
+   VARIABLES
 ========================================================== */
 
-db.collection("notices")
-.orderBy("createdAt","desc")
-.onSnapshot(function(snapshot){
+let allNotices = [];
+let currentFilter = "all";
 
-    allNotices = [];
+/* ==========================================================
+   LOAD NOTICES FROM FIRESTORE
+========================================================== */
 
-    snapshot.forEach(function(doc){
+function loadNotices() {
 
-        const data = doc.data();
+    db.collection("notices")
+    .orderBy("createdAt", "desc")
+    .onSnapshot(function(snapshot){
 
-        data.id = doc.id;
+        allNotices = [];
 
-        if(data.status === "Published"){
+        snapshot.forEach(function(doc){
 
-            allNotices.push(data);
+            const data = doc.data();
 
-        }
+            /* শুধুমাত্র Published Notice দেখাবে */
+
+            if(data.published !== true){
+
+                return;
+
+            }
+
+            allNotices.push({
+
+                id: doc.id,
+
+                title: data.title || "",
+
+                category: data.category || "সাধারণ",
+
+                description: data.description || "",
+
+                date: data.date || "",
+
+                important: data.important || false,
+
+                isNew: data.isNew || false,
+
+                published: data.published || false
+
+            });
+
+        });
+
+        renderNotices(allNotices);
+
+    }, function(error){
+
+        console.error("Notice Load Error:", error);
+
+        noticeList.innerHTML = `
+
+        <div class="notice-card">
+
+            <h3>
+
+                Notice Load Failed
+
+            </h3>
+
+            <p>
+
+                Firebase থেকে Notice লোড করা যায়নি।
+
+            </p>
+
+        </div>
+
+        `;
 
     });
 
-    filteredNotices = allNotices;
-
-    renderNotice(filteredNotices);
-
-});
-
+}
 /* ==========================================================
-RENDER NOTICE
+   RENDER NOTICE
 ========================================================== */
 
-function renderNotice(notices){
+function renderNotices(notices){
 
     noticeList.innerHTML = "";
 
@@ -66,8 +119,9 @@ function renderNotice(notices){
     });
 
 }
+
 /* ==========================================================
-CREATE NOTICE CARD
+   CREATE NOTICE CARD
 ========================================================== */
 
 function createNoticeCard(notice){
@@ -82,9 +136,8 @@ function createNoticeCard(notice){
         ? new Date(notice.date)
         : new Date();
 
-    const day = date.getDate();
-
     const months = [
+
         "জানুয়ারি",
         "ফেব্রুয়ারি",
         "মার্চ",
@@ -97,81 +150,84 @@ function createNoticeCard(notice){
         "অক্টোবর",
         "নভেম্বর",
         "ডিসেম্বর"
+
     ];
+
+    const day = date.getDate();
 
     const month = months[date.getMonth()];
 
     card.innerHTML = `
 
-    <div class="notice-date">
+<div class="notice-date">
 
-        <span class="day">
+<span class="day">
 
-            ${day}
+${day}
 
-        </span>
+</span>
 
-        <span class="month">
+<span class="month">
 
-            ${month}
+${month}
 
-        </span>
+</span>
 
-    </div>
+</div>
 
-    <div class="notice-content">
+<div class="notice-content">
 
-        <div class="notice-top">
+<div class="notice-top">
 
-            <span class="notice-category">
+<span class="notice-category">
 
-                ${notice.category}
+${notice.category}
 
-            </span>
+</span>
 
-            ${notice.important
-                ? '<span class="notice-category important-tag">গুরুত্বপূর্ণ</span>'
-                : ''}
+${notice.important
+? '<span class="notice-category important-tag">গুরুত্বপূর্ণ</span>'
+: ''}
 
-            ${notice.isNew
-                ? '<span class="notice-new">NEW</span>'
-                : ''}
+${notice.isNew
+? '<span class="notice-new">NEW</span>'
+: ''}
 
-        </div>
+</div>
 
-        <h3>
+<h3>
 
-            ${notice.title}
+${notice.title}
 
-        </h3>
+</h3>
 
-        <p>
+<p>
 
-            ${notice.description}
+${notice.description}
 
-        </p>
+</p>
 
-        <div class="notice-footer">
+<div class="notice-footer">
 
-            <span>
+<span>
 
-                <i class="fa-solid fa-calendar-days"></i>
+<i class="fa-solid fa-calendar-days"></i>
 
-                ${notice.date}
+${notice.date}
 
-            </span>
+</span>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    `;
+`;
 
     noticeList.appendChild(card);
 
 }
 /* ==========================================================
-SEARCH NOTICE
+   LIVE SEARCH
 ========================================================== */
 
 noticeSearch.addEventListener("keyup", function () {
@@ -180,13 +236,13 @@ noticeSearch.addEventListener("keyup", function () {
 
     if (keyword === "") {
 
-        renderNotice(allNotices);
+        applyFilter(currentFilter);
 
         return;
 
     }
 
-    const result = allNotices.filter(function (notice) {
+    const filtered = allNotices.filter(function (notice) {
 
         return (
 
@@ -200,21 +256,21 @@ noticeSearch.addEventListener("keyup", function () {
 
     });
 
-    renderNotice(result);
+    renderNotices(filtered);
 
 });
 
 /* ==========================================================
-CATEGORY FILTER
+   CATEGORY FILTER
 ========================================================== */
 
 const filterButtons = document.querySelectorAll(".filter-btn");
 
-filterButtons.forEach(function (button) {
+filterButtons.forEach(function(button){
 
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function(){
 
-        filterButtons.forEach(function (btn) {
+        filterButtons.forEach(function(btn){
 
             btn.classList.remove("active");
 
@@ -222,62 +278,99 @@ filterButtons.forEach(function (button) {
 
         this.classList.add("active");
 
-        const filter = this.dataset.filter;
+        currentFilter = this.dataset.filter;
 
-        if (filter === "all") {
-
-            renderNotice(allNotices);
-
-            return;
-
-        }
-
-        if (filter === "important") {
-
-            renderNotice(
-
-                allNotices.filter(function (notice) {
-
-                    return notice.important === true;
-
-                })
-
-            );
-
-            return;
-
-        }
-
-        renderNotice(
-
-            allNotices.filter(function (notice) {
-
-                return (
-
-                    (notice.category || "").toLowerCase() ===
-
-                    filter.toLowerCase()
-
-                );
-
-            })
-
-        );
+        applyFilter(currentFilter);
 
     });
 
 });
 
 /* ==========================================================
-READY
+   APPLY FILTER
 ========================================================== */
 
-console.log("====================================");
+function applyFilter(filter){
 
-console.log("Notice System Version 2 Ready");
+    if(filter === "all"){
 
-console.log("Firebase Firestore Connected");
+        renderNotices(allNotices);
 
-console.log("Realtime Notice Enabled");
+        return;
 
-console.log("====================================");
+    }
+
+    if(filter === "important"){
+
+        renderNotices(
+
+            allNotices.filter(function(notice){
+
+                return notice.important === true;
+
+            })
+
+        );
+
+        return;
+
+    }
+
+    renderNotices(
+
+        allNotices.filter(function(notice){
+
+            return (
+
+                notice.category || ""
+
+            ).toLowerCase() === filter.toLowerCase();
+
+        })
+
+    );
+
+}
+/* ==========================================================
+   INITIAL LOAD
+========================================================== */
+
+window.addEventListener("DOMContentLoaded", function () {
+
+    loadNotices();
+
+});
+
+/* ==========================================================
+   AUTO REFRESH
+========================================================== */
+
+document.addEventListener("visibilitychange", function(){
+
+    if(document.visibilityState === "visible"){
+
+        loadNotices();
+
+    }
+
+});
+
+/* ==========================================================
+   READY
+========================================================== */
+
+console.log("========================================");
+
+console.log(" AL HARAMAIN NOTICE SYSTEM V3 ");
+
+console.log(" Firestore Connected");
+
+console.log(" Published Notice Only");
+
+console.log(" Realtime Enabled");
+
+console.log(" Search Enabled");
+
+console.log(" Category Filter Enabled");
+
+console.log("========================================");
