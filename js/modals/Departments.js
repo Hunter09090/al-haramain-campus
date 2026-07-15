@@ -1,7 +1,0 @@
-window.deptData = {
-    nurani: { title: "আদর্শ নুরানী বিভাগ", icon: '<i class="fas fa-book-open"></i>', bg: 'bg-blue-100 text-blue-600', content: "<ul class='list-disc pl-5 text-sm'><li>নার্সারি থেকে তৃতীয় শ্রেণি পর্যন্ত।</li><li>সহীহ মাখরাজে কুরআন, দোয়া ও ইসলামি আদর্শ শিক্ষা।</li><li>শতভাগ পাশ ও A+ এর নিশ্চয়তা।</li></ul>" },
-    ebtedayi: { title: "ইবতেদায়ী বিভাগ", icon: '<i class="fas fa-school"></i>', bg: 'bg-emerald-100 text-emerald-600', content: "<ul class='list-disc pl-5 text-sm'><li>৪র্থ শ্রেণি হতে ৫ম শ্রেণি পর্যন্ত।</li><li>দ্বীনি ও আধুনিক শিক্ষার সমন্বয়।</li><li>উপজেলার সর্বোচ্চ বৃত্তি প্রাপ্তির গৌরব।</li></ul>" },
-    dakhil: { title: "দাখিল বিভাগ", icon: '<i class="fas fa-user-graduate"></i>', bg: 'bg-purple-100 text-purple-600', content: "<ul class='list-disc pl-5 text-sm'><li>৬ষ্ঠ শ্রেণি হতে ৮ম শ্রেণি পর্যন্ত।</li><li>মাদ্রাসা বোর্ডের পাঠ্যক্রম অনুযায়ী পরিচালিত।</li><li>গণিত, ইংরেজি ও ICT বিষয়ক বিশেষ পাঠদান।</li></ul>" },
-    hifz_boy: { title: "হিফজ বিভাগ (বালক)", icon: '<i class="fas fa-quran"></i>', bg: 'bg-amber-100 text-amber-600', content: "<ul class='list-disc pl-5 text-sm'><li>অভিজ্ঞ শিক্ষকদের তত্ত্বাবধানে কুরআন হিফজ।</li><li>হিফজের পাশাপাশি বাংলা, ইংরেজি ও গণিত শিক্ষা।</li></ul>" },
-    hifz_girl: { title: "হিফজ বিভাগ (বালিকা)", icon: '<i class="fas fa-heart"></i>', bg: 'bg-pink-100 text-pink-600', content: "<ul class='list-disc pl-5 text-sm'><li>পৃথক ও নিরাপদ পরিবেশে কুরআন হিফজের ব্যবস্থা।</li><li>দক্ষ মহিলা শিক্ষকদের তত্ত্বাবধানে পাঠদান।</li></ul>" }
-};
