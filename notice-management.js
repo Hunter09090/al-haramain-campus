@@ -1,43 +1,30 @@
 /* ==========================================================
-   AL HARAMAIN DIGITAL CAMPUS
-   NOTICE MANAGEMENT
+   NOTICE MANAGEMENT (FIRESTORE ONLY)
 ========================================================== */
 
 "use strict";
 
 /* ==========================================================
-   DOM ELEMENTS
+   DOM
 ========================================================== */
 
 const noticeForm = document.getElementById("noticeForm");
-
 const noticeList = document.getElementById("noticeList");
-
 const searchNotice = document.getElementById("searchNotice");
 
 const noticeTitle = document.getElementById("noticeTitle");
-
 const noticeCategory = document.getElementById("noticeCategory");
-
 const noticeDescription = document.getElementById("noticeDescription");
-
 const noticeDate = document.getElementById("noticeDate");
-
-const noticePdf = document.getElementById("noticePdf");
-
-const noticeImage = document.getElementById("noticeImage");
-
 const noticeImportant = document.getElementById("noticeImportant");
-
 const noticeNew = document.getElementById("noticeNew");
-
 const noticePublished = document.getElementById("noticePublished");
 
 /* ==========================================================
-   GLOBAL VARIABLES
+   VARIABLES
 ========================================================== */
 
-let editingNoticeId = null;
+let editId = null;
 
 /* ==========================================================
    SAVE NOTICE
@@ -47,125 +34,69 @@ noticeForm.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
+    const noticeData = {
+
+        title: noticeTitle.value.trim(),
+
+        category: noticeCategory.value,
+
+        description: noticeDescription.value.trim(),
+
+        date: noticeDate.value,
+
+        important: noticeImportant.checked,
+
+        isNew: noticeNew.checked,
+
+        published: noticePublished.checked,
+
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
+    };
+
     try {
 
-        let pdfUrl = "";
-
-        let imageUrl = "";
-
-        /* ======================
-           PDF Upload
-        ====================== */
-
-        if (noticePdf.files.length > 0) {
-
-            const pdfFile = noticePdf.files[0];
-
-            const pdfRef = storage
-                .ref("notices/pdf/" + Date.now() + "_" + pdfFile.name);
-
-            await pdfRef.put(pdfFile);
-
-            pdfUrl = await pdfRef.getDownloadURL();
-
-        }
-
-        /* ======================
-           Image Upload
-        ====================== */
-
-        if (noticeImage.files.length > 0) {
-
-            const imageFile = noticeImage.files[0];
-
-            const imageRef = storage
-                .ref("notices/images/" + Date.now() + "_" + imageFile.name);
-
-            await imageRef.put(imageFile);
-
-            imageUrl = await imageRef.getDownloadURL();
-
-        }
-
-        const noticeData = {
-
-            title: noticeTitle.value.trim(),
-
-            category: noticeCategory.value,
-
-            description: noticeDescription.value.trim(),
-
-            date: noticeDate.value,
-
-            pdfUrl: pdfUrl,
-
-            imageUrl: imageUrl,
-
-            important: noticeImportant.checked,
-
-            isNew: noticeNew.checked,
-
-            published: noticePublished.checked,
-
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-
-        };
-              /* ======================================================
-           SAVE / UPDATE NOTICE
-        ====================================================== */
-
-        if (editingNoticeId) {
+        if (editId) {
 
             await db.collection("notices")
-                .doc(editingNoticeId)
+                .doc(editId)
                 .update(noticeData);
 
-            alert("✅ Notice সফলভাবে আপডেট হয়েছে।");
+            alert("Notice Update সফল হয়েছে।");
 
-            editingNoticeId = null;
+            editId = null;
 
         } else {
 
             await db.collection("notices")
                 .add(noticeData);
 
-            alert("✅ নতুন Notice সফলভাবে প্রকাশ হয়েছে।");
+            alert("Notice Publish হয়েছে।");
 
         }
-
-        /* ======================================================
-           RESET FORM
-        ====================================================== */
 
         noticeForm.reset();
 
         noticePublished.checked = true;
 
-        /* ======================================================
-           RELOAD NOTICE LIST
-        ====================================================== */
-
         loadNotices();
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 
-        alert("❌ Notice সংরক্ষণ করতে সমস্যা হয়েছে!");
+        alert("Notice Save করতে সমস্যা হয়েছে!");
 
     }
 
 });
-
 /* ==========================================================
    LOAD ALL NOTICES
 ========================================================== */
 
 async function loadNotices() {
 
-    noticeList.innerHTML = "<p>Loading Notices...</p>";
+    noticeList.innerHTML = "<p>Loading...</p>";
 
     try {
 
@@ -179,7 +110,7 @@ async function loadNotices() {
 
             noticeList.innerHTML = `
                 <div class="dashboard-item">
-                    <strong>এখনো কোনো Notice যোগ করা হয়নি।</strong>
+                    <strong>এখনো কোনো Notice যোগ করা হয়নি।</strong>
                 </div>
             `;
 
@@ -189,9 +120,7 @@ async function loadNotices() {
 
         snapshot.forEach(function(doc){
 
-            const data = doc.data();
-
-            createNoticeCard(doc.id, data);
+            createNoticeCard(doc.id, doc.data());
 
         });
 
@@ -201,25 +130,23 @@ async function loadNotices() {
 
         console.error(error);
 
-        noticeList.innerHTML =
-            "<p>❌ Notice Load করতে সমস্যা হয়েছে।</p>";
+        noticeList.innerHTML = "<p>Notice Load Failed.</p>";
 
     }
 
 }
+
 /* ==========================================================
    CREATE NOTICE CARD
 ========================================================== */
 
-function createNoticeCard(id, data) {
+function createNoticeCard(id,data){
 
-    const card = document.createElement("div");
+    const card=document.createElement("div");
 
-    card.className = "notice-item";
+    card.className="notice-item";
 
-    card.dataset.id = id;
-
-    card.innerHTML = `
+    card.innerHTML=`
 
         <div class="notice-item-info">
 
@@ -227,23 +154,13 @@ function createNoticeCard(id, data) {
 
             <p>
 
-                <strong>Category:</strong> ${data.category}
+                <strong>${data.category}</strong>
 
                 |
 
-                <strong>Date:</strong> ${data.date}
+                ${data.date}
 
             </p>
-
-            <div class="notice-tags">
-
-                ${data.important ? '<span class="tag important-tag">গুরুত্বপূর্ণ</span>' : ''}
-
-                ${data.isNew ? '<span class="tag new-tag">NEW</span>' : ''}
-
-                ${data.published ? '<span class="tag published-tag">Published</span>' : '<span class="tag draft-tag">Draft</span>'}
-
-            </div>
 
         </div>
 
@@ -251,25 +168,13 @@ function createNoticeCard(id, data) {
 
             <button class="btn btn-primary edit-btn">
 
-                <i class="fa-solid fa-pen"></i>
-
                 Edit
 
             </button>
 
             <button class="btn btn-outline delete-btn">
 
-                <i class="fa-solid fa-trash"></i>
-
                 Delete
-
-            </button>
-
-            <button class="btn btn-primary preview-btn">
-
-                <i class="fa-solid fa-eye"></i>
-
-                Preview
 
             </button>
 
@@ -281,108 +186,125 @@ function createNoticeCard(id, data) {
        EDIT
     ========================== */
 
-    card.querySelector(".edit-btn").addEventListener("click", function () {
+    card.querySelector(".edit-btn").onclick=function(){
 
-        editingNoticeId = id;
+        editId=id;
 
-        noticeTitle.value = data.title;
+        noticeTitle.value=data.title;
 
-        noticeCategory.value = data.category;
+        noticeCategory.value=data.category;
 
-        noticeDescription.value = data.description;
+        noticeDescription.value=data.description;
 
-        noticeDate.value = data.date;
+        noticeDate.value=data.date;
 
-        noticeImportant.checked = data.important;
+        noticeImportant.checked=data.important || false;
 
-        noticeNew.checked = data.isNew;
+        noticeNew.checked=data.isNew || false;
 
-        noticePublished.checked = data.published;
+        noticePublished.checked=data.published || false;
 
         window.scrollTo({
 
-            top: 0,
+            top:0,
 
-            behavior: "smooth"
+            behavior:"smooth"
 
         });
 
-    });
+    };
 
     /* ==========================
        DELETE
     ========================== */
 
-    card.querySelector(".delete-btn").addEventListener("click", async function () {
+    card.querySelector(".delete-btn").onclick=async function(){
 
-        const ok = confirm("আপনি কি এই Notice Delete করতে চান?");
+        if(!confirm("এই Notice Delete করবেন?")) return;
 
-        if (!ok) return;
+        await db.collection("notices").doc(id).delete();
 
-        try {
+        loadNotices();
 
-            await db.collection("notices").doc(id).delete();
-
-            loadNotices();
-
-            alert("✅ Notice Delete হয়েছে।");
-
-        }
-
-        catch (error) {
-
-            console.error(error);
-
-            alert("❌ Delete করতে সমস্যা হয়েছে।");
-
-        }
-
-    });
-
-    /* ==========================
-       PREVIEW
-    ========================== */
-
-    card.querySelector(".preview-btn").addEventListener("click", function () {
-
-        alert(
-
-`শিরোনাম:
-${data.title}
-
-ক্যাটাগরি:
-${data.category}
-
-তারিখ:
-${data.date}
-
-বিস্তারিত:
-
-${data.description}`
-
-        );
-
-    });
+    };
 
     noticeList.appendChild(card);
 
 }
-
 /* ==========================================================
-   SEARCH NOTICE
+   LIVE SEARCH
 ========================================================== */
 
 searchNotice.addEventListener("keyup", function () {
 
     const keyword = this.value.toLowerCase();
 
-    document.querySelectorAll(".notice-item").forEach(function (item) {
+    const items = document.querySelectorAll(".notice-item");
+
+    items.forEach(function(item){
 
         const text = item.innerText.toLowerCase();
 
-        item.style.display = text.includes(keyword) ? "flex" : "none";
+        if(text.includes(keyword)){
+
+            item.style.display="flex";
+
+        }else{
+
+            item.style.display="none";
+
+        }
 
     });
+
+});
+
+/* ==========================================================
+   REALTIME FIREBASE UPDATE
+========================================================== */
+
+db.collection("notices")
+.onSnapshot(function(){
+
+    loadNotices();
+
+});
+
+/* ==========================================================
+   LOGOUT
+========================================================== */
+
+function logoutAdmin(){
+
+    auth.signOut()
+
+    .then(function(){
+
+        alert("Logout Successful");
+
+        window.location.href="admin-login.html";
+
+    })
+
+    .catch(function(error){
+
+        console.error(error);
+
+    });
+
+}
+
+/* ==========================================================
+   AUTH CHECK
+========================================================== */
+
+auth.onAuthStateChanged(function(user){
+
+    if(!user){
+
+        window.location.href="admin-login.html";
+
+    }
 
 });
 
@@ -390,10 +312,22 @@ searchNotice.addEventListener("keyup", function () {
    INITIAL LOAD
 ========================================================== */
 
-loadNotices();
+window.addEventListener("load", function(){
+
+    loadNotices();
+
+});
 
 /* ==========================================================
    READY
 ========================================================== */
 
+console.log("====================================");
+
 console.log("Notice Management Ready");
+
+console.log("Firestore Connected");
+
+console.log("Realtime Sync Enabled");
+
+console.log("====================================");
