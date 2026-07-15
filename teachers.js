@@ -36,11 +36,11 @@ function loadTeachers() {
 
             const data = doc.data();
 
-            if(data.published !== true){
+            if (data.status !== "Active") {
 
-                return;
+    return;
 
-            }
+}
 
             allTeachers.push({
 
