@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notice Management | Admin Panel</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="animations.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body class="admin-dashboard-body">
+
+<!-- ==========================================================
+SIDEBAR
+========================================================== -->
+
+<aside class="admin-sidebar">
+
+<div class="admin-brand">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<h2>Admin Panel</h2>
+
+<p>Al Haramain Digital Campus</p>
+
+</div>
+
+<nav class="admin-menu">
+
+<ul>
+
+<li>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-gauge-high"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a href="notice-management.html" class="active">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+Notice Management
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-user-group"></i>
+
+Teachers
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-building-columns"></i>
+
+Departments
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-image"></i>
+
+Gallery
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-trophy"></i>
+
+Achievements
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-gear"></i>
+
+Settings
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#" onclick="logoutAdmin()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</nav>
+
+</aside>
+
+<!-- ==========================================================
+MAIN
+========================================================== -->
+
+<div class="admin-main">
+
+<header class="admin-header">
+
+<div>
+
+<h1>
+
+Notice Management
+
+</h1>
+
+<p>
+
+সকল নোটিশ এখান থেকে নিয়ন্ত্রণ করুন
+
+</p>
+
+</div>
+
+</header>
+
+<!-- ==========================================================
+NOTICE FORM
+========================================================== -->
+
+<section class="dashboard-section">
+
+<div class="dashboard-box">
+
+<h2>
+
+<i class="fa-solid fa-circle-plus"></i>
+
+নতুন Notice যোগ করুন
+
+</h2>
+
+<form id="noticeForm">
+
+<div class="input-group">
+
+<label>
+
+Notice Title
+
+</label>
+
+<input
+type="text"
+id="noticeTitle"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Category
+
+</label>
+
+<select id="noticeCategory">
+
+<option>ভর্তি</option>
+
+<option>পরীক্ষা</option>
+
+<option>ছুটি</option>
+
+<option>সাধারণ</option>
+
+<option>জরুরি</option>
+
+</select>
+
+</div>
+<div class="input-group">
+
+<label>
+
+Notice Description
+
+</label>
+
+<textarea
+id="noticeDescription"
+rows="6"
+placeholder="নোটিশের বিস্তারিত লিখুন..."
+required></textarea>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+প্রকাশের তারিখ
+
+</label>
+
+<input
+type="date"
+id="noticeDate"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+PDF File (ঐচ্ছিক)
+
+</label>
+
+<input
+type="file"
+id="noticePdf"
+accept=".pdf">
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Notice Image (ঐচ্ছিক)
+
+</label>
+
+<input
+type="file"
+id="noticeImage"
+accept="image/*">
+
+</div>
+
+<div class="admin-checkbox-group">
+
+<label>
+
+<input
+type="checkbox"
+id="noticeImportant">
+
+গুরুত্বপূর্ণ Notice
+
+</label>
+
+</div>
+
+<div class="admin-checkbox-group">
+
+<label>
+
+<input
+type="checkbox"
+id="noticeNew">
+
+NEW Badge দেখাবে
+
+</label>
+
+</div>
+
+<div class="admin-checkbox-group">
+
+<label>
+
+<input
+type="checkbox"
+id="noticePublished"
+checked>
+
+সাথে সাথে Publish হবে
+
+</label>
+
+</div>
+
+<button
+type="submit"
+class="btn btn-primary admin-submit-btn">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Notice Publish
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- ==========================================================
+NOTICE LIST
+========================================================== -->
+
+<section class="dashboard-section">
+
+<div class="dashboard-box">
+
+<div class="box-header">
+
+<h2>
+
+<i class="fa-solid fa-list"></i>
+
+সকল Notice
+
+</h2>
+
+<input
+type="search"
+id="searchNotice"
+placeholder="নোটিশ খুঁজুন...">
+
+</div>
+
+<div id="noticeList">
+
+<!-- Firebase থেকে Notice এখানে আসবে -->
+
+</div>
+<!-- ==========================================================
+NOTICE TEMPLATE
+========================================================== -->
+
+<div class="notice-item">
+
+    <div class="notice-item-info">
+
+        <h3>২০২৬ শিক্ষাবর্ষে ভর্তি কার্যক্রম শুরু</h3>
+
+        <p>
+
+            <strong>Category:</strong> ভর্তি
+
+            |
+
+            <strong>Date:</strong> ২০২৬-০১-১৫
+
+        </p>
+
+        <div class="notice-tags">
+
+            <span class="tag important-tag">
+
+                গুরুত্বপূর্ণ
+
+            </span>
+
+            <span class="tag new-tag">
+
+                NEW
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="notice-item-actions">
+
+        <button class="btn btn-primary editNotice">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Edit
+
+        </button>
+
+        <button class="btn btn-outline deleteNotice">
+
+            <i class="fa-solid fa-trash"></i>
+
+            Delete
+
+        </button>
+
+        <button class="btn btn-primary previewNotice">
+
+            <i class="fa-solid fa-eye"></i>
+
+            Preview
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================================
+FIREBASE SDK
+========================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+<!-- ==========================================================
+FIREBASE CONFIG
+========================================================== -->
+
+<script src="firebase-config.js"></script>
+
+<!-- ==========================================================
+FIREBASE CORE
+========================================================== -->
+
+<script src="firebase.js"></script>
+
+<!-- ==========================================================
+NOTICE MANAGEMENT SCRIPT
+========================================================== -->
+
+<script src="notice-management.js"></script>
+
+</body>
+
+</html>
