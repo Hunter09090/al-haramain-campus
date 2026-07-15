@@ -3738,3 +3738,260 @@ font-size:16px;
     display:inline-block !important;
     margin-top:15px;
 }
+/* ==========================================================
+   NOTICE PAGE
+========================================================== */
+
+.notice-section{
+    padding:80px 0;
+    background:#f8fafc;
+}
+
+.notice-search{
+    max-width:700px;
+    margin:40px auto;
+    display:flex;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.notice-search input{
+    flex:1;
+    padding:16px 20px;
+    border:none;
+    outline:none;
+    font-size:16px;
+    font-family:inherit;
+}
+
+.notice-search button{
+    width:65px;
+    border:none;
+    cursor:pointer;
+    background:var(--primary-color);
+    color:#fff;
+    font-size:18px;
+}
+
+.notice-list{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.notice-card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    gap:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.notice-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.notice-card.important{
+    border-left:6px solid #e63946;
+}
+
+.notice-date{
+    width:95px;
+    min-width:95px;
+    background:var(--primary-color);
+    color:#fff;
+    border-radius:15px;
+    text-align:center;
+    padding:15px 10px;
+}
+
+.notice-date .day{
+    display:block;
+    font-size:30px;
+    font-weight:700;
+}
+
+.notice-date .month{
+    display:block;
+    margin-top:5px;
+    font-size:15px;
+}
+
+.notice-content{
+    flex:1;
+}
+
+.notice-top{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+}
+
+.notice-category{
+    background:#e8f5e9;
+    color:#1b5e20;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.important-tag{
+    background:#ffe5e5;
+    color:#d90429;
+}
+
+.notice-new{
+    background:#ff9800;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.notice-content h3{
+    margin:10px 0;
+    font-size:25px;
+}
+
+.notice-content p{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:18px;
+}
+
+.notice-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.notice-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.notice-pagination{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:50px;
+}
+
+.page-btn{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:#333;
+    text-decoration:none;
+    font-weight:600;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.page-btn:hover,
+.page-btn.active{
+    background:var(--primary-color);
+    color:#fff;
+}
+
+.notice-empty{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.notice-empty i{
+    font-size:60px;
+    color:#bbb;
+    margin-bottom:20px;
+}
+
+.notice-empty h3{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.notice-empty p{
+    color:#777;
+}
+
+.notice-cta{
+    padding:80px 0;
+    background:linear-gradient(135deg,var(--primary-color),#0b7b56);
+}
+
+.cta-box{
+    text-align:center;
+    color:#fff;
+}
+
+.cta-box h2{
+    font-size:38px;
+    margin-bottom:15px;
+}
+
+.cta-box p{
+    max-width:700px;
+    margin:0 auto 30px;
+    line-height:1.8;
+}
+
+.cta-buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:768px){
+
+.notice-card{
+    flex-direction:column;
+}
+
+.notice-date{
+    width:100%;
+}
+
+.notice-footer{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.notice-buttons{
+    width:100%;
+}
+
+.notice-buttons .btn{
+    width:100%;
+    text-align:center;
+}
+
+.cta-box h2{
+    font-size:28px;
+}
+
+.notice-content h3{
+    font-size:22px;
+}
+
+}
