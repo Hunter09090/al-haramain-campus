@@ -4,34 +4,31 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>শিক্ষকমণ্ডলী | আল হারামাইন মডেল মাদ্রাসা</title>
+<title>শিক্ষকমণ্ডলী | আল হারামাইন আইডিয়াল নূরানী একাডেমি</title>
 
-<meta name="description"
-content="আল হারামাইন মডেল মাদ্রাসার সম্মানিত শিক্ষকমণ্ডলীর পরিচিতি।">
-
-<link rel="stylesheet" href="variables.css">
-<link rel="stylesheet" href="animations.css">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="responsive.css">
+
+<link rel="stylesheet" href="animations.css">
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<!-- Header -->
+<!-- ==========================
+HEADER
+========================== -->
 
 <div id="header"></div>
 
-
-
-<!-- ==========================================================
+<!-- ==========================
 PAGE HERO
-========================================================== -->
+========================== -->
 
 <section class="page-hero">
 
@@ -43,17 +40,25 @@ PAGE HERO
 
 <h1>
 
-শিক্ষকমণ্ডলী
+আমাদের শিক্ষকমণ্ডলী
 
 </h1>
 
 <p>
 
-<a href="index.html">হোম</a>
+<a href="index.html">
+
+হোম
+
+</a>
 
 <i class="fa-solid fa-angle-right"></i>
 
-<span>শিক্ষকমণ্ডলী</span>
+<span>
+
+শিক্ষকমণ্ডলী
+
+</span>
 
 </p>
 
@@ -63,437 +68,212 @@ PAGE HERO
 
 </section>
 
+<!-- ==========================
+TEACHERS SECTION
+========================== -->
 
-
-<!-- ==========================================================
-INTRO
-========================================================== -->
-
-<section class="teachers-intro">
+<section class="teachers-section">
 
 <div class="container">
 
-<div class="section-title">
+<div class="section-header">
+
+<span class="section-subtitle">
+
+Our Teachers
+
+</span>
 
 <h2>
 
-আমাদের সম্মানিত শিক্ষকমণ্ডলী
+অভিজ্ঞ ও দক্ষ শিক্ষকমণ্ডলী
 
 </h2>
 
 <p>
 
-অভিজ্ঞ, দক্ষ ও দ্বীনি শিক্ষায় পারদর্শী শিক্ষকদের সমন্বয়ে পরিচালিত আমাদের শিক্ষা কার্যক্রম।
+আমাদের প্রতিষ্ঠানের সম্মানিত শিক্ষকমণ্ডলীর পরিচিতি।
 
 </p>
 
 </div>
 
-<p class="teacher-description">
+<!-- Search -->
 
-আল হারামাইন মডেল মাদ্রাসার শিক্ষকমণ্ডলী কেবল পাঠদানই করেন না,
-বরং প্রতিটি শিক্ষার্থীর নৈতিক, চারিত্রিক ও মানসিক বিকাশেও গুরুত্বপূর্ণ
-ভূমিকা পালন করেন। তাঁদের আন্তরিকতা, অভিজ্ঞতা এবং ইসলামী মূল্যবোধ
-প্রতিষ্ঠানটির অন্যতম শক্তি।
-
-</p>
-
-</div>
-
-</section>
-
-
-
-<!-- ==========================================================
-SEARCH
-========================================================== -->
-
-<section class="teacher-search">
-
-<div class="container">
-
-<div class="search-box">
-
-<i class="fa-solid fa-magnifying-glass"></i>
+<div class="teacher-search">
 
 <input
 type="text"
 id="teacherSearch"
 placeholder="শিক্ষকের নাম লিখে খুঁজুন...">
 
+<button>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</button>
+
+</div>
+
+<!-- Department Filter -->
+
+<div class="teacher-filter">
+
+<button class="teacher-filter-btn active" data-filter="all">
+
+সকল
+
+</button>
+
+<button class="teacher-filter-btn" data-filter="হিফজ">
+
+হিফজ
+
+</button>
+
+<button class="teacher-filter-btn" data-filter="নাজেরা">
+
+নাজেরা
+
+</button>
+
+<button class="teacher-filter-btn" data-filter="নূরানী">
+
+নূরানী
+
+</button>
+
+<button class="teacher-filter-btn" data-filter="আরবি">
+
+আরবি
+
+</button>
+
+</div>
+
+<!-- Teacher List -->
+
+<div
+class="teacher-grid"
+id="teacherList">
+
+<div class="loading-box">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+<p>
+
+শিক্ষকদের তথ্য লোড হচ্ছে...
+
+</p>
+
+</div>
+
+</div>
+
+<div
+id="teacherEmpty"
+class="teacher-empty"
+style="display:none;">
+
+<i class="fa-regular fa-folder-open"></i>
+
+<h3>
+
+কোন শিক্ষক পাওয়া যায়নি
+
+</h3>
+
+<p>
+
+বর্তমানে কোনো তথ্য প্রকাশ করা হয়নি।
+
+</p>
+
 </div>
 
 </div>
 
 </section>
+<!-- ==========================
+ACHIEVEMENT SECTION
+========================== -->
 
-
-
-<!-- ==========================================================
-TEACHER GRID
-========================================================== -->
-
-<section class="teachers-section">
+<section class="teacher-achievement">
 
 <div class="container">
 
-<div class="teacher-grid" id="teacherGrid">
-<!-- ==========================================================
-DIRECTOR
-========================================================== -->
+<div class="achievement-grid">
 
-<div class="teacher-card">
+<div class="achievement-card">
 
-    <div class="teacher-image">
+<i class="fa-solid fa-user-group"></i>
 
-        <img src="https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w1000"
-             alt="মাওঃ মোঃ জুনাইদ বোগদাদী">
+<h3 id="teacherCount">
 
-    </div>
+0
 
-    <div class="teacher-content">
+</h3>
 
-        <span class="teacher-badge">
+<p>
 
-            প্রতিষ্ঠাতা ও পরিচালক
+মোট শিক্ষক
 
-        </span>
-
-        <h3>
-
-            মাওঃ মোঃ জুনাইদ বোগদাদী
-
-        </h3>
-
-        <p>
-
-            প্রধান নির্বাহী ও প্রতিষ্ঠাতা
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
+</p>
 
 </div>
 
+<div class="achievement-card">
 
-<!-- ==========================================================
-TEACHER - 01
-========================================================== -->
+<i class="fa-solid fa-graduation-cap"></i>
 
-<div class="teacher-card">
+<h3>
 
-    <div class="teacher-image">
+যোগ্য ও অভিজ্ঞ
 
-        <img src="https://placehold.co/600x700?text=Teacher"
-             alt="Teacher">
+</h3>
 
-    </div>
+<p>
 
-    <div class="teacher-content">
+প্রশিক্ষিত শিক্ষকবৃন্দ
 
-        <span class="teacher-badge">
-
-            হিফজ বিভাগ
-
-        </span>
-
-        <h3>
-
-            শিক্ষকের নাম
-
-        </h3>
-
-        <p>
-
-            সহকারী শিক্ষক
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
+</p>
 
 </div>
 
+<div class="achievement-card">
 
-<!-- ==========================================================
-TEACHER - 02
-========================================================== -->
+<i class="fa-solid fa-book-open-reader"></i>
 
-<div class="teacher-card">
+<h3>
 
-    <div class="teacher-image">
+ইসলামিক শিক্ষা
 
-        <img src="https://placehold.co/600x700?text=Teacher"
-             alt="Teacher">
+</h3>
 
-    </div>
+<p>
 
-    <div class="teacher-content">
+আধুনিক ও দ্বীনি শিক্ষার সমন্বয়
 
-        <span class="teacher-badge">
-
-            নূরানী বিভাগ
-
-        </span>
-
-        <h3>
-
-            শিক্ষকের নাম
-
-        </h3>
-
-        <p>
-
-            সহকারী শিক্ষক
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
+</p>
 
 </div>
 
+<div class="achievement-card">
 
-<!-- ==========================================================
-TEACHER - 03
-========================================================== -->
+<i class="fa-solid fa-medal"></i>
 
-<div class="teacher-card">
+<h3>
 
-    <div class="teacher-image">
+সেরা মান
 
-        <img src="https://placehold.co/600x700?text=Teacher"
-             alt="Teacher">
+</h3>
 
-    </div>
+<p>
 
-    <div class="teacher-content">
+শিক্ষার সর্বোচ্চ মান নিশ্চিতকরণ
 
-        <span class="teacher-badge">
-
-            ইবতেদায়ী বিভাগ
-
-        </span>
-
-        <h3>
-
-            শিক্ষকের নাম
-
-        </h3>
-
-        <p>
-
-            সহকারী শিক্ষক
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================================
-TEACHER - 04
-========================================================== -->
-
-<div class="teacher-card">
-
-    <div class="teacher-image">
-
-        <img src="https://placehold.co/600x700?text=Teacher"
-             alt="Teacher">
-
-    </div>
-
-    <div class="teacher-content">
-
-        <span class="teacher-badge">
-
-            দাখিল বিভাগ
-
-        </span>
-
-        <h3>
-
-            শিক্ষকের নাম
-
-        </h3>
-
-        <p>
-
-            সহকারী শিক্ষক
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================================
-TEACHER - 05
-========================================================== -->
-
-<div class="teacher-card">
-
-    <div class="teacher-image">
-
-        <img src="https://placehold.co/600x700?text=Teacher"
-             alt="Teacher">
-
-    </div>
-
-    <div class="teacher-content">
-
-        <span class="teacher-badge">
-
-            মডেল মক্তব
-
-        </span>
-
-        <h3>
-
-            শিক্ষকের নাম
-
-        </h3>
-
-        <p>
-
-            সহকারী শিক্ষক
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================================
-TEACHER - 06
-========================================================== -->
-
-<div class="teacher-card">
-
-    <div class="teacher-image">
-
-        <img src="https://placehold.co/600x700?text=Teacher"
-             alt="Teacher">
-
-    </div>
-
-    <div class="teacher-content">
-
-        <span class="teacher-badge">
-
-            বয়স্ক মক্তব
-
-        </span>
-
-        <h3>
-
-            শিক্ষকের নাম
-
-        </h3>
-
-        <p>
-
-            সহকারী শিক্ষক
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================================
-TEACHER - 07
-========================================================== -->
-
-<div class="teacher-card">
-
-    <div class="teacher-image">
-
-        <img src="https://placehold.co/600x700?text=Teacher"
-             alt="Teacher">
-
-    </div>
-
-    <div class="teacher-content">
-
-        <span class="teacher-badge">
-
-            প্রশাসন
-
-        </span>
-
-        <h3>
-
-            শিক্ষকের নাম
-
-        </h3>
-
-        <p>
-
-            অফিস সহকারী
-
-        </p>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত
-
-        </a>
-
-    </div>
+</p>
 
 </div>
 
@@ -503,51 +283,194 @@ TEACHER - 07
 
 </section>
 
+<!-- ==========================
+CONTACT SECTION
+========================== -->
 
-
-<!-- ==========================================================
-JOIN US
-========================================================== -->
-
-<section class="cta-section">
+<section class="teacher-contact">
 
 <div class="container">
+
+<div class="teacher-contact-box">
 
 <h2>
 
-দক্ষ ও অভিজ্ঞ শিক্ষকদের তত্ত্বাবধানে পড়াশোনা করুন
+আপনার সন্তানের জন্য সেরা শিক্ষক নির্বাচন করুন
 
 </h2>
 
 <p>
 
-আজই অনলাইনে ভর্তি আবেদন করুন এবং আল হারামাইন মডেল মাদ্রাসার একজন শিক্ষার্থী হওয়ার সুযোগ গ্রহণ করুন।
+অভিজ্ঞ ও যোগ্য শিক্ষকমণ্ডলীর তত্ত্বাবধানে আপনার সন্তানকে
+আদর্শ দ্বীনি ও আধুনিক শিক্ষায় শিক্ষিত করুন।
 
 </p>
 
-<a href="admission.html"
-class="btn btn-secondary">
+<a href="contact.html" class="btn-primary">
 
-অনলাইনে ভর্তি
+<i class="fa-solid fa-phone"></i>
+
+যোগাযোগ করুন
 
 </a>
 
 </div>
 
+</div>
+
 </section>
 
-
-
-<!-- ==========================================================
+<!-- ==========================
 FOOTER
-========================================================== -->
+========================== -->
 
 <div id="footer"></div>
 
-<script src="include.js"></script>
+<!-- ==========================
+FIREBASE SDK
+========================== -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script src="firebase.js"></script>
+
+<!-- ==========================
+MAIN SCRIPT
+========================== -->
 
 <script src="app.js"></script>
 
+<script src="teachers.js"></script>
+<!-- ==========================
+BACK TO TOP
+========================== -->
+
+<button id="backToTop" class="back-to-top">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- ==========================
+LOADING OVERLAY
+========================== -->
+
+<div id="pageLoader" class="page-loader">
+
+    <div class="loader-circle"></div>
+
+    <p>Loading...</p>
+
+</div>
+
+<!-- ==========================
+PAGE LOADER
+========================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const loader = document.getElementById("pageLoader");
+
+    if (loader) {
+
+        setTimeout(function () {
+
+            loader.style.opacity = "0";
+
+            setTimeout(function () {
+
+                loader.style.display = "none";
+
+            }, 400);
+
+        }, 500);
+
+    }
+
+});
+
+</script>
+
+<!-- ==========================
+BACK TO TOP
+========================== -->
+
+<script>
+
+const backBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", function () {
+
+    if (window.scrollY > 300) {
+
+        backBtn.classList.add("show");
+
+    } else {
+
+        backBtn.classList.remove("show");
+
+    }
+
+});
+
+backBtn.addEventListener("click", function () {
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+});
+
+</script>
+
+<!-- ==========================
+LOAD HEADER
+========================== -->
+
+<script>
+
+fetch("header.html")
+
+.then(response => response.text())
+
+.then(data => {
+
+    document.getElementById("header").innerHTML = data;
+
+});
+
+</script>
+
+<!-- ==========================
+LOAD FOOTER
+========================== -->
+
+<script>
+
+fetch("footer.html")
+
+.then(response => response.text())
+
+.then(data => {
+
+    document.getElementById("footer").innerHTML = data;
+
+});
+
+</script>
+
 </body>
 
-  </html>
+</html>
