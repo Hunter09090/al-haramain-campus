@@ -4360,3 +4360,27 @@ RESPONSIVE
 }
 
 }
+/* ==========================================================
+ADMIN LOGIN LINK
+========================================================== */
+
+.admin-login-link{
+    text-align:center;
+    padding:15px 0;
+    background:#f8f9fa;
+}
+
+.admin-login-link a{
+    color:#666;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.admin-login-link a:hover{
+    color:var(--primary-color);
+}
+
+.admin-login-link i{
+    margin-right:6px;
+}
