@@ -1,24 +1,95 @@
 "use strict";
 
 /* ==========================================================
-   DEPARTMENTS SYSTEM V2
+   DEPARTMENT MANAGEMENT V2
 ========================================================== */
+
+const departmentName = document.getElementById("departmentName");
+const departmentIcon = document.getElementById("departmentIcon");
+const departmentOrder = document.getElementById("departmentOrder");
+const departmentColor = document.getElementById("departmentColor");
+const departmentDescription = document.getElementById("departmentDescription");
+const departmentStatus = document.getElementById("departmentStatus");
+const departmentPublished = document.getElementById("departmentPublished");
+
+const saveDepartmentBtn = document.getElementById("saveDepartmentBtn");
+const departmentTableBody = document.getElementById("departmentTableBody");
+
+let editingDepartmentId = null;
 
 /* ==========================================================
-   DOM
+   SAVE / UPDATE
 ========================================================== */
 
-const departmentList = document.getElementById("departmentList");
-const departmentSearch = document.getElementById("departmentSearch");
-const departmentEmpty = document.getElementById("departmentEmpty");
-const departmentCount = document.getElementById("departmentCount");
+saveDepartmentBtn.addEventListener("click", function () {
+
+    if (editingDepartmentId) {
+
+        updateDepartment();
+
+    } else {
+
+        saveDepartment();
+
+    }
+
+});
 
 /* ==========================================================
-   VARIABLES
+   SAVE NEW
 ========================================================== */
 
-let allDepartments = [];
+function saveDepartment() {
 
+    const data = {
+
+        name: departmentName.value.trim(),
+
+        icon: departmentIcon.value.trim(),
+
+        order: Number(departmentOrder.value) || 0,
+
+        color: departmentColor.value,
+
+        description: departmentDescription.value.trim(),
+
+        status: departmentStatus.value,
+
+        published: departmentPublished.checked,
+
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
+    };
+
+    if (data.name === "") {
+
+        alert("বিভাগের নাম লিখুন।");
+
+        return;
+
+    }
+
+    db.collection("departments")
+
+    .add(data)
+
+    .then(function () {
+
+        alert("Department Successfully Saved.");
+
+        clearDepartmentForm();
+
+    })
+
+    .catch(function (error) {
+
+        console.error(error);
+
+        alert("Save Failed!");
+
+    });
+
+}
 /* ==========================================================
    LOAD DEPARTMENTS
 ========================================================== */
@@ -27,230 +98,227 @@ function loadDepartments() {
 
     db.collection("departments")
     .orderBy("order", "asc")
-    .onSnapshot(function(snapshot){
+    .onSnapshot(function (snapshot) {
 
-        allDepartments = [];
+        departmentTableBody.innerHTML = "";
 
-        snapshot.forEach(function(doc){
+        let serial = 1;
+
+        snapshot.forEach(function (doc) {
 
             const data = doc.data();
 
-            if(data.status !== "Active"){
+            departmentTableBody.innerHTML += `
 
-                return;
+<tr>
 
-            }
+<td>${serial++}</td>
 
-            if(data.published !== true){
+<td>${data.name}</td>
 
-                return;
+<td>
 
-            }
+<i class="${data.icon}"
+style="color:${data.color};font-size:20px;"></i>
 
-            allDepartments.push({
+</td>
 
-                id: doc.id,
+<td>${data.order}</td>
 
-                name: data.name || "",
+<td>${data.status}</td>
 
-                icon: data.icon || "fa-solid fa-building",
+<td>${data.published ? "Yes" : "No"}</td>
 
-                color: data.color || "#0d6efd",
+<td>
 
-                description: data.description || "",
+<button
+class="btn-edit"
+onclick="editDepartment('${doc.id}')">
 
-                order: data.order || 0
+<i class="fa-solid fa-pen"></i>
 
-            });
+</button>
+
+<button
+class="btn-delete"
+onclick="deleteDepartment('${doc.id}')">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+`;
 
         });
 
-        departmentCount.textContent = allDepartments.length;
+    });
 
-        renderDepartments(allDepartments);
+}
 
-    }, function(error){
+loadDepartments();
+
+/* ==========================================================
+   EDIT
+========================================================== */
+
+function editDepartment(id) {
+
+    db.collection("departments")
+
+    .doc(id)
+
+    .get()
+
+    .then(function (doc) {
+
+        const data = doc.data();
+
+        editingDepartmentId = id;
+
+        departmentName.value = data.name || "";
+
+        departmentIcon.value = data.icon || "";
+
+        departmentOrder.value = data.order || 0;
+
+        departmentColor.value = data.color || "#0d6efd";
+
+        departmentDescription.value = data.description || "";
+
+        departmentStatus.value = data.status || "Active";
+
+        departmentPublished.checked = data.published === true;
+
+        saveDepartmentBtn.innerHTML =
+
+        '<i class="fa-solid fa-floppy-disk"></i> Update Department';
+
+    });
+
+                  }
+/* ==========================================================
+   UPDATE DEPARTMENT
+========================================================== */
+
+function updateDepartment() {
+
+    db.collection("departments")
+
+    .doc(editingDepartmentId)
+
+    .update({
+
+        name: departmentName.value.trim(),
+
+        icon: departmentIcon.value.trim(),
+
+        order: Number(departmentOrder.value) || 0,
+
+        color: departmentColor.value,
+
+        description: departmentDescription.value.trim(),
+
+        status: departmentStatus.value,
+
+        published: departmentPublished.checked
+
+    })
+
+    .then(function () {
+
+        alert("Department Updated Successfully.");
+
+        editingDepartmentId = null;
+
+        saveDepartmentBtn.innerHTML =
+        '<i class="fa-solid fa-floppy-disk"></i> Save Department';
+
+        clearDepartmentForm();
+
+    })
+
+    .catch(function (error) {
 
         console.error(error);
 
-        departmentList.innerHTML = `
-
-<div class="department-card">
-
-<h3>
-
-বিভাগ লোড করা যায়নি
-
-</h3>
-
-</div>
-
-`;
+        alert("Update Failed!");
 
     });
 
 }
+
 /* ==========================================================
-   RENDER DEPARTMENTS
+   DELETE
 ========================================================== */
 
-function renderDepartments(departments){
+function deleteDepartment(id) {
 
-    departmentList.innerHTML = "";
-
-    if(departments.length === 0){
-
-        departmentEmpty.style.display = "block";
+    if (!confirm("আপনি কি এই বিভাগটি Delete করতে চান?")) {
 
         return;
 
     }
 
-    departmentEmpty.style.display = "none";
+    db.collection("departments")
 
-    departments.forEach(function(department){
+    .doc(id)
 
-        createDepartmentCard(department);
+    .delete()
+
+    .then(function () {
+
+        alert("Department Deleted Successfully.");
+
+    })
+
+    .catch(function (error) {
+
+        console.error(error);
+
+        alert("Delete Failed!");
 
     });
 
 }
 
 /* ==========================================================
-   CREATE CARD
+   CLEAR FORM
 ========================================================== */
 
-function createDepartmentCard(department){
+function clearDepartmentForm() {
 
-    const card = document.createElement("div");
+    departmentName.value = "";
 
-    card.className = "department-card";
+    departmentIcon.value = "";
 
-    card.innerHTML = `
+    departmentOrder.value = "";
 
-<div class="department-icon"
-style="background:${department.color};">
+    departmentColor.value = "#0d6efd";
 
-<i class="${department.icon}"></i>
+    departmentDescription.value = "";
 
-</div>
+    departmentStatus.value = "Active";
 
-<div class="department-content">
-
-<h3>
-
-${department.name}
-
-</h3>
-
-<p>
-
-${department.description}
-
-</p>
-
-<a
-href="department-details.html?id=${department.id}"
-class="btn-primary">
-
-<i class="fa-solid fa-arrow-right"></i>
-
-বিস্তারিত দেখুন
-
-</a>
-
-</div>
-
-`;
-
-    departmentList.appendChild(card);
+    departmentPublished.checked = true;
 
 }
-
-/* ==========================================================
-   SEARCH
-========================================================== */
-
-departmentSearch.addEventListener("keyup", function(){
-
-    const keyword = this.value.trim().toLowerCase();
-
-    if(keyword === ""){
-
-        renderDepartments(allDepartments);
-
-        return;
-
-    }
-
-    const filtered = allDepartments.filter(function(department){
-
-        return (
-
-            (department.name || "")
-            .toLowerCase()
-            .includes(keyword)
-
-        );
-
-    });
-
-    renderDepartments(filtered);
-
-});
-
-/* ==========================================================
-   INITIAL LOAD
-========================================================== */
-
-window.addEventListener("DOMContentLoaded", function(){
-
-    loadDepartments();
-
-});
-
-/* ==========================================================
-   AUTO REFRESH
-========================================================== */
-
-document.addEventListener("visibilitychange", function(){
-
-    if(document.visibilityState === "visible"){
-
-        loadDepartments();
-
-    }
-
-});
-
-/* ==========================================================
-   IMAGE FALLBACK (OPTIONAL)
-========================================================== */
-
-document.addEventListener("error", function(e){
-
-    if(e.target.tagName === "IMG"){
-
-        e.target.src = "images/default-department.jpg";
-
-    }
-
-}, true);
 
 /* ==========================================================
    READY
 ========================================================== */
 
-console.log("========================================");
+console.clear();
 
-console.log(" AL HARAMAIN DEPARTMENTS SYSTEM V2 ");
+console.log("====================================");
 
-console.log(" Firestore Connected");
+console.log("Department Management V2 Ready");
 
-console.log(" Realtime Enabled");
+console.log("Firebase Connected");
 
-console.log(" Search Enabled");
+console.log("Realtime CRUD Enabled");
 
-console.log(" Published Departments Only");
-
-console.log("========================================");
+console.log("====================================");
