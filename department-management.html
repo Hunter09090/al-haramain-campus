@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Department Management | Admin Panel</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<!-- ==========================
+SIDEBAR
+========================== -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h2>
+
+Admin Panel
+
+</h2>
+
+<p>
+
+Al Haramain Digital Campus
+
+</p>
+
+</div>
+
+<ul class="sidebar-menu">
+
+<li>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-gauge"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a href="notice-management.html">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+Notice Management
+
+</a>
+
+</li>
+
+<li>
+
+<a href="teacher-management.html">
+
+<i class="fa-solid fa-users"></i>
+
+Teachers
+
+</a>
+
+</li>
+
+<li>
+
+<a href="department-management.html" class="active">
+
+<i class="fa-solid fa-building-columns"></i>
+
+Departments
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-image"></i>
+
+Gallery
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-trophy"></i>
+
+Achievements
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+<i class="fa-solid fa-gear"></i>
+
+Settings
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#" onclick="logoutAdmin()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</aside>
+
+<!-- ==========================
+MAIN CONTENT
+========================== -->
+
+<main class="admin-main">
+
+<div class="page-title">
+
+<h1>
+
+Department Management
+
+</h1>
+
+<p>
+
+প্রতিষ্ঠানের সকল বিভাগ এখান থেকে নিয়ন্ত্রণ করুন।
+
+</p>
+
+</div>
+
+<!-- ==========================
+ADD DEPARTMENT
+========================== -->
+
+<div class="admin-card">
+
+<h2>
+
+<i class="fa-solid fa-plus-circle"></i>
+
+নতুন বিভাগ যোগ করুন
+
+</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>
+
+বিভাগের নাম
+
+</label>
+
+<input
+type="text"
+id="departmentName"
+placeholder="যেমন: হিফজ বিভাগ">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+আইকন (Font Awesome)
+
+</label>
+
+<input
+type="text"
+id="departmentIcon"
+placeholder="fa-solid fa-book-quran">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+ক্রম (Order)
+
+</label>
+
+<input
+type="number"
+id="departmentOrder"
+placeholder="1">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+রঙ
+
+</label>
+
+<input
+type="color"
+id="departmentColor"
+value="#0d6efd">
+
+</div>
+<div class="form-group">
+
+<label>
+
+বিভাগের বিবরণ
+
+</label>
+
+<textarea
+id="departmentDescription"
+rows="5"
+placeholder="বিভাগ সম্পর্কে সংক্ষিপ্ত বিবরণ লিখুন..."></textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+স্ট্যাটাস
+
+</label>
+
+<select id="departmentStatus">
+
+<option value="Active">
+
+Active
+
+</option>
+
+<option value="Inactive">
+
+Inactive
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+হোমপেজে দেখাবেন?
+
+</label>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="departmentPublished"
+checked>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+<div class="form-actions">
+
+<button
+type="button"
+id="saveDepartmentBtn"
+class="btn-primary">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Department
+
+</button>
+
+<button
+type="reset"
+class="btn-secondary">
+
+<i class="fa-solid fa-rotate-left"></i>
+
+Reset
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================
+ALL DEPARTMENTS
+========================== -->
+
+<div class="admin-card">
+
+<h2>
+
+<i class="fa-solid fa-building-columns"></i>
+
+সকল বিভাগ
+
+</h2>
+
+<div
+class="table-responsive">
+
+<table class="admin-table">
+
+<thead>
+
+<tr>
+
+<th>#</th>
+
+<th>বিভাগ</th>
+
+<th>আইকন</th>
+
+<th>ক্রম</th>
+
+<th>স্ট্যাটাস</th>
+
+<th>Publish</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="departmentTableBody">
+
+<tr>
+
+<td colspan="7">
+
+Loading...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<!-- ==========================
+FIREBASE SDK
+========================== -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script src="firebase.js"></script>
+
+<script src="department-management.js"></script>
+<!-- ==========================
+PAGE LOADER
+========================== -->
+
+<div id="pageLoader" class="page-loader">
+
+<div class="loader-circle"></div>
+
+<p>
+
+Loading...
+
+</p>
+
+</div>
+
+<!-- ==========================
+BACK TO TOP
+========================== -->
+
+<button id="backToTop" class="back-to-top">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- ==========================
+PAGE LOADER SCRIPT
+========================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const loader = document.getElementById("pageLoader");
+
+    if(loader){
+
+        setTimeout(function(){
+
+            loader.style.opacity = "0";
+
+            setTimeout(function(){
+
+                loader.style.display = "none";
+
+            },400);
+
+        },500);
+
+    }
+
+});
+
+</script>
+
+<!-- ==========================
+BACK TO TOP SCRIPT
+========================== -->
+
+<script>
+
+const backBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll",function(){
+
+    if(window.scrollY>300){
+
+        backBtn.classList.add("show");
+
+    }else{
+
+        backBtn.classList.remove("show");
+
+    }
+
+});
+
+backBtn.addEventListener("click",function(){
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+});
+
+</script>
+
+<!-- ==========================
+READY
+========================== -->
+
+<script>
+
+console.log("===================================");
+
+console.log("Department Management Ready");
+
+console.log("Firebase Connected");
+
+console.log("Realtime Enabled");
+
+console.log("===================================");
+
+</script>
+
+</body>
+
+</html>
