@@ -7,9 +7,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Department Management | Admin Panel</title>
+<title>Department Management | Al Haramain Admin</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="department-management.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -18,7 +18,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <body>
 
-<div class="admin-container">
+<div class="wrapper">
 
 <!-- ==========================
 SIDEBAR
@@ -28,27 +28,19 @@ SIDEBAR
 
 <div class="logo">
 
-<h2>
+<h2>AL HARAMAIN</h2>
 
-Admin Panel
-
-</h2>
-
-<p>
-
-Al Haramain Digital Campus
-
-</p>
+<p>Admin Panel</p>
 
 </div>
 
-<ul class="sidebar-menu">
+<ul>
 
 <li>
 
-<a href="admin-dashboard.html">
+<a href="dashboard.html">
 
-<i class="fa-solid fa-gauge"></i>
+<i class="fa-solid fa-house"></i>
 
 Dashboard
 
@@ -56,13 +48,13 @@ Dashboard
 
 </li>
 
-<li>
+<li class="active">
 
-<a href="notice-management.html">
+<a href="department-management.html">
 
-<i class="fa-solid fa-bullhorn"></i>
+<i class="fa-solid fa-building-columns"></i>
 
-Notice Management
+Department Management
 
 </a>
 
@@ -82,11 +74,11 @@ Teachers
 
 <li>
 
-<a href="department-management.html" class="active">
+<a href="notice-management.html">
 
-<i class="fa-solid fa-building-columns"></i>
+<i class="fa-solid fa-bullhorn"></i>
 
-Departments
+Notices
 
 </a>
 
@@ -94,9 +86,9 @@ Departments
 
 <li>
 
-<a href="#">
+<a href="gallery-management.html">
 
-<i class="fa-solid fa-image"></i>
+<i class="fa-solid fa-images"></i>
 
 Gallery
 
@@ -106,35 +98,11 @@ Gallery
 
 <li>
 
-<a href="#">
+<a href="dashboard.html">
 
-<i class="fa-solid fa-trophy"></i>
+<i class="fa-solid fa-arrow-left"></i>
 
-Achievements
-
-</a>
-
-</li>
-
-<li>
-
-<a href="#">
-
-<i class="fa-solid fa-gear"></i>
-
-Settings
-
-</a>
-
-</li>
-
-<li>
-
-<a href="#" onclick="logoutAdmin()">
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
-Logout
+Back Dashboard
 
 </a>
 
@@ -148,9 +116,9 @@ Logout
 MAIN CONTENT
 ========================== -->
 
-<main class="admin-main">
+<main class="content">
 
-<div class="page-title">
+<div class="page-header">
 
 <h1>
 
@@ -160,7 +128,7 @@ Department Management
 
 <p>
 
-প্রতিষ্ঠানের সকল বিভাগ এখান থেকে নিয়ন্ত্রণ করুন।
+Create, Edit & Manage Departments
 
 </p>
 
@@ -170,38 +138,38 @@ Department Management
 ADD DEPARTMENT
 ========================== -->
 
-<div class="admin-card">
+<div class="card">
 
 <h2>
 
 <i class="fa-solid fa-plus-circle"></i>
 
-নতুন বিভাগ যোগ করুন
+Add New Department
 
 </h2>
 
-<div class="form-grid">
+<div class="grid">
 
-<div class="form-group">
+<div>
 
 <label>
 
-বিভাগের নাম
+Department Name
 
 </label>
 
 <input
 type="text"
 id="departmentName"
-placeholder="যেমন: হিফজ বিভাগ">
+placeholder="হিফজ বিভাগ">
 
 </div>
 
-<div class="form-group">
+<div>
 
 <label>
 
-আইকন (Font Awesome)
+Font Awesome Icon
 
 </label>
 
@@ -212,11 +180,11 @@ placeholder="fa-solid fa-book-quran">
 
 </div>
 
-<div class="form-group">
+<div>
 
 <label>
 
-ক্রম (Order)
+Display Order
 
 </label>
 
@@ -227,11 +195,11 @@ placeholder="1">
 
 </div>
 
-<div class="form-group">
+<div>
 
 <label>
 
-রঙ
+Department Color
 
 </label>
 
@@ -241,77 +209,63 @@ id="departmentColor"
 value="#0d6efd">
 
 </div>
-<div class="form-group">
+
+<div class="full">
 
 <label>
 
-বিভাগের বিবরণ
+Description
 
 </label>
 
 <textarea
 id="departmentDescription"
-rows="5"
-placeholder="বিভাগ সম্পর্কে সংক্ষিপ্ত বিবরণ লিখুন..."></textarea>
+rows="5"></textarea>
 
 </div>
 
-<div class="form-group">
+<div>
 
 <label>
 
-স্ট্যাটাস
+Status
 
 </label>
 
 <select id="departmentStatus">
 
-<option value="Active">
+<option value="Active">Active</option>
 
-Active
-
-</option>
-
-<option value="Inactive">
-
-Inactive
-
-</option>
+<option value="Inactive">Inactive</option>
 
 </select>
 
 </div>
 
-<div class="form-group">
+<div>
 
 <label>
 
-হোমপেজে দেখাবেন?
+Publish Homepage
 
 </label>
-
-<label class="switch">
 
 <input
 type="checkbox"
 id="departmentPublished"
 checked>
 
-<span class="slider"></span>
-
-</label>
-
 </div>
+<!-- ==========================
+FORM ACTIONS
+========================== -->
 
-</div>
-
-<div class="form-actions">
+<div class="full actions">
 
 <button
 type="button"
 id="saveDepartmentBtn"
-class="btn-primary"
-style="display:inline-block !important; visibility:visible !important;">
+class="btn btn-primary">
 
 <i class="fa-solid fa-floppy-disk"></i>
 
@@ -321,34 +275,37 @@ Save Department
 
 <button
 type="reset"
-class="btn-secondary">
+class="btn btn-secondary">
 
 <i class="fa-solid fa-rotate-left"></i>
 
 Reset
 
 </button>
+
 </div>
+
+</div>
+
 </div>
 
 <!-- ==========================
-ALL DEPARTMENTS
+DEPARTMENT LIST
 ========================== -->
 
-<div class="admin-card">
+<div class="card">
 
 <h2>
 
 <i class="fa-solid fa-building-columns"></i>
 
-সকল বিভাগ
+All Departments
 
 </h2>
 
-<div
-class="table-responsive">
+<div class="table-box">
 
-<table class="admin-table">
+<table>
 
 <thead>
 
@@ -356,13 +313,13 @@ class="table-responsive">
 
 <th>#</th>
 
-<th>বিভাগ</th>
+<th>Name</th>
 
-<th>আইকন</th>
+<th>Icon</th>
 
-<th>ক্রম</th>
+<th>Order</th>
 
-<th>স্ট্যাটাস</th>
+<th>Status</th>
 
 <th>Publish</th>
 
@@ -391,11 +348,6 @@ Loading...
 </div>
 
 </div>
-
-</main>
-
-</div>
-
 <!-- ==========================
 FIREBASE SDK
 ========================== -->
@@ -410,20 +362,19 @@ FIREBASE SDK
 
 <script src="firebase.js"></script>
 
-<script src="department-management.js?v=3"></script>
+<!-- ==========================
+DEPARTMENT JS
+========================== -->
+
+<script src="department-management.js?v=1"></script>
+
 <!-- ==========================
 PAGE LOADER
 ========================== -->
 
 <div id="pageLoader" class="page-loader">
 
-<div class="loader-circle"></div>
-
-<p>
-
-Loading...
-
-</p>
+<div class="loader"></div>
 
 </div>
 
@@ -443,23 +394,23 @@ PAGE LOADER SCRIPT
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("load", function () {
 
     const loader = document.getElementById("pageLoader");
 
-    if(loader){
+    if (loader) {
 
-        setTimeout(function(){
+        setTimeout(function () {
 
             loader.style.opacity = "0";
 
-            setTimeout(function(){
+            setTimeout(function () {
 
                 loader.style.display = "none";
 
-            },400);
+            }, 300);
 
-        },500);
+        }, 500);
 
     }
 
@@ -473,29 +424,29 @@ BACK TO TOP SCRIPT
 
 <script>
 
-const backBtn = document.getElementById("backToTop");
+const backToTop = document.getElementById("backToTop");
 
-window.addEventListener("scroll",function(){
+window.addEventListener("scroll", function () {
 
-    if(window.scrollY>300){
+    if (window.scrollY > 300) {
 
-        backBtn.classList.add("show");
+        backToTop.classList.add("show");
 
-    }else{
+    } else {
 
-        backBtn.classList.remove("show");
+        backToTop.classList.remove("show");
 
     }
 
 });
 
-backBtn.addEventListener("click",function(){
+backToTop.addEventListener("click", function () {
 
     window.scrollTo({
 
-        top:0,
+        top: 0,
 
-        behavior:"smooth"
+        behavior: "smooth"
 
     });
 
@@ -503,23 +454,9 @@ backBtn.addEventListener("click",function(){
 
 </script>
 
-<!-- ==========================
-READY
-========================== -->
+</main>
 
-<script>
-
-console.log("===================================");
-
-console.log("Department Management Ready");
-
-console.log("Firebase Connected");
-
-console.log("Realtime Enabled");
-
-console.log("===================================");
-
-</script>
+</div>
 
 </body>
 
