@@ -1,24 +1,39 @@
-alert("Department JS Loaded");
 "use strict";
 
 /* ==========================================================
-   DEPARTMENT MANAGEMENT V1
+   DEPARTMENT MANAGEMENT V3
 ========================================================== */
 
 /* ==========================================================
-   DOM
+   DOM ELEMENTS
 ========================================================== */
 
-const departmentName = document.getElementById("departmentName");
-const departmentIcon = document.getElementById("departmentIcon");
-const departmentOrder = document.getElementById("departmentOrder");
-const departmentColor = document.getElementById("departmentColor");
-const departmentDescription = document.getElementById("departmentDescription");
-const departmentStatus = document.getElementById("departmentStatus");
-const departmentPublished = document.getElementById("departmentPublished");
+const departmentName =
+document.getElementById("departmentName");
 
-const saveDepartmentBtn = document.getElementById("saveDepartmentBtn");
-const departmentTableBody = document.getElementById("departmentTableBody");
+const departmentIcon =
+document.getElementById("departmentIcon");
+
+const departmentOrder =
+document.getElementById("departmentOrder");
+
+const departmentColor =
+document.getElementById("departmentColor");
+
+const departmentDescription =
+document.getElementById("departmentDescription");
+
+const departmentStatus =
+document.getElementById("departmentStatus");
+
+const departmentPublished =
+document.getElementById("departmentPublished");
+
+const saveDepartmentBtn =
+document.getElementById("saveDepartmentBtn");
+
+const departmentTableBody =
+document.getElementById("departmentTableBody");
 
 /* ==========================================================
    VARIABLES
@@ -27,20 +42,48 @@ const departmentTableBody = document.getElementById("departmentTableBody");
 let editingDepartmentId = null;
 
 /* ==========================================================
-   SAVE DEPARTMENT
+   SAVE BUTTON
 ========================================================== */
 
-saveDepartmentBtn.addEventListener("click", saveDepartment);
+saveDepartmentBtn.addEventListener("click", function () {
+
+    if (editingDepartmentId) {
+
+        updateDepartment();
+
+    } else {
+
+        saveDepartment();
+
+    }
+
+});
+
+/* ==========================================================
+   SAVE NEW DEPARTMENT
+========================================================== */
 
 function saveDepartment() {
 
-    const data = {
+    if (departmentName.value.trim() === "") {
+
+        alert("Department Name Required!");
+
+        return;
+
+    }
+
+    saveDepartmentBtn.disabled = true;
+
+    db.collection("departments")
+
+    .add({
 
         name: departmentName.value.trim(),
 
         icon: departmentIcon.value.trim(),
 
-        order: Number(departmentOrder.value),
+        order: Number(departmentOrder.value) || 0,
 
         color: departmentColor.value,
 
@@ -52,25 +95,15 @@ function saveDepartment() {
 
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
 
-    };
-
-    if (data.name === "") {
-
-        alert("বিভাগের নাম লিখুন।");
-
-        return;
-
-    }
-
-    db.collection("departments")
-
-    .add(data)
+    })
 
     .then(function () {
 
-        alert("Department Successfully Saved.");
+        alert("Department Saved Successfully.");
 
         clearDepartmentForm();
+
+        saveDepartmentBtn.disabled = false;
 
     })
 
@@ -78,93 +111,102 @@ function saveDepartment() {
 
         console.error(error);
 
-        alert("Department Save Failed.");
+        alert("Save Failed!");
+
+        saveDepartmentBtn.disabled = false;
 
     });
 
 }
 /* ==========================================================
-   LOAD DEPARTMENTS
+   REALTIME DEPARTMENT LIST
 ========================================================== */
 
-loadDepartments();
+db.collection("departments")
+.orderBy("order", "asc")
+.onSnapshot(function (snapshot) {
 
-function loadDepartments() {
+    departmentTableBody.innerHTML = "";
 
-    db.collection("departments")
-    .orderBy("order", "asc")
-    .onSnapshot(function(snapshot){
+    if (snapshot.empty) {
 
-        departmentTableBody.innerHTML = "";
+        departmentTableBody.innerHTML = `
 
-        let serial = 1;
+<tr>
 
-        snapshot.forEach(function(doc){
+<td colspan="7">
 
-            const data = doc.data();
-
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
-
-<td>${serial++}</td>
-
-<td>${data.name}</td>
-
-<td>
-
-<i class="${data.icon}"
-style="color:${data.color};font-size:20px;"></i>
+No Department Found
 
 </td>
 
-<td>${data.order}</td>
-
-<td>${data.status}</td>
-
-<td>
-
-${data.published
-? '<span style="color:green;">Published</span>'
-: '<span style="color:red;">Hidden</span>'}
-
-</td>
-
-<td>
-
-<button
-class="btn-edit"
-onclick="editDepartment('${doc.id}')">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button
-class="btn-delete"
-onclick="deleteDepartment('${doc.id}')">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
+</tr>
 
 `;
 
-            departmentTableBody.appendChild(row);
+        return;
 
-        });
+    }
+
+    let serial = 1;
+
+    snapshot.forEach(function (doc) {
+
+        const data = doc.data();
+
+        departmentTableBody.innerHTML += `
+
+<tr>
+
+<td>${serial++}</td>
+
+<td>${data.name || "-"}</td>
+
+<td>
+
+<i class="${data.icon || "fa-solid fa-building-columns"}"></i>
+
+</td>
+
+<td>${data.order || 0}</td>
+
+<td>${data.status || "Active"}</td>
+
+<td>
+
+${data.published ? "✅ Yes" : "❌ No"}
+
+</td>
+
+<td>
+
+<button onclick="editDepartment('${doc.id}')">
+
+Edit
+
+</button>
+
+<button onclick="deleteDepartment('${doc.id}')">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
 
     });
 
-}
+});
 
 /* ==========================================================
-   EDIT
+   EDIT DEPARTMENT
 ========================================================== */
 
-function editDepartment(id){
+function editDepartment(id) {
 
     db.collection("departments")
 
@@ -172,29 +214,39 @@ function editDepartment(id){
 
     .get()
 
-    .then(function(doc){
+    .then(function (doc) {
+
+        if (!doc.exists) return;
 
         const data = doc.data();
 
         editingDepartmentId = id;
 
-        departmentName.value = data.name;
+        departmentName.value = data.name || "";
 
-        departmentIcon.value = data.icon;
+        departmentIcon.value = data.icon || "";
 
-        departmentOrder.value = data.order;
+        departmentOrder.value = data.order || "";
 
-        departmentColor.value = data.color;
+        departmentColor.value = data.color || "#0d6efd";
 
-        departmentDescription.value = data.description;
+        departmentDescription.value = data.description || "";
 
-        departmentStatus.value = data.status;
+        departmentStatus.value = data.status || "Active";
 
-        departmentPublished.checked = data.published;
+        departmentPublished.checked = data.published === true;
 
         saveDepartmentBtn.innerHTML =
 
         '<i class="fa-solid fa-pen"></i> Update Department';
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
 
     });
 
@@ -203,17 +255,7 @@ function editDepartment(id){
    UPDATE DEPARTMENT
 ========================================================== */
 
-saveDepartmentBtn.addEventListener("click", function(){
-
-    if(editingDepartmentId){
-
-        updateDepartment();
-
-    }
-
-});
-
-function updateDepartment(){
+function updateDepartment() {
 
     db.collection("departments")
 
@@ -225,7 +267,7 @@ function updateDepartment(){
 
         icon: departmentIcon.value.trim(),
 
-        order: Number(departmentOrder.value),
+        order: Number(departmentOrder.value) || 0,
 
         color: departmentColor.value,
 
@@ -233,29 +275,30 @@ function updateDepartment(){
 
         status: departmentStatus.value,
 
-        published: departmentPublished.checked
+        published: departmentPublished.checked,
+
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
 
     })
 
-    .then(function(){
+    .then(function () {
 
         alert("Department Updated Successfully.");
 
         editingDepartmentId = null;
 
         saveDepartmentBtn.innerHTML =
-
         '<i class="fa-solid fa-floppy-disk"></i> Save Department';
 
         clearDepartmentForm();
 
     })
 
-    .catch(function(error){
+    .catch(function (error) {
 
         console.error(error);
 
-        alert("Update Failed.");
+        alert("Update Failed!");
 
     });
 
@@ -265,9 +308,9 @@ function updateDepartment(){
    DELETE DEPARTMENT
 ========================================================== */
 
-function deleteDepartment(id){
+function deleteDepartment(id) {
 
-    if(!confirm("এই বিভাগটি Delete করতে চান?")){
+    if (!confirm("আপনি কি এই বিভাগটি Delete করতে চান?")) {
 
         return;
 
@@ -279,17 +322,17 @@ function deleteDepartment(id){
 
     .delete()
 
-    .then(function(){
+    .then(function () {
 
         alert("Department Deleted Successfully.");
 
     })
 
-    .catch(function(error){
+    .catch(function (error) {
 
         console.error(error);
 
-        alert("Delete Failed.");
+        alert("Delete Failed!");
 
     });
 
@@ -299,7 +342,7 @@ function deleteDepartment(id){
    CLEAR FORM
 ========================================================== */
 
-function clearDepartmentForm(){
+function clearDepartmentForm() {
 
     departmentName.value = "";
 
@@ -321,14 +364,16 @@ function clearDepartmentForm(){
    READY
 ========================================================== */
 
-console.log("======================================");
+console.clear();
 
-console.log("Department Management Version 1 Ready");
+console.log("====================================");
 
-console.log("Firestore Connected");
+console.log("Department Management V3 Ready");
 
-console.log("Realtime Enabled");
+console.log("Firebase Connected");
 
-console.log("CRUD Enabled");
+console.log("Realtime CRUD Enabled");
 
-console.log("======================================");
+console.log("Save / Edit / Delete Ready");
+
+console.log("====================================");
