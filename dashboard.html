@@ -1,463 +1,591 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>টিচার ড্যাশবোর্ড | আল-হারামাইন</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
-        body { font-family: 'Hind Siliguri', sans-serif; }
-    </style>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Admin Dashboard | Al Haramain Ideal Nurani Academy
+</title>
+
+<link rel="stylesheet"
+href="dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 </head>
-<body class="bg-slate-900 text-white min-h-screen">
 
-    <header class="bg-slate-950 p-6 flex justify-between items-center shadow-lg border-b border-slate-800">
-        <div>
-            <h1 class="text-xl font-bold text-green-400">শিক্ষক ড্যাশবোর্ড</h1>
-            <p id="userEmail" class="text-xs text-slate-400 mt-1">লোডিং...</p>
-        </div>
-        <button onclick="logout()" class="bg-red-900/30 border border-red-700 text-red-400 hover:bg-red-900 px-4 py-2 rounded-xl text-sm transition">লগ আউট</button>
-    </header>
+<body>
 
-    <div class="max-w-2xl mx-auto p-4 mt-6">
-        <!-- মেইন গ্রিড মেনু -->
-        <div class="grid grid-cols-2 gap-4 mb-4">
-            <button onclick="toggleStudentSection()" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition focus:outline-none">
-                <span class="block text-4xl mb-2">🎓</span>
-                <span class="font-bold block">শিক্ষার্থী তথ্য</span>
-            </button>
+<!-- ==========================
+LOADER
+========================== -->
 
-            <a href="result.html" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition">
-                <span class="block text-4xl mb-2">📝</span>
-                <span class="font-bold">ফলাফল এন্ট্রি</span>
-            </a>
-            <a href="routine.html" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition">
-                <span class="block text-4xl mb-2">📅</span>
-                <span class="font-bold">রুটিন আপডেট</span>
-            </a>
-            <button onclick="toggleNoticeSection()" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center hover:border-green-500 hover:bg-slate-700 transition focus:outline-none">
-                <span class="block text-4xl mb-2">📢</span>
-                <span class="font-bold block">নোটিশ বোর্ড</span>
-            </button>
-        </div>
+<div id="pageLoader" class="page-loader">
 
-        <a href="teachers.html" class="flex items-center justify-center gap-3 w-full bg-slate-800 p-6 rounded-3xl border border-slate-700 hover:border-green-500 hover:bg-slate-700 transition mb-4">
-            <span class="text-3xl">👨‍🏫</span>
-            <span class="font-bold text-lg">শিক্ষক তালিকা</span>
-        </a>
+<div class="loader"></div>
 
-        <!-- ================= শিক্ষার্থী তথ্য সেকশন ================= -->
-        <div id="student-manager-section" class="hidden mt-8 bg-slate-950 p-4 rounded-3xl border border-slate-800 shadow-2xl">
-            <h2 class="text-lg font-bold text-green-400 mb-4 flex items-center justify-between">
-                <span>📋 ফায়ারবেস শিক্ষার্থী তালিকা</span>
-                <button onclick="toggleStudentSection()" class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded-lg hover:bg-slate-700">বন্ধ করুন</button>
-            </h2>
-            <div class="overflow-x-auto rounded-2xl border border-slate-800">
-                <table class="w-full text-left text-sm">
-                    <thead>
-                        <tr class="bg-slate-900 text-slate-400 border-b border-slate-800">
-                            <th class="p-3">শ্রেণী</th>
-                            <th class="p-3">রোল</th>
-                            <th class="p-3">নাম</th>
-                            <th class="p-3 text-center">অ্যাকশন</th>
-                        </tr>
-                    </thead>
-                    <tbody id="student-table-body">
-                        <tr><td colspan="4" class="p-4 text-center text-slate-500">ডাটা লোড হচ্ছে...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<p>Loading Dashboard...</p>
 
-        <!-- ================= নতুন নোটিশ বোর্ড সেকশন ================= -->
-        <div id="notice-manager-section" class="hidden mt-8 bg-slate-950 p-6 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h2 class="text-lg font-bold text-green-400 flex items-center gap-2"><span>📢 নোটিশ বোর্ড ম্যানেজার</span></h2>
-                <button onclick="toggleNoticeSection()" class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded-lg hover:bg-slate-700">বন্ধ করুন</button>
-            </div>
+</div>
 
-            <!-- নতুন নোটিশ আপলোড ফর্ম -->
-            <form id="noticeForm" class="space-y-4 bg-slate-900 p-4 rounded-2xl border border-slate-800">
-                <h3 class="text-sm font-semibold text-slate-300">নতুন নোটিশ যোগ করুন</h3>
-                <div>
-                    <label class="block text-xs text-slate-400 mb-1">নোটিশের শিরোনাম</label>
-                    <input type="text" id="noticeTitle" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-green-500 transition">
-                </div>
-                <div>
-                    <label class="block text-xs text-slate-400 mb-1">নোটিশের বিবরণ</label>
-                    <textarea id="noticeContent" rows="3" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-green-500 transition"></textarea>
-                </div>
-                <button type="submit" id="noticeSubmitBtn" class="w-full bg-green-600 hover:bg-green-500 text-slate-950 font-bold py-2 rounded-xl text-sm transition">
-                    পাবলিশ করুন
-                </button>
-            </form>
+<!-- ==========================
+SIDEBAR
+========================== -->
 
-            <!-- নোটিশ তালিকা টেবিল -->
-            <div>
-                <h3 class="text-sm font-semibold text-slate-300 mb-2">প্রকাশিত নোটিশ সমূহ</h3>
-                <div class="overflow-x-auto rounded-2xl border border-slate-800">
-                    <table class="w-full text-left text-sm">
-                        <thead>
-                            <tr class="bg-slate-900 text-slate-400 border-b border-slate-800">
-                                <th class="p-3">তারিখ</th>
-                                <th class="p-3">শিরোনাম</th>
-                                <th class="p-3 text-center">অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="notice-table-body">
-                            <tr><td colspan="3" class="p-4 text-center text-slate-500">নোটিশ লোড হচ্ছে...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<aside class="sidebar">
 
-        <a href="contact.html" class="block w-full bg-slate-900 border border-slate-800 p-4 rounded-2xl text-center text-slate-500 hover:text-green-400 transition text-sm mt-6">
-            প্রযুক্তিগত সহায়তা ও যোগাযোগ
-        </a>
-    </div>
+<div class="logo">
 
-    <!-- ================= শিক্ষার্থী তথ্য এডিট মডাল ================= -->
-    <div id="edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-sm border border-slate-700 shadow-2xl">
-            <h3 class="text-lg font-bold mb-4 text-green-400">তথ্য সংশোধন / অপসারণ</h3>
-            <input type="hidden" id="edit-doc-id">
-            <div class="mb-3">
-                <label class="block text-xs text-slate-400 mb-1">শিক্ষার্থীর নাম</label>
-                <input type="text" id="edit-name" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500">
-            </div>
-            <div class="mb-3">
-                <label class="block text-xs text-slate-400 mb-1">রোল নম্বর</label>
-                <input type="text" id="edit-roll" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500">
-            </div>
-            <div class="mb-5">
-                <label class="block text-xs text-slate-400 mb-1">শ্রেণী (পরিবর্তনযোগ্য নয়)</label>
-                <input type="text" id="edit-class" class="w-full bg-slate-900/50 border border-slate-800 rounded-xl p-2 text-slate-500 text-sm focus:outline-none" readonly>
-            </div>
-            <div class="flex justify-between gap-2 text-sm">
-                <button id="delete-btn" class="px-3 py-2 bg-red-950 text-red-400 border border-red-800/50 hover:bg-red-900 hover:text-white rounded-xl font-semibold transition">মুছে ফেলুন</button>
-                <div class="flex gap-2">
-                    <button onclick="closeModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition">বাতিল</button>
-                    <button id="save-btn" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-xl font-semibold transition text-slate-950">সংরক্ষণ</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<img src="images/logo.png" alt="Logo">
 
-    <!-- ================= নতুন নোটিশ এডিট মডাল ================= -->
-    <div id="notice-edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-md border border-slate-700 shadow-2xl">
-            <h3 class="text-lg font-bold mb-4 text-green-400">নোটিশ সংশোধন / অপসারণ</h3>
-            <input type="hidden" id="edit-notice-id">
-            <div class="mb-3">
-                <label class="block text-xs text-slate-400 mb-1">নোটিশের শিরোনাম</label>
-                <input type="text" id="edit-notice-title" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500">
-            </div>
-            <div class="mb-5">
-                <label class="block text-xs text-slate-400 mb-1">নোটিশের বিবরণ</label>
-                <textarea id="edit-notice-content" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-white text-sm focus:outline-none focus:border-green-500"></textarea>
-            </div>
-            <div class="flex justify-between gap-2 text-sm">
-                <button id="notice-delete-btn" class="px-3 py-2 bg-red-950 text-red-400 border border-red-800/50 hover:bg-red-900 hover:text-white rounded-xl font-semibold transition">মুছে ফেলুন</button>
-                <div class="flex gap-2">
-                    <button onclick="closeNoticeModal()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition">বাতিল</button>
-                    <button id="notice-save-btn" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-xl font-semibold transition text-slate-950">হালনাগাদ</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<h2>AL HARAMAIN</h2>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+<span>Admin Panel</span>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
-            authDomain: "al-haramain-digital-campus.firebaseapp.com",
-            projectId: "al-haramain-digital-campus",
-            storageBucket: "al-haramain-digital-campus.firebasestorage.app",
-            messagingSenderId: "306805947710",
-            appId: "1:306805947710:web:d0ed996b453928767a406f"
-        };
+</div>
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+<ul class="menu">
 
-        // লগইন ভেরিফিকেশন
-        onAuthStateChanged(auth, (user) => {
-            if (!user) { window.location.href = "login.html"; }
-            else {
-                document.getElementById("userEmail").innerText = user.email;
-                loadStudentsData();
-                listenToNotices(); // রিয়েলটাইম নোটিশ লিসেনার চালু
-            }
+<li class="active">
+
+<a href="#dashboard">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="notice-management.html">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+<span>Notice Management</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="teacher-management.html">
+
+<i class="fa-solid fa-chalkboard-user"></i>
+
+<span>Teacher Management</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="department-management.html">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Department Management</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="gallery-management.html">
+
+<i class="fa-solid fa-images"></i>
+
+<span>Gallery Management</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="student-management.html">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<span>Student Management</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="admission-management.html">
+
+<i class="fa-solid fa-file-signature"></i>
+
+<span>Admission</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="settings.html">
+
+<i class="fa-solid fa-gear"></i>
+
+<span>Settings</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="login.html">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</a>
+
+</li>
+
+</ul>
+
+</aside>
+
+<!-- ==========================
+MAIN CONTENT
+========================== -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+<div>
+
+<h1>
+
+Admin Dashboard
+
+</h1>
+
+<p>
+
+Welcome Back, Administrator
+
+</p>
+
+</div>
+
+<div class="admin-profile">
+
+<img
+src="images/admin.png"
+alt="Admin">
+
+<div>
+
+<h4>
+
+Administrator
+
+</h4>
+
+<small>
+
+Firebase Connected
+
+</small>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- ==========================
+DASHBOARD CARDS
+========================== -->
+
+<section class="cards">
+
+<div class="card">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+<h2 id="noticeCount">
+
+0
+
+</h2>
+
+<p>
+
+Total Notices
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-chalkboard-user"></i>
+
+<h2 id="teacherCount">
+
+0
+
+</h2>
+
+<p>
+
+Total Teachers
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<h2 id="departmentCount">
+
+0
+
+</h2>
+
+<p>
+
+Departments
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<h2 id="studentCount">
+
+0
+
+</h2>
+
+<p>
+
+Students
+
+</p>
+
+</div>
+
+</section>
+<!-- ==========================
+QUICK ACTIONS
+========================== -->
+
+<section class="dashboard-grid">
+
+<div class="dashboard-box">
+
+<h2>
+
+<i class="fa-solid fa-bolt"></i>
+
+Quick Actions
+
+</h2>
+
+<div class="quick-grid">
+
+<a href="notice-management.html" class="quick-card">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+<span>Notice</span>
+
+</a>
+
+<a href="teacher-management.html" class="quick-card">
+
+<i class="fa-solid fa-chalkboard-user"></i>
+
+<span>Teachers</span>
+
+</a>
+
+<a href="department-management.html" class="quick-card">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Departments</span>
+
+</a>
+
+<a href="gallery-management.html" class="quick-card">
+
+<i class="fa-solid fa-images"></i>
+
+<span>Gallery</span>
+
+</a>
+
+<a href="student-management.html" class="quick-card">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<span>Students</span>
+
+</a>
+
+<a href="admission-management.html" class="quick-card">
+
+<i class="fa-solid fa-file-signature"></i>
+
+<span>Admission</span>
+
+</a>
+
+</div>
+
+</div>
+
+<!-- ==========================
+SYSTEM STATUS
+========================== -->
+
+<div class="dashboard-box">
+
+<h2>
+
+<i class="fa-solid fa-server"></i>
+
+System Status
+
+</h2>
+
+<ul class="status-list">
+
+<li>
+
+<span>Firebase</span>
+
+<strong class="online">
+
+ONLINE
+
+</strong>
+
+</li>
+
+<li>
+
+<span>Firestore</span>
+
+<strong class="online">
+
+CONNECTED
+
+</strong>
+
+</li>
+
+<li>
+
+<span>Website</span>
+
+<strong class="online">
+
+RUNNING
+
+</strong>
+
+</li>
+
+<li>
+
+<span>GitHub</span>
+
+<strong class="online">
+
+DEPLOYED
+
+</strong>
+
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+<!-- ==========================
+RECENT ACTIVITY
+========================== -->
+
+<section class="dashboard-box">
+
+<h2>
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+Recent Activity
+
+</h2>
+
+<table class="activity-table">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Activity</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="recentActivity">
+
+<tr>
+
+<td colspan="3">
+
+Loading...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<!-- ==========================
+FOOTER
+========================== -->
+
+<footer class="dashboard-footer">
+
+<p>
+
+© 2026 Al Haramain Ideal Nurani Academy
+
+</p>
+
+</footer>
+<!-- ==========================
+FIREBASE SDK
+========================== -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script src="firebase.js"></script>
+
+<!-- ==========================
+DASHBOARD SCRIPT
+========================== -->
+
+<script src="dashboard.js?v=1"></script>
+
+<!-- ==========================
+PAGE LOADER
+========================== -->
+
+<script>
+
+window.addEventListener("load", function(){
+
+    const loader = document.getElementById("pageLoader");
+
+    setTimeout(function(){
+
+        loader.style.opacity = "0";
+
+        setTimeout(function(){
+
+            loader.style.display = "none";
+
+        },300);
+
+    },500);
+
+});
+
+</script>
+
+<!-- ==========================
+AUTH CHECK
+========================== -->
+
+<script>
+
+firebase.auth().onAuthStateChanged(function(user){
+
+    if(!user){
+
+        location.href = "login.html";
+
+    }
+
+});
+
+</script>
+
+<!-- ==========================
+LOGOUT
+========================== -->
+
+<script>
+
+document.querySelectorAll("a[href='login.html']").forEach(function(btn){
+
+    btn.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        firebase.auth().signOut()
+
+        .then(function(){
+
+            location.href="login.html";
+
         });
 
-        // লগআউট
-        window.logout = () => {
-            signOut(auth).then(() => { window.location.href = "login.html"; });
-        };
+    });
 
-        // ================= শিক্ষার্থী তথ্য হ্যান্ডলিং লজিক =================
-        async function loadStudentsData() {
-            const tableBody = document.getElementById("student-table-body");
-            try {
-                const querySnapshot = await getDocs(collection(db, "students"));
-                tableBody.innerHTML = ""; 
+});
 
-                if(querySnapshot.empty) {
-                    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">কোনো ডাটা পাওয়া যায়নি।</td></tr>`;
-                    return;
-                }
+</script>
 
-                querySnapshot.forEach((documentSnapshot) => {
-                    const student = documentSnapshot.data();
-                    const docId = documentSnapshot.id;
+</main>
 
-                    const row = document.createElement("tr");
-                    row.className = "border-b border-slate-900 hover:bg-slate-900/40 transition";
-                    row.innerHTML = `
-                        <td class="p-3 text-slate-400">${student.class || ''}</td>
-                        <td class="p-3">${student.roll || ''}</td>
-                        <td class="p-3 font-medium text-slate-200">${student.name || ''}</td>
-                        <td class="p-3 text-center">
-                            <button class="edit-action-btn text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded-lg hover:bg-green-500 hover:text-slate-950 transition" 
-                                    data-id="${docId}" data-name="${student.name}" data-roll="${student.roll}" data-class="${student.class}">
-                                এডিট
-                            </button>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-
-                document.querySelectorAll('.edit-action-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        openEditModal(
-                            e.target.getAttribute('data-id'),
-                            e.target.getAttribute('data-name'),
-                            e.target.getAttribute('data-roll'),
-                            e.target.getAttribute('data-class')
-                        );
-                    });
-                });
-
-            } catch (error) {
-                console.error("ডাটা লোড ত্রুটি: ", error);
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400">ডাটা লোড করা যায়নি।</td></tr>`;
-            }
-        }
-
-        function openEditModal(id, name, roll, sClass) {
-            document.getElementById("edit-doc-id").value = id;
-            document.getElementById("edit-name").value = name;
-            document.getElementById("edit-roll").value = roll;
-            document.getElementById("edit-class").value = sClass;
-            document.getElementById("edit-modal").classList.remove("hidden");
-
-            const deleteBtn = document.getElementById("delete-btn");
-            const newDeleteBtn = deleteBtn.cloneNode(true);
-            deleteBtn.parentNode.replaceChild(newDeleteBtn, deleteBtn);
-            newDeleteBtn.addEventListener("click", () => deleteStudentData(id));
-        }
-
-        async function saveUpdatedData() {
-            const id = document.getElementById("edit-doc-id").value;
-            const newName = document.getElementById("edit-name").value;
-            const newRoll = document.getElementById("edit-roll").value;
-            const saveBtn = document.getElementById("save-btn");
-
-            if(!newName || !newRoll) { return alert("সব ঘর পূরণ করুন!"); }
-            saveBtn.innerText = "সেভ হচ্ছে...";
-            saveBtn.disabled = true;
-
-            try {
-                await updateDoc(doc(db, "students", id), { name: newName, roll: newRoll });
-                alert("তথ্য সফলভাবে আপডেট হয়েছে! 🎉");
-                closeModal();
-                loadStudentsData(); 
-            } catch (err) {
-                alert("আপডেট ব্যর্থ হয়েছে।");
-            } finally {
-                saveBtn.innerText = "সংরক্ষণ";
-                saveBtn.disabled = false;
-            }
-        }
-
-        async function deleteStudentData(id) {
-            if(!confirm("আপনি কি নিশ্চিত যে এই শিক্ষার্থীর সকল তথ্য চিরতরে মুছে ফেলতে চান?")) { return; }
-            const deleteBtn = document.getElementById("delete-btn");
-            deleteBtn.innerText = "মুছছে...";
-            deleteBtn.disabled = true;
-
-            try {
-                await deleteDoc(doc(db, "students", id));
-                alert("শিক্ষার্থীর তথ্য মুছে ফেলা হয়েছে! 🗑️");
-                closeModal();
-                loadStudentsData(); 
-            } catch (err) {
-                alert("ডাটা মুছতে সমস্যা হয়েছে।");
-            } finally {
-                deleteBtn.innerText = "মুছে ফেলুন";
-                deleteBtn.disabled = false;
-            }
-        }
-
-        // ================= নতুন নোটিশ বোর্ড হ্যান্ডলিং লজিক =================
-        
-        // ১. নোটিশ ক্রিয়েট করা (Write)
-        document.getElementById('noticeForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const title = document.getElementById('noticeTitle').value;
-            const content = document.getElementById('noticeContent').value;
-            const submitBtn = document.getElementById('noticeSubmitBtn');
-
-            submitBtn.innerText = "পাবলিশ হচ্ছে...";
-            submitBtn.disabled = true;
-
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const publishDate = new Date().toLocaleDateString('bn-BD', options);
-            const timestamp = Date.now();
-            
-            // ইউনিক আইডি জেনারেট করা (যেমন: notice_171789...)
-            const noticeDocId = "notice_" + timestamp; 
-
-            try {
-                await setDoc(doc(db, "notices", noticeDocId), {
-                    title: title,
-                    content: content,
-                    publishDate: publishDate,
-                    timestamp: timestamp
-                });
-                document.getElementById('noticeForm').reset();
-                alert("নোটিশটি সফলভাবে পাবলিশ হয়েছে! 📢");
-            } catch (error) {
-                alert("ত্রুটি ঘটেছে: " + error.message);
-            } finally {
-                submitBtn.innerText = "পাবলিশ করুন";
-                submitBtn.disabled = false;
-            }
-        });
-
-        // ২. নোটিশ লাইভ রিড করা (Real-time Read)
-        function listenToNotices() {
-            const q = query(collection(db, "notices"), orderBy("timestamp", "desc"));
-            onSnapshot(q, (snapshot) => {
-                const tableBody = document.getElementById("notice-table-body");
-                tableBody.innerHTML = "";
-
-                if(snapshot.empty) {
-                    tableBody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-500">কোনো নোটিশ পাওয়া যায়নি।</td></tr>`;
-                    return;
-                }
-
-                snapshot.forEach((documentSnapshot) => {
-                    const notice = documentSnapshot.data();
-                    const docId = documentSnapshot.id;
-
-                    const row = document.createElement("tr");
-                    row.className = "border-b border-slate-900 hover:bg-slate-900/40 transition";
-                    row.innerHTML = `
-                        <td class="p-3 text-slate-400 whitespace-nowrap">${notice.publishDate || ''}</td>
-                        <td class="p-3 font-medium text-slate-200 max-w-[180px] truncate">${notice.title || ''}</td>
-                        <td class="p-3 text-center">
-                            <button class="notice-edit-btn text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded-lg hover:bg-green-500 hover:text-slate-950 transition" 
-                                    data-id="${docId}" data-title="${notice.title}" data-content="${notice.content}">
-                                ম্যানেজ
-                            </button>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-
-                document.querySelectorAll('.notice-edit-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        openNoticeModal(
-                            e.target.getAttribute('data-id'),
-                            e.target.getAttribute('data-title'),
-                            e.target.getAttribute('data-content')
-                        );
-                    });
-                });
-            });
-        }
-
-        // ৩. নোটিশ এডিট মডাল ওপেন
-        function openNoticeModal(id, title, content) {
-            document.getElementById("edit-notice-id").value = id;
-            document.getElementById("edit-notice-title").value = title;
-            document.getElementById("edit-notice-content").value = content;
-            document.getElementById("notice-edit-modal").classList.remove("hidden");
-
-            const deleteBtn = document.getElementById("notice-delete-btn");
-            const newDeleteBtn = deleteBtn.cloneNode(true);
-            deleteBtn.parentNode.replaceChild(newDeleteBtn, deleteBtn);
-            newDeleteBtn.addEventListener("click", () => deleteNoticeData(id));
-        }
-
-        // ৪. নোটিশ আপডেট করা (Update)
-        async function saveUpdatedNotice() {
-            const id = document.getElementById("edit-notice-id").value;
-            const updatedTitle = document.getElementById("edit-notice-title").value;
-            const updatedContent = document.getElementById("edit-notice-content").value;
-            const saveBtn = document.getElementById("notice-save-btn");
-
-            if(!updatedTitle || !updatedContent) { return alert("সব ঘর পূরণ করুন!"); }
-            saveBtn.innerText = "সেভ হচ্ছে...";
-            saveBtn.disabled = true;
-
-            try {
-                await updateDoc(doc(db, "notices", id), {
-                    title: updatedTitle,
-                    content: updatedContent
-                });
-                alert("নোটিশটি সফলভাবে আপডেট করা হয়েছে! 📝");
-                closeNoticeModal();
-            } catch (err) {
-                alert("নোটিশ আপডেট ব্যর্থ হয়েছে।");
-            } finally {
-                saveBtn.innerText = "হালনাগাদ";
-                saveBtn.disabled = false;
-            }
-        }
-
-        // ৫. নোটিশ ডিলিট করা (Delete)
-        async function deleteNoticeData(id) {
-            if(!confirm("আপনি কি নিশ্চিত যে এই নোটিশটি চিরতরে মুছে ফেলতে চান?")) { return; }
-            const deleteBtn = document.getElementById("notice-delete-btn");
-            deleteBtn.innerText = "মুছছে...";
-            deleteBtn.disabled = true;
-
-            try {
-                await deleteDoc(doc(db, "notices", id));
-                alert("নোটিশটি ডাইরেক্টরি থেকে মুছে ফেলা হয়েছে! 🗑️");
-                closeNoticeModal();
-            } catch (err) {
-                alert("নোটিশ মুছতে সমস্যা হয়েছে।");
-            } finally {
-                deleteBtn.innerText = "মুছে ফেলুন";
-                deleteBtn.disabled = false;
-            }
-        }
-
-        // গ্লোবাল উইন্ডো ফাংশনসমূহ
-        window.toggleStudentSection = () => {
-            document.getElementById("student-manager-section").classList.toggle("hidden");
-            document.getElementById("notice-manager-section").classList.add("hidden");
-        };
-
-        window.toggleNoticeSection = () => {
-            document.getElementById("notice-manager-section").classList.toggle("hidden");
-            document.getElementById("student-manager-section").classList.add("hidden");
-        };
-
-        window.closeModal = () => { document.getElementById("edit-modal").classList.add("hidden"); };
-        window.closeNoticeModal = () => { document.getElementById("notice-edit-modal").classList.add("hidden"); };
-
-        document.getElementById("save-btn").addEventListener("click", saveUpdatedData);
-        document.getElementById("notice-save-btn").addEventListener("click", saveUpdatedNotice);
-    </script>
 </body>
+
 </html>
