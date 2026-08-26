@@ -1,31 +1,92 @@
 /* =====================================================
    AL-HARAMAIN DIGITAL
-   Main JavaScript
+   Database + Main JavaScript
 ===================================================== */
 
 
-/* =========================
-   LOADING SCREEN
-========================= */
+/* =====================================================
+   1. FIREBASE CONFIGURATION
+   -----------------------------------------------------
+   আপনার Firebase Console থেকে এই তথ্যগুলো বসাবেন।
+===================================================== */
 
-document.body.classList.add("loading");
+const firebaseConfig = {
+
+  apiKey: "YOUR_API_KEY",
+
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+
+  projectId: "YOUR_PROJECT_ID",
+
+  storageBucket: "YOUR_PROJECT.firebasestorage.app",
+
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+
+  appId: "YOUR_APP_ID"
+
+};
+
+
+/* =====================================================
+   2. FIREBASE IMPORT
+===================================================== */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  where,
+  limit
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+import {
+  getAuth
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+/* =====================================================
+   3. INITIALIZE FIREBASE
+===================================================== */
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+
+/* =====================================================
+   4. LOADING SCREEN
+===================================================== */
 
 window.addEventListener("load", () => {
 
   setTimeout(() => {
 
-    document.getElementById("loader")?.classList.add("hide");
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+
+      loader.classList.add("hide");
+
+    }
 
     document.body.classList.remove("loading");
 
-  }, 600);
+  }, 700);
 
 });
 
 
-/* =========================
-   LOAD COMMON HEADER
-========================= */
+/* =====================================================
+   5. LOAD HEADER
+===================================================== */
 
 async function loadHeader() {
 
@@ -38,12 +99,12 @@ async function loadHeader() {
     const response = await fetch("header.html");
 
     if (!response.ok) {
-      throw new Error("Header file not found");
+      throw new Error("Header could not be loaded.");
     }
 
     header.innerHTML = await response.text();
 
-    initMenu();
+    initNavbar();
 
   } catch (error) {
 
@@ -54,17 +115,46 @@ async function loadHeader() {
 }
 
 
-/* =========================
-   MOBILE MENU
-========================= */
+/* =====================================================
+   6. LOAD FOOTER
+===================================================== */
 
-function initMenu() {
+async function loadFooter() {
+
+  const footer = document.getElementById("footer");
+
+  if (!footer) return;
+
+  try {
+
+    const response = await fetch("footer.html");
+
+    if (!response.ok) {
+      throw new Error("Footer could not be loaded.");
+    }
+
+    footer.innerHTML = await response.text();
+
+  } catch (error) {
+
+    console.error("Footer Error:", error);
+
+  }
+
+}
+
+
+/* =====================================================
+   7. MOBILE NAVIGATION
+===================================================== */
+
+function initNavbar() {
 
   const menuBtn =
-    document.getElementById("menuBtn");
+    document.querySelector(".menu-btn");
 
   const navLinks =
-    document.getElementById("navLinks");
+    document.querySelector(".nav-links");
 
 
   if (!menuBtn || !navLinks) return;
@@ -74,109 +164,806 @@ function initMenu() {
 
     navLinks.classList.toggle("open");
 
-    menuBtn.textContent =
-      navLinks.classList.contains("open")
-        ? "✕"
-        : "☰";
-
   });
 
 
-  document.querySelectorAll(".nav-links a")
-    .forEach(link => {
+  navLinks.querySelectorAll("a").forEach(link => {
 
-      link.addEventListener("click", () => {
+    link.addEventListener("click", () => {
 
-        navLinks.classList.remove("open");
-
-        menuBtn.textContent = "☰";
-
-      });
+      navLinks.classList.remove("open");
 
     });
+
+  });
 
 }
 
 
-/* =========================
-   HERO SLIDER
-========================= */
+/* =====================================================
+   8. HERO PHOTO SLIDER
+===================================================== */
 
-const slides =
-  document.querySelectorAll(".slide");
+function initSlider() {
 
-const dots =
-  document.querySelectorAll(".slider-dots button");
+  const slides =
+    document.querySelectorAll(".slide");
 
-let currentSlide = 0;
+  const dots =
+    document.querySelectorAll(".slider-dots button");
 
-
-function showSlide(index) {
 
   if (!slides.length) return;
 
 
-  currentSlide = index;
+  let currentSlide = 0;
 
 
-  slides.forEach((slide, i) => {
+  function showSlide(index) {
 
-    slide.classList.toggle(
-      "active",
-      i === index
-    );
+    slides.forEach((slide, i) => {
 
-  });
+      slide.classList.toggle(
+        "active",
+        i === index
+      );
 
-
-  dots.forEach((dot, i) => {
-
-    dot.classList.toggle(
-      "active",
-      i === index
-    );
-
-  });
-
-}
+    });
 
 
-/* Dot Click */
+    dots.forEach((dot, i) => {
 
-dots.forEach((dot, index) => {
+      dot.classList.toggle(
+        "active",
+        i === index
+      );
 
-  dot.addEventListener("click", () => {
+    });
 
-    showSlide(index);
-
-  });
-
-});
+  }
 
 
-/* Auto Slider */
-
-if (slides.length > 1) {
-
-  setInterval(() => {
+  function nextSlide() {
 
     currentSlide++;
 
     if (currentSlide >= slides.length) {
+
       currentSlide = 0;
+
     }
 
     showSlide(currentSlide);
 
-  }, 4500);
+  }
+
+
+  dots.forEach((dot, index) => {
+
+    dot.addEventListener("click", () => {
+
+      currentSlide = index;
+
+      showSlide(currentSlide);
+
+    });
+
+  });
+
+
+  showSlide(0);
+
+
+  setInterval(nextSlide, 5000);
 
 }
 
 
-/* =========================
-   START
-========================= */
+/* =====================================================
+   9. SCROLL ANIMATION
+===================================================== */
 
-showSlide(0);
+function initScrollAnimation() {
 
-loadHeader();
+  const sections =
+    document.querySelectorAll(
+      ".section, .director-card, .info-card, .stat-box, .notice-card, .gallery-item"
+    );
+
+
+  if (!sections.length) return;
+
+
+  sections.forEach(item => {
+
+    item.classList.add("reveal");
+
+  });
+
+
+  const observer =
+    new IntersectionObserver(
+
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("show");
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
+
+        });
+
+      },
+
+      {
+        threshold: 0.08
+      }
+
+    );
+
+
+  sections.forEach(item => {
+
+    observer.observe(item);
+
+  });
+
+}
+
+
+/* =====================================================
+   10. ADMISSION FORM
+===================================================== */
+
+function initAdmissionForm() {
+
+  const form =
+    document.getElementById(
+      "admission-form"
+    );
+
+
+  if (!form) return;
+
+
+  form.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const message =
+        document.getElementById(
+          "admissionMessage"
+        );
+
+
+      const studentName =
+        document.getElementById(
+          "studentName"
+        ).value.trim();
+
+
+      const fatherName =
+        document.getElementById(
+          "fatherName"
+        ).value.trim();
+
+
+      const phone =
+        document.getElementById(
+          "phone"
+        ).value.trim();
+
+
+      const department =
+        document.getElementById(
+          "department"
+        ).value;
+
+
+      const address =
+        document.getElementById(
+          "address"
+        ).value.trim();
+
+
+      if (
+        !studentName ||
+        !fatherName ||
+        !phone ||
+        !department ||
+        !address
+      ) {
+
+        message.textContent =
+          "অনুগ্রহ করে সব তথ্য পূরণ করুন।";
+
+        return;
+
+      }
+
+
+      message.textContent =
+        "আবেদন জমা দেওয়া হচ্ছে...";
+
+
+      try {
+
+        await addDoc(
+          collection(
+            db,
+            "admissions"
+          ),
+          {
+
+            studentName,
+
+            fatherName,
+
+            phone,
+
+            department,
+
+            address,
+
+            status: "pending",
+
+            createdAt:
+              new Date().toISOString()
+
+          }
+        );
+
+
+        message.textContent =
+          "আলহামদুলিল্লাহ! আপনার ভর্তি আবেদন সফলভাবে জমা হয়েছে।";
+
+
+        form.reset();
+
+
+      } catch (error) {
+
+        console.error(
+          "Admission Error:",
+          error
+        );
+
+
+        message.textContent =
+          "দুঃখিত, আবেদন জমা দেওয়া যায়নি। পরে আবার চেষ্টা করুন।";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   11. LOAD NOTICES
+===================================================== */
+
+async function loadNotices() {
+
+  const noticeList =
+    document.getElementById(
+      "noticeList"
+    );
+
+
+  if (!noticeList) return;
+
+
+  try {
+
+    const noticeQuery =
+      query(
+        collection(
+          db,
+          "notices"
+        ),
+        limit(10)
+      );
+
+
+    const snapshot =
+      await getDocs(
+        noticeQuery
+      );
+
+
+    if (snapshot.empty) {
+
+      return;
+
+    }
+
+
+    noticeList.innerHTML = "";
+
+
+    snapshot.forEach(doc => {
+
+      const data = doc.data();
+
+
+      const article =
+        document.createElement(
+          "article"
+        );
+
+
+      article.className =
+        "notice-card";
+
+
+      article.innerHTML = `
+
+        <div class="notice-date">
+
+          <strong>
+            ${data.day || "--"}
+          </strong>
+
+          <span>
+            ${data.month || "---"}
+          </span>
+
+        </div>
+
+
+        <div class="notice-content">
+
+          <h3>
+            ${data.title || "নোটিশ"}
+          </h3>
+
+          <p>
+            ${data.description || ""}
+          </p>
+
+        </div>
+
+      `;
+
+
+      noticeList.appendChild(
+        article
+      );
+
+    });
+
+
+  } catch (error) {
+
+    console.error(
+      "Notice Error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   12. EMERGENCY NOTICE
+===================================================== */
+
+async function loadEmergencyNotice() {
+
+  const notice =
+    document.getElementById(
+      "emergencyNotice"
+    );
+
+
+  if (!notice) return;
+
+
+  try {
+
+    const noticeQuery =
+      query(
+        collection(
+          db,
+          "emergencyNotices"
+        ),
+        limit(1)
+      );
+
+
+    const snapshot =
+      await getDocs(
+        noticeQuery
+      );
+
+
+    if (!snapshot.empty) {
+
+      snapshot.forEach(doc => {
+
+        const data =
+          doc.data();
+
+
+        notice.textContent =
+          data.text ||
+          "নতুন জরুরি নোটিশ এখানে প্রদর্শিত হবে...";
+
+      });
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Emergency Notice Error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   13. RESULT SEARCH
+===================================================== */
+
+function initResultSearch() {
+
+  const button =
+    document.getElementById(
+      "resultBtn"
+    );
+
+  const input =
+    document.getElementById(
+      "resultRoll"
+    );
+
+  const resultBox =
+    document.getElementById(
+      "resultBox"
+    );
+
+
+  if (
+    !button ||
+    !input ||
+    !resultBox
+  ) return;
+
+
+  button.addEventListener(
+    "click",
+    async () => {
+
+      const roll =
+        input.value.trim();
+
+
+      if (!roll) {
+
+        resultBox.textContent =
+          "রোল নম্বর লিখুন।";
+
+        return;
+
+      }
+
+
+      resultBox.textContent =
+        "রেজাল্ট খোঁজা হচ্ছে...";
+
+
+      try {
+
+        const resultQuery =
+          query(
+            collection(
+              db,
+              "results"
+            ),
+            where(
+              "roll",
+              "==",
+              roll
+            ),
+            limit(1)
+          );
+
+
+        const snapshot =
+          await getDocs(
+            resultQuery
+          );
+
+
+        if (snapshot.empty) {
+
+          resultBox.textContent =
+            "এই রোল নম্বরের কোনো রেজাল্ট পাওয়া যায়নি।";
+
+          return;
+
+        }
+
+
+        let resultHTML = "";
+
+
+        snapshot.forEach(doc => {
+
+          const data =
+            doc.data();
+
+
+          resultHTML = `
+
+            <div>
+
+              <strong>
+                ${data.studentName || "শিক্ষার্থী"}
+              </strong>
+
+              <br>
+
+              রোল:
+              ${data.roll || "-"}
+
+              <br>
+
+              শ্রেণি:
+              ${data.className || "-"}
+
+              <br>
+
+              ফলাফল:
+              ${data.result || "-"}
+
+            </div>
+
+          `;
+
+        });
+
+
+        resultBox.innerHTML =
+          resultHTML;
+
+
+      } catch (error) {
+
+        console.error(
+          "Result Error:",
+          error
+        );
+
+
+        resultBox.textContent =
+          "রেজাল্ট খুঁজতে সমস্যা হয়েছে।";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   14. STUDENT INFORMATION SEARCH
+===================================================== */
+
+function initStudentSearch() {
+
+  const button =
+    document.getElementById(
+      "studentBtn"
+    );
+
+  const input =
+    document.getElementById(
+      "studentId"
+    );
+
+  const box =
+    document.getElementById(
+      "studentBox"
+    );
+
+
+  if (
+    !button ||
+    !input ||
+    !box
+  ) return;
+
+
+  button.addEventListener(
+    "click",
+    async () => {
+
+      const studentId =
+        input.value.trim();
+
+
+      if (!studentId) {
+
+        box.textContent =
+          "Student ID অথবা Roll লিখুন।";
+
+        return;
+
+      }
+
+
+      box.textContent =
+        "শিক্ষার্থীর তথ্য খোঁজা হচ্ছে...";
+
+
+      try {
+
+        const studentQuery =
+          query(
+            collection(
+              db,
+              "students"
+            ),
+            where(
+              "studentId",
+              "==",
+              studentId
+            ),
+            limit(1)
+          );
+
+
+        const snapshot =
+          await getDocs(
+            studentQuery
+          );
+
+
+        if (snapshot.empty) {
+
+          box.textContent =
+            "এই ID-এর কোনো শিক্ষার্থীর তথ্য পাওয়া যায়নি।";
+
+          return;
+
+        }
+
+
+        snapshot.forEach(doc => {
+
+          const data =
+            doc.data();
+
+
+          box.innerHTML = `
+
+            <div>
+
+              <strong>
+                ${data.name || "নাম নেই"}
+              </strong>
+
+              <br>
+
+              Student ID:
+              ${data.studentId || "-"}
+
+              <br>
+
+              শ্রেণি:
+              ${data.className || "-"}
+
+              <br>
+
+              রোল:
+              ${data.roll || "-"}
+
+            </div>
+
+          `;
+
+        });
+
+
+      } catch (error) {
+
+        console.error(
+          "Student Search Error:",
+          error
+        );
+
+
+        box.textContent =
+          "তথ্য খুঁজতে সমস্যা হয়েছে।";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   15. GOOGLE MAP
+===================================================== */
+
+function initMap() {
+
+  /*
+    Google Maps Embed API ব্যবহার করার সময়
+    এখানে আপনার Embed URL বসানো যাবে।
+
+    আপাতত Google Maps-এর share link
+    আলাদা button হিসেবে কাজ করছে।
+  */
+
+}
+
+
+/* =====================================================
+   16. START EVERYTHING
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  async () => {
+
+    await loadHeader();
+
+    await loadFooter();
+
+    initSlider();
+
+    initScrollAnimation();
+
+    initAdmissionForm();
+
+    initResultSearch();
+
+    initStudentSearch();
+
+    initMap();
+
+    await loadNotices();
+
+    await loadEmergencyNotice();
+
+  }
+);
+
+
+/* =====================================================
+   17. GLOBAL ACCESS
+   Admin dashboard বা অন্য JS file থেকে
+   প্রয়োজনে ব্যবহার করা যাবে।
+===================================================== */
+
+window.AlHaramain = {
+
+  firebaseApp: app,
+
+  database: db,
+
+  authentication: auth
+
+};
