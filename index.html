@@ -1,513 +1,200 @@
-
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Al-haramain-digital</title>
-  <meta name="description" content="Al-haramain-digital - আমাদের মাদ্রাসার অফিসিয়াল ওয়েবসাইট">
+  <title>আল-হারামাইন মডেল মাদ্রাসা | Al-Haramain Model Madrasa</title>
+
+  <meta
+    name="description"
+    content="আল-হারামাইন মডেল মাদ্রাসা, সোনার পাড়া, ইনানী, উখিয়া, কক্সবাজার। প্রতিষ্ঠিত ২০১৩।"
+  >
+
   <meta name="theme-color" content="#0f766e">
 
   <link rel="icon" href="logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- ================= LOADING SCREEN ================= -->
+  <!-- =========================
+       LOADING SCREEN
+  ========================== -->
+
   <div id="loader">
-    <div class="loader-box">
-      <img src="logo.png" alt="Al-haramain-digital Logo">
-      <h2>Al-haramain-digital</h2>
+    <div class="loader-content">
+
+      <img src="logo.png" alt="Al-Haramain Model Madrasa">
+
+      <h2>আল-হারামাইন মডেল মাদ্রাসা</h2>
+
+      <p>Al-Haramain Model Madrasa</p>
+
       <div class="loader-line"></div>
+
     </div>
   </div>
 
 
-  <!-- ================= HEADER / NAVBAR ================= -->
-  <header class="header">
-    <nav class="navbar container">
+  <!-- =========================
+       HEADER
+       header.html থেকে আসবে
+  ========================== -->
 
-      <a href="#home" class="brand">
-        <img src="logo.png" alt="Logo">
-        <span>Al-haramain-digital</span>
-      </a>
-
-      <button class="menu-btn" id="menuBtn" aria-label="Menu">
-        ☰
-      </button>
-
-      <div class="nav-links" id="navLinks">
-        <a href="#home">হোম</a>
-        <a href="#director">পরিচালকের বাণী</a>
-        <a href="#departments">বিভাগসমূহ</a>
-        <a href="#achievements">অর্জনসমূহ</a>
-        <a href="#admission">অনলাইন ভর্তি</a>
-        <a href="#notice">নোটিশ</a>
-        <a href="#result">রেজাল্ট</a>
-        <a href="#gallery">গ্যালারি</a>
-        <a href="#student">শিক্ষার্থীর তথ্য</a>
-        <a href="#location">লোকেশন</a>
-      </div>
-
-    </nav>
-  </header>
+  <div id="header"></div>
 
 
   <main>
 
-    <!-- ================= HERO / HOME ================= -->
-    <section class="hero section" id="home">
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero" id="home">
+
       <div class="container hero-grid">
 
-        <div class="hero-content reveal">
-          <span class="welcome">আসসালামু আলাইকুম</span>
+        <!-- LEFT CONTENT -->
+
+        <div class="hero-content">
+
+          <span class="welcome-text">
+            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+          </span>
+
+          <span class="est-text">
+            প্রতিষ্ঠিত — ২০১৩
+          </span>
 
           <h1>
-            Al-haramain-digital
+            আল-হারামাইন
+            <span>মডেল মাদ্রাসা</span>
           </h1>
 
-          <p>
-            দ্বীনি ও নৈতিক শিক্ষার মাধ্যমে একটি সুন্দর ভবিষ্যৎ গড়ার প্রত্যয়।
+          <h2>
+            Al-Haramain Model Madrasa
+          </h2>
+
+          <p class="hero-description">
+            দ্বীনি ও নৈতিক শিক্ষার মাধ্যমে আদর্শ মানুষ গড়ার
+            প্রত্যয়ে আমাদের শিক্ষা কার্যক্রম পরিচালিত হচ্ছে।
           </p>
 
+          <div class="registration">
+            <span>Registration No.</span>
+            <strong>0202707</strong>
+          </div>
+
           <div class="hero-buttons">
-            <a href="#admission" class="btn primary">অনলাইন ভর্তি</a>
-            <a href="#location" class="btn secondary">যোগাযোগ</a>
+
+            <a href="#admission" class="btn primary-btn">
+              অনলাইন ভর্তি
+            </a>
+
+            <a href="#location" class="btn outline-btn">
+              যোগাযোগ
+            </a>
+
           </div>
-        </div>
-
-
-        <!-- SIDE PHOTO SCROLL -->
-        <div class="hero-slider reveal">
-          <div class="slide active">
-            <img src="images/slide1.jpg" alt="মাদ্রাসার ছবি">
-          </div>
-
-          <div class="slide">
-            <img src="images/slide2.jpg" alt="মাদ্রাসার ছবি">
-          </div>
-
-          <div class="slide">
-            <img src="images/slide3.jpg" alt="মাদ্রাসার ছবি">
-          </div>
-
-          <div class="slider-dots" id="sliderDots"></div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ================= DIRECTOR ================= -->
-    <section class="section" id="director">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>আমাদের কথা</span>
-          <h2>পরিচালকের বাণী</h2>
-        </div>
-
-        <div class="director-card reveal">
-
-          <div class="director-image">
-            <img src="images/director.jpg" alt="পরিচালক">
-          </div>
-
-          <div class="director-text">
-            <h3>মোঃ পরিচালকের নাম</h3>
-            <small>পরিচালক</small>
-
-            <p>
-              আলহামদুলিল্লাহ। আমাদের উদ্দেশ্য হলো শিক্ষার্থীদের
-              দ্বীনি ও নৈতিক শিক্ষার পাশাপাশি আদর্শ মানুষ হিসেবে গড়ে তোলা।
-              আপনার সন্তানের সুন্দর ভবিষ্যৎ গঠনে আমরা আন্তরিকভাবে কাজ করে যাচ্ছি।
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ================= EMERGENCY NOTICE ================= -->
-    <section class="emergency">
-      <div class="container emergency-inner">
-
-        <strong>জরুরি নোটিশ</strong>
-
-        <div class="notice-scroll">
-          <div id="emergencyNotice">
-            নতুন জরুরি নোটিশ এখানে প্রদর্শিত হবে...
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ================= DEPARTMENTS ================= -->
-    <section class="section light" id="departments">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>শিক্ষা কার্যক্রম</span>
-          <h2>আমাদের বিভাগসমূহ</h2>
-        </div>
-
-        <div class="cards">
-
-          <article class="info-card reveal">
-            <div class="card-icon">📖</div>
-            <h3>নূরানী বিভাগ</h3>
-            <p>
-              কুরআন শিক্ষার প্রাথমিক ও সুন্দর ভিত্তি গড়ে তোলার জন্য।
-            </p>
-          </article>
-
-          <article class="info-card reveal">
-            <div class="card-icon">📚</div>
-            <h3>নাজেরা বিভাগ</h3>
-            <p>
-              বিশুদ্ধভাবে কুরআন মাজীদ পড়ার জন্য বিশেষ শিক্ষা কার্যক্রম।
-            </p>
-          </article>
-
-          <article class="info-card reveal">
-            <div class="card-icon">🕌</div>
-            <h3>হিফজ বিভাগ</h3>
-            <p>
-              কুরআন মাজীদ হিফজের জন্য নিয়মিত ও পরিকল্পিত শিক্ষা ব্যবস্থা।
-            </p>
-          </article>
-
-          <article class="info-card reveal">
-            <div class="card-icon">📘</div>
-            <h3>কিতাব বিভাগ</h3>
-            <p>
-              প্রয়োজন অনুযায়ী কিতাবি ও দ্বীনি শিক্ষার ব্যবস্থা।
-            </p>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ================= ACHIEVEMENTS ================= -->
-    <section class="section" id="achievements">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>আমাদের পরিচয়</span>
-          <h2>আমাদের অর্জনসমূহ</h2>
-        </div>
-
-        <div class="stats">
-
-          <div class="stat-box reveal">
-            <strong>০+</strong>
-            <span>শিক্ষার্থী</span>
-          </div>
-
-          <div class="stat-box reveal">
-            <strong>০+</strong>
-            <span>শিক্ষক</span>
-          </div>
-
-          <div class="stat-box reveal">
-            <strong>০+</strong>
-            <span>বিভাগ</span>
-          </div>
-
-          <div class="stat-box reveal">
-            <strong>০+</strong>
-            <span>অর্জন</span>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ================= ADMISSION ================= -->
-    <section class="section light" id="admission">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>ভর্তি কার্যক্রম</span>
-          <h2>অনলাইন ভর্তি</h2>
-        </div>
-
-        <div class="admission-box reveal">
-
-          <div>
-            <h3>আপনার সন্তানের সুন্দর ভবিষ্যতের জন্য আজই আবেদন করুন</h3>
-            <p>
-              অনলাইন ফর্ম পূরণ করে সহজেই ভর্তি আবেদন করতে পারবেন।
-            </p>
-          </div>
-
-          <a href="#admission-form" class="btn primary">
-            ভর্তি আবেদন করুন
-          </a>
 
         </div>
 
 
-        <form class="admission-form reveal" id="admission-form">
+        <!-- RIGHT PHOTO SLIDER -->
 
-          <h3>ভর্তি আবেদন ফর্ম</h3>
+        <div class="hero-slider">
 
-          <div class="form-grid">
+          <div class="slides">
 
-            <input type="text" id="studentName" placeholder="শিক্ষার্থীর নাম" required>
-
-            <input type="text" id="fatherName" placeholder="পিতার নাম" required>
-
-            <input type="tel" id="phone" placeholder="মোবাইল নম্বর" required>
-
-            <select id="department" required>
-              <option value="">বিভাগ নির্বাচন করুন</option>
-              <option>নূরানী</option>
-              <option>নাজেরা</option>
-              <option>হিফজ</option>
-              <option>কিতাব</option>
-            </select>
-
-          </div>
-
-          <textarea id="address" placeholder="ঠিকানা" required></textarea>
-
-          <button type="submit" class="btn primary">
-            আবেদন জমা দিন
-          </button>
-
-          <p id="admissionMessage" class="form-message"></p>
-
-        </form>
-
-      </div>
-    </section>
-
-
-    <!-- ================= NOTICE ================= -->
-    <section class="section" id="notice">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>সর্বশেষ তথ্য</span>
-          <h2>নোটিশ</h2>
-        </div>
-
-        <div class="notice-list" id="noticeList">
-
-          <article class="notice-card reveal">
-            <div class="notice-date">
-              <strong>--</strong>
-              <span>---</span>
+            <div class="slide active">
+              <img
+                src="https://drive.google.com/thumbnail?id=1zGEYElVhA1R_ngt4iqjpjfzsuqRt9bK0&sz=w1200"
+                alt="আল-হারামাইন মডেল মাদ্রাসা"
+                loading="eager"
+              >
             </div>
 
-            <div>
-              <h3>নতুন নোটিশ</h3>
-              <p>
-                নতুন নোটিশ প্রকাশিত হলে এখানে দেখা যাবে।
-              </p>
+            <div class="slide">
+              <img
+                src="https://drive.google.com/thumbnail?id=1YbDQtjP-DY1ogLM3w5_EC4WcyQt6qStB&sz=w1200"
+                alt="আল-হারামাইন মডেল মাদ্রাসা"
+                loading="lazy"
+              >
             </div>
-          </article>
 
-        </div>
+            <div class="slide">
+              <img
+                src="https://drive.google.com/thumbnail?id=1GlKbDIjmjqTJ0kybdPyKXeZsswPInAxw&sz=w1200"
+                alt="আল-হারামাইন মডেল মাদ্রাসা"
+                loading="lazy"
+              >
+            </div>
 
-      </div>
-    </section>
-
-
-    <!-- ================= RESULT ================= -->
-    <section class="section light" id="result">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>ফলাফল</span>
-          <h2>রেজাল্ট</h2>
-        </div>
-
-        <div class="search-box reveal">
-
-          <h3>রেজাল্ট দেখুন</h3>
-
-          <div class="search-row">
-            <input
-              type="text"
-              id="resultRoll"
-              placeholder="রোল নম্বর লিখুন"
-            >
-
-            <button class="btn primary" id="resultBtn">
-              রেজাল্ট দেখুন
-            </button>
           </div>
 
-          <div id="resultBox" class="result-box">
-            রোল নম্বর দিয়ে রেজাল্ট অনুসন্ধান করুন।
+
+          <!-- Slider Overlay -->
+
+          <div class="slider-overlay">
+
+            <div class="slider-title">
+              <span>Al-Haramain Model Madrasa</span>
+              <strong>সোনার পাড়া, ইনানী, উখিয়া</strong>
+            </div>
+
+          </div>
+
+
+          <!-- Slider Dots -->
+
+          <div class="slider-dots" id="sliderDots">
+
+            <button class="active" data-slide="0"></button>
+            <button data-slide="1"></button>
+            <button data-slide="2"></button>
+
           </div>
 
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- ================= GALLERY ================= -->
-    <section class="section" id="gallery">
-      <div class="container">
+    <!--
+      পরবর্তী ধাপে এখানে যুক্ত হবে:
 
-        <div class="section-title reveal">
-          <span>আমাদের স্মৃতি</span>
-          <h2>ফটো গ্যালারি</h2>
-        </div>
-
-        <div class="gallery-grid">
-
-          <a href="images/gallery1.jpg" class="gallery-item reveal">
-            <img src="images/gallery1.jpg" alt="Gallery">
-          </a>
-
-          <a href="images/gallery2.jpg" class="gallery-item reveal">
-            <img src="images/gallery2.jpg" alt="Gallery">
-          </a>
-
-          <a href="images/gallery3.jpg" class="gallery-item reveal">
-            <img src="images/gallery3.jpg" alt="Gallery">
-          </a>
-
-          <a href="images/gallery4.jpg" class="gallery-item reveal">
-            <img src="images/gallery4.jpg" alt="Gallery">
-          </a>
-
-          <a href="images/gallery5.jpg" class="gallery-item reveal">
-            <img src="images/gallery5.jpg" alt="Gallery">
-          </a>
-
-          <a href="images/gallery6.jpg" class="gallery-item reveal">
-            <img src="images/gallery6.jpg" alt="Gallery">
-          </a>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ================= STUDENT INFORMATION ================= -->
-    <section class="section light" id="student">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>শিক্ষার্থী</span>
-          <h2>শিক্ষার্থীর তথ্য</h2>
-        </div>
-
-        <div class="search-box reveal">
-
-          <h3>শিক্ষার্থীর তথ্য অনুসন্ধান</h3>
-
-          <div class="search-row">
-
-            <input
-              type="text"
-              id="studentId"
-              placeholder="Student ID / Roll"
-            >
-
-            <button class="btn primary" id="studentBtn">
-              তথ্য দেখুন
-            </button>
-
-          </div>
-
-          <div id="studentBox" class="result-box">
-            Student ID অথবা Roll দিয়ে তথ্য অনুসন্ধান করুন।
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ================= LOCATION ================= -->
-    <section class="section" id="location">
-      <div class="container">
-
-        <div class="section-title reveal">
-          <span>আমাদের ঠিকানা</span>
-          <h2>ম্যাপ লোকেশন</h2>
-        </div>
-
-        <div class="map-box reveal">
-
-          <iframe
-            src="https://www.google.com/maps/embed?pb="
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="মাদ্রাসার লোকেশন">
-          </iframe>
-
-        </div>
-
-      </div>
-    </section>
+      Director
+      Emergency Notice
+      Departments
+      Achievements
+      Admission
+      Notice
+      Result
+      Gallery
+      Student Information
+      Map
+    -->
 
   </main>
 
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-
-    <div class="container footer-grid">
-
-      <div>
-        <a href="#home" class="footer-brand">
-          <img src="logo.png" alt="Logo">
-          <span>Al-haramain-digital</span>
-        </a>
-
-        <p>
-          দ্বীনি ও নৈতিক শিক্ষার মাধ্যমে আদর্শ মানুষ গড়ার প্রত্যয়।
-        </p>
-      </div>
-
-      <div>
-        <h3>যোগাযোগ</h3>
-
-        <p>📍 আপনার মাদ্রাসার ঠিকানা</p>
-        <p>📞 01XXXXXXXXX</p>
-        <p>✉️ example@email.com</p>
-      </div>
-
-      <div>
-        <h3>দ্রুত লিংক</h3>
-
-        <a href="#admission">অনলাইন ভর্তি</a>
-        <a href="#notice">নোটিশ</a>
-        <a href="#result">রেজাল্ট</a>
-        <a href="#gallery">গ্যালারি</a>
-      </div>
-
-    </div>
-
-    <div class="copyright">
-      © <span id="year"></span> Al-haramain-digital. সর্বস্বত্ব সংরক্ষিত।
-    </div>
-
-  </footer>
-
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
 
   <script type="module" src="database.js"></script>
 
