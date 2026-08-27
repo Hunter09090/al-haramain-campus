@@ -1,376 +1,531 @@
-"use strict";
+/* =================================================
+   AL-HARAMAIN DIGITAL
+   NOTICE SYSTEM
+================================================= */
 
-/* ==========================================================
-   NOTICE SYSTEM V3
-========================================================== */
 
-/* ==========================================================
-   DOM
-========================================================== */
+/* ================================================
+   ELEMENTS
+================================================ */
 
-const noticeList = document.getElementById("noticeList");
-const noticeSearch = document.getElementById("noticeSearch");
-const noticeEmpty = document.getElementById("noticeEmpty");
+const noticeList =
+  document.getElementById("noticeList");
 
-/* ==========================================================
-   VARIABLES
-========================================================== */
+const noticeEmpty =
+  document.getElementById("noticeEmpty");
+
+const noticeSearch =
+  document.getElementById("noticeSearch");
+
+
 
 let allNotices = [];
-let currentFilter = "all";
 
-/* ==========================================================
-   LOAD NOTICES FROM FIRESTORE
-========================================================== */
 
-function loadNotices() {
 
-    db.collection("notices")
-    .orderBy("createdAt", "desc")
-    .onSnapshot(function(snapshot){
+/* ================================================
+   LOAD HEADER
+================================================ */
 
-        allNotices = [];
+async function loadHeader() {
 
-        snapshot.forEach(function(doc){
+  const header =
+    document.getElementById("header");
 
-            const data = doc.data();
+  if (!header) return;
 
-            /* শুধুমাত্র Published Notice দেখাবে */
 
-            if(data.published !== true){
+  try {
 
-                return;
+    const response =
+      await fetch("header.html");
+
+    header.innerHTML =
+      await response.text();
+
+
+    const menuBtn =
+      header.querySelector(".menu-btn");
+
+    const navLinks =
+      header.querySelector(".nav-links");
+
+
+    if (menuBtn && navLinks) {
+
+      menuBtn.addEventListener(
+        "click",
+        () => {
+
+          const open =
+            navLinks.classList.toggle("open");
+
+          menuBtn.setAttribute(
+            "aria-expanded",
+            open
+          );
+
+          menuBtn.textContent =
+            open ? "✕" : "☰";
+
+        }
+      );
+
+
+      navLinks
+        .querySelectorAll("a")
+        .forEach(link => {
+
+          link.addEventListener(
+            "click",
+            () => {
+
+              navLinks
+                .classList
+                .remove("open");
+
+              menuBtn.textContent = "☰";
 
             }
-
-            allNotices.push({
-
-                id: doc.id,
-
-                title: data.title || "",
-
-                category: data.category || "সাধারণ",
-
-                description: data.description || "",
-
-                date: data.date || "",
-
-                important: data.important || false,
-
-                isNew: data.isNew || false,
-
-                published: data.published || false
-
-            });
+          );
 
         });
 
-        renderNotices(allNotices);
+    }
 
-    }, function(error){
+  } catch (error) {
 
-        console.error("Notice Load Error:", error);
+    console.error(
+      "Header Error:",
+      error
+    );
 
-        noticeList.innerHTML = `
+  }
 
-        <div class="notice-card">
+}
 
-            <h3>
 
-                Notice Load Failed
 
-            </h3>
+/* ================================================
+   LOAD FOOTER
+================================================ */
 
-            <p>
+async function loadFooter() {
 
-                Firebase থেকে Notice লোড করা যায়নি।
+  const footer =
+    document.getElementById("footer");
 
-            </p>
+  if (!footer) return;
 
-        </div>
 
-        `;
+  try {
+
+    const response =
+      await fetch("footer.html");
+
+    footer.innerHTML =
+      await response.text();
+
+
+  } catch (error) {
+
+    console.error(
+      "Footer Error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/* ================================================
+   LOAD NOTICES
+================================================ */
+
+async function loadNotices() {
+
+  if (!window.noticeDB) {
+
+    showEmpty();
+
+    return;
+
+  }
+
+
+  try {
+
+    const {
+      collection,
+      getDocs,
+      query,
+      orderBy
+    } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js"
+    );
+
+
+    const noticeQuery =
+      query(
+        collection(
+          window.noticeDB,
+          "notices"
+        ),
+        orderBy(
+          "createdAt",
+          "desc"
+        )
+      );
+
+
+    const snapshot =
+      await getDocs(
+        noticeQuery
+      );
+
+
+    allNotices = [];
+
+
+    snapshot.forEach(doc => {
+
+      allNotices.push({
+
+        id: doc.id,
+
+        ...doc.data()
+
+      });
 
     });
 
+
+    renderNotices(allNotices);
+
+
+  } catch (error) {
+
+    console.error(
+      "Notice Loading Error:",
+      error
+    );
+
+
+    /*
+      যদি database-এ notice collection
+      এখনো না থাকে, website ভেঙে যাবে না।
+    */
+
+    showEmpty();
+
+  }
+
 }
-/* ==========================================================
-   RENDER NOTICE
-========================================================== */
 
-function renderNotices(notices){
 
-    noticeList.innerHTML = "";
 
-    if(notices.length === 0){
+/* ================================================
+   RENDER NOTICES
+================================================ */
 
-        noticeEmpty.style.display = "block";
+function renderNotices(notices) {
 
-        return;
+  noticeList.innerHTML = "";
+
+
+  if (!notices.length) {
+
+    showEmpty();
+
+    return;
+
+  }
+
+
+  noticeEmpty.hidden = true;
+
+
+  notices.forEach(notice => {
+
+    const card =
+      document.createElement("article");
+
+
+    card.className =
+      "notice-page-card";
+
+
+    if (notice.important === true) {
+
+      card.classList.add(
+        "important"
+      );
 
     }
 
-    noticeEmpty.style.display = "none";
 
-    notices.forEach(function(notice){
+    const date =
+      formatDate(
+        notice.createdAt ||
+        notice.date
+      );
 
-        createNoticeCard(notice);
-
-    });
-
-}
-
-/* ==========================================================
-   CREATE NOTICE CARD
-========================================================== */
-
-function createNoticeCard(notice){
-
-    const card = document.createElement("div");
-
-    card.className = notice.important
-        ? "notice-card important"
-        : "notice-card";
-
-    const date = notice.date
-        ? new Date(notice.date)
-        : new Date();
-
-    const months = [
-
-        "জানুয়ারি",
-        "ফেব্রুয়ারি",
-        "মার্চ",
-        "এপ্রিল",
-        "মে",
-        "জুন",
-        "জুলাই",
-        "আগস্ট",
-        "সেপ্টেম্বর",
-        "অক্টোবর",
-        "নভেম্বর",
-        "ডিসেম্বর"
-
-    ];
-
-    const day = date.getDate();
-
-    const month = months[date.getMonth()];
 
     card.innerHTML = `
 
-<div class="notice-date">
+      <div class="notice-date-box">
 
-<span class="day">
+        <strong>
+          ${date.day}
+        </strong>
 
-${day}
+        <span>
+          ${date.month}
+        </span>
 
-</span>
+      </div>
 
-<span class="month">
 
-${month}
+      <div class="notice-page-content">
 
-</span>
+        ${
+          notice.important === true
+          ? `
+            <span class="important-label">
+              গুরুত্বপূর্ণ
+            </span>
+          `
+          : ""
+        }
 
-</div>
 
-<div class="notice-content">
+        <h2>
+          ${escapeHTML(
+            notice.title ||
+            "নোটিশ"
+          )}
+        </h2>
 
-<div class="notice-top">
 
-<span class="notice-category">
+        <p>
+          ${escapeHTML(
+            notice.description ||
+            notice.text ||
+            ""
+          )}
+        </p>
 
-${notice.category}
 
-</span>
+        <div class="notice-meta">
 
-${notice.important
-? '<span class="notice-category important-tag">গুরুত্বপূর্ণ</span>'
-: ''}
+          প্রকাশের তারিখ:
+          ${date.full}
 
-${notice.isNew
-? '<span class="notice-new">NEW</span>'
-: ''}
+        </div>
 
-</div>
+      </div>
 
-<h3>
+    `;
 
-${notice.title}
-
-</h3>
-
-<p>
-
-${notice.description}
-
-</p>
-
-<div class="notice-footer">
-
-<span>
-
-<i class="fa-solid fa-calendar-days"></i>
-
-${notice.date}
-
-</span>
-
-</div>
-
-</div>
-
-`;
 
     noticeList.appendChild(card);
 
+  });
+
 }
-/* ==========================================================
-   LIVE SEARCH
-========================================================== */
 
-noticeSearch.addEventListener("keyup", function () {
 
-    const keyword = this.value.trim().toLowerCase();
 
-    if (keyword === "") {
+/* ================================================
+   SEARCH
+================================================ */
 
-        applyFilter(currentFilter);
+noticeSearch.addEventListener(
+  "input",
+  () => {
 
-        return;
+    const search =
+      noticeSearch.value
+        .trim()
+        .toLowerCase();
+
+
+    if (!search) {
+
+      renderNotices(
+        allNotices
+      );
+
+      return;
 
     }
 
-    const filtered = allNotices.filter(function (notice) {
+
+    const filtered =
+      allNotices.filter(notice => {
+
+        const title =
+          (
+            notice.title || ""
+          ).toLowerCase();
+
+
+        const description =
+          (
+            notice.description ||
+            notice.text ||
+            ""
+          ).toLowerCase();
+
 
         return (
-
-            (notice.title || "").toLowerCase().includes(keyword) ||
-
-            (notice.description || "").toLowerCase().includes(keyword) ||
-
-            (notice.category || "").toLowerCase().includes(keyword)
-
+          title.includes(search) ||
+          description.includes(search)
         );
 
-    });
+      });
+
 
     renderNotices(filtered);
 
-});
+  }
+);
 
-/* ==========================================================
-   CATEGORY FILTER
-========================================================== */
 
-const filterButtons = document.querySelectorAll(".filter-btn");
 
-filterButtons.forEach(function(button){
+/* ================================================
+   DATE FORMAT
+================================================ */
 
-    button.addEventListener("click", function(){
+function formatDate(value) {
 
-        filterButtons.forEach(function(btn){
+  let date;
 
-            btn.classList.remove("active");
 
-        });
+  if (
+    value &&
+    typeof value.toDate === "function"
+  ) {
 
-        this.classList.add("active");
+    date = value.toDate();
 
-        currentFilter = this.dataset.filter;
+  }
 
-        applyFilter(currentFilter);
+  else if (value) {
 
-    });
+    date = new Date(value);
 
-});
+  }
 
-/* ==========================================================
-   APPLY FILTER
-========================================================== */
+  else {
 
-function applyFilter(filter){
+    date = new Date();
 
-    if(filter === "all"){
+  }
 
-        renderNotices(allNotices);
 
-        return;
+  const months = [
 
-    }
+    "জানুয়ারি",
+    "ফেব্রুয়ারি",
+    "মার্চ",
+    "এপ্রিল",
+    "মে",
+    "জুন",
+    "জুলাই",
+    "আগস্ট",
+    "সেপ্টেম্বর",
+    "অক্টোবর",
+    "নভেম্বর",
+    "ডিসেম্বর"
 
-    if(filter === "important"){
+  ];
 
-        renderNotices(
 
-            allNotices.filter(function(notice){
+  return {
 
-                return notice.important === true;
+    day:
+      date.getDate(),
 
-            })
+    month:
+      months[
+        date.getMonth()
+      ],
 
-        );
+    full:
+      `${date.getDate()} ${
+        months[date.getMonth()]
+      } ${date.getFullYear()}`
 
-        return;
+  };
 
-    }
+}
 
-    renderNotices(
 
-        allNotices.filter(function(notice){
 
-            return (
+/* ================================================
+   HTML SECURITY
+================================================ */
 
-                notice.category || ""
+function escapeHTML(value) {
 
-            ).toLowerCase() === filter.toLowerCase();
+  return String(value)
 
-        })
+    .replace(
+      /&/g,
+      "&amp;"
+    )
 
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
     );
 
 }
-/* ==========================================================
-   INITIAL LOAD
-========================================================== */
 
-window.addEventListener("DOMContentLoaded", function () {
 
-    loadNotices();
 
-});
+/* ================================================
+   EMPTY
+================================================ */
 
-/* ==========================================================
-   AUTO REFRESH
-========================================================== */
+function showEmpty() {
 
-document.addEventListener("visibilitychange", function(){
+  noticeList.innerHTML = "";
 
-    if(document.visibilityState === "visible"){
+  noticeEmpty.hidden = false;
 
-        loadNotices();
+}
 
-    }
 
-});
 
-/* ==========================================================
-   READY
-========================================================== */
+/* ================================================
+   START
+================================================ */
 
-console.log("========================================");
+(async function () {
 
-console.log(" AL HARAMAIN NOTICE SYSTEM V3 ");
+  await loadHeader();
 
-console.log(" Firestore Connected");
+  await loadFooter();
 
-console.log(" Published Notice Only");
+  await loadNotices();
 
-console.log(" Realtime Enabled");
-
-console.log(" Search Enabled");
-
-console.log(" Category Filter Enabled");
-
-console.log("========================================");
+})();
