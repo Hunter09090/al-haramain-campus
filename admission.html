@@ -1,1 +1,342 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>অনলাইন ভর্তি | Al-Haramain Model Madrasa</title>
+
+  <meta
+    name="description"
+    content="আল-হারামাইন মডেল মাদ্রাসার অনলাইন ভর্তি আবেদন"
+  >
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admission.css">
+
+</head>
+
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <div id="header"></div>
+
+
+  <!-- PAGE HERO -->
+
+  <section class="admission-hero">
+
+    <div class="container">
+
+      <span>
+        Al-Haramain Model Madrasa
+      </span>
+
+      <h1>
+        অনলাইন ভর্তি
+      </h1>
+
+      <p>
+        মাদ্রাসায় ভর্তির জন্য নিচের ফরমটি
+        সঠিক তথ্য দিয়ে পূরণ করুন।
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ADMISSION FORM -->
+
+  <main>
+
+    <section class="admission-section">
+
+      <div class="container">
+
+        <div class="admission-box">
+
+
+          <div class="form-heading">
+
+            <span>
+              Admission Form
+            </span>
+
+            <h2>
+              ভর্তি আবেদন ফরম
+            </h2>
+
+            <p>
+              সকল তথ্য সঠিকভাবে পূরণ করুন।
+            </p>
+
+          </div>
+
+
+          <form id="admissionForm">
+
+
+            <!-- STUDENT NAME -->
+
+            <div class="form-group">
+
+              <label for="studentName">
+                শিক্ষার্থীর নাম *
+              </label>
+
+              <input
+                type="text"
+                id="studentName"
+                name="studentName"
+                placeholder="শিক্ষার্থীর পূর্ণ নাম"
+                required
+              >
+
+            </div>
+
+
+            <!-- FATHER -->
+
+            <div class="form-group">
+
+              <label for="fatherName">
+                পিতার নাম *
+              </label>
+
+              <input
+                type="text"
+                id="fatherName"
+                name="fatherName"
+                placeholder="পিতার নাম"
+                required
+              >
+
+            </div>
+
+
+            <!-- MOTHER -->
+
+            <div class="form-group">
+
+              <label for="motherName">
+                মাতার নাম
+              </label>
+
+              <input
+                type="text"
+                id="motherName"
+                name="motherName"
+                placeholder="মাতার নাম"
+              >
+
+            </div>
+
+
+            <!-- DATE OF BIRTH -->
+
+            <div class="form-group">
+
+              <label for="birthDate">
+                জন্ম তারিখ *
+              </label>
+
+              <input
+                type="date"
+                id="birthDate"
+                name="birthDate"
+                required
+              >
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group">
+
+              <label for="phone">
+                অভিভাবকের মোবাইল নম্বর *
+              </label>
+
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="01XXXXXXXXX"
+                required
+              >
+
+            </div>
+
+
+            <!-- DEPARTMENT -->
+
+            <div class="form-group">
+
+              <label for="department">
+                যে বিভাগে ভর্তি হতে চান *
+              </label>
+
+              <select
+                id="department"
+                name="department"
+                required
+              >
+
+                <option value="">
+                  বিভাগ নির্বাচন করুন
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- ADDRESS -->
+
+            <div class="form-group">
+
+              <label for="address">
+                ঠিকানা *
+              </label>
+
+              <textarea
+                id="address"
+                name="address"
+                rows="4"
+                placeholder="বর্তমান ঠিকানা"
+                required
+              ></textarea>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="form-group">
+
+              <label for="message">
+                অতিরিক্ত তথ্য
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                rows="3"
+                placeholder="প্রয়োজন হলে অতিরিক্ত তথ্য লিখুন"
+              ></textarea>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+              type="submit"
+              id="submitBtn"
+              class="admission-submit"
+            >
+
+              আবেদন জমা দিন
+
+            </button>
+
+
+            <!-- STATUS -->
+
+            <div
+              id="formStatus"
+              class="form-status"
+              aria-live="polite"
+            ></div>
+
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <div id="footer"></div>
+
+
+
+  <!-- FIREBASE -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+
+    import {
+      getFirestore
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXl9IBA",
+
+      authDomain:
+        "al-haramain-digital-campus.firebaseapp.com",
+
+      projectId:
+        "al-haramain-digital-campus",
+
+      storageBucket:
+        "al-haramain-digital-campus.firebasestorage.app",
+
+      messagingSenderId:
+        "306805947710",
+
+      appId:
+        "1:306805947710:web:d0ed996b453928767a406f",
+
+      measurementId:
+        "G-LSMDHF5TDY"
+
+    };
+
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const db =
+      getFirestore(app);
+
+
+    window.admissionDB = db;
+
+
+    import("./admission.js");
+
+  </script>
+
+
+</body>
+
+  </html>
