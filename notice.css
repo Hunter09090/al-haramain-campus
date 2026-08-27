@@ -1,0 +1,432 @@
+/* =================================================
+   AL-HARAMAIN DIGITAL
+   NOTICE PAGE
+================================================= */
+
+
+/* ================================================
+   NOTICE HERO
+================================================ */
+
+.notice-page-hero {
+
+  padding: 110px 20px 70px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f4faf7,
+      #ffffff
+    );
+
+}
+
+
+.notice-page-hero .page-label {
+
+  display: inline-block;
+
+  margin-bottom: 12px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  opacity: .75;
+
+}
+
+
+.notice-page-hero h1 {
+
+  margin: 0 0 12px;
+
+  font-size: clamp(
+    32px,
+    5vw,
+    52px
+  );
+
+}
+
+
+.notice-page-hero p {
+
+  max-width: 600px;
+
+  margin: auto;
+
+  line-height: 1.8;
+
+  opacity: .75;
+
+}
+
+
+
+/* ================================================
+   NOTICE PAGE
+================================================ */
+
+.notice-page {
+
+  padding: 70px 20px;
+
+}
+
+
+
+/* ================================================
+   SEARCH
+================================================ */
+
+.notice-tools {
+
+  max-width: 700px;
+
+  margin: 0 auto 40px;
+
+}
+
+
+.notice-tools input {
+
+  width: 100%;
+
+  padding: 15px 18px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 12px;
+
+  outline: none;
+
+  font-size: 16px;
+
+  background: #fff;
+
+  transition: .3s;
+
+}
+
+
+.notice-tools input:focus {
+
+  border-color: #1f7a4d;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(31,122,77,.08);
+
+}
+
+
+
+/* ================================================
+   NOTICE LIST
+================================================ */
+
+.notice-list {
+
+  max-width: 900px;
+
+  margin: auto;
+
+  display: grid;
+
+  gap: 18px;
+
+}
+
+
+
+/* ================================================
+   NOTICE CARD
+================================================ */
+
+.notice-page-card {
+
+  display: flex;
+
+  gap: 20px;
+
+  padding: 22px;
+
+  background: #fff;
+
+  border: 1px solid #eee;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.05);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+
+}
+
+
+.notice-page-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.08);
+
+}
+
+
+
+/* ================================================
+   DATE
+================================================ */
+
+.notice-date-box {
+
+  min-width: 72px;
+
+  height: 78px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #f1f8f4;
+
+  text-align: center;
+
+}
+
+
+.notice-date-box strong {
+
+  font-size: 26px;
+
+  line-height: 1;
+
+}
+
+
+.notice-date-box span {
+
+  margin-top: 6px;
+
+  font-size: 12px;
+
+  opacity: .7;
+
+}
+
+
+
+/* ================================================
+   NOTICE CONTENT
+================================================ */
+
+.notice-page-content {
+
+  flex: 1;
+
+}
+
+
+.notice-page-content h2 {
+
+  margin: 0 0 8px;
+
+  font-size: 20px;
+
+}
+
+
+.notice-page-content p {
+
+  margin: 0;
+
+  line-height: 1.8;
+
+  opacity: .75;
+
+}
+
+
+.notice-meta {
+
+  margin-top: 12px;
+
+  font-size: 12px;
+
+  opacity: .6;
+
+}
+
+
+
+/* ================================================
+   IMPORTANT NOTICE
+================================================ */
+
+.notice-page-card.important {
+
+  border-left:
+    4px solid #c58a00;
+
+}
+
+
+.important-label {
+
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  padding: 4px 9px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  background: #fff5d6;
+
+}
+
+
+
+/* ================================================
+   LOADING
+================================================ */
+
+.notice-loading {
+
+  padding: 50px;
+
+  text-align: center;
+
+  opacity: .65;
+
+}
+
+
+
+/* ================================================
+   EMPTY
+================================================ */
+
+.notice-empty {
+
+  max-width: 600px;
+
+  margin: 40px auto;
+
+  padding: 50px 20px;
+
+  text-align: center;
+
+  border-radius: 16px;
+
+  background: #f8f8f8;
+
+}
+
+
+.empty-icon {
+
+  font-size: 40px;
+
+  margin-bottom: 10px;
+
+}
+
+
+.notice-empty h3 {
+
+  margin: 0 0 8px;
+
+}
+
+
+.notice-empty p {
+
+  margin: 0;
+
+  opacity: .65;
+
+}
+
+
+
+/* ================================================
+   MOBILE
+================================================ */
+
+@media (max-width: 600px) {
+
+  .notice-page-hero {
+
+    padding:
+      90px 15px 50px;
+
+  }
+
+
+  .notice-page {
+
+    padding:
+      45px 15px;
+
+  }
+
+
+  .notice-page-card {
+
+    gap: 14px;
+
+    padding: 16px;
+
+  }
+
+
+  .notice-date-box {
+
+    min-width: 58px;
+
+    height: 65px;
+
+  }
+
+
+  .notice-date-box strong {
+
+    font-size: 22px;
+
+  }
+
+
+  .notice-page-content h2 {
+
+    font-size: 17px;
+
+  }
+
+
+  .notice-page-content p {
+
+    font-size: 14px;
+
+  }
+
+}
