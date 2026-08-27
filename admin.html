@@ -636,12 +636,14 @@ document
 
       } catch (error) {
 
-        showLoginMessage(
-          "Email অথবা Password সঠিক নয়।",
-          true
-        );
+  console.log("Firebase Login Error:", error);
 
-      }
+  showLoginMessage(
+    "Login Error: " + error.code,
+    true
+  );
+
+}
 
     }
   );
