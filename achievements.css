@@ -1,0 +1,315 @@
+/* =================================================
+   AL-HARAMAIN DIGITAL
+   ACHIEVEMENT PAGE
+================================================= */
+
+
+/* ================================================
+   HERO
+================================================ */
+
+.achievement-hero {
+
+  padding: 110px 20px 70px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f4faf7,
+      #ffffff
+    );
+
+}
+
+
+.achievement-hero span {
+
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  opacity: .7;
+
+}
+
+
+.achievement-hero h1 {
+
+  margin: 0 0 12px;
+
+  font-size: clamp(
+    32px,
+    5vw,
+    52px
+  );
+
+}
+
+
+.achievement-hero p {
+
+  max-width: 650px;
+
+  margin: auto;
+
+  line-height: 1.8;
+
+  opacity: .7;
+
+}
+
+
+
+/* ================================================
+   SECTION
+================================================ */
+
+.achievement-section {
+
+  padding: 75px 20px;
+
+}
+
+
+
+/* ================================================
+   GRID
+================================================ */
+
+.achievement-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(220px, 1fr)
+    );
+
+  gap: 22px;
+
+}
+
+
+
+/* ================================================
+   CARD
+================================================ */
+
+.achievement-card {
+
+  position: relative;
+
+  padding: 30px 22px;
+
+  background: #fff;
+
+  border: 1px solid #eee;
+
+  border-radius: 18px;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.05);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+
+}
+
+
+.achievement-card:hover {
+
+  transform:
+    translateY(-6px);
+
+  box-shadow:
+    0 14px 32px
+    rgba(0,0,0,.09);
+
+}
+
+
+
+/* ================================================
+   ICON
+================================================ */
+
+.achievement-icon {
+
+  width: 70px;
+
+  height: 70px;
+
+  margin:
+    0 auto 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1f8f4;
+
+  font-size: 32px;
+
+}
+
+
+
+/* ================================================
+   NUMBER
+================================================ */
+
+.achievement-number {
+
+  margin-bottom: 8px;
+
+  font-size: 38px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+}
+
+
+.achievement-card h3 {
+
+  margin:
+    0 0 10px;
+
+  font-size: 20px;
+
+}
+
+
+.achievement-card p {
+
+  margin: 0;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+
+  opacity: .7;
+
+}
+
+
+
+/* ================================================
+   DATE
+================================================ */
+
+.achievement-date {
+
+  margin-top: 15px;
+
+  font-size: 12px;
+
+  opacity: .5;
+
+}
+
+
+
+/* ================================================
+   LOADING
+================================================ */
+
+.achievement-loading {
+
+  grid-column:
+    1 / -1;
+
+  padding: 50px;
+
+  text-align: center;
+
+  opacity: .6;
+
+}
+
+
+
+/* ================================================
+   EMPTY
+================================================ */
+
+.achievement-empty {
+
+  grid-column:
+    1 / -1;
+
+  padding: 50px 20px;
+
+  text-align: center;
+
+  border-radius: 16px;
+
+  background: #f8f8f8;
+
+  opacity: .7;
+
+}
+
+
+
+/* ================================================
+   MOBILE
+================================================ */
+
+@media (max-width: 600px) {
+
+  .achievement-hero {
+
+    padding:
+      90px 15px 50px;
+
+  }
+
+
+  .achievement-section {
+
+    padding:
+      50px 15px;
+
+  }
+
+
+  .achievement-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .achievement-card {
+
+    padding:
+      25px 18px;
+
+  }
+
+
+  .achievement-number {
+
+    font-size: 34px;
+
+  }
+
+}
