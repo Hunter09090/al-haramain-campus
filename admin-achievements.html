@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Achievements Management | Al-Haramain
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="admin-achievements.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================== -->
+
+<header class="topbar">
+
+  <a
+    href="admin.html"
+    class="back-btn"
+  >
+    ← Dashboard
+  </a>
+
+
+  <div class="brand">
+
+    <strong>
+      🏆 Achievements Management
+    </strong>
+
+    <small>
+      Al-Haramain Digital
+    </small>
+
+  </div>
+
+
+  <button
+    id="logoutBtn"
+    class="logout-btn"
+  >
+    Logout
+  </button>
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================== -->
+
+<main class="container">
+
+
+  <!-- TITLE -->
+
+  <section class="page-title">
+
+    <h1>
+      আমাদের অর্জনসমূহ
+    </h1>
+
+    <p>
+      নতুন অর্জন যোগ করুন এবং পুরোনো অর্জন
+      পরিবর্তন বা মুছে ফেলুন।
+    </p>
+
+  </section>
+
+
+
+  <!-- =======================================
+       FORM
+  ======================================== -->
+
+  <section class="form-card">
+
+    <h2 id="formTitle">
+      ➕ নতুন অর্জন
+    </h2>
+
+
+    <form id="achievementForm">
+
+
+      <!-- TITLE -->
+
+      <label>
+        অর্জনের শিরোনাম
+      </label>
+
+      <input
+        type="text"
+        id="achievementTitle"
+        placeholder="যেমন: ২০২৬ সালের পরীক্ষায় অসাধারণ ফলাফল"
+        required
+      >
+
+
+
+      <!-- DATE -->
+
+      <label>
+        অর্জনের তারিখ
+      </label>
+
+      <input
+        type="date"
+        id="achievementDate"
+        required
+      >
+
+
+
+      <!-- DESCRIPTION -->
+
+      <label>
+        অর্জনের বিস্তারিত
+      </label>
+
+      <textarea
+        id="achievementDescription"
+        rows="7"
+        placeholder="অর্জনের বিস্তারিত এখানে লিখুন..."
+        required
+      ></textarea>
+
+
+
+      <!-- CATEGORY -->
+
+      <label>
+        ক্যাটাগরি
+      </label>
+
+      <select
+        id="achievementCategory"
+      >
+
+        <option value="সাধারণ">
+          সাধারণ
+        </option>
+
+        <option value="শিক্ষাগত">
+          শিক্ষাগত
+        </option>
+
+        <option value="পুরস্কার">
+          পুরস্কার
+        </option>
+
+        <option value="পরীক্ষার ফলাফল">
+          পরীক্ষার ফলাফল
+        </option>
+
+        <option value="প্রতিযোগিতা">
+          প্রতিযোগিতা
+        </option>
+
+        <option value="অন্যান্য">
+          অন্যান্য
+        </option>
+
+      </select>
+
+
+
+      <!-- FEATURED -->
+
+      <label class="check-row">
+
+        <input
+          type="checkbox"
+          id="achievementFeatured"
+        >
+
+        <span>
+          এটি গুরুত্বপূর্ণ অর্জন হিসেবে দেখান
+        </span>
+
+      </label>
+
+
+
+      <!-- BUTTONS -->
+
+      <div class="form-buttons">
+
+        <button
+          type="submit"
+          id="saveBtn"
+          class="save-btn"
+        >
+          💾 অর্জন সংরক্ষণ
+        </button>
+
+
+        <button
+          type="button"
+          id="cancelBtn"
+          class="cancel-btn hidden"
+        >
+          বাতিল
+        </button>
+
+      </div>
+
+
+      <p
+        id="formMessage"
+        class="message"
+      ></p>
+
+
+    </form>
+
+  </section>
+
+
+
+  <!-- =======================================
+       ACHIEVEMENT LIST
+  ======================================== -->
+
+  <section class="list-section">
+
+    <div class="list-heading">
+
+      <div>
+
+        <h2>
+          🏆 প্রকাশিত অর্জন
+        </h2>
+
+        <p>
+          মোট:
+          <strong id="achievementTotal">
+            0
+          </strong>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div id="achievementList">
+
+      <div class="loading">
+        অর্জন লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+
+<script
+  type="module"
+  src="admin-achievements.js"
+></script>
+
+
+</body>
+
+  </html>
