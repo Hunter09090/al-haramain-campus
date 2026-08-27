@@ -1,0 +1,344 @@
+/* =================================================
+   AL-HARAMAIN DIGITAL
+   ONLINE ADMISSION
+================================================= */
+
+
+/* ================================================
+   HERO
+================================================ */
+
+.admission-hero {
+
+  padding: 110px 20px 70px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f4faf7,
+      #ffffff
+    );
+
+}
+
+
+.admission-hero span {
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  opacity: .7;
+
+}
+
+
+.admission-hero h1 {
+
+  margin: 12px 0;
+
+  font-size: clamp(
+    32px,
+    5vw,
+    52px
+  );
+
+}
+
+
+.admission-hero p {
+
+  max-width: 650px;
+
+  margin: auto;
+
+  line-height: 1.8;
+
+  opacity: .7;
+
+}
+
+
+
+/* ================================================
+   SECTION
+================================================ */
+
+.admission-section {
+
+  padding: 70px 20px;
+
+}
+
+
+.admission-box {
+
+  max-width: 760px;
+
+  margin: auto;
+
+  padding: 35px;
+
+  background: #fff;
+
+  border: 1px solid #eee;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 35px
+    rgba(0,0,0,.06);
+
+}
+
+
+
+/* ================================================
+   HEADING
+================================================ */
+
+.form-heading {
+
+  margin-bottom: 30px;
+
+  text-align: center;
+
+}
+
+
+.form-heading span {
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  opacity: .65;
+
+}
+
+
+.form-heading h2 {
+
+  margin: 8px 0;
+
+  font-size: 28px;
+
+}
+
+
+.form-heading p {
+
+  margin: 0;
+
+  opacity: .65;
+
+}
+
+
+
+/* ================================================
+   FORM
+================================================ */
+
+.form-group {
+
+  margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border:
+    1px solid #ddd;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  font: inherit;
+
+  background: #fff;
+
+  box-sizing: border-box;
+
+  transition: .25s;
+
+}
+
+
+.form-group textarea {
+
+  resize: vertical;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+  border-color: #1f7a4d;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(31,122,77,.08);
+
+}
+
+
+
+/* ================================================
+   BUTTON
+================================================ */
+
+.admission-submit {
+
+  width: 100%;
+
+  padding: 15px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font: inherit;
+
+  font-weight: 700;
+
+  background: #1f7a4d;
+
+  color: #fff;
+
+  transition: .25s;
+
+}
+
+
+.admission-submit:hover {
+
+  transform:
+    translateY(-2px);
+
+  opacity: .9;
+
+}
+
+
+.admission-submit:disabled {
+
+  opacity: .6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+}
+
+
+
+/* ================================================
+   STATUS
+================================================ */
+
+.form-status {
+
+  margin-top: 18px;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+}
+
+
+.form-status.success {
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #edf8f1;
+
+  color: #17643c;
+
+}
+
+
+.form-status.error {
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #fff0f0;
+
+  color: #a12626;
+
+}
+
+
+
+/* ================================================
+   MOBILE
+================================================ */
+
+@media (max-width: 600px) {
+
+  .admission-hero {
+
+    padding:
+      90px 15px 50px;
+
+  }
+
+
+  .admission-section {
+
+    padding:
+      45px 15px;
+
+  }
+
+
+  .admission-box {
+
+    padding: 22px 17px;
+
+    border-radius: 15px;
+
+  }
+
+
+  .form-heading h2 {
+
+    font-size: 24px;
+
+  }
+
+  }
