@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin Dashboard | Al-Haramain Digital</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="admin.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<!-- =================================================
+     LOGIN SCREEN
+================================================= -->
+
+<section
+  id="loginScreen"
+  class="login-screen"
+>
+
+  <div class="login-box">
+
+    <div class="admin-logo">
+      🔐
+    </div>
+
+    <h1>
+      Admin Login
+    </h1>
+
+    <p>
+      Al-Haramain Digital
+    </p>
+
+
+    <form id="loginForm">
+
+      <div class="form-group">
+
+        <label>
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Admin Email"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Password"
+          required
+        >
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="admin-btn"
+        id="loginBtn"
+      >
+        Login
+      </button>
+
+
+      <div
+        id="loginMessage"
+        class="message"
+      ></div>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- =================================================
+     DASHBOARD
+================================================= -->
+
+<section
+  id="dashboard"
+  class="dashboard"
+  style="display:none;"
+>
+
+
+  <!-- TOP BAR -->
+
+  <header class="admin-header">
+
+    <div>
+
+      <strong>
+        Al-Haramain Digital
+      </strong>
+
+      <span>
+        Admin Dashboard
+      </span>
+
+    </div>
+
+
+    <button
+      id="logoutBtn"
+      class="logout-btn"
+    >
+      Logout
+    </button>
+
+  </header>
+
+
+
+  <!-- DASHBOARD CONTENT -->
+
+  <main class="admin-main">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="dashboard-title">
+
+      <h1>
+        Dashboard
+      </h1>
+
+      <p>
+        Website-এর সকল তথ্য এখান থেকে পরিচালনা করুন।
+      </p>
+
+    </div>
+
+
+
+    <!-- STAT CARDS -->
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+
+        <span>
+          📢
+        </span>
+
+        <strong id="noticeCount">
+          0
+        </strong>
+
+        <small>
+          Notices
+        </small>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <span>
+          🏆
+        </span>
+
+        <strong id="achievementCount">
+          0
+        </strong>
+
+        <small>
+          Achievements
+        </small>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <span>
+          🏫
+        </span>
+
+        <strong id="departmentCount">
+          0
+        </strong>
+
+        <small>
+          Departments
+        </small>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <span>
+          📝
+        </span>
+
+        <strong id="admissionCount">
+          0
+        </strong>
+
+        <small>
+          Applications
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         NOTICE
+    ================================================= -->
+
+    <section class="admin-section">
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            📢 Notice Management
+          </h2>
+
+          <p>
+            নতুন নোটিশ যোগ করুন
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <form id="noticeForm">
+
+        <input
+          type="hidden"
+          id="noticeId"
+        >
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Notice Title *
+            </label>
+
+            <input
+              type="text"
+              id="noticeTitle"
+              placeholder="নোটিশের শিরোনাম"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Date
+            </label>
+
+            <input
+              type="date"
+              id="noticeDate"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Notice Details *
+          </label>
+
+          <textarea
+            id="noticeText"
+            rows="4"
+            placeholder="নোটিশের বিস্তারিত"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="admin-btn"
+          >
+            Save Notice
+          </button>
+
+          <button
+            type="button"
+            class="cancel-btn"
+            onclick="resetNoticeForm()"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <div
+        id="noticeList"
+        class="admin-list"
+      ></div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACHIEVEMENT
+    ================================================= -->
+
+    <section class="admin-section">
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            🏆 Achievement Management
+          </h2>
+
+          <p>
+            নতুন অর্জন যোগ করুন
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <form id="achievementForm">
+
+        <input
+          type="hidden"
+          id="achievementId"
+        >
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Icon
+            </label>
+
+            <input
+              type="text"
+              id="achievementIcon"
+              value="🏆"
+              placeholder="🏆"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Number
+            </label>
+
+            <input
+              type="text"
+              id="achievementNumber"
+              placeholder="500+"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Title *
+            </label>
+
+            <input
+              type="text"
+              id="achievementTitle"
+              placeholder="সফল শিক্ষার্থী"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Year
+            </label>
+
+            <input
+              type="text"
+              id="achievementYear"
+              placeholder="2026"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Description
+          </label>
+
+          <textarea
+            id="achievementDescription"
+            rows="3"
+            placeholder="অর্জনের বিস্তারিত"
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="admin-btn"
+          >
+            Save Achievement
+          </button>
+
+          <button
+            type="button"
+            class="cancel-btn"
+            onclick="resetAchievementForm()"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <div
+        id="achievementList"
+        class="admin-list"
+      ></div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         DEPARTMENT
+    ================================================= -->
+
+    <section class="admin-section">
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            🏫 Department Management
+          </h2>
+
+          <p>
+            নতুন বিভাগ যোগ করুন
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <form id="departmentForm">
+
+        <input
+          type="hidden"
+          id="departmentId"
+        >
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Icon
+            </label>
+
+            <input
+              type="text"
+              id="departmentIcon"
+              value="📚"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Department Name *
+            </label>
+
+            <input
+              type="text"
+              id="departmentName"
+              placeholder="হিফজ বিভাগ"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Description
+          </label>
+
+          <textarea
+            id="departmentDescription"
+            rows="3"
+            placeholder="বিভাগের বিস্তারিত"
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Order
+          </label>
+
+          <input
+            type="number"
+            id="departmentOrder"
+            value="1"
+          >
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="admin-btn"
+          >
+            Save Department
+          </button>
+
+          <button
+            type="button"
+            class="cancel-btn"
+            onclick="resetDepartmentForm()"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <div
+        id="departmentList"
+        class="admin-list"
+      ></div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ADMISSION
+    ================================================= -->
+
+    <section class="admin-section">
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            📝 Admission Applications
+          </h2>
+
+          <p>
+            শিক্ষার্থীদের অনলাইন ভর্তি আবেদন
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="admissionList"
+        class="admin-list"
+      >
+
+        <p class="empty">
+          আবেদন লোড হচ্ছে...
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+</section>
+
+
+
+<!-- =================================================
+     FIREBASE
+================================================= -->
+
+<script type="module">
+
+  import {
+    initializeApp
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+  import {
+    getFirestore
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXl9IBA",
+
+    authDomain:
+      "al-haramain-digital-campus.firebaseapp.com",
+
+    projectId:
+      "al-haramain-digital-campus",
+
+    storageBucket:
+      "al-haramain-digital-campus.firebasestorage.app",
+
+    messagingSenderId:
+      "306805947710",
+
+    appId:
+      "1:306805947710:web:d0ed996b453928767a406f",
+
+    measurementId:
+      "G-LSMDHF5TDY"
+
+  };
+
+
+  const app =
+    initializeApp(
+      firebaseConfig
+    );
+
+
+  const auth =
+    getAuth(app);
+
+
+  const db =
+    getFirestore(app);
+
+
+  window.adminAuth = auth;
+  window.adminDB = db;
+
+
+  window.firebaseLogin =
+    signInWithEmailAndPassword;
+
+
+  window.firebaseLogout =
+    signOut;
+
+
+  onAuthStateChanged(
+    auth,
+    user => {
+
+      if (user) {
+
+        document
+          .getElementById(
+            "loginScreen"
+          )
+          .style.display = "none";
+
+
+        document
+          .getElementById(
+            "dashboard"
+          )
+          .style.display = "block";
+
+
+        window.dispatchEvent(
+          new Event(
+            "adminReady"
+          )
+        );
+
+      } else {
+
+        document
+          .getElementById(
+            "loginScreen"
+          )
+          .style.display = "flex";
+
+
+        document
+          .getElementById(
+            "dashboard"
+          )
+          .style.display = "none";
+
+      }
+
+    }
+  );
+
+
+  import("./admin.js");
+
+</script>
+
+
+</body>
+
+</html>
