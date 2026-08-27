@@ -1,0 +1,243 @@
+/* =================================================
+   AL-HARAMAIN DIGITAL
+   DEPARTMENT PAGE
+================================================= */
+
+
+/* ================================================
+   HERO
+================================================ */
+
+.department-hero {
+
+  padding: 110px 20px 70px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f4faf7,
+      #ffffff
+    );
+
+}
+
+
+.department-hero span {
+
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  opacity: .7;
+
+}
+
+
+.department-hero h1 {
+
+  margin: 0 0 12px;
+
+  font-size: clamp(
+    32px,
+    5vw,
+    52px
+  );
+
+}
+
+
+.department-hero p {
+
+  max-width: 650px;
+
+  margin: auto;
+
+  line-height: 1.8;
+
+  opacity: .7;
+
+}
+
+
+
+/* ================================================
+   DEPARTMENT SECTION
+================================================ */
+
+.department-section {
+
+  padding: 75px 20px;
+
+}
+
+
+.department-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(230px, 1fr)
+    );
+
+  gap: 22px;
+
+}
+
+
+
+/* ================================================
+   DEPARTMENT CARD
+================================================ */
+
+.department-card {
+
+  padding: 28px 22px;
+
+  background: #fff;
+
+  border: 1px solid #eee;
+
+  border-radius: 18px;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.05);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+
+}
+
+
+.department-card:hover {
+
+  transform:
+    translateY(-6px);
+
+  box-shadow:
+    0 14px 32px
+    rgba(0,0,0,.09);
+
+}
+
+
+
+/* ================================================
+   ICON
+================================================ */
+
+.department-icon {
+
+  width: 70px;
+
+  height: 70px;
+
+  margin:
+    0 auto 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1f8f4;
+
+  font-size: 32px;
+
+}
+
+
+.department-card h3 {
+
+  margin:
+    0 0 10px;
+
+  font-size: 20px;
+
+}
+
+
+.department-card p {
+
+  margin: 0;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+
+  opacity: .7;
+
+}
+
+
+
+/* ================================================
+   LOADING
+================================================ */
+
+.department-loading {
+
+  grid-column:
+    1 / -1;
+
+  padding: 50px;
+
+  text-align: center;
+
+  opacity: .6;
+
+}
+
+
+
+/* ================================================
+   MOBILE
+================================================ */
+
+@media (max-width: 600px) {
+
+  .department-hero {
+
+    padding:
+      90px 15px 50px;
+
+  }
+
+
+  .department-section {
+
+    padding:
+      50px 15px;
+
+  }
+
+
+  .department-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .department-card {
+
+    padding: 24px 18px;
+
+  }
+
+}
