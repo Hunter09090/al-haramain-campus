@@ -1,30 +1,193 @@
+<!-- =================================================
+     AL-HARAMAIN DIGITAL
+     Reusable Header / Navbar
+================================================= -->
+
 <header class="header">
-  <nav class="navbar container">
 
-    <a href="index.html#home" class="brand">
-      <img src="logo.png.jpg" alt="Al-Haramain Model Madrasa">
-      <div>
-        <strong>আল-হারামাইন মডেল মাদ্রাসা</strong>
-        <small>Al-Haramain Model Madrasa</small>
+  <div class="container">
+
+    <nav class="navbar">
+
+
+      <!-- =========================================
+           LOGO + MADRASA NAME
+      ========================================== -->
+
+      <a href="index.html" class="brand">
+
+        <img
+          src="logo.png.jpg"
+          alt="আল-হারামাইন মডেল মাদ্রাসা"
+        >
+
+        <div>
+
+          <strong>
+            আল-হারামাইন মডেল মাদ্রাসা
+          </strong>
+
+          <small>
+            Al-Haramain Model Madrasa
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <!-- =========================================
+           MOBILE MENU BUTTON
+      ========================================== -->
+
+      <button
+        class="menu-btn"
+        type="button"
+        aria-label="Menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+
+      <!-- =========================================
+           NAVIGATION
+      ========================================== -->
+
+      <div class="nav-links">
+
+
+        <a href="index.html#home">
+          হোম
+        </a>
+
+
+        <a href="index.html#director">
+          পরিচালকের বাণী
+        </a>
+
+
+        <a href="index.html#departments">
+          বিভাগসমূহ
+        </a>
+
+
+        <a href="index.html#achievements">
+          অর্জনসমূহ
+        </a>
+
+
+        <a href="index.html#admission">
+          অনলাইন ভর্তি
+        </a>
+
+
+        <a href="index.html#notice">
+          নোটিশ
+        </a>
+
+
+        <a href="index.html#result">
+          রেজাল্ট
+        </a>
+
+
+        <a href="index.html#gallery">
+          ফটো গ্যালারি
+        </a>
+
+
+        <a href="index.html#student">
+          শিক্ষার্থীর তথ্য
+        </a>
+
+
+        <a href="index.html#location">
+          লোকেশন
+        </a>
+
+
+        <!-- Facebook -->
+
+        <a
+          href="https://www.facebook.com/profile.php?id=61571161346418"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Facebook
+        </a>
+
+
       </div>
-    </a>
 
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">
-      ☰
-    </button>
+    </nav>
 
-    <div class="nav-links" id="navLinks">
-      <a href="index.html#home">হোম</a>
-      <a href="index.html#director">ফেসবুক</a>
-      <a href="index.html#departments">বিভাগসমূহ</a>
-      <a href="index.html#achievements">অর্জনসমূহ</a>
-      <a href="index.html#admission">অনলাইন ভর্তি</a>
-      <a href="index.html#notice">নোটিশ</a>
-      <a href="index.html#result">রেজাল্ট</a>
-      <a href="index.html#gallery">গ্যালারি</a>
-      <a href="index.html#student">শিক্ষার্থীর তথ্য</a>
-      <a href="index.html#location">লোকেশন</a>
-    </div>
+  </div>
 
-  </nav>
 </header>
+
+
+<!-- =================================================
+     MOBILE MENU SCRIPT
+================================================= -->
+
+<script>
+
+  (() => {
+
+    const menuBtn =
+      document.querySelector(".menu-btn");
+
+    const navLinks =
+      document.querySelector(".nav-links");
+
+
+    if (!menuBtn || !navLinks) return;
+
+
+    menuBtn.addEventListener("click", () => {
+
+      const isOpen =
+        navLinks.classList.toggle("open");
+
+
+      menuBtn.setAttribute(
+        "aria-expanded",
+        isOpen
+      );
+
+
+      menuBtn.textContent =
+        isOpen ? "✕" : "☰";
+
+    });
+
+
+    /*
+      Mobile menu থেকে কোনো link চাপলে
+      menu automatically বন্ধ হবে।
+    */
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+          navLinks.classList.remove("open");
+
+          menuBtn.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          menuBtn.textContent = "☰";
+
+        });
+
+      });
+
+
+  })();
+
+</script>
