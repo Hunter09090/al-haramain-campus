@@ -1,1 +1,209 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    আমাদের বিভাগসমূহ | Al-Haramain Model Madrasa
+  </title>
+
+  <meta
+    name="description"
+    content="আল-হারামাইন মডেল মাদ্রাসার সকল শিক্ষা বিভাগ"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="departments.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <div id="header"></div>
+
+
+
+  <!-- =========================================
+       PAGE HERO
+  ========================================== -->
+
+  <section class="department-hero">
+
+    <div class="container">
+
+      <span>
+        Al-Haramain Model Madrasa
+      </span>
+
+      <h1>
+        আমাদের বিভাগসমূহ
+      </h1>
+
+      <p>
+        শিক্ষার্থীদের প্রয়োজন ও যোগ্যতা অনুযায়ী
+        বিভিন্ন শিক্ষা কার্যক্রম পরিচালিত হয়।
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       DEPARTMENTS
+  ========================================== -->
+
+  <main>
+
+    <section
+      class="department-section"
+      id="departments"
+    >
+
+      <div class="container">
+
+
+        <div class="section-title">
+
+          <span>
+            Education
+          </span>
+
+          <h2>
+            শিক্ষা বিভাগসমূহ
+          </h2>
+
+        </div>
+
+
+        <!-- Department Cards -->
+
+        <div
+          id="departmentList"
+          class="department-grid"
+        >
+
+          <!-- JavaScript এখানে বিভাগ দেখাবে -->
+
+          <div class="department-loading">
+
+            বিভাগগুলো লোড হচ্ছে...
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <div id="footer"></div>
+
+
+
+  <!-- =========================================
+       FIREBASE + DEPARTMENT SCRIPT
+  ========================================== -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+
+    import {
+      getFirestore
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+    /* =========================================
+       FIREBASE CONFIG
+    ========================================== */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXl9IBA",
+
+      authDomain:
+        "al-haramain-digital-campus.firebaseapp.com",
+
+      projectId:
+        "al-haramain-digital-campus",
+
+      storageBucket:
+        "al-haramain-digital-campus.firebasestorage.app",
+
+      messagingSenderId:
+        "306805947710",
+
+      appId:
+        "1:306805947710:web:d0ed996b453928767a406f",
+
+      measurementId:
+        "G-LSMDHF5TDY"
+
+    };
+
+
+    /* =========================================
+       FIREBASE INITIALIZE
+    ========================================== */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const db =
+      getFirestore(app);
+
+
+    window.departmentDB = db;
+
+
+    /* =========================================
+       LOAD DEPARTMENT JS
+    ========================================== */
+
+    import("./departments.js");
+
+  </script>
+
+
+</body>
+
+</html>
