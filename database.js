@@ -1,31 +1,35 @@
-/* =====================================================
-   AL-HARAMAIN DIGITAL
-   Database + Main JavaScript
-===================================================== */
+// ================================================
+// Firebase Configuration
+// Al-Haramain Digital
+// ================================================
 
-
-/* =====================================================
-   1. FIREBASE CONFIGURATION
-   -----------------------------------------------------
-   আপনার Firebase Console থেকে এই তথ্যগুলো বসাবেন।
-===================================================== */
+// For Firebase JS SDK v7.20.0 and later,
+// measurementId is optional.
 
 const firebaseConfig = {
 
-  apiKey: "YOUR_API_KEY",
+  apiKey:
+    "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXl9IBA",
 
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  authDomain:
+    "al-haramain-digital-campus.firebaseapp.com",
 
-  projectId: "YOUR_PROJECT_ID",
+  projectId:
+    "al-haramain-digital-campus",
 
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
+  storageBucket:
+    "al-haramain-digital-campus.firebasestorage.app",
 
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  messagingSenderId:
+    "306805947710",
 
-  appId: "YOUR_APP_ID"
+  appId:
+    "1:306805947710:web:d0ed996b453928767a406f",
+
+  measurementId:
+    "G-LSMDHF5TDY"
 
 };
-
 
 /* =====================================================
    2. FIREBASE IMPORT
