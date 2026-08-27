@@ -3,400 +3,217 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<title>নোটিশ | আল হারামাইন মডেল মাদ্রাসা</title>
+  <title>নোটিশ | Al-Haramain Model Madrasa</title>
 
-<link rel="stylesheet" href="style.css">
+  <meta
+    name="description"
+    content="আল-হারামাইন মডেল মাদ্রাসার সকল নোটিশ"
+  >
 
-<link rel="stylesheet" href="animations.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="notice.css"
+  >
 
 </head>
 
+
 <body>
 
-<!-- ==========================
-HEADER
-========================== -->
 
-<div id="header"></div>
+  <!-- =========================================
+       HEADER
+  ========================================== -->
 
-<!-- ==========================
-PAGE HERO
-========================== -->
+  <div id="header"></div>
 
-<section class="page-hero">
 
-<div class="page-overlay"></div>
 
-<div class="container">
+  <!-- =========================================
+       NOTICE HERO
+  ========================================== -->
 
-<div class="page-content">
+  <section class="notice-page-hero">
 
-<h1>
+    <div class="container">
 
-নোটিশ বোর্ড
+      <span class="page-label">
+        Al-Haramain Model Madrasa
+      </span>
 
-</h1>
+      <h1>
+        নোটিশ
+      </h1>
 
-<p>
+      <p>
+        মাদ্রাসার সকল গুরুত্বপূর্ণ নোটিশ
+        এখানে প্রকাশ করা হবে।
+      </p>
 
-<a href="index.html">
+    </div>
 
-হোম
+  </section>
 
-</a>
 
-<i class="fa-solid fa-angle-right"></i>
 
-<span>
+  <!-- =========================================
+       NOTICE SECTION
+  ========================================== -->
 
-নোটিশ
+  <main>
 
-</span>
+    <section class="notice-page">
 
-</p>
+      <div class="container">
 
-</div>
 
-</div>
+        <!-- SEARCH -->
 
-</section>
+        <div class="notice-tools">
 
-<!-- ==========================
-NOTICE SECTION
-========================== -->
+          <input
+            type="search"
+            id="noticeSearch"
+            placeholder="নোটিশ খুঁজুন..."
+            aria-label="নোটিশ খুঁজুন"
+          >
 
-<section class="notice-section">
+        </div>
 
-<div class="container">
 
-<div class="section-header">
 
-<span class="section-subtitle">
+        <!-- NOTICE LIST -->
 
-Notice Board
+        <div
+          id="noticeList"
+          class="notice-list"
+        >
 
-</span>
+          <div class="notice-loading">
 
-<h2>
+            নোটিশ লোড হচ্ছে...
 
-সর্বশেষ নোটিশসমূহ
+          </div>
 
-</h2>
+        </div>
 
-<p>
 
-মাদ্রাসার সকল গুরুত্বপূর্ণ নোটিশ, ভর্তি বিজ্ঞপ্তি,
-পরীক্ষা সংক্রান্ত তথ্য এবং অন্যান্য ঘোষণা এখানে প্রকাশিত হবে।
 
-</p>
+        <!-- EMPTY MESSAGE -->
 
-</div>
+        <div
+          id="noticeEmpty"
+          class="notice-empty"
+          hidden
+        >
 
-<!-- Search -->
+          <div class="empty-icon">
+            📢
+          </div>
 
-<div class="notice-search">
+          <h3>
+            কোনো নোটিশ পাওয়া যায়নি
+          </h3>
 
-<input
-type="text"
-id="noticeSearch"
-placeholder="নোটিশ খুঁজুন...">
+          <p>
+            বর্তমানে প্রদর্শনের জন্য কোনো নোটিশ নেই।
+          </p>
 
-<button id="searchBtn">
+        </div>
 
-<i class="fa-solid fa-magnifying-glass"></i>
 
-</button>
+      </div>
 
-</div>
+    </section>
 
-<!-- Notice List -->
+  </main>
 
-<div
-class="notice-list"
-id="noticeList">
 
-<!-- Firebase Notice এখানে Auto Load হবে -->
 
-<div class="loading-box">
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
 
-<i class="fa-solid fa-spinner fa-spin"></i>
+  <div id="footer"></div>
 
-<p>
 
-নোটিশ লোড হচ্ছে...
 
-</p>
+  <!-- =========================================
+       NOTICE SCRIPT
+  ========================================== -->
 
-</div>
+  <script type="module">
 
-</div>
+    import {
+      initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
-<!-- Empty -->
 
-<div
-class="notice-empty"
-id="noticeEmpty"
-style="display:none;">
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      query,
+      orderBy
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-<i class="fa-regular fa-folder-open"></i>
 
-<h3>
 
-কোন নোটিশ পাওয়া যায়নি
+    const firebaseConfig = {
 
-</h3>
+      apiKey:
+        "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXl9IBA",
 
-<p>
+      authDomain:
+        "al-haramain-digital-campus.firebaseapp.com",
 
-বর্তমানে কোনো নোটিশ প্রকাশ করা হয়নি।
+      projectId:
+        "al-haramain-digital-campus",
 
-</p>
+      storageBucket:
+        "al-haramain-digital-campus.firebasestorage.app",
 
-</div>
+      messagingSenderId:
+        "306805947710",
 
-</div>
+      appId:
+        "1:306805947710:web:d0ed996b453928767a406f",
 
-</section>
-<!-- ==========================
-NOTICE FILTER
-========================== -->
+      measurementId:
+        "G-LSMDHF5TDY"
 
-<div class="notice-filter">
+    };
 
-<button class="filter-btn active" data-filter="all">
 
-সব নোটিশ
+    const app =
+      initializeApp(firebaseConfig);
 
-</button>
 
-<button class="filter-btn" data-filter="important">
+    const db =
+      getFirestore(app);
 
-গুরুত্বপূর্ণ
 
-</button>
+    window.noticeDB = db;
 
-<button class="filter-btn" data-filter="admission">
 
-ভর্তি
+    import("./notice.js");
 
-</button>
+  </script>
 
-<button class="filter-btn" data-filter="exam">
-
-পরীক্ষা
-
-</button>
-
-<button class="filter-btn" data-filter="general">
-
-সাধারণ
-
-</button>
-
-</div>
-
-<!-- ==========================
-NOTICE PAGINATION
-========================== -->
-
-<div
-id="pagination"
-class="notice-pagination">
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================
-NEWSLETTER
-========================== -->
-
-<section class="newsletter">
-
-<div class="container">
-
-<div class="newsletter-content">
-
-<h2>
-
-সবশেষ নোটিশ সবার আগে জানতে চান?
-
-</h2>
-
-<p>
-
-আমাদের অফিসিয়াল ফেসবুক পেজ ও ওয়েবসাইট নিয়মিত ভিজিট করুন।
-
-</p>
-
-<a
-href="https://facebook.com/"
-target="_blank"
-class="btn-primary">
-
-<i class="fa-brands fa-facebook"></i>
-
-Facebook Page
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================
-FOOTER
-========================== -->
-
-<div id="footer"></div>
-
-<!-- ==========================
-FIREBASE SDK
-========================== -->
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    
-<script src="firebase-config.js"></script>
-
-<script src="firebase.js"></script>
-
-<!-- ==========================
-MAIN SCRIPT
-========================== -->
-
-<script src="app.js"></script>
-
-<script src="notice.js"></script>
-<!-- ==========================
-BACK TO TOP
-========================== -->
-
-<button id="backToTop" class="back-to-top">
-
-<i class="fa-solid fa-arrow-up"></i>
-
-</button>
-
-<!-- ==========================
-LOADING OVERLAY
-========================== -->
-
-<div id="pageLoader" class="page-loader">
-
-<div class="loader-circle"></div>
-
-<p>
-
-Loading...
-
-</p>
-
-</div>
-
-<!-- ==========================
-FIREBASE READY
-========================== -->
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const loader = document.getElementById("pageLoader");
-
-    if (loader) {
-
-        setTimeout(function () {
-
-            loader.style.opacity = "0";
-
-            setTimeout(function () {
-
-                loader.style.display = "none";
-
-            }, 400);
-
-        }, 500);
-
-    }
-
-});
-
-</script>
-
-<!-- ==========================
-BACK TO TOP
-========================== -->
-
-<script>
-
-const backBtn = document.getElementById("backToTop");
-
-window.addEventListener("scroll", function () {
-
-    if (window.scrollY > 300) {
-
-        backBtn.classList.add("show");
-
-    } else {
-
-        backBtn.classList.remove("show");
-
-    }
-
-});
-
-backBtn.addEventListener("click", function () {
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
-});
-
-</script>
-
-<!-- ==========================
-LOAD HEADER & FOOTER
-========================== -->
-
-<script>
-
-fetch("header.html")
-.then(res => res.text())
-.then(data => {
-
-    document.getElementById("header").innerHTML = data;
-
-});
-
-fetch("footer.html")
-.then(res => res.text())
-.then(data => {
-
-    document.getElementById("footer").innerHTML = data;
-
-});
-
-</script>
 
 </body>
 
