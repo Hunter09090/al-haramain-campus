@@ -3,662 +3,203 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>আমাদের অর্জনসমূহ | আল হারামাইন মডেল মাদ্রাসা</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta name="description"
-content="আল হারামাইন মডেল মাদ্রাসার বিভিন্ন অর্জন, সাফল্য, পুরস্কার এবং গৌরবময় ইতিহাস দেখুন।">
+  <title>
+    আমাদের অর্জনসমূহ | Al-Haramain Model Madrasa
+  </title>
 
-<link rel="stylesheet" href="variables.css">
-<link rel="stylesheet" href="animations.css">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="responsive.css">
+  <meta
+    name="description"
+    content="আল-হারামাইন মডেল মাদ্রাসার অর্জনসমূহ"
+  >
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="achievements.css"
+  >
 
 </head>
 
+
 <body>
 
-<!-- ===========================
-HEADER
-=========================== -->
 
-<div id="header"></div>
+  <!-- =========================================
+       HEADER
+  ========================================== -->
 
-<!-- ===========================
-PAGE HERO
-=========================== -->
+  <div id="header"></div>
 
-<section class="page-hero">
 
-<div class="page-overlay"></div>
 
-<div class="container">
+  <!-- =========================================
+       PAGE HERO
+  ========================================== -->
 
-<div class="page-content">
-
-<h1>
-
-আমাদের অর্জনসমূহ
-
-</h1>
-
-<p>
-
-<a href="index.html">হোম</a>
-
-<i class="fa-solid fa-angle-right"></i>
-
-<span>অর্জনসমূহ</span>
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ===========================
-FEATURED ACHIEVEMENT
-=========================== -->
-
-<section class="featured-achievement">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>
-
-🏆 আমাদের গর্বের অর্জন
-
-</h2>
-
-<p>
-
-আল হারামাইন মডেল মাদ্রাসার উল্লেখযোগ্য সাফল্যসমূহ
-
-</p>
-
-</div>
-
-<div class="featured-card">
-
-<div class="featured-image">
-
-<img
-src="https://placehold.co/900x550?text=Achievement+Photo"
-alt="Achievement">
-
-</div>
-
-<div class="featured-content">
-
-<span class="achievement-badge">
-
-সর্বশেষ অর্জন
-
-</span>
-
-<h2>
-
-এখানে সর্বশেষ বড় অর্জনের শিরোনাম বসবে
-
-</h2>
-
-<p>
-
-ভবিষ্যতে Firebase থেকে এই অংশ
-স্বয়ংক্রিয়ভাবে পরিবর্তন হবে।
-
-বর্তমানে এটি Demo হিসেবে রাখা হয়েছে।
-
-</p>
-
-<div class="featured-info">
-
-<span>
-
-<i class="fa-solid fa-calendar-days"></i>
-
-তারিখ
-
-</span>
-
-<span>
-
-<i class="fa-solid fa-trophy"></i>
-
-সাফল্য
-
-</span>
-
-</div>
-
-<a href="#achievement-list"
-
-class="btn btn-primary">
-
-সব অর্জন দেখুন
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ===========================
-SEARCH & FILTER
-=========================== -->
-
-<section class="achievement-tools">
-
-<div class="container">
-
-<div class="tools-wrapper">
-
-<div class="search-box">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-<input
-
-type="text"
-
-id="achievementSearch"
-
-placeholder="অর্জনের নাম লিখে খুঁজুন...">
-
-</div>
-
-<div class="filter-box">
-
-<select id="achievementCategory">
-
-<option value="all">
-
-সকল বিভাগ
-
-</option>
-
-<option value="hifz">
-
-হিফজ
-
-</option>
-
-<option value="nurani">
-
-নূরানী
-
-</option>
-
-<option value="ibtedayi">
-
-ইবতেদায়ী
-
-</option>
-
-<option value="dakhil">
-
-দাখিল
-
-</option>
-
-<option value="competition">
-
-প্রতিযোগিতা
-
-</option>
-
-<option value="award">
-
-পুরস্কার
-
-</option>
-
-<option value="other">
-
-অন্যান্য
-
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ===========================
-ACHIEVEMENT LIST
-=========================== -->
-
-<section
-id="achievement-list"
-class="achievement-list">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>
-
-সকল অর্জন
-
-</h2>
-
-<p>
-
-আমাদের বিভিন্ন বছরের সকল সাফল্য
-
-</p>
-
-</div>
-
-<div
-
-class="achievement-grid"
-
-id="achievementGrid">
-<!-- ===========================
-ACHIEVEMENT CARD - 01
-=========================== -->
-
-<div class="achievement-card" data-category="hifz">
-
-    <img src="https://placehold.co/600x400?text=Achievement+01"
-         alt="Achievement">
-
-    <div class="achievement-content">
-
-        <span class="achievement-category">
-
-            হিফজ বিভাগ
-
-        </span>
-
-        <h3>
-
-            অর্জনের শিরোনাম এখানে হবে
-
-        </h3>
-
-        <p>
-
-            এখানে সংক্ষিপ্ত বিবরণ থাকবে।
-            ভবিষ্যতে Firebase থেকে স্বয়ংক্রিয়ভাবে আসবে।
-
-        </p>
-
-        <div class="achievement-meta">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ২০২৬
-
-            </span>
-
-        </div>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত দেখুন
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ===========================
-CARD-02
-=========================== -->
-
-<div class="achievement-card" data-category="competition">
-
-    <img src="https://placehold.co/600x400?text=Achievement+02"
-         alt="Achievement">
-
-    <div class="achievement-content">
-
-        <span class="achievement-category">
-
-            প্রতিযোগিতা
-
-        </span>
-
-        <h3>
-
-            বিভাগীয় প্রতিযোগিতায় সাফল্য
-
-        </h3>
-
-        <p>
-
-            এখানে ভবিষ্যতে আসল তথ্য বসবে।
-
-        </p>
-
-        <div class="achievement-meta">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ২০২৫
-
-            </span>
-
-        </div>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত দেখুন
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ===========================
-CARD-03
-=========================== -->
-
-<div class="achievement-card" data-category="award">
-
-    <img src="https://placehold.co/600x400?text=Achievement+03"
-         alt="Achievement">
-
-    <div class="achievement-content">
-
-        <span class="achievement-category">
-
-            পুরস্কার
-
-        </span>
-
-        <h3>
-
-            বিশেষ সম্মাননা অর্জন
-
-        </h3>
-
-        <p>
-
-            এখানে ভবিষ্যতে আসল তথ্য বসবে।
-
-        </p>
-
-        <div class="achievement-meta">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ২০২৪
-
-            </span>
-
-        </div>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত দেখুন
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ===========================
-CARD-04
-=========================== -->
-
-<div class="achievement-card" data-category="dakhil">
-
-    <img src="https://placehold.co/600x400?text=Achievement+04"
-         alt="Achievement">
-
-    <div class="achievement-content">
-
-        <span class="achievement-category">
-
-            দাখিল বিভাগ
-
-        </span>
-
-        <h3>
-
-            বোর্ড পরীক্ষায় কৃতিত্ব
-
-        </h3>
-
-        <p>
-
-            এখানে ভবিষ্যতে আসল তথ্য বসবে।
-
-        </p>
-
-        <div class="achievement-meta">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ২০২৩
-
-            </span>
-
-        </div>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত দেখুন
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ===========================
-CARD-05
-=========================== -->
-
-<div class="achievement-card" data-category="nurani">
-
-    <img src="https://placehold.co/600x400?text=Achievement+05"
-         alt="Achievement">
-
-    <div class="achievement-content">
-
-        <span class="achievement-category">
-
-            নূরানী বিভাগ
-
-        </span>
-
-        <h3>
-
-            বার্ষিক মেধা মূল্যায়নে সাফল্য
-
-        </h3>
-
-        <p>
-
-            এখানে ভবিষ্যতে আসল তথ্য বসবে।
-
-        </p>
-
-        <div class="achievement-meta">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ২০২২
-
-            </span>
-
-        </div>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত দেখুন
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ===========================
-CARD-06
-=========================== -->
-
-<div class="achievement-card" data-category="other">
-
-    <img src="https://placehold.co/600x400?text=Achievement+06"
-         alt="Achievement">
-
-    <div class="achievement-content">
-
-        <span class="achievement-category">
-
-            অন্যান্য
-
-        </span>
-
-        <h3>
-
-            সামাজিক কার্যক্রমে অবদান
-
-        </h3>
-
-        <p>
-
-            এখানে ভবিষ্যতে আসল তথ্য বসবে।
-
-        </p>
-
-        <div class="achievement-meta">
-
-            <span>
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                ২০২১
-
-            </span>
-
-        </div>
-
-        <a href="#"
-           class="btn btn-outline">
-
-            বিস্তারিত দেখুন
-
-        </a>
-
-    </div>
-
-</div>
-
-</div>
-
-<!-- Achievement Grid End -->
-
-
-<div class="text-center mt-5">
-
-    <button class="btn btn-primary">
-
-        আরও অর্জন দেখুন
-
-    </button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ===========================
-CALL TO ACTION
-=========================== -->
-
-<section class="cta-section">
+  <section class="achievement-hero">
 
     <div class="container">
 
-        <h2>
+      <span>
+        Al-Haramain Model Madrasa
+      </span>
 
-            আপনিও হতে পারেন আমাদের পরবর্তী গর্ব
+      <h1>
+        আমাদের অর্জনসমূহ
+      </h1>
 
-        </h2>
-
-        <p>
-
-            আজই অনলাইনে ভর্তি আবেদন করুন এবং আল হারামাইন মডেল মাদ্রাসার একজন শিক্ষার্থী হন।
-
-        </p>
-
-        <a href="admission.html"
-           class="btn btn-secondary">
-
-            অনলাইনে ভর্তি
-
-        </a>
+      <p>
+        আমাদের শিক্ষার্থী ও মাদ্রাসার
+        বিভিন্ন সাফল্য ও অর্জন।
+      </p>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- ===========================
-FOOTER
-=========================== -->
 
-<div id="footer"></div>
+  <!-- =========================================
+       ACHIEVEMENTS
+  ========================================== -->
+
+  <main>
+
+    <section
+      class="achievement-section"
+      id="achievements"
+    >
+
+      <div class="container">
 
 
-<script src="include.js"></script>
+        <div class="section-title">
 
-<script src="app.js"></script>
+          <span>
+            Our Achievements
+          </span>
+
+          <h2>
+            সাফল্যের কিছু চিত্র
+          </h2>
+
+        </div>
+
+
+        <!-- Achievement Cards -->
+
+        <div
+          id="achievementList"
+          class="achievement-grid"
+        >
+
+          <div class="achievement-loading">
+
+            অর্জনগুলো লোড হচ্ছে...
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <div id="footer"></div>
+
+
+
+  <!-- =========================================
+       FIREBASE
+  ========================================== -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+
+    import {
+      getFirestore
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+    /* =========================================
+       FIREBASE CONFIG
+    ========================================== */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXl9IBA",
+
+      authDomain:
+        "al-haramain-digital-campus.firebaseapp.com",
+
+      projectId:
+        "al-haramain-digital-campus",
+
+      storageBucket:
+        "al-haramain-digital-campus.firebasestorage.app",
+
+      messagingSenderId:
+        "306805947710",
+
+      appId:
+        "1:306805947710:web:d0ed996b453928767a406f",
+
+      measurementId:
+        "G-LSMDHF5TDY"
+
+    };
+
+
+    /* =========================================
+       INITIALIZE FIREBASE
+    ========================================== */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const db =
+      getFirestore(app);
+
+
+    window.achievementDB = db;
+
+
+    /* =========================================
+       LOAD ACHIEVEMENT SCRIPT
+    ========================================== */
+
+    import("./achievements.js");
+
+  </script>
+
 
 </body>
 
