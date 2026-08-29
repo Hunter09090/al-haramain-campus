@@ -971,3 +971,4 @@ window.AlHaramain = {
   authentication: auth
 
 };
+loadAchievements();
