@@ -484,15 +484,11 @@
 <!-- =========================================
      FIREBASE
 ========================================== -->
-
 <script type="module">
-
 
 import {
   initializeApp
-} from
-"https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
 import {
   getAuth,
@@ -503,27 +499,23 @@ import {
   onAuthStateChanged,
   setPersistence,
   browserLocalPersistence
-} from
-"https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
   getDocs
-} from
-"https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 
 /* =========================================
    FIREBASE CONFIG
-========================================== */
+========================================= */
 
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXlX9IBA",
+    "AIzaSyDYKfabHaqiUrX7__NT-M1IwOREXl9XIBA",
 
   authDomain:
     "al-haramain-digital-campus.firebaseapp.com",
@@ -546,159 +538,253 @@ const firebaseConfig = {
 };
 
 
-
 /* =========================================
-   FIREBASE INITIALIZE
-========================================== */
+   INITIALIZE FIREBASE
+========================================= */
 
 const app =
-  initializeApp(
-    firebaseConfig
-  );
-
+  initializeApp(firebaseConfig);
 
 const auth =
   getAuth(app);
 
+const db =
+  getFirestore(app);
 
-// Keep admin login active across all admin pages
+
+/* =========================================
+   KEEP LOGIN ACTIVE
+========================================= */
+
 await setPersistence(
   auth,
   browserLocalPersistence
 );
 
 
-const db =
-  getFirestore(app);
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const loginPage =
+  document.getElementById("loginPage");
+
+const dashboard =
+  document.getElementById("dashboard");
+
+const loginForm =
+  document.getElementById("emailLogin");
+
+const googleLogin =
+  document.getElementById("googleLogin");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const loginMessage =
+  document.getElementById("loginMessage");
 
 
-const db =
-  getFirestore(app);
+/* =========================================
+   LOGIN MESSAGE
+========================================= */
 
+function showLoginMessage(
+  text,
+  error = false
+) {
+
+  loginMessage.textContent = text;
+
+  loginMessage.className =
+    error
+      ? "login-message error"
+      : "login-message success";
+
+}
+
+
+/* =========================================
+   EMAIL + PASSWORD LOGIN
+========================================= */
+
+loginForm.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    const email =
+      document
+        .getElementById("adminEmail")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("adminPassword")
+        .value;
+
+
+    if (!email || !password) {
+
+      showLoginMessage(
+        "Email এবং Password দিন।",
+        true
+      );
+
+      return;
+
+    }
+
+
+    showLoginMessage(
+      "Login হচ্ছে..."
+    );
+
+
+    try {
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      showLoginMessage(
+        "Login সফল হয়েছে।"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Firebase Login Error:",
+        error
+      );
+
+
+      let message =
+        "Email অথবা Password সঠিক নয়।";
+
+
+      if (
+        error.code ===
+        "auth/invalid-credential"
+      ) {
+
+        message =
+          "Email অথবা Password সঠিক নয়।";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/user-not-found"
+      ) {
+
+        message =
+          "এই Email দিয়ে কোনো Admin account পাওয়া যায়নি।";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/wrong-password"
+      ) {
+
+        message =
+          "Password সঠিক নয়।";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/invalid-api-key"
+      ) {
+
+        message =
+          "Firebase API Key সঠিক নয়।";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/operation-not-allowed"
+      ) {
+
+        message =
+          "Firebase Console-এ Email/Password Login চালু নেই।";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/network-request-failed"
+      ) {
+
+        message =
+          "Internet connection সমস্যা হয়েছে।";
+
+      }
+
+
+      showLoginMessage(
+        message,
+        true
+      );
+
+    }
+
+  }
+);
 
 
 /* =========================================
    GOOGLE LOGIN
-========================================== */
+========================================= */
 
-const googleProvider =
-  new GoogleAuthProvider();
+googleLogin.addEventListener(
+  "click",
+  async () => {
 
+    try {
 
-document
-  .getElementById("googleLogin")
-  .addEventListener(
-    "click",
-    async () => {
+      const provider =
+        new GoogleAuthProvider();
 
-      try {
-
-        await signInWithPopup(
-          auth,
-          googleProvider
-        );
-
-      } catch (error) {
-
-        showLoginMessage(
-          "Google Login করা যায়নি।",
-          true
-        );
-
-      }
-
-    }
-  );
+      await signInWithPopup(
+        auth,
+        provider
+      );
 
 
+    } catch (error) {
 
-/* =========================================
-   EMAIL LOGIN
-========================================== */
-
-document
-  .getElementById("emailLogin")
-  .addEventListener(
-    "submit",
-    async event => {
-
-      event.preventDefault();
+      console.error(
+        "Google Login Error:",
+        error
+      );
 
 
-      const email =
-        document
-          .getElementById("adminEmail")
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById("adminPassword")
-          .value;
-
-
-      try {
-
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-
-      } catch (error) {
-
-  console.log("Firebase Login Error:", error);
-
-  showLoginMessage(
-    "Login Error: " + error.code,
-    true
-  );
-
-}
+      showLoginMessage(
+        "Google Login করা যায়নি।",
+        true
+      );
 
     }
-  );
 
-
-
-/* =========================================
-   LOGOUT
-========================================== */
-
-document
-  .getElementById("logoutBtn")
-  .addEventListener(
-    "click",
-    async () => {
-
-      await signOut(auth);
-
-    }
-  );
-
+  }
+);
 
 
 /* =========================================
    AUTH STATE
-========================================== */
+========================================= */
 
 onAuthStateChanged(
   auth,
   async user => {
-
-    const loginPage =
-      document.getElementById(
-        "loginPage"
-      );
-
-
-    const dashboard =
-      document.getElementById(
-        "dashboard"
-      );
-
 
     if (user) {
 
@@ -706,28 +792,36 @@ onAuthStateChanged(
         "hidden"
       );
 
-
       dashboard.classList.remove(
         "hidden"
       );
 
 
-      document
-        .getElementById("adminName")
-        .textContent =
-        user.displayName ||
-        user.email ||
-        "Admin";
+      const adminName =
+        document.getElementById(
+          "adminName"
+        );
+
+
+      if (adminName) {
+
+        adminName.textContent =
+          user.displayName ||
+          user.email ||
+          "Admin";
+
+      }
 
 
       await loadCounts();
 
-    } else {
+    }
+
+    else {
 
       dashboard.classList.add(
         "hidden"
       );
-
 
       loginPage.classList.remove(
         "hidden"
@@ -739,10 +833,34 @@ onAuthStateChanged(
 );
 
 
+/* =========================================
+   LOGOUT
+========================================= */
+
+logoutBtn.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      await signOut(auth);
+
+    } catch (error) {
+
+      console.error(
+        "Logout Error:",
+        error
+      );
+
+    }
+
+  }
+);
+
 
 /* =========================================
-   COUNTS
-========================================== */
+   DASHBOARD COUNTS
+========================================= */
 
 async function loadCounts() {
 
@@ -818,8 +936,8 @@ async function loadCounts() {
 
   } catch (error) {
 
-    console.log(
-      "Dashboard count error:",
+    console.error(
+      "Dashboard Count Error:",
       error
     );
 
@@ -827,38 +945,4 @@ async function loadCounts() {
 
 }
 
-
-
-/* =========================================
-   LOGIN MESSAGE
-========================================== */
-
-function showLoginMessage(
-  text,
-  error = false
-) {
-
-  const message =
-    document.getElementById(
-      "loginMessage"
-    );
-
-
-  message.textContent =
-    text;
-
-
-  message.className =
-    error
-      ? "login-message error"
-      : "login-message success";
-
-}
-
-
 </script>
-
-
-</body>
-
-</html>
