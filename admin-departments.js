@@ -177,21 +177,20 @@ onAuthStateChanged(
   auth,
   user => {
 
-    if (!user) {
+    if (user) {
 
-      window.location.href =
-        "admin.html";
+      loadDepartments();
 
-      return;
+    } else {
+
+      window.location.replace(
+        "admin.html"
+      );
 
     }
 
-
-    loadDepartments();
-
   }
 );
-
 
 
 /* =========================================
