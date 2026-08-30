@@ -1,8 +1,7 @@
 /* =========================================================
    AL-HARAMAIN DIGITAL
    DATABASE.JS — FINAL VERSION
-   Firebase + Departments + Achievements + Notices
-   Admission + Results + Students + Gallery
+   Firebase + Homepage Dynamic Data
 ========================================================= */
 
 
@@ -50,20 +49,12 @@ import {
   getFirestore,
   collection,
   getDocs,
-  addDoc,
   query,
-  where,
   orderBy,
   limit,
-  serverTimestamp
+  where
 } from
 "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
-
-import {
-  getAuth
-} from
-"https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 
 /* =========================================================
@@ -78,41 +69,22 @@ const db =
   getFirestore(app);
 
 
-const auth =
-  getAuth(app);
-
-
 /* =========================================================
-   4. GOOGLE DRIVE IMAGE CONVERTER
+   4. HELPER
 ========================================================= */
 
-function driveImageURL(url) {
+function getElement(...ids) {
 
-  if (!url) return "";
+  for (const id of ids) {
 
-  url = url.trim();
+    const element =
+      document.getElementById(id);
 
-  let match =
-    url.match(
-      /\/d\/([a-zA-Z0-9_-]+)/
-    );
-
-  if (!match) {
-
-    match =
-      url.match(
-        /id=([a-zA-Z0-9_-]+)/
-      );
+    if (element) return element;
 
   }
 
-  if (match && match[1]) {
-
-    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-
-  }
-
-  return url;
+  return null;
 
 }
 
@@ -139,43 +111,94 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   6. LOADING SCREEN
+   6. GOOGLE DRIVE IMAGE CONVERTER
 ========================================================= */
 
-window.addEventListener(
-  "load",
-  () => {
+function convertDriveImage(url) {
 
-    setTimeout(
-      () => {
+  if (!url) return "";
 
-        const loader =
-          document.getElementById(
-            "loader"
-          );
+  url = String(url).trim();
 
-        if (loader) {
 
-          loader.classList.add(
-            "hide"
-          );
+  /* Google Drive file ID */
 
-        }
+  let match =
+    url.match(
+      /\/file\/d\/([a-zA-Z0-9_-]+)/
+    );
 
-        document.body.classList.remove(
-          "loading"
-        );
 
-      },
-      700
+  if (!match) {
+
+    match =
+      url.match(
+        /[?&]id=([a-zA-Z0-9_-]+)/
+      );
+
+  }
+
+
+  if (match && match[1]) {
+
+    return (
+      "https://drive.google.com/thumbnail?id=" +
+      match[1] +
+      "&sz=w1200"
     );
 
   }
-);
+
+
+  /* Direct image URL */
+
+  return url;
+
+}
 
 
 /* =========================================================
-   7. HEADER
+   7. LOADING SCREEN
+========================================================= */
+
+function initLoader() {
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      setTimeout(
+        () => {
+
+          const loader =
+            document.getElementById(
+              "loader"
+            );
+
+          if (loader) {
+
+            loader.classList.add(
+              "hide"
+            );
+
+          }
+
+          document.body.classList.remove(
+            "loading"
+          );
+
+        },
+        700
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   8. LOAD HEADER
 ========================================================= */
 
 async function loadHeader() {
@@ -184,6 +207,7 @@ async function loadHeader() {
     document.getElementById(
       "header"
     );
+
 
   if (!header) return;
 
@@ -199,7 +223,7 @@ async function loadHeader() {
     if (!response.ok) {
 
       throw new Error(
-        "Header load failed"
+        "Header loading failed"
       );
 
     }
@@ -225,7 +249,7 @@ async function loadHeader() {
 
 
 /* =========================================================
-   8. FOOTER
+   9. LOAD FOOTER
 ========================================================= */
 
 async function loadFooter() {
@@ -234,6 +258,7 @@ async function loadFooter() {
     document.getElementById(
       "footer"
     );
+
 
   if (!footer) return;
 
@@ -249,7 +274,7 @@ async function loadFooter() {
     if (!response.ok) {
 
       throw new Error(
-        "Footer load failed"
+        "Footer loading failed"
       );
 
     }
@@ -272,7 +297,7 @@ async function loadFooter() {
 
 
 /* =========================================================
-   9. NAVBAR
+   10. MOBILE NAVIGATION
 ========================================================= */
 
 function initNavbar() {
@@ -289,20 +314,19 @@ function initNavbar() {
     );
 
 
-  if (!menuBtn || !navLinks)
-    return;
+  if (
+    !menuBtn ||
+    !navLinks
+  ) return;
 
 
-  menuBtn.addEventListener(
-    "click",
-    () => {
+  menuBtn.onclick = () => {
 
-      navLinks.classList.toggle(
-        "open"
-      );
+    navLinks.classList.toggle(
+      "open"
+    );
 
-    }
-  );
+  };
 
 
   navLinks
@@ -328,7 +352,7 @@ function initNavbar() {
 
 
 /* =========================================================
-   10. HERO SLIDER
+   11. HERO SLIDER
 ========================================================= */
 
 function initSlider() {
@@ -345,11 +369,11 @@ function initSlider() {
     );
 
 
-  if (!slides.length)
-    return;
+  if (!slides.length) return;
 
 
-  let currentSlide = 0;
+  let current =
+    0;
 
 
   function showSlide(index) {
@@ -380,26 +404,6 @@ function initSlider() {
   }
 
 
-  function nextSlide() {
-
-    currentSlide++;
-
-    if (
-      currentSlide >=
-      slides.length
-    ) {
-
-      currentSlide = 0;
-
-    }
-
-    showSlide(
-      currentSlide
-    );
-
-  }
-
-
   dots.forEach(
     (dot, index) => {
 
@@ -407,11 +411,11 @@ function initSlider() {
         "click",
         () => {
 
-          currentSlide =
+          current =
             index;
 
           showSlide(
-            currentSlide
+            current
           );
 
         }
@@ -425,7 +429,24 @@ function initSlider() {
 
 
   setInterval(
-    nextSlide,
+    () => {
+
+      current++;
+
+      if (
+        current >=
+        slides.length
+      ) {
+
+        current = 0;
+
+      }
+
+      showSlide(
+        current
+      );
+
+    },
     5000
   );
 
@@ -433,28 +454,26 @@ function initSlider() {
 
 
 /* =========================================================
-   11. SCROLL ANIMATION
+   12. SCROLL ANIMATION
 ========================================================= */
 
 function initScrollAnimation() {
 
   const elements =
     document.querySelectorAll(
-      ".section, .director-card, .info-card, " +
-      ".stat-box, .notice-card, .gallery-item, " +
-      ".department-card, .achievement-card, " +
-      ".location-card, .quick-info-item"
+      ".section, .section-title, .department-card, " +
+      ".achievement-card, .notice-card, .gallery-item, " +
+      ".director-card, .result-box, .student-card"
     );
 
 
-  if (!elements.length)
-    return;
+  if (!elements.length) return;
 
 
   elements.forEach(
-    item => {
+    element => {
 
-      item.classList.add(
+      element.classList.add(
         "reveal"
       );
 
@@ -462,28 +481,8 @@ function initScrollAnimation() {
   );
 
 
-  if (
-    !("IntersectionObserver" in window)
-  ) {
-
-    elements.forEach(
-      item => {
-
-        item.classList.add(
-          "show"
-        );
-
-      }
-    );
-
-    return;
-
-  }
-
-
   const observer =
     new IntersectionObserver(
-
       entries => {
 
         entries.forEach(
@@ -507,19 +506,17 @@ function initScrollAnimation() {
         );
 
       },
-
       {
         threshold: 0.08
       }
-
     );
 
 
   elements.forEach(
-    item => {
+    element => {
 
       observer.observe(
-        item
+        element
       );
 
     }
@@ -529,429 +526,256 @@ function initScrollAnimation() {
 
 
 /* =========================================================
-   12. LOAD DEPARTMENTS
+   13. DEPARTMENTS
+   Static content — intentionally inside index
 ========================================================= */
 
-async function loadDepartments() {
+function initDepartments() {
 
-  const list =
-    document.getElementById(
-      "departmentList"
+  const container =
+    getElement(
+      "departmentList",
+      "departmentsList",
+      "departmentGrid"
     );
 
 
-  if (!list)
-    return;
+  if (!container) return;
 
 
-  list.innerHTML =
-    `
-      <div class="loading-card">
-        বিভাগ লোড হচ্ছে...
-      </div>
-    `;
+  const departments = [
 
+    {
+      icon: "📖",
+      name: "নুরানী বিভাগ",
+      text:
+        "শিশুদের কুরআন শিক্ষা, আরবি বর্ণমালা, আমপারা ও মৌলিক দ্বীনি শিক্ষার সুন্দর ভিত্তি গড়ে তোলা হয়।"
+    },
 
-  try {
+    {
+      icon: "🎓",
+      name: "ইবতেদায়ী বিভাগ",
+      text:
+        "প্রাথমিক স্তরে সাধারণ শিক্ষা ও ইসলামী শিক্ষার সমন্বয়ে শিক্ষার্থীদের সুন্দরভাবে গড়ে তোলা হয়।"
+    },
 
-    const departmentQuery =
-      query(
+    {
+      icon: "📚",
+      name: "দাখিল বিভাগ",
+      text:
+        "দাখিল স্তরের শিক্ষার্থীদের জন্য নিয়মিত পাঠদান, পরীক্ষার প্রস্তুতি ও মানসম্মত শিক্ষা কার্যক্রম পরিচালিত হয়।"
+    },
 
-        collection(
-          db,
-          "departments"
-        ),
+    {
+      icon: "🕌",
+      name: "মডেল হিফজ বিভাগ (বালক)",
+      text:
+        "বালক শিক্ষার্থীদের জন্য নিয়মতান্ত্রিক পরিবেশে পবিত্র কুরআন হিফজ ও দ্বীনি শিক্ষার ব্যবস্থা।"
+    },
 
-        orderBy(
-          "name",
-          "asc"
-        )
+    {
+      icon: "🕌",
+      name: "মডেল হিফজ বিভাগ (বালিকা)",
+      text:
+        "বালিকা শিক্ষার্থীদের জন্য নিরাপদ ও উপযোগী পরিবেশে কুরআন হিফজ ও প্রয়োজনীয় ইসলামী শিক্ষার ব্যবস্থা।"
+    },
 
-      );
+    {
+      icon: "🌙",
+      name: "মডেল মক্তব বিভাগ",
+      text:
+        "শিশু-কিশোরদের জন্য কুরআন তিলাওয়াত, নামাজ, মাসআলা-মাসায়েল ও প্রয়োজনীয় দ্বীনি শিক্ষার ব্যবস্থা।"
+    },
 
-
-    const snapshot =
-      await getDocs(
-        departmentQuery
-      );
-
-
-    if (snapshot.empty) {
-
-      list.innerHTML =
-        `
-          <div class="empty-card">
-            এখনো কোনো বিভাগ যোগ করা হয়নি।
-          </div>
-        `;
-
-      return;
-
+    {
+      icon: "🌙",
+      name: "মডেল মক্তব বিভাগ (বয়স্ক)",
+      text:
+        "বয়স্কদের জন্য সহজ পদ্ধতিতে কুরআন শিক্ষা, নামাজ ও প্রয়োজনীয় ইসলামী জ্ঞান অর্জনের সুযোগ।"
     }
 
-
-    list.innerHTML = "";
-
-
-    snapshot.forEach(
-      departmentDoc => {
-
-        const data =
-          departmentDoc.data();
+  ];
 
 
-        if (
-          data.active === false
-        )
-          return;
+  container.innerHTML =
+    departments
+      .map(
+        department => `
 
+          <article class="department-card">
 
-        const card =
-          document.createElement(
-            "article"
-          );
-
-
-        card.className =
-          "department-card";
-
-
-        card.innerHTML = `
-
-          <div class="department-icon">
-
-            ${escapeHTML(
-              data.icon || "📚"
-            )}
-
-          </div>
-
-
-          <div class="department-content">
+            <div class="department-icon">
+              ${department.icon}
+            </div>
 
             <h3>
-
               ${escapeHTML(
-                data.name ||
-                "বিভাগ"
+                department.name
               )}
-
             </h3>
 
-
-            ${
-              data.className
-              ?
-              `
-                <span class="department-class">
-
-                  ${escapeHTML(
-                    data.className
-                  )}
-
-                </span>
-              `
-              :
-              ""
-            }
-
-
             <p>
-
               ${escapeHTML(
-                data.description ||
-                ""
+                department.text
               )}
-
             </p>
 
-          </div>
+          </article>
 
-        `;
-
-
-        list.appendChild(
-          card
-        );
-
-      }
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "Department Error:",
-      error
-    );
-
-
-    list.innerHTML =
-      `
-        <div class="empty-card">
-          বিভাগ লোড করা যায়নি।
-        </div>
-      `;
-
-  }
+        `
+      )
+      .join("");
 
 }
 
 
 /* =========================================================
-   13. LOAD DEPARTMENT OPTIONS
-========================================================= */
-
-async function loadDepartmentOptions() {
-
-  const select =
-    document.getElementById(
-      "department"
-    );
-
-
-  if (!select)
-    return;
-
-
-  try {
-
-    const snapshot =
-      await getDocs(
-        query(
-
-          collection(
-            db,
-            "departments"
-          ),
-
-          orderBy(
-            "name",
-            "asc"
-          )
-
-        )
-      );
-
-
-    snapshot.forEach(
-      departmentDoc => {
-
-        const data =
-          departmentDoc.data();
-
-
-        if (
-          data.active === false
-        )
-          return;
-
-
-        const option =
-          document.createElement(
-            "option"
-          );
-
-
-        option.value =
-          data.name || "";
-
-
-        option.textContent =
-          data.name || "বিভাগ";
-
-
-        select.appendChild(
-          option
-        );
-
-      }
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "Department Option Error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   14. LOAD ACHIEVEMENTS
+   14. ACHIEVEMENTS
+   Show latest 5
 ========================================================= */
 
 async function loadAchievements() {
 
-  const list =
-    document.getElementById(
-      "achievementList"
+  const container =
+    getElement(
+      "achievementList",
+      "achievementsList",
+      "achievementGrid"
     );
 
 
-  if (!list)
-    return;
+  if (!container) return;
 
 
-  list.innerHTML =
-    `
-      <div class="loading-card">
-        অর্জনসমূহ লোড হচ্ছে...
-      </div>
-    `;
+  container.innerHTML =
+    '<div class="loading">অর্জনসমূহ লোড হচ্ছে...</div>';
 
 
   try {
 
-    const achievementQuery =
-      query(
-
-        collection(
-          db,
-          "achievements"
-        ),
-
-        orderBy(
-          "createdAt",
-          "desc"
-        ),
-
-        limit(20)
-
-      );
+    let snapshot;
 
 
-    const snapshot =
-      await getDocs(
-        achievementQuery
-      );
+    try {
+
+      const q =
+        query(
+          collection(
+            db,
+            "achievements"
+          ),
+          orderBy(
+            "createdAt",
+            "desc"
+          ),
+          limit(5)
+        );
+
+
+      snapshot =
+        await getDocs(q);
+
+
+    } catch {
+
+      snapshot =
+        await getDocs(
+          collection(
+            db,
+            "achievements"
+          )
+        );
+
+    }
 
 
     if (snapshot.empty) {
 
-      list.innerHTML =
-        `
-          <div class="empty-card">
-            এখনো কোনো অর্জন যোগ করা হয়নি।
-          </div>
-        `;
+      container.innerHTML =
+        '<div class="empty">এখনো কোনো অর্জন যোগ করা হয়নি।</div>';
 
       return;
 
     }
 
 
-    list.innerHTML = "";
+    const docs =
+      Array.from(
+        snapshot.docs
+      ).slice(0, 5);
 
 
-    snapshot.forEach(
-      achievementDoc => {
+    container.innerHTML =
+      docs
+        .map(
+          achievement => {
 
-        const data =
-          achievementDoc.data();
-
-
-        const card =
-          document.createElement(
-            "article"
-          );
+            const data =
+              achievement.data();
 
 
-        card.className =
-          "achievement-card";
-
-
-        const image =
-          driveImageURL(
-            data.image ||
-            data.imageUrl ||
-            data.photo ||
-            ""
-          );
-
-
-        card.innerHTML = `
-
-          ${
-            image
-            ?
-            `
-              <div class="achievement-image">
-
-                <img
-                  src="${escapeHTML(image)}"
-                  alt="${escapeHTML(
-                    data.title ||
-                    "অর্জন"
-                  )}"
-                  loading="lazy"
-                  onerror="this.parentElement.style.display='none'"
-                >
-
-              </div>
-            `
-            :
-            `
-              <div class="achievement-placeholder">
-                🏆
-              </div>
-            `
-          }
-
-
-          <div class="achievement-content">
-
-            <h3>
-
-              ${escapeHTML(
-                data.title ||
-                "অর্জন"
-              )}
-
-            </h3>
-
-
-            <p>
-
-              ${escapeHTML(
-                data.description ||
+            const image =
+              convertDriveImage(
+                data.imageUrl ||
+                data.image ||
+                data.photo ||
                 ""
-              )}
-
-            </p>
+              );
 
 
-            ${
-              data.year
-              ?
-              `
-                <span class="achievement-year">
+            return `
 
-                  ${escapeHTML(
-                    data.year
-                  )}
+              <article class="achievement-card">
 
-                </span>
-              `
-              :
-              ""
-            }
+                ${
+                  image
+                  ? `
+                    <div class="achievement-image">
 
-          </div>
+                      <img
+                        src="${escapeHTML(image)}"
+                        alt="${escapeHTML(
+                          data.title ||
+                          "অর্জনের ছবি"
+                        )}"
+                        loading="lazy"
+                        onerror="this.parentElement.style.display='none'"
+                      >
 
-        `;
+                    </div>
+                  `
+                  : ""
+                }
 
 
-        list.appendChild(
-          card
-        );
+                <div class="achievement-content">
 
-      }
-    );
+                  <h3>
+                    ${escapeHTML(
+                      data.title ||
+                      data.name ||
+                      "অর্জন"
+                    )}
+                  </h3>
+
+
+                  <p>
+                    ${escapeHTML(
+                      data.description ||
+                      data.details ||
+                      ""
+                    )}
+                  </p>
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        )
+        .join("");
 
 
   } catch (error) {
@@ -962,12 +786,8 @@ async function loadAchievements() {
     );
 
 
-    list.innerHTML =
-      `
-        <div class="empty-card">
-          অর্জনসমূহ লোড করা যায়নি।
-        </div>
-      `;
+    container.innerHTML =
+      '<div class="empty">অর্জনসমূহ লোড করা যাচ্ছে না।</div>';
 
   }
 
@@ -975,19 +795,1289 @@ async function loadAchievements() {
 
 
 /* =========================================================
-   15. ADMISSION FORM
+   15. ALL ACHIEVEMENTS BUTTON
+========================================================= */
+
+function initAllAchievements() {
+
+  const buttons =
+    document.querySelectorAll(
+      "#allAchievements, .all-achievements"
+    );
+
+
+  buttons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+
+          window.location.href =
+            "achievements.html";
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   16. NOTICES
+   Show latest 5
+========================================================= */
+
+async function loadNotices() {
+
+  const container =
+    getElement(
+      "noticeList",
+      "noticesList",
+      "noticeGrid"
+    );
+
+
+  if (!container) return;
+
+
+  container.innerHTML =
+    '<div class="loading">নোটিশ লোড হচ্ছে...</div>';
+
+
+  try {
+
+    let snapshot;
+
+
+    try {
+
+      const q =
+        query(
+          collection(
+            db,
+            "notices"
+          ),
+          orderBy(
+            "createdAt",
+            "desc"
+          ),
+          limit(5)
+        );
+
+
+      snapshot =
+        await getDocs(q);
+
+
+    } catch {
+
+      snapshot =
+        await getDocs(
+          collection(
+            db,
+            "notices"
+          )
+        );
+
+    }
+
+
+    if (snapshot.empty) {
+
+      container.innerHTML =
+        '<div class="empty">এখনো কোনো নোটিশ প্রকাশ করা হয়নি।</div>';
+
+      return;
+
+    }
+
+
+    const docs =
+      Array.from(
+        snapshot.docs
+      ).slice(0, 5);
+
+
+    container.innerHTML =
+      docs
+        .map(
+          notice => {
+
+            const data =
+              notice.data();
+
+
+            return `
+
+              <article class="notice-card">
+
+                <div class="notice-date">
+
+                  <strong>
+                    ${escapeHTML(
+                      data.day || "--"
+                    )}
+                  </strong>
+
+                  <span>
+                    ${escapeHTML(
+                      data.month || "---"
+                    )}
+                  </span>
+
+                </div>
+
+
+                <div class="notice-content">
+
+                  <h3>
+                    ${escapeHTML(
+                      data.title ||
+                      "নোটিশ"
+                    )}
+                  </h3>
+
+
+                  <p>
+                    ${escapeHTML(
+                      data.description ||
+                      data.text ||
+                      ""
+                    )}
+                  </p>
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        )
+        .join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "Notice Error:",
+      error
+    );
+
+
+    container.innerHTML =
+      '<div class="empty">নোটিশ লোড করা যাচ্ছে না।</div>';
+
+  }
+
+}
+
+
+/* =========================================================
+   17. ALL NOTICES BUTTON
+========================================================= */
+
+function initAllNotices() {
+
+  const buttons =
+    document.querySelectorAll(
+      "#allNotices, .all-notices"
+    );
+
+
+  buttons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+
+          window.location.href =
+            "notices.html";
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   18. RESULT SEARCH
+========================================================= */
+
+function initResultSearch() {
+
+  const button =
+    getElement(
+      "resultBtn",
+      "searchResultBtn"
+    );
+
+
+  const resultBox =
+    getElement(
+      "resultBox",
+      "resultResult"
+    );
+
+
+  const rollInput =
+    getElement(
+      "resultRoll",
+      "roll"
+    );
+
+
+  const classInput =
+    getElement(
+      "resultClass",
+      "resultClassName",
+      "className"
+    );
+
+
+  const yearInput =
+    getElement(
+      "resultYear",
+      "academicYear"
+    );
+
+
+  const examInput =
+    getElement(
+      "resultExam",
+      "examType"
+    );
+
+
+  if (
+    !button ||
+    !resultBox
+  ) return;
+
+
+  button.addEventListener(
+    "click",
+    async () => {
+
+      const roll =
+        rollInput?.value.trim() ||
+        "";
+
+
+      const className =
+        classInput?.value.trim() ||
+        "";
+
+
+      const academicYear =
+        yearInput?.value.trim() ||
+        "";
+
+
+      const examType =
+        examInput?.value.trim() ||
+        "";
+
+
+      if (
+        !roll ||
+        !className ||
+        !academicYear ||
+        !examType
+      ) {
+
+        resultBox.innerHTML =
+          `<p class="error">
+             রোল, শ্রেণী, শিক্ষাবর্ষ এবং পরীক্ষার ফলাফল নির্বাচন করুন।
+           </p>`;
+
+        return;
+
+      }
+
+
+      resultBox.innerHTML =
+        '<p class="loading">রেজাল্ট খোঁজা হচ্ছে...</p>';
+
+
+      try {
+
+        const q =
+          query(
+            collection(
+              db,
+              "results"
+            ),
+            where(
+              "roll",
+              "==",
+              roll
+            ),
+            where(
+              "className",
+              "==",
+              className
+            ),
+            where(
+              "academicYear",
+              "==",
+              academicYear
+            ),
+            where(
+              "examType",
+              "==",
+              examType
+            ),
+            limit(1)
+          );
+
+
+        const snapshot =
+          await getDocs(q);
+
+
+        if (snapshot.empty) {
+
+          resultBox.innerHTML =
+            `<p class="error">
+               এই তথ্য অনুযায়ী কোনো রেজাল্ট পাওয়া যায়নি।
+             </p>`;
+
+          return;
+
+        }
+
+
+        const data =
+          snapshot.docs[0].data();
+
+
+        resultBox.innerHTML = `
+
+          <div class="result-card">
+
+            <h3>
+              ${escapeHTML(
+                data.studentName ||
+                "শিক্ষার্থী"
+              )}
+            </h3>
+
+
+            <div class="result-info">
+
+              <p>
+                <strong>রোল:</strong>
+                ${escapeHTML(
+                  data.roll || roll
+                )}
+              </p>
+
+              <p>
+                <strong>শ্রেণী:</strong>
+                ${escapeHTML(
+                  data.className ||
+                  className
+                )}
+              </p>
+
+              <p>
+                <strong>শিক্ষাবর্ষ:</strong>
+                ${escapeHTML(
+                  data.academicYear ||
+                  academicYear
+                )}
+              </p>
+
+              <p>
+                <strong>পরীক্ষা:</strong>
+                ${escapeHTML(
+                  data.examType ||
+                  examType
+                )}
+              </p>
+
+              <p>
+                <strong>ফলাফল:</strong>
+                ${escapeHTML(
+                  data.result ||
+                  data.grade ||
+                  data.gpa ||
+                  "-"
+                )}
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+      } catch (error) {
+
+        console.error(
+          "Result Search Error:",
+          error
+        );
+
+
+        resultBox.innerHTML =
+          `<p class="error">
+             রেজাল্ট খুঁজতে সমস্যা হয়েছে।
+             তথ্যগুলো সঠিকভাবে নির্বাচন করুন।
+           </p>`;
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   19. STUDENT INFORMATION SEARCH
+========================================================= */
+
+function initStudentSearch() {
+
+  const button =
+    getElement(
+      "studentBtn",
+      "searchStudentBtn"
+    );
+
+
+  const box =
+    getElement(
+      "studentBox",
+      "studentResult"
+    );
+
+
+  const rollInput =
+    getElement(
+      "studentRoll",
+      "studentId"
+    );
+
+
+  const classInput =
+    getElement(
+      "studentClass",
+      "studentClassName"
+    );
+
+
+  const yearInput =
+    getElement(
+      "studentYear",
+      "studentAcademicYear"
+    );
+
+
+  if (
+    !button ||
+    !box
+  ) return;
+
+
+  button.addEventListener(
+    "click",
+    async () => {
+
+      const roll =
+        rollInput?.value.trim() ||
+        "";
+
+
+      const className =
+        classInput?.value.trim() ||
+        "";
+
+
+      const academicYear =
+        yearInput?.value.trim() ||
+        "";
+
+
+      if (
+        !roll ||
+        !className ||
+        !academicYear
+      ) {
+
+        box.innerHTML =
+          `<p class="error">
+             রোল, শ্রেণী ও শিক্ষাবর্ষ নির্বাচন করুন।
+           </p>`;
+
+        return;
+
+      }
+
+
+      box.innerHTML =
+        '<p class="loading">শিক্ষার্থীর তথ্য খোঁজা হচ্ছে...</p>';
+
+
+      try {
+
+        const q =
+          query(
+            collection(
+              db,
+              "students"
+            ),
+            where(
+              "roll",
+              "==",
+              roll
+            ),
+            where(
+              "className",
+              "==",
+              className
+            ),
+            where(
+              "academicYear",
+              "==",
+              academicYear
+            ),
+            limit(1)
+          );
+
+
+        const snapshot =
+          await getDocs(q);
+
+
+        if (snapshot.empty) {
+
+          box.innerHTML =
+            `<p class="error">
+               এই তথ্য অনুযায়ী কোনো শিক্ষার্থীর তথ্য পাওয়া যায়নি।
+             </p>`;
+
+          return;
+
+        }
+
+
+        const data =
+          snapshot.docs[0].data();
+
+
+        const photo =
+          convertDriveImage(
+            data.photo ||
+            data.photoUrl ||
+            data.image ||
+            ""
+          );
+
+
+        box.innerHTML = `
+
+          <div
+            class="student-card"
+            id="digitalStudentCard"
+          >
+
+            <div class="student-card-header">
+
+              <strong>
+                AL-HARAMAIN DIGITAL
+              </strong>
+
+              <span>
+                STUDENT ID CARD
+              </span>
+
+            </div>
+
+
+            <div class="student-photo">
+
+              ${
+                photo
+                ? `
+                  <img
+                    src="${escapeHTML(photo)}"
+                    alt="Student Photo"
+                  >
+                `
+                : `
+                  <div class="no-photo">
+                    👨‍🎓
+                  </div>
+                `
+              }
+
+            </div>
+
+
+            <h3>
+              ${escapeHTML(
+                data.name ||
+                data.studentName ||
+                "শিক্ষার্থী"
+              )}
+            </h3>
+
+
+            <div class="student-details">
+
+              <p>
+                <strong>রোল:</strong>
+                ${escapeHTML(
+                  data.roll ||
+                  roll
+                )}
+              </p>
+
+
+              <p>
+                <strong>শ্রেণী:</strong>
+                ${escapeHTML(
+                  data.className ||
+                  className
+                )}
+              </p>
+
+
+              <p>
+                <strong>শিক্ষাবর্ষ:</strong>
+                ${escapeHTML(
+                  data.academicYear ||
+                  academicYear
+                )}
+              </p>
+
+
+              ${
+                data.studentId
+                ? `
+                  <p>
+                    <strong>Student ID:</strong>
+                    ${escapeHTML(
+                      data.studentId
+                    )}
+                  </p>
+                `
+                : ""
+              }
+
+            </div>
+
+
+            <div class="student-motto">
+              সফলতা তোমার অপেক্ষায়
+            </div>
+
+
+            <div class="student-qr">
+
+              <div
+                class="qr-code"
+                data-url="${escapeHTML(
+                  window.location.href
+                )}"
+              ></div>
+
+              <small>
+                Al-Haramain Digital
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            id="downloadStudentPDF"
+            class="download-pdf-btn"
+          >
+            📥 Digital ID Card Download
+          </button>
+
+        `;
+
+
+        generateQRCode();
+
+
+        initStudentPDF();
+
+
+      } catch (error) {
+
+        console.error(
+          "Student Search Error:",
+          error
+        );
+
+
+        box.innerHTML =
+          `<p class="error">
+             শিক্ষার্থীর তথ্য খুঁজতে সমস্যা হয়েছে।
+           </p>`;
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   20. QR CODE
+========================================================= */
+
+function generateQRCode() {
+
+  const qr =
+    document.querySelector(
+      ".qr-code"
+    );
+
+
+  if (!qr) return;
+
+
+  const url =
+    encodeURIComponent(
+      window.location.href
+    );
+
+
+  qr.innerHTML = `
+
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${url}"
+      alt="Website QR Code"
+      loading="lazy"
+    >
+
+  `;
+
+}
+
+
+/* =========================================================
+   21. DIGITAL ID PDF
+========================================================= */
+
+function initStudentPDF() {
+
+  const button =
+    document.getElementById(
+      "downloadStudentPDF"
+    );
+
+
+  const card =
+    document.getElementById(
+      "digitalStudentCard"
+    );
+
+
+  if (
+    !button ||
+    !card
+  ) return;
+
+
+  button.addEventListener(
+    "click",
+    async () => {
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "PDF তৈরি হচ্ছে...";
+
+
+      try {
+
+        if (
+          typeof window.jspdf ===
+          "undefined"
+        ) {
+
+          const script =
+            document.createElement(
+              "script"
+            );
+
+
+          script.src =
+            "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+
+
+          document.head.appendChild(
+            script
+          );
+
+
+          await new Promise(
+            resolve => {
+
+              script.onload =
+                resolve;
+
+              script.onerror =
+                resolve;
+
+            }
+          );
+
+        }
+
+
+        if (
+          typeof window.jspdf ===
+          "undefined"
+        ) {
+
+          throw new Error(
+            "PDF library unavailable"
+          );
+
+        }
+
+
+        const {
+          jsPDF
+        } =
+          window.jspdf;
+
+
+        const pdf =
+          new jsPDF(
+            "p",
+            "mm",
+            "a4"
+          );
+
+
+        pdf.setFontSize(18);
+
+        pdf.text(
+          "AL-HARAMAIN DIGITAL",
+          105,
+          25,
+          {
+            align: "center"
+          }
+        );
+
+
+        pdf.setFontSize(14);
+
+        pdf.text(
+          "STUDENT DIGITAL ID CARD",
+          105,
+          34,
+          {
+            align: "center"
+          }
+        );
+
+
+        let y =
+          55;
+
+
+        const name =
+          card.querySelector(
+            "h3"
+          )?.textContent.trim() ||
+          "Student";
+
+
+        const details =
+          Array.from(
+            card.querySelectorAll(
+              ".student-details p"
+            )
+          );
+
+
+        pdf.setFontSize(12);
+
+
+        pdf.text(
+          "Name: " + name,
+          25,
+          y
+        );
+
+
+        y += 10;
+
+
+        details.forEach(
+          item => {
+
+            pdf.text(
+              item.textContent
+                .trim()
+                .replace(
+                  /\s+/g,
+                  " "
+                ),
+              25,
+              y
+            );
+
+            y += 9;
+
+          }
+        );
+
+
+        y += 10;
+
+
+        pdf.setFontSize(14);
+
+        pdf.text(
+          "সফলতা তোমার অপেক্ষায়",
+          105,
+          y,
+          {
+            align: "center"
+          }
+        );
+
+
+        y += 20;
+
+
+        pdf.setFontSize(10);
+
+        pdf.text(
+          "Website:",
+          25,
+          y
+        );
+
+
+        y += 7;
+
+
+        pdf.text(
+          window.location.origin,
+          25,
+          y
+        );
+
+
+        pdf.save(
+          "Al-Haramain-Student-ID.pdf"
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "PDF Error:",
+          error
+        );
+
+
+        alert(
+          "PDF তৈরি করা যায়নি।"
+        );
+
+      }
+
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "📥 Digital ID Card Download";
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   22. PHOTO GALLERY
+   Show latest 5
+========================================================= */
+
+async function loadGallery() {
+
+  const container =
+    getElement(
+      "galleryList",
+      "galleryGrid",
+      "photoGallery"
+    );
+
+
+  if (!container) return;
+
+
+  container.innerHTML =
+    '<div class="loading">ছবি লোড হচ্ছে...</div>';
+
+
+  try {
+
+    let snapshot;
+
+
+    try {
+
+      const q =
+        query(
+          collection(
+            db,
+            "gallery"
+          ),
+          orderBy(
+            "createdAt",
+            "desc"
+          ),
+          limit(5)
+        );
+
+
+      snapshot =
+        await getDocs(q);
+
+
+    } catch {
+
+      snapshot =
+        await getDocs(
+          collection(
+            db,
+            "gallery"
+          )
+        );
+
+    }
+
+
+    if (snapshot.empty) {
+
+      container.innerHTML =
+        '<div class="empty">এখনো কোনো ছবি যোগ করা হয়নি।</div>';
+
+      return;
+
+    }
+
+
+    const docs =
+      Array.from(
+        snapshot.docs
+      ).slice(0, 5);
+
+
+    container.innerHTML =
+      docs
+        .map(
+          galleryDoc => {
+
+            const data =
+              galleryDoc.data();
+
+
+            const image =
+              convertDriveImage(
+                data.imageUrl ||
+                data.image ||
+                data.photo ||
+                data.url ||
+                ""
+              );
+
+
+            if (!image) return "";
+
+
+            return `
+
+              <div class="gallery-item">
+
+                <img
+                  src="${escapeHTML(image)}"
+                  alt="${escapeHTML(
+                    data.title ||
+                    "Al-Haramain Gallery"
+                  )}"
+                  loading="lazy"
+                >
+
+
+                ${
+                  data.title
+                  ? `
+                    <div class="gallery-caption">
+                      ${escapeHTML(
+                        data.title
+                      )}
+                    </div>
+                  `
+                  : ""
+                }
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "Gallery Error:",
+      error
+    );
+
+
+    container.innerHTML =
+      '<div class="empty">ফটো গ্যালারি লোড করা যাচ্ছে না।</div>';
+
+  }
+
+}
+
+
+/* =========================================================
+   23. ALL GALLERY BUTTON
+========================================================= */
+
+function initAllGallery() {
+
+  const buttons =
+    document.querySelectorAll(
+      "#allGallery, .all-gallery"
+    );
+
+
+  buttons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+
+          window.location.href =
+            "gallery.html";
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   24. EMERGENCY NOTICE
+========================================================= */
+
+async function loadEmergencyNotice() {
+
+  const element =
+    getElement(
+      "emergencyNotice",
+      "emergencyText"
+    );
+
+
+  if (!element) return;
+
+
+  try {
+
+    const q =
+      query(
+        collection(
+          db,
+          "emergencyNotices"
+        ),
+        limit(1)
+      );
+
+
+    const snapshot =
+      await getDocs(q);
+
+
+    if (
+      !snapshot.empty
+    ) {
+
+      const data =
+        snapshot.docs[0].data();
+
+
+      element.textContent =
+        data.text ||
+        data.title ||
+        "নতুন জরুরি নোটিশ এখানে প্রকাশিত হবে।";
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Emergency Notice Error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   25. ADMISSION FORM
 ========================================================= */
 
 function initAdmissionForm() {
 
   const form =
-    document.getElementById(
-      "admission-form"
+    getElement(
+      "admission-form",
+      "admissionForm"
     );
 
 
-  if (!form)
-    return;
+  if (!form) return;
 
 
   form.addEventListener(
@@ -998,39 +2088,53 @@ function initAdmissionForm() {
 
 
       const message =
-        document.getElementById(
+        getElement(
           "admissionMessage"
         );
 
 
+      const getValue =
+        (...ids) => {
+
+          const element =
+            getElement(...ids);
+
+          return (
+            element?.value.trim() ||
+            ""
+          );
+
+        };
+
+
       const studentName =
-        document.getElementById(
+        getValue(
           "studentName"
-        ).value.trim();
+        );
 
 
       const fatherName =
-        document.getElementById(
+        getValue(
           "fatherName"
-        ).value.trim();
+        );
 
 
       const phone =
-        document.getElementById(
+        getValue(
           "phone"
-        ).value.trim();
+        );
 
 
       const department =
-        document.getElementById(
+        getValue(
           "department"
-        ).value;
+        );
 
 
       const address =
-        document.getElementById(
+        getValue(
           "address"
-        ).value.trim();
+        );
 
 
       if (
@@ -1041,27 +2145,41 @@ function initAdmissionForm() {
         !address
       ) {
 
-        message.textContent =
-          "অনুগ্রহ করে সব তথ্য পূরণ করুন।";
+        if (message) {
+
+          message.textContent =
+            "অনুগ্রহ করে সব তথ্য পূরণ করুন।";
+
+        }
 
         return;
 
       }
 
 
-      message.textContent =
-        "আবেদন জমা দেওয়া হচ্ছে...";
+      if (message) {
+
+        message.textContent =
+          "আবেদন জমা হচ্ছে...";
+
+      }
 
 
       try {
 
-        await addDoc(
+        const {
+          addDoc
+        } =
+        await import(
+          "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js"
+        );
 
+
+        await addDoc(
           collection(
             db,
             "admissions"
           ),
-
           {
 
             studentName,
@@ -1078,15 +2196,19 @@ function initAdmissionForm() {
               "pending",
 
             createdAt:
-              serverTimestamp()
+              new Date()
+                .toISOString()
 
           }
-
         );
 
 
-        message.textContent =
-          "আলহামদুলিল্লাহ! আপনার ভর্তি আবেদন সফলভাবে জমা হয়েছে।";
+        if (message) {
+
+          message.textContent =
+            "আলহামদুলিল্লাহ! আপনার ভর্তি আবেদন সফলভাবে জমা হয়েছে।";
+
+        }
 
 
         form.reset();
@@ -1100,8 +2222,12 @@ function initAdmissionForm() {
         );
 
 
-        message.textContent =
-          "আবেদন জমা দেওয়া যায়নি। পরে আবার চেষ্টা করুন।";
+        if (message) {
+
+          message.textContent =
+            "আবেদন জমা দেওয়া যায়নি। পরে আবার চেষ্টা করুন।";
+
+        }
 
       }
 
@@ -1112,1183 +2238,177 @@ function initAdmissionForm() {
 
 
 /* =========================================================
-   16. LOAD NOTICES
-========================================================= */
-
-async function loadNotices() {
-
-  const list =
-    document.getElementById(
-      "noticeList"
-    );
-
-
-  if (!list)
-    return;
-
-
-  list.innerHTML =
-    `
-      <div class="loading-card">
-        নোটিশ লোড হচ্ছে...
-      </div>
-    `;
-
-
-  try {
-
-    const noticeQuery =
-      query(
-
-        collection(
-          db,
-          "notices"
-        ),
-
-        limit(20)
-
-      );
-
-
-    const snapshot =
-      await getDocs(
-        noticeQuery
-      );
-
-
-    if (snapshot.empty) {
-
-      list.innerHTML =
-        `
-          <div class="empty-card">
-            বর্তমানে কোনো নোটিশ নেই।
-          </div>
-        `;
-
-      return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
-    snapshot.forEach(
-      noticeDoc => {
-
-        const data =
-          noticeDoc.data();
-
-
-        const article =
-          document.createElement(
-            "article"
-          );
-
-
-        article.className =
-          "notice-card";
-
-
-        article.innerHTML = `
-
-          <div class="notice-date">
-
-            <strong>
-
-              ${escapeHTML(
-                data.day ||
-                "--"
-              )}
-
-            </strong>
-
-            <span>
-
-              ${escapeHTML(
-                data.month ||
-                "---"
-              )}
-
-            </span>
-
-          </div>
-
-
-          <div class="notice-content">
-
-            <h3>
-
-              ${escapeHTML(
-                data.title ||
-                "নোটিশ"
-              )}
-
-            </h3>
-
-
-            <p>
-
-              ${escapeHTML(
-                data.description ||
-                ""
-              )}
-
-            </p>
-
-          </div>
-
-        `;
-
-
-        list.appendChild(
-          article
-        );
-
-      }
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "Notice Error:",
-      error
-    );
-
-
-    list.innerHTML =
-      `
-        <div class="empty-card">
-          নোটিশ লোড করা যায়নি।
-        </div>
-      `;
-
-  }
-
-}
-
-
-/* =========================================================
-   17. EMERGENCY NOTICE
-========================================================= */
-
-async function loadEmergencyNotice() {
-
-  const notice =
-    document.getElementById(
-      "emergencyNotice"
-    );
-
-
-  if (!notice)
-    return;
-
-
-  try {
-
-    const emergencyQuery =
-      query(
-
-        collection(
-          db,
-          "emergencyNotices"
-        ),
-
-        limit(1)
-
-      );
-
-
-    const snapshot =
-      await getDocs(
-        emergencyQuery
-      );
-
-
-    if (!snapshot.empty) {
-
-      snapshot.forEach(
-        emergencyDoc => {
-
-          const data =
-            emergencyDoc.data();
-
-
-          notice.textContent =
-            data.text ||
-            "বর্তমানে কোনো জরুরি নোটিশ নেই।";
-
-        }
-      );
-
-    } else {
-
-      notice.textContent =
-        "বর্তমানে কোনো জরুরি নোটিশ নেই।";
-
-    }
-
-
-  } catch (error) {
-
-    console.error(
-      "Emergency Notice Error:",
-      error
-    );
-
-
-    notice.textContent =
-      "জরুরি নোটিশ লোড করা যায়নি।";
-
-  }
-
-}
-
-
-/* =========================================================
-   18. RESULT SEARCH
-========================================================= */
-
-function initResultSearch() {
-
-  const button =
-    document.getElementById(
-      "resultBtn"
-    );
-
-
-  const rollInput =
-    document.getElementById(
-      "resultRoll"
-    );
-
-
-  const classInput =
-    document.getElementById(
-      "resultClass"
-    );
-
-
-  const yearInput =
-    document.getElementById(
-      "resultYear"
-    );
-
-
-  const examInput =
-    document.getElementById(
-      "examType"
-    );
-
-
-  const box =
-    document.getElementById(
-      "resultBox"
-    );
-
-
-  if (
-    !button ||
-    !rollInput ||
-    !box
-  )
-    return;
-
-
-  button.addEventListener(
-    "click",
-    async () => {
-
-      const roll =
-        rollInput.value.trim();
-
-
-      const className =
-        classInput
-        ? classInput.value
-        : "";
-
-
-      const year =
-        yearInput
-        ? yearInput.value
-        : "";
-
-
-      const examType =
-        examInput
-        ? examInput.value
-        : "";
-
-
-      if (!roll) {
-
-        box.textContent =
-          "রোল নম্বর লিখুন।";
-
-        return;
-
-      }
-
-
-      box.innerHTML =
-        `
-          <div class="loading-card">
-            রেজাল্ট খোঁজা হচ্ছে...
-          </div>
-        `;
-
-
-      try {
-
-        let conditions = [
-
-          where(
-            "roll",
-            "==",
-            roll
-          )
-
-        ];
-
-
-        if (className) {
-
-          conditions.push(
-            where(
-              "className",
-              "==",
-              className
-            )
-          );
-
-        }
-
-
-        if (year) {
-
-          conditions.push(
-            where(
-              "academicYear",
-              "==",
-              year
-            )
-          );
-
-        }
-
-
-        if (examType) {
-
-          conditions.push(
-            where(
-              "examType",
-              "==",
-              examType
-            )
-          );
-
-        }
-
-
-        const resultQuery =
-          query(
-
-            collection(
-              db,
-              "results"
-            ),
-
-            ...conditions,
-
-            limit(1)
-
-          );
-
-
-        const snapshot =
-          await getDocs(
-            resultQuery
-          );
-
-
-        if (snapshot.empty) {
-
-          box.innerHTML =
-            `
-              <div class="empty-card">
-                এই তথ্য অনুযায়ী কোনো রেজাল্ট পাওয়া যায়নি।
-              </div>
-            `;
-
-          return;
-
-        }
-
-
-        snapshot.forEach(
-          resultDoc => {
-
-            const data =
-              resultDoc.data();
-
-
-            box.innerHTML = `
-
-              <div class="result-display">
-
-                <h3>
-                  📊 পরীক্ষার ফলাফল
-                </h3>
-
-
-                <div class="result-details">
-
-                  <p>
-                    <strong>
-                      শিক্ষার্থীর নাম:
-                    </strong>
-
-                    ${escapeHTML(
-                      data.studentName ||
-                      "-"
-                    )}
-                  </p>
-
-
-                  <p>
-                    <strong>
-                      রোল:
-                    </strong>
-
-                    ${escapeHTML(
-                      data.roll ||
-                      roll
-                    )}
-                  </p>
-
-
-                  <p>
-                    <strong>
-                      শ্রেণী:
-                    </strong>
-
-                    ${escapeHTML(
-                      data.className ||
-                      className ||
-                      "-"
-                    )}
-                  </p>
-
-
-                  <p>
-                    <strong>
-                      শিক্ষাবর্ষ:
-                    </strong>
-
-                    ${escapeHTML(
-                      data.academicYear ||
-                      year ||
-                      "-"
-                    )}
-                  </p>
-
-
-                  <p>
-                    <strong>
-                      পরীক্ষার ধরন:
-                    </strong>
-
-                    ${escapeHTML(
-                      data.examType ||
-                      examType ||
-                      "-"
-                    )}
-                  </p>
-
-
-                  <p>
-                    <strong>
-                      ফলাফল:
-                    </strong>
-
-                    ${escapeHTML(
-                      data.result ||
-                      "-"
-                    )}
-                  </p>
-
-                </div>
-
-              </div>
-
-            `;
-
-          }
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Result Error:",
-          error
-        );
-
-
-        box.innerHTML =
-          `
-            <div class="empty-card">
-              রেজাল্ট খুঁজতে সমস্যা হয়েছে।
-            </div>
-          `;
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   19. STUDENT SEARCH
-========================================================= */
-
-function initStudentSearch() {
-
-  const button =
-    document.getElementById(
-      "studentBtn"
-    );
-
-
-  const rollInput =
-    document.getElementById(
-      "studentId"
-    );
-
-
-  const classInput =
-    document.getElementById(
-      "studentClass"
-    );
-
-
-  const yearInput =
-    document.getElementById(
-      "studentYear"
-    );
-
-
-  const box =
-    document.getElementById(
-      "studentBox"
-    );
-
-
-  if (
-    !button ||
-    !rollInput ||
-    !box
-  )
-    return;
-
-
-  button.addEventListener(
-    "click",
-    async () => {
-
-      const roll =
-        rollInput.value.trim();
-
-
-      const className =
-        classInput
-        ? classInput.value
-        : "";
-
-
-      const academicYear =
-        yearInput
-        ? yearInput.value
-        : "";
-
-
-      if (!roll) {
-
-        box.textContent =
-          "রোল নম্বর লিখুন।";
-
-        return;
-
-      }
-
-
-      box.innerHTML =
-        `
-          <div class="loading-card">
-            শিক্ষার্থীর তথ্য খোঁজা হচ্ছে...
-          </div>
-        `;
-
-
-      try {
-
-        let conditions = [
-
-          where(
-            "roll",
-            "==",
-            roll
-          )
-
-        ];
-
-
-        if (className) {
-
-          conditions.push(
-            where(
-              "className",
-              "==",
-              className
-            )
-          );
-
-        }
-
-
-        if (academicYear) {
-
-          conditions.push(
-            where(
-              "academicYear",
-              "==",
-              academicYear
-            )
-          );
-
-        }
-
-
-        const studentQuery =
-          query(
-
-            collection(
-              db,
-              "students"
-            ),
-
-            ...conditions,
-
-            limit(1)
-
-          );
-
-
-        const snapshot =
-          await getDocs(
-            studentQuery
-          );
-
-
-        if (snapshot.empty) {
-
-          box.innerHTML =
-            `
-              <div class="empty-card">
-                এই তথ্য অনুযায়ী কোনো শিক্ষার্থীর তথ্য পাওয়া যায়নি।
-              </div>
-            `;
-
-          return;
-
-        }
-
-
-        snapshot.forEach(
-          studentDoc => {
-
-            const data =
-              studentDoc.data();
-
-
-            createDigitalIDCard(
-              box,
-              data
-            );
-
-          }
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Student Search Error:",
-          error
-        );
-
-
-        box.innerHTML =
-          `
-            <div class="empty-card">
-              শিক্ষার্থীর তথ্য খুঁজতে সমস্যা হয়েছে।
-            </div>
-          `;
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   20. DIGITAL ID CARD
-========================================================= */
-
-function createDigitalIDCard(
-  box,
-  data
-) {
-
-  const websiteURL =
-    window.location.href;
-
-
-  const studentName =
-    data.name ||
-    data.studentName ||
-    "শিক্ষার্থী";
-
-
-  const roll =
-    data.roll ||
-    "-";
-
-
-  const className =
-    data.className ||
-    "-";
-
-
-  const academicYear =
-    data.academicYear ||
-    "-";
-
-
-  const studentImage =
-    driveImageURL(
-      data.photo ||
-      data.image ||
-      data.photoUrl ||
-      ""
-    );
-
-
-  const card =
-    document.createElement(
-      "div"
-    );
-
-
-  card.className =
-    "digital-id-card";
-
-
-  card.id =
-    "digitalIDCard";
-
-
-  card.innerHTML = `
-
-    <div class="id-card-header">
-
-      <img
-        src="logo.png.jpg"
-        alt="Al-Haramain Logo"
-      >
-
-
-      <div>
-
-        <h3>
-          আল-হারামাইন মডেল মাদ্রাসা
-        </h3>
-
-        <small>
-          Al-Haramain Model Madrasa
-        </small>
-
-      </div>
-
-    </div>
-
-
-    <div class="id-card-body">
-
-
-      ${
-        studentImage
-        ?
-        `
-          <img
-            class="student-photo"
-            src="${escapeHTML(
-              studentImage
-            )}"
-            alt="${escapeHTML(
-              studentName
-            )}"
-          >
-        `
-        :
-        `
-          <div class="student-photo-placeholder">
-            👨‍🎓
-          </div>
-        `
-      }
-
-
-      <h2>
-        ${escapeHTML(
-          studentName
-        )}
-      </h2>
-
-
-      <div class="id-info">
-
-        <div>
-
-          <span>
-            রোল
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              roll
-            )}
-          </strong>
-
-        </div>
-
-
-        <div>
-
-          <span>
-            শ্রেণী
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              className
-            )}
-          </strong>
-
-        </div>
-
-
-        <div>
-
-          <span>
-            শিক্ষাবর্ষ
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              academicYear
-            )}
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <div class="id-slogan">
-
-        সফলতা তোমার অপেক্ষায়
-
-      </div>
-
-
-      <div class="id-qr">
-
-        <img
-          src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(
-            websiteURL
-          )}"
-          alt="Website QR Code"
-        >
-
-      </div>
-
-
-    </div>
-
-
-    <div class="id-card-footer">
-
-      Al-Haramain Digital
-
-    </div>
-
-
-    <button
-      type="button"
-      class="download-id-btn"
-      onclick="window.print()"
-    >
-      📥 Digital ID Card Download / Print
-    </button>
-
-  `;
-
-
-  box.innerHTML =
-    "";
-
-
-  box.appendChild(
-    card
-  );
-
-}
-
-
-/* =========================================================
-   21. GALLERY
-========================================================= */
-
-async function loadGallery() {
-
-  const list =
-    document.getElementById(
-      "galleryList"
-    );
-
-
-  if (!list)
-    return;
-
-
-  list.innerHTML =
-    `
-      <div class="loading-card">
-        ছবি লোড হচ্ছে...
-      </div>
-    `;
-
-
-  try {
-
-    const galleryQuery =
-      query(
-
-        collection(
-          db,
-          "gallery"
-        ),
-
-        limit(50)
-
-      );
-
-
-    const snapshot =
-      await getDocs(
-        galleryQuery
-      );
-
-
-    if (snapshot.empty) {
-
-      list.innerHTML =
-        `
-          <div class="empty-card">
-            এখনো কোনো ছবি যোগ করা হয়নি।
-          </div>
-        `;
-
-      return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
-    snapshot.forEach(
-      galleryDoc => {
-
-        const data =
-          galleryDoc.data();
-
-
-        const image =
-          driveImageURL(
-            data.image ||
-            data.imageUrl ||
-            data.url ||
-            ""
-          );
-
-
-        if (!image)
-          return;
-
-
-        const item =
-          document.createElement(
-            "div"
-          );
-
-
-        item.className =
-          "gallery-item";
-
-
-        item.innerHTML = `
-
-          <img
-            src="${escapeHTML(
-              image
-            )}"
-            alt="${escapeHTML(
-              data.title ||
-              "Al-Haramain Gallery"
-            )}"
-            loading="lazy"
-          >
-
-          ${
-            data.title
-            ?
-            `
-              <div class="gallery-caption">
-
-                ${escapeHTML(
-                  data.title
-                )}
-
-              </div>
-            `
-            :
-            ""
-          }
-
-        `;
-
-
-        list.appendChild(
-          item
-        );
-
-      }
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "Gallery Error:",
-      error
-    );
-
-
-    list.innerHTML =
-      `
-        <div class="empty-card">
-          Gallery লোড করা যায়নি।
-        </div>
-      `;
-
-  }
-
-}
-
-
-/* =========================================================
-   22. GOOGLE MAP
+   26. GOOGLE MAP
 ========================================================= */
 
 function initMap() {
 
-  /*
-    বর্তমানে Google Maps share link
-    index.html-এর button থেকে সরাসরি খোলা হচ্ছে।
+  const map =
+    document.getElementById(
+      "map"
+    );
 
-    ভবিষ্যতে চাইলে এখানে Google Maps Embed
-    যোগ করা যাবে।
+
+  if (!map) return;
+
+
+  /*
+    এখানে Google Maps Embed URL দিলে
+    সরাসরি iframe-এ দেখানো যাবে।
   */
+
+  const mapUrl =
+    map.dataset.mapUrl ||
+    "";
+
+
+  if (
+    mapUrl &&
+    map.tagName === "IFRAME"
+  ) {
+
+    map.src =
+      mapUrl;
+
+  }
 
 }
 
 
 /* =========================================================
-   23. START ALL
+   27. SMOOTH SCROLL
+========================================================= */
+
+function initSmoothScroll() {
+
+  document
+    .querySelectorAll(
+      'a[href^="#"]'
+    )
+    .forEach(
+      link => {
+
+        link.addEventListener(
+          "click",
+          event => {
+
+            const targetId =
+              link
+                .getAttribute(
+                  "href"
+                )
+                .substring(1);
+
+
+            const target =
+              document.getElementById(
+                targetId
+              );
+
+
+            if (!target) return;
+
+
+            event.preventDefault();
+
+
+            target.scrollIntoView({
+              behavior:
+                "smooth"
+            });
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   28. START WEBSITE
 ========================================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   async () => {
 
+    initLoader();
+
+
     await loadHeader();
+
 
     await loadFooter();
 
 
     initSlider();
 
+
+    initDepartments();
+
+
     initScrollAnimation();
+
 
     initAdmissionForm();
 
+
     initResultSearch();
 
+
     initStudentSearch();
+
 
     initMap();
 
 
-    await loadDepartments();
+    initSmoothScroll();
 
-    await loadDepartmentOptions();
+
+    initAllAchievements();
+
+
+    initAllNotices();
+
+
+    initAllGallery();
+
 
     await loadAchievements();
 
+
     await loadNotices();
 
-    await loadEmergencyNotice();
 
     await loadGallery();
+
+
+    await loadEmergencyNotice();
 
   }
 );
 
 
 /* =========================================================
-   24. GLOBAL ACCESS
+   29. GLOBAL ACCESS
 ========================================================= */
 
 window.AlHaramain = {
 
-  firebaseApp:
-    app,
+  app,
 
-  database:
-    db,
+  db,
 
-  authentication:
-    auth,
+  convertDriveImage,
 
-  driveImageURL:
-    driveImageURL
+  loadAchievements,
+
+  loadNotices,
+
+  loadGallery,
+
+  loadEmergencyNotice
 
 };
