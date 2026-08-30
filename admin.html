@@ -561,6 +561,17 @@ const auth =
   getAuth(app);
 
 
+// Keep admin login active across all admin pages
+await setPersistence(
+  auth,
+  browserLocalPersistence
+);
+
+
+const db =
+  getFirestore(app);
+
+
 const db =
   getFirestore(app);
 
