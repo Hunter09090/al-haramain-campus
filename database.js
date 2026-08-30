@@ -1616,6 +1616,8 @@ document.addEventListener(
 
     await loadAchievements();
 
+    await loadDepartments();
+    
     await loadEmergencyNotice();
 
   }
