@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Departments Management | Al-Haramain
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="admin-departments.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+  <a
+    href="admin.html"
+    class="back-btn"
+  >
+    ← Dashboard
+  </a>
+
+
+  <div class="brand">
+
+    <strong>
+      🏫 Departments Management
+    </strong>
+
+    <small>
+      Al-Haramain Digital
+    </small>
+
+  </div>
+
+
+  <button
+    id="logoutBtn"
+    class="logout-btn"
+  >
+    Logout
+  </button>
+
+</header>
+
+
+
+<main class="container">
+
+
+  <section class="page-title">
+
+    <h1>
+      আমাদের বিভাগসমূহ
+    </h1>
+
+    <p>
+      নতুন বিভাগ যোগ করুন এবং প্রয়োজন হলে
+      পুরোনো বিভাগ পরিবর্তন বা মুছে ফেলুন।
+    </p>
+
+  </section>
+
+
+
+  <!-- FORM -->
+
+  <section class="form-card">
+
+    <h2 id="formTitle">
+      ➕ নতুন বিভাগ
+    </h2>
+
+
+    <form id="departmentForm">
+
+
+      <label>
+        বিভাগের নাম
+      </label>
+
+      <input
+        type="text"
+        id="departmentName"
+        placeholder="যেমন: নূরানী বিভাগ"
+        required
+      >
+
+
+      <label>
+        সংক্ষিপ্ত বিবরণ
+      </label>
+
+      <textarea
+        id="departmentDescription"
+        rows="5"
+        placeholder="বিভাগ সম্পর্কে সংক্ষিপ্ত তথ্য লিখুন..."
+        required
+      ></textarea>
+
+
+      <label>
+        বিভাগ / শ্রেণির তথ্য
+      </label>
+
+      <input
+        type="text"
+        id="departmentClass"
+        placeholder="যেমন: শিশু থেকে ৫ম শ্রেণি"
+      >
+
+
+      <label>
+        Icon / Emoji
+      </label>
+
+      <input
+        type="text"
+        id="departmentIcon"
+        placeholder="📚"
+        maxlength="5"
+      >
+
+
+      <label class="check-row">
+
+        <input
+          type="checkbox"
+          id="departmentActive"
+          checked
+        >
+
+        <span>
+          Website-এ বিভাগটি দেখাবেন
+        </span>
+
+      </label>
+
+
+      <div class="form-buttons">
+
+        <button
+          type="submit"
+          id="saveBtn"
+          class="save-btn"
+        >
+          💾 বিভাগ সংরক্ষণ
+        </button>
+
+
+        <button
+          type="button"
+          id="cancelBtn"
+          class="cancel-btn hidden"
+        >
+          বাতিল
+        </button>
+
+      </div>
+
+
+      <p
+        id="formMessage"
+        class="message"
+      ></p>
+
+
+    </form>
+
+  </section>
+
+
+
+  <!-- LIST -->
+
+  <section class="list-section">
+
+    <div class="list-heading">
+
+      <div>
+
+        <h2>
+          🏫 প্রকাশিত বিভাগ
+        </h2>
+
+        <p>
+          মোট:
+          <strong id="departmentTotal">
+            0
+          </strong>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div id="departmentList">
+
+      <div class="loading">
+        বিভাগ লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+
+<script
+  type="module"
+  src="admin-departments.js"
+></script>
+
+
+</body>
+
+</html>
