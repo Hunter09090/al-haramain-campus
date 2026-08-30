@@ -3,9 +3,6 @@
 // Al-Haramain Digital
 // ================================================
 
-// For Firebase JS SDK v7.20.0 and later,
-// measurementId is optional.
-
 const firebaseConfig = {
 
   apiKey:
@@ -31,13 +28,16 @@ const firebaseConfig = {
 
 };
 
-/* =====================================================
-   2. FIREBASE IMPORT
-===================================================== */
+
+// =================================================
+// FIREBASE IMPORT
+// =================================================
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+} from
+"https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
 
 import {
   getFirestore,
@@ -46,155 +46,251 @@ import {
   addDoc,
   query,
   where,
-  limit
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+  limit,
+  orderBy
+} from
+"https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
 
 import {
   getAuth
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+} from
+"https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 
-/* =====================================================
-   3. INITIALIZE FIREBASE
-===================================================== */
+// =================================================
+// INITIALIZE FIREBASE
+// =================================================
 
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-const auth = getAuth(app);
-
-
-/* =====================================================
-   4. LOADING SCREEN
-===================================================== */
-
-window.addEventListener("load", () => {
-
-  setTimeout(() => {
-
-    const loader = document.getElementById("loader");
-
-    if (loader) {
-
-      loader.classList.add("hide");
-
-    }
-
-    document.body.classList.remove("loading");
-
-  }, 700);
-
-});
+const app =
+  initializeApp(
+    firebaseConfig
+  );
 
 
-/* =====================================================
-   5. LOAD HEADER
-===================================================== */
+const db =
+  getFirestore(app);
+
+
+const auth =
+  getAuth(app);
+
+
+// =================================================
+// LOADING SCREEN
+// =================================================
+
+window.addEventListener(
+  "load",
+  () => {
+
+    setTimeout(
+      () => {
+
+        const loader =
+          document.getElementById(
+            "loader"
+          );
+
+
+        if (loader) {
+
+          loader.classList.add(
+            "hide"
+          );
+
+        }
+
+
+        document.body.classList.remove(
+          "loading"
+        );
+
+      },
+      700
+    );
+
+  }
+);
+
+
+// =================================================
+// LOAD HEADER
+// =================================================
 
 async function loadHeader() {
 
-  const header = document.getElementById("header");
+  const header =
+    document.getElementById(
+      "header"
+    );
+
 
   if (!header) return;
 
+
   try {
 
-    const response = await fetch("header.html");
+    const response =
+      await fetch(
+        "header.html"
+      );
+
 
     if (!response.ok) {
-      throw new Error("Header could not be loaded.");
+
+      throw new Error(
+        "Header could not be loaded."
+      );
+
     }
 
-    header.innerHTML = await response.text();
+
+    header.innerHTML =
+      await response.text();
+
 
     initNavbar();
 
+
   } catch (error) {
 
-    console.error("Header Error:", error);
+    console.error(
+      "Header Error:",
+      error
+    );
 
   }
 
 }
 
 
-/* =====================================================
-   6. LOAD FOOTER
-===================================================== */
+// =================================================
+// LOAD FOOTER
+// =================================================
 
 async function loadFooter() {
 
-  const footer = document.getElementById("footer");
+  const footer =
+    document.getElementById(
+      "footer"
+    );
+
 
   if (!footer) return;
 
+
   try {
 
-    const response = await fetch("footer.html");
+    const response =
+      await fetch(
+        "footer.html"
+      );
+
 
     if (!response.ok) {
-      throw new Error("Footer could not be loaded.");
+
+      throw new Error(
+        "Footer could not be loaded."
+      );
+
     }
 
-    footer.innerHTML = await response.text();
+
+    footer.innerHTML =
+      await response.text();
+
 
   } catch (error) {
 
-    console.error("Footer Error:", error);
+    console.error(
+      "Footer Error:",
+      error
+    );
 
   }
 
 }
 
 
-/* =====================================================
-   7. MOBILE NAVIGATION
-===================================================== */
+// =================================================
+// MOBILE NAVIGATION
+// =================================================
 
 function initNavbar() {
 
   const menuBtn =
-    document.querySelector(".menu-btn");
+    document.querySelector(
+      ".menu-btn"
+    );
+
 
   const navLinks =
-    document.querySelector(".nav-links");
+    document.querySelector(
+      ".nav-links"
+    );
 
 
-  if (!menuBtn || !navLinks) return;
+  if (
+    !menuBtn ||
+    !navLinks
+  ) {
+
+    return;
+
+  }
 
 
-  menuBtn.addEventListener("click", () => {
+  menuBtn.addEventListener(
+    "click",
+    () => {
 
-    navLinks.classList.toggle("open");
+      navLinks.classList.toggle(
+        "open"
+      );
 
-  });
+    }
+  );
 
 
-  navLinks.querySelectorAll("a").forEach(link => {
+  navLinks
+    .querySelectorAll("a")
+    .forEach(
+      link => {
 
-    link.addEventListener("click", () => {
+        link.addEventListener(
+          "click",
+          () => {
 
-      navLinks.classList.remove("open");
+            navLinks.classList.remove(
+              "open"
+            );
 
-    });
+          }
+        );
 
-  });
+      }
+    );
 
 }
 
 
-/* =====================================================
-   8. HERO PHOTO SLIDER
-===================================================== */
+// =================================================
+// HERO PHOTO SLIDER
+// =================================================
 
 function initSlider() {
 
   const slides =
-    document.querySelectorAll(".slide");
+    document.querySelectorAll(
+      ".slide"
+    );
+
 
   const dots =
-    document.querySelectorAll(".slider-dots button");
+    document.querySelectorAll(
+      ".slider-dots button"
+    );
 
 
   if (!slides.length) return;
@@ -203,26 +299,32 @@ function initSlider() {
   let currentSlide = 0;
 
 
-  function showSlide(index) {
+  function showSlide(
+    index
+  ) {
 
-    slides.forEach((slide, i) => {
+    slides.forEach(
+      (slide, i) => {
 
-      slide.classList.toggle(
-        "active",
-        i === index
-      );
+        slide.classList.toggle(
+          "active",
+          i === index
+        );
 
-    });
+      }
+    );
 
 
-    dots.forEach((dot, i) => {
+    dots.forEach(
+      (dot, i) => {
 
-      dot.classList.toggle(
-        "active",
-        i === index
-      );
+        dot.classList.toggle(
+          "active",
+          i === index
+        );
 
-    });
+      }
+    );
 
   }
 
@@ -231,41 +333,60 @@ function initSlider() {
 
     currentSlide++;
 
-    if (currentSlide >= slides.length) {
+
+    if (
+      currentSlide >=
+      slides.length
+    ) {
 
       currentSlide = 0;
 
     }
 
-    showSlide(currentSlide);
+
+    showSlide(
+      currentSlide
+    );
 
   }
 
 
-  dots.forEach((dot, index) => {
+  dots.forEach(
+    (dot, index) => {
 
-    dot.addEventListener("click", () => {
+      dot.addEventListener(
+        "click",
+        () => {
 
-      currentSlide = index;
+          currentSlide =
+            index;
 
-      showSlide(currentSlide);
 
-    });
+          showSlide(
+            currentSlide
+          );
 
-  });
+        }
+      );
+
+    }
+  );
 
 
   showSlide(0);
 
 
-  setInterval(nextSlide, 5000);
+  setInterval(
+    nextSlide,
+    5000
+  );
 
 }
 
 
-/* =====================================================
-   9. SCROLL ANIMATION
-===================================================== */
+// =================================================
+// SCROLL ANIMATION
+// =================================================
 
 function initScrollAnimation() {
 
@@ -278,11 +399,15 @@ function initScrollAnimation() {
   if (!sections.length) return;
 
 
-  sections.forEach(item => {
+  sections.forEach(
+    item => {
 
-    item.classList.add("reveal");
+      item.classList.add(
+        "reveal"
+      );
 
-  });
+    }
+  );
 
 
   const observer =
@@ -290,19 +415,26 @@ function initScrollAnimation() {
 
       entries => {
 
-        entries.forEach(entry => {
+        entries.forEach(
+          entry => {
 
-          if (entry.isIntersecting) {
+            if (
+              entry.isIntersecting
+            ) {
 
-            entry.target.classList.add("show");
+              entry.target.classList.add(
+                "show"
+              );
 
-            observer.unobserve(
-              entry.target
-            );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
 
           }
-
-        });
+        );
 
       },
 
@@ -313,18 +445,22 @@ function initScrollAnimation() {
     );
 
 
-  sections.forEach(item => {
+  sections.forEach(
+    item => {
 
-    observer.observe(item);
+      observer.observe(
+        item
+      );
 
-  });
+    }
+  );
 
 }
 
 
-/* =====================================================
-   10. ADMISSION FORM
-===================================================== */
+// =================================================
+// ADMISSION FORM
+// =================================================
 
 function initAdmissionForm() {
 
@@ -391,6 +527,7 @@ function initAdmissionForm() {
         message.textContent =
           "অনুগ্রহ করে সব তথ্য পূরণ করুন।";
 
+
         return;
 
       }
@@ -403,10 +540,12 @@ function initAdmissionForm() {
       try {
 
         await addDoc(
+
           collection(
             db,
             "admissions"
           ),
+
           {
 
             studentName,
@@ -419,12 +558,14 @@ function initAdmissionForm() {
 
             address,
 
-            status: "pending",
+            status:
+              "pending",
 
             createdAt:
               new Date().toISOString()
 
           }
+
         );
 
 
@@ -454,9 +595,9 @@ function initAdmissionForm() {
 }
 
 
-/* =====================================================
-   11. LOAD NOTICES
-===================================================== */
+// =================================================
+// LOAD NOTICES
+// =================================================
 
 async function loadNotices() {
 
@@ -473,11 +614,14 @@ async function loadNotices() {
 
     const noticeQuery =
       query(
+
         collection(
           db,
           "notices"
         ),
+
         limit(10)
+
       );
 
 
@@ -487,66 +631,80 @@ async function loadNotices() {
       );
 
 
-    if (snapshot.empty) {
+    if (
+      snapshot.empty
+    ) {
 
       return;
 
     }
 
 
-    noticeList.innerHTML = "";
+    noticeList.innerHTML =
+      "";
 
 
-    snapshot.forEach(doc => {
+    snapshot.forEach(
+      noticeDoc => {
 
-      const data = doc.data();
+        const data =
+          noticeDoc.data();
 
 
-      const article =
-        document.createElement(
-          "article"
+        const article =
+          document.createElement(
+            "article"
+          );
+
+
+        article.className =
+          "notice-card";
+
+
+        article.innerHTML = `
+
+          <div class="notice-date">
+
+            <strong>
+              ${escapeHTML(
+                data.day || "--"
+              )}
+            </strong>
+
+            <span>
+              ${escapeHTML(
+                data.month || "---"
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="notice-content">
+
+            <h3>
+              ${escapeHTML(
+                data.title || "নোটিশ"
+              )}
+            </h3>
+
+            <p>
+              ${escapeHTML(
+                data.description || ""
+              )}
+            </p>
+
+          </div>
+
+        `;
+
+
+        noticeList.appendChild(
+          article
         );
 
-
-      article.className =
-        "notice-card";
-
-
-      article.innerHTML = `
-
-        <div class="notice-date">
-
-          <strong>
-            ${data.day || "--"}
-          </strong>
-
-          <span>
-            ${data.month || "---"}
-          </span>
-
-        </div>
-
-
-        <div class="notice-content">
-
-          <h3>
-            ${data.title || "নোটিশ"}
-          </h3>
-
-          <p>
-            ${data.description || ""}
-          </p>
-
-        </div>
-
-      `;
-
-
-      noticeList.appendChild(
-        article
-      );
-
-    });
+      }
+    );
 
 
   } catch (error) {
@@ -561,9 +719,228 @@ async function loadNotices() {
 }
 
 
-/* =====================================================
-   12. EMERGENCY NOTICE
-===================================================== */
+// =================================================
+// LOAD ACHIEVEMENTS
+// =================================================
+
+async function loadAchievements() {
+
+  const achievementList =
+    document.getElementById(
+      "achievementList"
+    );
+
+
+  if (!achievementList) {
+
+    return;
+
+  }
+
+
+  try {
+
+    const achievementQuery =
+      query(
+
+        collection(
+          db,
+          "achievements"
+        ),
+
+        orderBy(
+          "date",
+          "desc"
+        )
+
+      );
+
+
+    const snapshot =
+      await getDocs(
+        achievementQuery
+      );
+
+
+    achievementList.innerHTML =
+      "";
+
+
+    if (
+      snapshot.empty
+    ) {
+
+      achievementList.innerHTML = `
+
+        <div class="achievement-loading">
+
+          এখনো কোনো নতুন অর্জন প্রকাশ করা হয়নি।
+
+        </div>
+
+      `;
+
+
+      return;
+
+    }
+
+
+    snapshot.forEach(
+      achievementDoc => {
+
+        const data =
+          achievementDoc.data();
+
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+
+        card.className =
+          "achievement-card";
+
+
+        if (
+          data.featured === true
+        ) {
+
+          card.classList.add(
+            "featured"
+          );
+
+        }
+
+
+        card.innerHTML = `
+
+          ${
+            data.featured === true
+            ? `
+              <div class="achievement-badge">
+                ⭐ গুরুত্বপূর্ণ অর্জন
+              </div>
+            `
+            : ""
+          }
+
+
+          <div class="achievement-header">
+
+            <h3>
+              ${escapeHTML(
+                data.title ||
+                "অর্জন"
+              )}
+            </h3>
+
+
+            <span>
+              ${formatAchievementDate(
+                data.date
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="achievement-category">
+
+            ${escapeHTML(
+              data.category ||
+              "সাধারণ"
+            )}
+
+          </div>
+
+
+          <p>
+
+            ${escapeHTML(
+              data.description ||
+              ""
+            )}
+
+          </p>
+
+        `;
+
+
+        achievementList.appendChild(
+          card
+        );
+
+      }
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Achievement Error:",
+      error
+    );
+
+
+    achievementList.innerHTML = `
+
+      <div class="achievement-loading">
+
+        অর্জনসমূহ লোড করা যায়নি।
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+// =================================================
+// ACHIEVEMENT DATE
+// =================================================
+
+function formatAchievementDate(
+  value
+) {
+
+  if (!value) {
+
+    return "";
+
+  }
+
+
+  const parts =
+    value.split("-");
+
+
+  if (
+    parts.length !== 3
+  ) {
+
+    return value;
+
+  }
+
+
+  return (
+    parts[2] +
+    "-" +
+    parts[1] +
+    "-" +
+    parts[0]
+  );
+
+}
+
+
+// =================================================
+// EMERGENCY NOTICE
+// =================================================
 
 async function loadEmergencyNotice() {
 
@@ -580,11 +957,14 @@ async function loadEmergencyNotice() {
 
     const noticeQuery =
       query(
+
         collection(
           db,
           "emergencyNotices"
         ),
+
         limit(1)
+
       );
 
 
@@ -594,19 +974,23 @@ async function loadEmergencyNotice() {
       );
 
 
-    if (!snapshot.empty) {
+    if (
+      !snapshot.empty
+    ) {
 
-      snapshot.forEach(doc => {
+      snapshot.forEach(
+        emergencyDoc => {
 
-        const data =
-          doc.data();
+          const data =
+            emergencyDoc.data();
 
 
-        notice.textContent =
-          data.text ||
-          "নতুন জরুরি নোটিশ এখানে প্রদর্শিত হবে...";
+          notice.textContent =
+            data.text ||
+            "নতুন জরুরি নোটিশ এখানে প্রদর্শিত হবে...";
 
-      });
+        }
+      );
 
     }
 
@@ -622,9 +1006,9 @@ async function loadEmergencyNotice() {
 }
 
 
-/* =====================================================
-   13. RESULT SEARCH
-===================================================== */
+// =================================================
+// RESULT SEARCH
+// =================================================
 
 function initResultSearch() {
 
@@ -633,10 +1017,12 @@ function initResultSearch() {
       "resultBtn"
     );
 
+
   const input =
     document.getElementById(
       "resultRoll"
     );
+
 
   const resultBox =
     document.getElementById(
@@ -648,7 +1034,11 @@ function initResultSearch() {
     !button ||
     !input ||
     !resultBox
-  ) return;
+  ) {
+
+    return;
+
+  }
 
 
   button.addEventListener(
@@ -664,6 +1054,7 @@ function initResultSearch() {
         resultBox.textContent =
           "রোল নম্বর লিখুন।";
 
+
         return;
 
       }
@@ -677,16 +1068,20 @@ function initResultSearch() {
 
         const resultQuery =
           query(
+
             collection(
               db,
               "results"
             ),
+
             where(
               "roll",
               "==",
               roll
             ),
+
             limit(1)
+
           );
 
 
@@ -696,53 +1091,68 @@ function initResultSearch() {
           );
 
 
-        if (snapshot.empty) {
+        if (
+          snapshot.empty
+        ) {
 
           resultBox.textContent =
             "এই রোল নম্বরের কোনো রেজাল্ট পাওয়া যায়নি।";
+
 
           return;
 
         }
 
 
-        let resultHTML = "";
+        let resultHTML =
+          "";
 
 
-        snapshot.forEach(doc => {
+        snapshot.forEach(
+          resultDoc => {
 
-          const data =
-            doc.data();
+            const data =
+              resultDoc.data();
 
 
-          resultHTML = `
+            resultHTML = `
 
-            <div>
+              <div>
 
-              <strong>
-                ${data.studentName || "শিক্ষার্থী"}
-              </strong>
+                <strong>
+                  ${escapeHTML(
+                    data.studentName ||
+                    "শিক্ষার্থী"
+                  )}
+                </strong>
 
-              <br>
+                <br>
 
-              রোল:
-              ${data.roll || "-"}
+                রোল:
+                ${escapeHTML(
+                  data.roll || "-"
+                )}
 
-              <br>
+                <br>
 
-              শ্রেণি:
-              ${data.className || "-"}
+                শ্রেণি:
+                ${escapeHTML(
+                  data.className || "-"
+                )}
 
-              <br>
+                <br>
 
-              ফলাফল:
-              ${data.result || "-"}
+                ফলাফল:
+                ${escapeHTML(
+                  data.result || "-"
+                )}
 
-            </div>
+              </div>
 
-          `;
+            `;
 
-        });
+          }
+        );
 
 
         resultBox.innerHTML =
@@ -768,9 +1178,9 @@ function initResultSearch() {
 }
 
 
-/* =====================================================
-   14. STUDENT INFORMATION SEARCH
-===================================================== */
+// =================================================
+// STUDENT INFORMATION SEARCH
+// =================================================
 
 function initStudentSearch() {
 
@@ -779,10 +1189,12 @@ function initStudentSearch() {
       "studentBtn"
     );
 
+
   const input =
     document.getElementById(
       "studentId"
     );
+
 
   const box =
     document.getElementById(
@@ -794,7 +1206,11 @@ function initStudentSearch() {
     !button ||
     !input ||
     !box
-  ) return;
+  ) {
+
+    return;
+
+  }
 
 
   button.addEventListener(
@@ -810,6 +1226,7 @@ function initStudentSearch() {
         box.textContent =
           "Student ID অথবা Roll লিখুন।";
 
+
         return;
 
       }
@@ -823,16 +1240,20 @@ function initStudentSearch() {
 
         const studentQuery =
           query(
+
             collection(
               db,
               "students"
             ),
+
             where(
               "studentId",
               "==",
               studentId
             ),
+
             limit(1)
+
           );
 
 
@@ -842,50 +1263,67 @@ function initStudentSearch() {
           );
 
 
-        if (snapshot.empty) {
+        if (
+          snapshot.empty
+        ) {
 
           box.textContent =
             "এই ID-এর কোনো শিক্ষার্থীর তথ্য পাওয়া যায়নি।";
+
 
           return;
 
         }
 
 
-        snapshot.forEach(doc => {
+        snapshot.forEach(
+          studentDoc => {
 
-          const data =
-            doc.data();
+            const data =
+              studentDoc.data();
 
 
-          box.innerHTML = `
+            box.innerHTML = `
 
-            <div>
+              <div>
 
-              <strong>
-                ${data.name || "নাম নেই"}
-              </strong>
+                <strong>
+                  ${escapeHTML(
+                    data.name ||
+                    "নাম নেই"
+                  )}
+                </strong>
 
-              <br>
+                <br>
 
-              Student ID:
-              ${data.studentId || "-"}
+                Student ID:
+                ${escapeHTML(
+                  data.studentId ||
+                  "-"
+                )}
 
-              <br>
+                <br>
 
-              শ্রেণি:
-              ${data.className || "-"}
+                শ্রেণি:
+                ${escapeHTML(
+                  data.className ||
+                  "-"
+                )}
 
-              <br>
+                <br>
 
-              রোল:
-              ${data.roll || "-"}
+                রোল:
+                ${escapeHTML(
+                  data.roll ||
+                  "-"
+                )}
 
-            </div>
+              </div>
 
-          `;
+            `;
 
-        });
+          }
+        );
 
 
       } catch (error) {
@@ -907,26 +1345,64 @@ function initStudentSearch() {
 }
 
 
-/* =====================================================
-   15. GOOGLE MAP
-===================================================== */
+// =================================================
+// GOOGLE MAP
+// =================================================
 
 function initMap() {
 
   /*
-    Google Maps Embed API ব্যবহার করার সময়
-    এখানে আপনার Embed URL বসানো যাবে।
+    Google Maps Embed API ব্যবহার করলে
+    এখানে Embed URL ব্যবহার করা যাবে।
 
-    আপাতত Google Maps-এর share link
-    আলাদা button হিসেবে কাজ করছে।
+    বর্তমানে আপনার Google Maps share link
+    আলাদা button/link হিসেবে ব্যবহার করা যাবে।
   */
 
 }
 
 
-/* =====================================================
-   16. START EVERYTHING
-===================================================== */
+// =================================================
+// HTML SECURITY
+// =================================================
+
+function escapeHTML(
+  value
+) {
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+// =================================================
+// START EVERYTHING
+// =================================================
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -950,25 +1426,27 @@ document.addEventListener(
 
     await loadNotices();
 
+    await loadAchievements();
+
     await loadEmergencyNotice();
 
   }
 );
 
 
-/* =====================================================
-   17. GLOBAL ACCESS
-   Admin dashboard বা অন্য JS file থেকে
-   প্রয়োজনে ব্যবহার করা যাবে।
-===================================================== */
+// =================================================
+// GLOBAL ACCESS
+// =================================================
 
 window.AlHaramain = {
 
-  firebaseApp: app,
+  firebaseApp:
+    app,
 
-  database: db,
+  database:
+    db,
 
-  authentication: auth
+  authentication:
+    auth
 
 };
-loadAchievements();
