@@ -28,7 +28,9 @@ import {
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 } from
 "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
