@@ -492,20 +492,8 @@ import {
 
 import {
   getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  setPersistence,
-  browserLocalPersistence
+  signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 
 /* =========================================
@@ -530,16 +518,13 @@ const firebaseConfig = {
     "306805947710",
 
   appId:
-    "1:306805947710:web:d0ed996b453928767a406f",
-
-  measurementId:
-    "G-LSMDHF5TDY"
+    "1:306805947710:web:d0ed996b453928767a406f"
 
 };
 
 
 /* =========================================
-   INITIALIZE FIREBASE
+   FIREBASE
 ========================================= */
 
 const app =
@@ -548,64 +533,24 @@ const app =
 const auth =
   getAuth(app);
 
-const db =
-  getFirestore(app);
-
 
 /* =========================================
-   KEEP LOGIN ACTIVE
+   FORM
 ========================================= */
-
-await setPersistence(
-  auth,
-  browserLocalPersistence
-);
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const loginPage =
-  document.getElementById("loginPage");
-
-const dashboard =
-  document.getElementById("dashboard");
 
 const loginForm =
-  document.getElementById("emailLogin");
-
-const googleLogin =
-  document.getElementById("googleLogin");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
+  document.getElementById(
+    "emailLogin"
+  );
 
 const loginMessage =
-  document.getElementById("loginMessage");
+  document.getElementById(
+    "loginMessage"
+  );
 
 
 /* =========================================
-   LOGIN MESSAGE
-========================================= */
-
-function showLoginMessage(
-  text,
-  error = false
-) {
-
-  loginMessage.textContent = text;
-
-  loginMessage.className =
-    error
-      ? "login-message error"
-      : "login-message success";
-
-}
-
-
-/* =========================================
-   EMAIL + PASSWORD LOGIN
+   LOGIN
 ========================================= */
 
 loginForm.addEventListener(
@@ -614,11 +559,13 @@ loginForm.addEventListener(
 
     event.preventDefault();
 
+
     const email =
       document
         .getElementById("adminEmail")
         .value
         .trim();
+
 
     const password =
       document
@@ -626,256 +573,68 @@ loginForm.addEventListener(
         .value;
 
 
-    if (!email || !password) {
-
-      showLoginMessage(
-        "Email এবং Password দিন।",
-        true
-      );
-
-      return;
-
-    }
+    loginMessage.textContent =
+      "Login হচ্ছে...";
 
 
-    showLoginMessage(
-      "Login হচ্ছে..."
+    console.log(
+      "Login started:",
+      email
     );
 
 
     try {
 
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      showLoginMessage(
-        "Login সফল হয়েছে।"
-      );
-
-
-    } catch (error) {
-
-  console.error(
-    "Firebase Login Error:",
-    error
-  );
-
-  showLoginMessage(
-    "Firebase Error: " + error.code,
-    true
-  );
-
-}
-
-
-      
-
-/* =========================================
-   GOOGLE LOGIN
-========================================= */
-
-googleLogin.addEventListener(
-  "click",
-  async () => {
-
-    try {
-
-      const provider =
-        new GoogleAuthProvider();
-
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "Google Login Error:",
-        error
-      );
-
-
-      showLoginMessage(
-        "Google Login করা যায়নি।",
-        true
-      );
-
-    }
-
-  }
-);
-
-
-/* =========================================
-   AUTH STATE
-========================================= */
-
-onAuthStateChanged(
-  auth,
-  async user => {
-
-    if (user) {
-
-      loginPage.classList.add(
-        "hidden"
-      );
-
-      dashboard.classList.remove(
-        "hidden"
-      );
-
-
-      const adminName =
-        document.getElementById(
-          "adminName"
+      const result =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
         );
 
 
-      if (adminName) {
-
-        adminName.textContent =
-          user.displayName ||
-          user.email ||
-          "Admin";
-
-      }
-
-
-      await loadCounts();
-
-    }
-
-    else {
-
-      dashboard.classList.add(
-        "hidden"
+      console.log(
+        "LOGIN SUCCESS:",
+        result.user
       );
 
-      loginPage.classList.remove(
-        "hidden"
-      );
 
-    }
-
-  }
-);
+      loginMessage.textContent =
+        "Login সফল হয়েছে!";
 
 
-/* =========================================
-   LOGOUT
-========================================= */
+      /*
+        এখানে আপাতত শুধু পরীক্ষা করছি।
+        Login সফল হলে Dashboard দেখাবে।
+      */
 
-logoutBtn.addEventListener(
-  "click",
-  async () => {
+      document
+        .getElementById("loginPage")
+        .classList.add("hidden");
 
-    try {
 
-      await signOut(auth);
+      document
+        .getElementById("dashboard")
+        .classList.remove("hidden");
+
 
     } catch (error) {
 
       console.error(
-        "Logout Error:",
-        error
+        "LOGIN ERROR:",
+        error.code,
+        error.message
       );
+
+
+      loginMessage.textContent =
+        "Firebase Error: " +
+        error.code;
+
 
     }
 
   }
 );
-
-
-/* =========================================
-   DASHBOARD COUNTS
-========================================= */
-
-async function loadCounts() {
-
-  try {
-
-    const notices =
-      await getDocs(
-        collection(
-          db,
-          "notices"
-        )
-      );
-
-
-    const achievements =
-      await getDocs(
-        collection(
-          db,
-          "achievements"
-        )
-      );
-
-
-    const departments =
-      await getDocs(
-        collection(
-          db,
-          "departments"
-        )
-      );
-
-
-    const applications =
-      await getDocs(
-        collection(
-          db,
-          "admissions"
-        )
-      );
-
-
-    document
-      .getElementById(
-        "noticeCount"
-      )
-      .textContent =
-      notices.size;
-
-
-    document
-      .getElementById(
-        "achievementCount"
-      )
-      .textContent =
-      achievements.size;
-
-
-    document
-      .getElementById(
-        "departmentCount"
-      )
-      .textContent =
-      departments.size;
-
-
-    document
-      .getElementById(
-        "applicationCount"
-      )
-      .textContent =
-      applications.size;
-
-
-  } catch (error) {
-
-    console.error(
-      "Dashboard Count Error:",
-      error
-    );
-
-  }
-
-}
 
 </script>
