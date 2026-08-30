@@ -658,87 +658,20 @@ loginForm.addEventListener(
 
     } catch (error) {
 
-      console.error(
-        "Firebase Login Error:",
-        error
-      );
+  console.error(
+    "Firebase Login Error:",
+    error
+  );
+
+  showLoginMessage(
+    "Firebase Error: " + error.code,
+    true
+  );
+
+}
 
 
-      let message =
-        "Email অথবা Password সঠিক নয়।";
-
-
-      if (
-        error.code ===
-        "auth/invalid-credential"
-      ) {
-
-        message =
-          "Email অথবা Password সঠিক নয়।";
-
-      }
-
-      else if (
-        error.code ===
-        "auth/user-not-found"
-      ) {
-
-        message =
-          "এই Email দিয়ে কোনো Admin account পাওয়া যায়নি।";
-
-      }
-
-      else if (
-        error.code ===
-        "auth/wrong-password"
-      ) {
-
-        message =
-          "Password সঠিক নয়।";
-
-      }
-
-      else if (
-        error.code ===
-        "auth/invalid-api-key"
-      ) {
-
-        message =
-          "Firebase API Key সঠিক নয়।";
-
-      }
-
-      else if (
-        error.code ===
-        "auth/operation-not-allowed"
-      ) {
-
-        message =
-          "Firebase Console-এ Email/Password Login চালু নেই।";
-
-      }
-
-      else if (
-        error.code ===
-        "auth/network-request-failed"
-      ) {
-
-        message =
-          "Internet connection সমস্যা হয়েছে।";
-
-      }
-
-
-      showLoginMessage(
-        message,
-        true
-      );
-
-    }
-
-  }
-);
-
+      
 
 /* =========================================
    GOOGLE LOGIN
