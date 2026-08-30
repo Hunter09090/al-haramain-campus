@@ -182,17 +182,17 @@ onAuthStateChanged(
   auth,
   user => {
 
-    if (user) {
-
-      loadDepartments();
-
-    } else {
+    if (!user) {
 
       window.location.replace(
         "admin.html"
       );
 
+      return;
+
     }
+
+    loadDepartments();
 
   }
 );
