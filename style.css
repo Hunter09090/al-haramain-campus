@@ -1962,3 +1962,125 @@ button {
   }
 
 }
+/* =========================================
+   DYNAMIC DEPARTMENTS
+========================================= */
+
+.departments-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(230px, 1fr)
+    );
+
+  gap: 20px;
+
+}
+
+
+.department-card {
+
+  padding: 24px;
+
+  background: #fff;
+
+  border-radius: 16px;
+
+  border: 1px solid #eee;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+
+}
+
+
+.department-card:hover {
+
+  transform:
+    translateY(-5px);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.08);
+
+}
+
+
+.department-icon {
+
+  width: 55px;
+
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  border-radius: 14px;
+
+  background: #eef7f1;
+
+  font-size: 28px;
+
+}
+
+
+.department-content h3 {
+
+  margin: 0 0 8px;
+
+  font-size: 20px;
+
+}
+
+
+.department-content p {
+
+  margin: 12px 0 0;
+
+  line-height: 1.7;
+
+  opacity: .75;
+
+}
+
+
+.department-class {
+
+  display: inline-block;
+
+  padding: 5px 9px;
+
+  border-radius: 7px;
+
+  background: #eef7f1;
+
+  color: #176b43;
+
+  font-size: 12px;
+
+}
+
+
+.department-loading {
+
+  width: 100%;
+
+  padding: 30px;
+
+  text-align: center;
+
+  opacity: .6;
+
+  grid-column:
+    1 / -1;
+
+}
