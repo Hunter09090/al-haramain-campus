@@ -718,7 +718,195 @@ async function loadNotices() {
 
 }
 
+// =================================================
+// LOAD DEPARTMENTS
+// Firebase: departments collection
+// =================================================
 
+async function loadDepartments() {
+
+  const departmentList =
+    document.getElementById(
+      "departmentList"
+    );
+
+  if (!departmentList) return;
+
+
+  // Loading message
+
+  departmentList.innerHTML = `
+    <div class="department-loading">
+      বিভাগসমূহ লোড হচ্ছে...
+    </div>
+  `;
+
+
+  try {
+
+    const departmentQuery =
+      query(
+        collection(
+          db,
+          "departments"
+        ),
+        orderBy(
+          "name",
+          "asc"
+        )
+      );
+
+
+    const snapshot =
+      await getDocs(
+        departmentQuery
+      );
+
+
+    // যদি কোনো বিভাগ না থাকে
+
+    if (snapshot.empty) {
+
+      departmentList.innerHTML = `
+        <div class="department-loading">
+          বর্তমানে কোনো বিভাগ যোগ করা হয়নি।
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    departmentList.innerHTML = "";
+
+
+    let activeCount = 0;
+
+
+    snapshot.forEach(
+      departmentDoc => {
+
+        const data =
+          departmentDoc.data();
+
+
+        // Admin থেকে বন্ধ করা বিভাগ Website-এ দেখাবে না
+
+        if (
+          data.active === false
+        ) {
+
+          return;
+
+        }
+
+
+        activeCount++;
+
+
+        const card =
+          document.createElement(
+            "div"
+          );
+
+
+        card.className =
+          "department-card";
+
+
+        card.innerHTML = `
+
+          <div class="department-icon">
+
+            ${escapeHTML(
+              data.icon || "📚"
+            )}
+
+          </div>
+
+
+          <div class="department-content">
+
+            <h3>
+
+              ${escapeHTML(
+                data.name ||
+                "বিভাগ"
+              )}
+
+            </h3>
+
+
+            ${
+              data.className
+              ? `
+                <span class="department-class">
+
+                  ${escapeHTML(
+                    data.className
+                  )}
+
+                </span>
+              `
+              : ""
+            }
+
+
+            <p>
+
+              ${escapeHTML(
+                data.description ||
+                ""
+              )}
+
+            </p>
+
+          </div>
+
+        `;
+
+
+        departmentList.appendChild(
+          card
+        );
+
+      }
+    );
+
+
+    // সব বিভাগ inactive হলে
+
+    if (
+      activeCount === 0
+    ) {
+
+      departmentList.innerHTML = `
+        <div class="department-loading">
+          বর্তমানে কোনো বিভাগ প্রকাশিত নেই।
+        </div>
+      `;
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Department Error:",
+      error
+    );
+
+
+    departmentList.innerHTML = `
+      <div class="department-loading">
+        বিভাগসমূহ লোড করা যায়নি।
+      </div>
+    `;
+
+  }
+
+}
 // =================================================
 // LOAD ACHIEVEMENTS
 // =================================================
