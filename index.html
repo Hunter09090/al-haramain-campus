@@ -12,32 +12,22 @@
 
   <meta
     name="description"
-    content="Al-Haramain Digital - Al-Haramain Ideal Norani Academy"
+    content="Al-Haramain Ideal Norani Academy - শিক্ষা, নৈতিকতা ও আদর্শের সমন্বিত প্রতিষ্ঠান।"
   >
 
   <meta
     name="theme-color"
-    content="#0f5132"
+    content="#075c4d"
   >
 
   <title>
-    Al-Haramain Digital
+    Al-Haramain Ideal Norani Academy
   </title>
 
 
-  <!-- ==============================
-       WEBSITE STYLE
-  =============================== -->
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
-
-  <!-- ==============================
+  <!-- =========================================
        GOOGLE FONT
-  =============================== -->
+  ========================================== -->
 
   <link
     rel="preconnect"
@@ -55,147 +45,449 @@
     rel="stylesheet"
   >
 
+
+  <!-- =========================================
+       CSS
+  ========================================== -->
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
 </head>
 
 
 <body class="loading">
 
 
-  <!-- =================================
-       LOADING / ENTRY ANIMATION
-  ================================== -->
+<!-- =========================================
+     PAGE LOADER
+========================================== -->
 
-  <div id="loader">
+<div
+  id="loader"
+  class="page-loader"
+>
 
-    <div class="loader-content">
-
-      <img
-        src="logo.png.jpg"
-        alt="Al-Haramain Digital Logo"
-        class="loader-logo"
-      >
-
-      <h2>
-        Al-Haramain Digital
-      </h2>
-
-      <p>
-        লোড হচ্ছে...
-      </p>
-
-      <div class="loader-spinner"></div>
-
-    </div>
-
+  <div class="loader-logo">
+    🕌
   </div>
 
+  <div class="loader-spinner"></div>
+
+  <p>
+    Al-Haramain
+  </p>
+
+  <small>
+    Loading...
+  </small>
+
+</div>
 
 
-  <!-- =================================
-       HEADER
-       header.html থেকে load হবে
-  ================================== -->
-
-  <div id="header"></div>
-
-
-
-  <!-- =================================
-       MAIN WEBSITE
-       
-       ⚠️ মাঝখানের সব section
-       আমরা ধাপে ধাপে এখানে বসাব।
-  ================================== -->
-
-  <main id="main-content">
 
 <!-- =========================================
-     SECTION 01
-     ENTRY + MADRASAH IDENTITY
-========================================= -->
+     HEADER
+========================================== -->
 
-<section class="hero-section" id="home">
+<header class="site-header">
 
-  <div class="hero-inner">
+  <div class="header-container">
 
-    <!-- Logo -->
 
-    <div class="hero-logo-area">
+    <!-- LOGO -->
 
-      <div class="hero-logo-ring">
+    <a
+      href="index.html"
+      class="brand"
+    >
 
-        <img
-          src="logo.png.jpg"
-          alt="আল-হারামাইন আইডিয়াল নূরানী একাডেমি"
-          class="hero-logo"
-        >
+      <div class="brand-logo">
+        🕌
+      </div>
+
+
+      <div class="brand-text">
+
+        <h1>
+          Al-Haramain
+        </h1>
+
+        <p>
+          Ideal Norani Academy
+        </p>
 
       </div>
 
-    </div>
+    </a>
 
 
-    <!-- Madrasah Name -->
 
-    <div class="hero-info">
+    <!-- INSTITUTION INFO -->
 
-      <span class="hero-bismillah">
-        بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+    <div class="institution-info">
+
+      <span>
+        শিক্ষা • নৈতিকতা • আদর্শ
       </span>
 
+      <strong>
+        AL-HARAMAIN DIGITAL
+      </strong>
 
-      <h1>
-        আল-হারামাইন আইডিয়াল নূরানী একাডেমি
-      </h1>
-
-
-      <p class="hero-subtitle">
-        দ্বীনি ও আধুনিক শিক্ষার সমন্বিত প্রতিষ্ঠান
-      </p>
+    </div>
 
 
-      <!-- Small Information Columns -->
 
-      <div class="madrasah-info-grid">
+    <!-- MENU BUTTON -->
 
-        <div class="madrasah-info-card">
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Menu"
+    >
 
-          <span class="info-icon">
-            🏫
-          </span>
+      <span></span>
+      <span></span>
+      <span></span>
 
-          <div>
+    </button>
 
-            <small>
-              প্রতিষ্ঠানের কোড
-            </small>
 
-            <strong>
-              AL-HARAMAIN
-            </strong>
+
+    <!-- NAVIGATION -->
+
+    <nav
+      class="main-nav"
+      id="mainNav"
+    >
+
+      <a
+        href="#home"
+        class="active"
+      >
+        হোম
+      </a>
+
+      <a href="#director">
+        পরিচালকের বাণী
+      </a>
+
+      <a href="#departments">
+        বিভাগসমূহ
+      </a>
+
+      <a href="#achievements">
+        অর্জনসমূহ
+      </a>
+
+      <a href="#notices">
+        নোটিশ
+      </a>
+
+      <a href="#results">
+        ফলাফল
+      </a>
+
+      <a href="#gallery">
+        গ্যালারি
+      </a>
+
+      <a href="#location">
+        যোগাযোগ
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================== -->
+
+<main id="home">
+
+
+
+  <!-- =======================================
+       HERO / PHOTO SLIDER
+  ======================================== -->
+
+  <section
+    class="hero-section"
+    aria-label="প্রতিষ্ঠানের ছবি"
+  >
+
+    <div class="hero-container">
+
+
+      <!-- SLIDER -->
+
+      <div
+        class="hero-slider"
+        id="heroSlider"
+      >
+
+
+        <!-- SLIDE 01 -->
+
+        <div class="hero-slide active">
+
+          <img
+            src="https://drive.google.com/thumbnail?id=1di9f-Z-HKaSWODkGnGFie4toIAca5szq&sz=w1600"
+            alt="Al-Haramain Academy"
+          >
+
+          <div class="hero-overlay">
+
+            <div class="hero-content">
+
+              <span class="hero-tag">
+                بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+              </span>
+
+              <h2>
+                শিক্ষা হোক আলোর পথ
+              </h2>
+
+              <p>
+                জ্ঞান, নৈতিকতা ও আদর্শের সমন্বয়ে
+                একটি সুন্দর ভবিষ্যৎ গড়ার প্রত্যয়।
+              </p>
+
+            </div>
 
           </div>
 
         </div>
 
 
-        <div class="madrasah-info-card">
 
-          <span class="info-icon">
-            📚
-          </span>
+        <!-- SLIDE 02 -->
 
-          <div>
+        <div class="hero-slide">
 
-            <small>
-              শিক্ষা কার্যক্রম
-            </small>
+          <img
+            src="https://drive.google.com/thumbnail?id=1GlKbDIjmjqTJ0kybdPyKXeZsswPInAxw&sz=w1600"
+            alt="Al-Haramain Academy"
+          >
 
-            <strong>
-              নূরানী • মক্তব • হিফজ • দাখিল
-            </strong>
+          <div class="hero-overlay">
+
+            <div class="hero-content">
+
+              <span class="hero-tag">
+                AL-HARAMAIN
+              </span>
+
+              <h2>
+                আদর্শ শিক্ষার প্রত্যয়
+              </h2>
+
+              <p>
+                দ্বীনি ও প্রয়োজনীয় শিক্ষার সমন্বিত
+                পরিবেশে শিক্ষার্থীর বিকাশ।
+              </p>
+
+            </div>
 
           </div>
+
+        </div>
+
+
+
+        <!-- SLIDE 03 -->
+
+        <div class="hero-slide">
+
+          <img
+            src="https://drive.google.com/thumbnail?id=1zGEYElVhA1R_ngt4iqjpjfzsuqRt9bK0&sz=w1600"
+            alt="Al-Haramain Academy"
+          >
+
+          <div class="hero-overlay">
+
+            <div class="hero-content">
+
+              <span class="hero-tag">
+                OUR CAMPUS
+              </span>
+
+              <h2>
+                সুন্দর পরিবেশে শিক্ষা
+              </h2>
+
+              <p>
+                শিক্ষার্থীদের জন্য নিরাপদ,
+                সুন্দর ও মনোরম শিক্ষার পরিবেশ।
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- SLIDE 04 -->
+
+        <div class="hero-slide">
+
+          <img
+            src="https://drive.google.com/thumbnail?id=1YbDQtjP-DY1ogLM3w5_EC4WcyQt6qStB&sz=w1600"
+            alt="Al-Haramain Academy"
+          >
+
+          <div class="hero-overlay">
+
+            <div class="hero-content">
+
+              <span class="hero-tag">
+                OUR STUDENTS
+              </span>
+
+              <h2>
+                ভবিষ্যতের জন্য প্রস্তুতি
+              </h2>
+
+              <p>
+                জ্ঞান ও চরিত্র গঠনের মাধ্যমে
+                আগামী দিনের যোগ্য মানুষ তৈরি।
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- SLIDE 05 -->
+
+        <div class="hero-slide">
+
+          <img
+            src="https://drive.google.com/thumbnail?id=1di9f-Z-HKaSWODkGnGFie4toIAca5szq&sz=w1600"
+            alt="Al-Haramain Academy"
+          >
+
+          <div class="hero-overlay">
+
+            <div class="hero-content">
+
+              <span class="hero-tag">
+                WELCOME
+              </span>
+
+              <h2>
+                আল-হারামাইনে আপনাকে স্বাগতম
+              </h2>
+
+              <p>
+                আপনার সন্তানের সুন্দর ভবিষ্যতের
+                পথচলায় আমরা পাশে আছি।
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PREVIOUS -->
+
+        <button
+          type="button"
+          class="hero-arrow hero-prev"
+          id="heroPrev"
+          aria-label="আগের ছবি"
+        >
+          ‹
+        </button>
+
+
+
+        <!-- NEXT -->
+
+        <button
+          type="button"
+          class="hero-arrow hero-next"
+          id="heroNext"
+          aria-label="পরের ছবি"
+        >
+          ›
+        </button>
+
+
+
+        <!-- DOTS -->
+
+        <div
+          class="hero-dots"
+          id="heroDots"
+        >
+
+          <button
+            type="button"
+            class="active"
+            data-slide="0"
+          ></button>
+
+          <button
+            type="button"
+            data-slide="1"
+          ></button>
+
+          <button
+            type="button"
+            data-slide="2"
+          ></button>
+
+          <button
+            type="button"
+            data-slide="3"
+          ></button>
+
+          <button
+            type="button"
+            data-slide="4"
+          ></button>
+
+        </div>
+
+      </div>
+
+
+      <!-- SMALL INTRO CARD -->
+
+      <div class="hero-intro">
+
+        <div class="intro-icon">
+          ✦
+        </div>
+
+        <div>
+
+          <strong>
+            Al-Haramain Ideal Norani Academy
+          </strong>
+
+          <p>
+            দ্বীনি ও আধুনিক শিক্ষার সমন্বিত
+            একটি আদর্শ শিক্ষা প্রতিষ্ঠান।
+          </p>
 
         </div>
 
@@ -203,280 +495,423 @@
 
     </div>
 
-  </div>
+  </section>
 
-</section>
+
+
+  <!-- =======================================
+       NEXT SECTIONS
+       এগুলো পরবর্তী ধাপে যোগ হবে
+  ======================================== -->
+
+  <section
+    id="director"
+    class="future-section"
+  >
+    <div>
+      <span>পরবর্তী ধাপ</span>
+      <h2>পরিচালকের বাণী</h2>
+    </div>
+  </section>
+
+
+  <section
+    id="departments"
+    class="future-section"
+  >
+    <div>
+      <span>পরবর্তী ধাপ</span>
+      <h2>আমাদের বিভাগসমূহ</h2>
+    </div>
+  </section>
+
+
+  <section
+    id="achievements"
+    class="future-section"
+  >
+    <div>
+      <span>পরবর্তী ধাপ</span>
+      <h2>আমাদের অর্জনসমূহ</h2>
+    </div>
+  </section>
+
+
+  <section
+    id="notices"
+    class="future-section"
+  >
+    <div>
+      <span>পরবর্তী ধাপ</span>
+      <h2>নোটিশ</h2>
+    </div>
+  </section>
+
+
+  <section
+    id="results"
+    class="future-section"
+  >
+    <div>
+      <span>পরবর্তী ধাপ</span>
+      <h2>ফলাফল</h2>
+    </div>
+  </section>
+
+
+  <section
+    id="gallery"
+    class="future-section"
+  >
+    <div>
+      <span>পরবর্তী ধাপ</span>
+      <h2>ফটো গ্যালারি</h2>
+    </div>
+  </section>
+
+
+  <section
+    id="location"
+    class="future-section"
+  >
+    <div>
+      <span>পরবর্তী ধাপ</span>
+      <h2>আমাদের ঠিকানা</h2>
+    </div>
+  </section>
+
+
+</main>
 
 
 
 <!-- =========================================
-     SECTION 02
-     FIVE PHOTO SIDE SLIDER
-========================================= -->
-<!-- =========================================
-     SECTION 02
-     GOOGLE DRIVE PHOTO SLIDER
-========================================= -->
+     FOOTER PLACEHOLDER
+========================================== -->
 
-<section class="photo-slider-section" id="photo-slider">
+<footer class="site-footer">
 
-  <div class="section-heading">
+  <div class="footer-container">
 
-    <span class="section-tag">
-      আমাদের প্রতিষ্ঠান
-    </span>
-
-    <h2>
-      আল-হারামাইনের কিছু মুহূর্ত
-    </h2>
+    <strong>
+      Al-Haramain Ideal Norani Academy
+    </strong>
 
     <p>
-      আমাদের শিক্ষা কার্যক্রম ও প্রতিষ্ঠানের কিছু সুন্দর মুহূর্ত
+      শিক্ষা • নৈতিকতা • আদর্শ
     </p>
 
-  </div>
-
-
-  <div class="photo-slider-wrapper">
-
-    <div class="photo-slider-track">
-
-
-      <!-- PHOTO 01 -->
-
-      <div class="photo-slide active">
-
-        <img
-          src="https://drive.google.com/thumbnail?id=1di9f-Z-HKaSWODkGnGFie4toIAca5szq&sz=w1200"
-          alt="আল-হারামাইন একাডেমির ছবি ১"
-        >
-
-      </div>
-
-
-      <!-- PHOTO 02 -->
-
-      <div class="photo-slide">
-
-        <img
-          src="https://drive.google.com/thumbnail?id=1GlKbDIjmjqTJ0kybdPyKXeZsswPInAxw&sz=w1200"
-          alt="আল-হারামাইন একাডেমির ছবি ২"
-        >
-
-      </div>
-
-
-      <!-- PHOTO 03 -->
-
-      <div class="photo-slide">
-
-        <img
-          src="https://drive.google.com/thumbnail?id=1zGEYElVhA1R_ngt4iqjpjfzsuqRt9bK0&sz=w1200"
-          alt="আল-হারামাইন একাডেমির ছবি ৩"
-        >
-
-      </div>
-
-
-      <!-- PHOTO 04 -->
-
-      <div class="photo-slide">
-
-        <img
-          src="https://drive.google.com/thumbnail?id=1YbDQtjP-DY1ogLM3w5_EC4WcyQt6qStB&sz=w1200"
-          alt="আল-হারামাইন একাডেমির ছবি ৪"
-        >
-
-      </div>
-
-
-      <!-- PHOTO 05 -->
-
-      <div class="photo-slide">
-
-        <img
-          src="https://drive.google.com/thumbnail?id=1di9f-Z-HKaSWODkGnGFie4toIAca5szq&sz=w1200"
-          alt="আল-হারামাইন একাডেমির ছবি ৫"
-        >
-
-      </div>
-
-
-    </div>
-
-
-    <!-- PREVIOUS -->
-
-    <button
-      type="button"
-      class="slider-btn slider-prev"
-      aria-label="আগের ছবি"
-    >
-      ❮
-    </button>
-
-
-    <!-- NEXT -->
-
-    <button
-      type="button"
-      class="slider-btn slider-next"
-      aria-label="পরের ছবি"
-    >
-      ❯
-    </button>
-
-
-    <!-- DOTS -->
-
-    <div class="slider-dots">
-
-      <button
-        type="button"
-        class="active"
-        data-slide="0"
-      ></button>
-
-      <button
-        type="button"
-        data-slide="1"
-      ></button>
-
-      <button
-        type="button"
-        data-slide="2"
-      ></button>
-
-      <button
-        type="button"
-        data-slide="3"
-      ></button>
-
-      <button
-        type="button"
-        data-slide="4"
-      ></button>
-
-    </div>
+    <small>
+      © 2026 Al-Haramain Digital. All Rights Reserved.
+    </small>
 
   </div>
 
-</section>
-
-
-  <!-- Slider -->
-
-  
-
-
-      <!-- ==============================
-           SLIDE 01
-      =============================== -->
-
-      
-
-    <!--
-    =================================================
-    SECTION 01
-    এখানে আমরা প্রথমে Madrasah Header / Hero
-    তৈরি করব।
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 02
-    এখানে ৫টি Side Slide Photo
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 03
-    পরিচালকের বাণী
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 04
-    আমাদের বিভাগসমূহ
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 05
-    আমাদের অর্জনসমূহ
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 06
-    নোটিশ
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 07
-    ফলাফল
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 08
-    শিক্ষার্থীর তথ্য
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 09
-    ফটো গ্যালারি
-    =================================================
-    -->
-
-
-    <!--
-    =================================================
-    SECTION 10
-    ঠিকানা + Google Map
-    =================================================
-    -->
-
-
-  </main>
+</footer>
 
 
 
-  <!-- =================================
-       FOOTER
-       footer.html থেকে load হবে
-  ================================== -->
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
 
-  <div id="footer"></div>
+<script type="module">
+
+/* =========================================
+   LOADER
+========================================= */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    setTimeout(
+      () => {
+
+        const loader =
+          document.getElementById("loader");
+
+        if (loader) {
+
+          loader.classList.add("hide");
+
+        }
+
+        document.body.classList.remove(
+          "loading"
+        );
+
+      },
+      700
+    );
+
+  }
+);
 
 
 
-  <!-- =================================
-       DATABASE.JS
-  ================================== -->
+/* =========================================
+   MOBILE MENU
+========================================= */
 
-  <script
-    type="module"
-    src="database.js"
-  ></script>
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const mainNav =
+  document.getElementById("mainNav");
+
+
+menuBtn.addEventListener(
+  "click",
+  () => {
+
+    mainNav.classList.toggle("open");
+
+    menuBtn.classList.toggle("active");
+
+  }
+);
+
+
+mainNav
+  .querySelectorAll("a")
+  .forEach(
+    link => {
+
+      link.addEventListener(
+        "click",
+        () => {
+
+          mainNav.classList.remove(
+            "open"
+          );
+
+          menuBtn.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+
+/* =========================================
+   HERO SLIDER
+========================================= */
+
+const slides =
+  document.querySelectorAll(
+    ".hero-slide"
+  );
+
+const dots =
+  document.querySelectorAll(
+    ".hero-dots button"
+  );
+
+const prevBtn =
+  document.getElementById(
+    "heroPrev"
+  );
+
+const nextBtn =
+  document.getElementById(
+    "heroNext"
+  );
+
+
+let currentSlide = 0;
+
+let sliderTimer;
+
+
+function showSlide(index) {
+
+  if (!slides.length) return;
+
+
+  if (index >= slides.length) {
+
+    index = 0;
+
+  }
+
+
+  if (index < 0) {
+
+    index =
+      slides.length - 1;
+
+  }
+
+
+  currentSlide =
+    index;
+
+
+  slides.forEach(
+    (slide, i) => {
+
+      slide.classList.toggle(
+        "active",
+        i === currentSlide
+      );
+
+    }
+  );
+
+
+  dots.forEach(
+    (dot, i) => {
+
+      dot.classList.toggle(
+        "active",
+        i === currentSlide
+      );
+
+    }
+  );
+
+}
+
+
+function nextSlide() {
+
+  showSlide(
+    currentSlide + 1
+  );
+
+}
+
+
+function previousSlide() {
+
+  showSlide(
+    currentSlide - 1
+  );
+
+}
+
+
+function startSlider() {
+
+  clearInterval(
+    sliderTimer
+  );
+
+
+  sliderTimer =
+    setInterval(
+      nextSlide,
+      5000
+    );
+
+}
+
+
+nextBtn.addEventListener(
+  "click",
+  () => {
+
+    nextSlide();
+
+    startSlider();
+
+  }
+);
+
+
+prevBtn.addEventListener(
+  "click",
+  () => {
+
+    previousSlide();
+
+    startSlider();
+
+  }
+);
+
+
+dots.forEach(
+  (dot, index) => {
+
+    dot.addEventListener(
+      "click",
+      () => {
+
+        showSlide(index);
+
+        startSlider();
+
+      }
+    );
+
+  }
+);
+
+
+showSlide(0);
+
+startSlider();
+
+
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+const revealElements =
+  document.querySelectorAll(
+    ".future-section"
+  );
+
+
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(
+        entry => {
+
+          if (
+            entry.isIntersecting
+          ) {
+
+            entry.target.classList.add(
+              "show"
+            );
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          }
+
+        }
+      );
+
+    },
+    {
+      threshold: 0.08
+    }
+  );
+
+
+revealElements.forEach(
+  element => {
+
+    revealObserver.observe(
+      element
+    );
+
+  }
+);
+
+</script>
 
 
 </body>
