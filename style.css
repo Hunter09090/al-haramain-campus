@@ -2182,9 +2182,10 @@ a {
    REVEAL ANIMATION
 ===================================================== */
 
-.departments-section
-.reveal {
-  opacity: 0;
+.departments-section .department-card {
+  opacity: 1;
+  transform: translateY(0);
+}
 
   transform:
     translateY(35px);
