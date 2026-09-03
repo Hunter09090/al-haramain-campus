@@ -45,7 +45,7 @@ const SITE_CONFIG = {
 
     heroImages: [
 
-        "PASTE_GOOGLE_DRIVE_HERO_IMAGE_1_HERE",
+        "https://drive.google.com/file/d/10zK2s2K_vOsxBc3OyB4vjdsI8lZ_9n9j/view?usp=drivesdk",
 
         "PASTE_GOOGLE_DRIVE_HERO_IMAGE_2_HERE",
 
@@ -64,12 +64,12 @@ const SITE_CONFIG = {
 
     director: {
 
-        name: "মুহতামিম / পরিচালক",
+        name: "পরিচালক",
 
         designation: "পরিচালক",
 
         image:
-            "PASTE_GOOGLE_DRIVE_DIRECTOR_IMAGE_LINK_HERE",
+            "https://drive.google.com/file/d/1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X/view?usp=drivesdk",
 
         message:
             "আমাদের লক্ষ্য হলো শিক্ষার্থীদের কুরআন-সুন্নাহর আলোকে নৈতিক, আদর্শ ও যোগ্য মানুষ হিসেবে গড়ে তোলা। আধুনিক শিক্ষার পাশাপাশি ইসলামী মূল্যবোধ, শৃঙ্খলা ও মানবিক গুণাবলির বিকাশের মাধ্যমে আমরা একটি সুন্দর ভবিষ্যৎ প্রজন্ম গড়ে তুলতে চাই।"
