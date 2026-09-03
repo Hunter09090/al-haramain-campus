@@ -69,7 +69,7 @@ const SITE_CONFIG = {
         designation: "পরিচালক",
 
         image:
-            "https://drive.google.com/file/d/1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X/view?usp=drivesdk",
+            "https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w1600",
 
         message:
             "আমাদের লক্ষ্য হলো শিক্ষার্থীদের কুরআন-সুন্নাহর আলোকে নৈতিক, আদর্শ ও যোগ্য মানুষ হিসেবে গড়ে তোলা। আধুনিক শিক্ষার পাশাপাশি ইসলামী মূল্যবোধ, শৃঙ্খলা ও মানবিক গুণাবলির বিকাশের মাধ্যমে আমরা একটি সুন্দর ভবিষ্যৎ প্রজন্ম গড়ে তুলতে চাই।"
