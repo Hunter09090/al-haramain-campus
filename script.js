@@ -227,9 +227,12 @@ document.addEventListener("DOMContentLoaded", () => {
        ===================================================== */
 
     map: {
-      embed:
-        "https://maps.app.goo.gl/WeTLJ1xUvPcTFkh3A"
-    },
+  embed:
+    "https://www.google.com/maps?q=Dhaka,Bangladesh&output=embed",
+
+  link:
+    "https://maps.app.goo.gl/WeTLJ1xUvPcTFkh3A"
+},
 
     /* =====================================================
        DEVELOPER
