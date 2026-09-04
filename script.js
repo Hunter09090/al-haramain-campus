@@ -1843,3 +1843,514 @@ function setupPageLoader() {
 ========================================================= */
 
 setupPageLoader();
+/* =========================================================
+   AL-HARAMAIN PREMIUM JS ENHANCEMENT
+   Add-only enhancement — does not replace existing code
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    "use strict";
+
+    /* ---------------------------------------------------------
+       1. PREMIUM SCROLL PROGRESS
+       --------------------------------------------------------- */
+
+    const progressBar = document.createElement("div");
+    progressBar.className = "premium-scroll-progress";
+
+    progressBar.innerHTML = `
+        <span></span>
+    `;
+
+    document.body.appendChild(progressBar);
+
+    const progressStyle = document.createElement("style");
+
+    progressStyle.textContent = `
+        .premium-scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            z-index: 99999;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        .premium-scroll-progress span {
+            display: block;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                #b88a2a,
+                #e6c56a,
+                #b88a2a
+            );
+            box-shadow:
+                0 0 8px rgba(210, 170, 70, 0.45);
+            transition: width 0.08s linear;
+        }
+    `;
+
+    document.head.appendChild(progressStyle);
+
+
+    function updateScrollProgress() {
+        const scrollTop =
+            window.scrollY ||
+            document.documentElement.scrollTop;
+
+        const documentHeight =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+        const percentage =
+            documentHeight > 0
+                ? (scrollTop / documentHeight) * 100
+                : 0;
+
+        const bar =
+            progressBar.querySelector("span");
+
+        if (bar) {
+            bar.style.width =
+                Math.min(100, Math.max(0, percentage)) + "%";
+        }
+    }
+
+    window.addEventListener(
+        "scroll",
+        updateScrollProgress,
+        { passive: true }
+    );
+
+    updateScrollProgress();
+
+
+    /* ---------------------------------------------------------
+       2. PREMIUM HEADER SCROLL STATE
+       --------------------------------------------------------- */
+
+    const header =
+        document.querySelector(
+            "header, .site-header, .main-header"
+        );
+
+    if (header) {
+
+        const headerStyle = document.createElement("style");
+
+        headerStyle.textContent = `
+            .premium-header-scrolled {
+                box-shadow:
+                    0 8px 30px rgba(0, 0, 0, 0.08);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+            }
+        `;
+
+        document.head.appendChild(headerStyle);
+
+
+        function updateHeaderState() {
+            if (window.scrollY > 25) {
+                header.classList.add(
+                    "premium-header-scrolled"
+                );
+            } else {
+                header.classList.remove(
+                    "premium-header-scrolled"
+                );
+            }
+        }
+
+        window.addEventListener(
+            "scroll",
+            updateHeaderState,
+            { passive: true }
+        );
+
+        updateHeaderState();
+    }
+
+
+    /* ---------------------------------------------------------
+       3. PREMIUM BUTTON RIPPLE
+       --------------------------------------------------------- */
+
+    const rippleStyle = document.createElement("style");
+
+    rippleStyle.textContent = `
+        .premium-ripple {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: scale(0);
+            opacity: 0.35;
+            background: currentColor;
+            animation: premiumRippleAnimation 0.6s ease-out;
+        }
+
+        @keyframes premiumRippleAnimation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .premium-ripple-host {
+            position: relative;
+            overflow: hidden;
+        }
+    `;
+
+    document.head.appendChild(rippleStyle);
+
+
+    const rippleTargets = document.querySelectorAll(
+        "button, .btn, a.btn, .cta-button"
+    );
+
+    rippleTargets.forEach((button) => {
+
+        button.classList.add(
+            "premium-ripple-host"
+        );
+
+        button.addEventListener("click", (event) => {
+
+            if (
+                window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches
+            ) {
+                return;
+            }
+
+            const rect =
+                button.getBoundingClientRect();
+
+            const size =
+                Math.max(
+                    rect.width,
+                    rect.height
+                );
+
+            const ripple =
+                document.createElement("span");
+
+            ripple.className =
+                "premium-ripple";
+
+            ripple.style.width =
+                size + "px";
+
+            ripple.style.height =
+                size + "px";
+
+            ripple.style.left =
+                event.clientX -
+                rect.left -
+                size / 2 +
+                "px";
+
+            ripple.style.top =
+                event.clientY -
+                rect.top -
+                size / 2 +
+                "px";
+
+            button.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 650);
+        });
+    });
+
+
+    /* ---------------------------------------------------------
+       4. PREMIUM IMAGE LOADING POLISH
+       --------------------------------------------------------- */
+
+    const imageStyle = document.createElement("style");
+
+    imageStyle.textContent = `
+        .premium-image-ready {
+            animation: premiumImageReveal 0.7s ease both;
+        }
+
+        @keyframes premiumImageReveal {
+            from {
+                opacity: 0;
+                filter: blur(3px);
+            }
+
+            to {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+    `;
+
+    document.head.appendChild(imageStyle);
+
+
+    const images =
+        document.querySelectorAll("img");
+
+    images.forEach((img) => {
+
+        if (
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
+        ) {
+            return;
+        }
+
+        if (img.complete) {
+            img.classList.add(
+                "premium-image-ready"
+            );
+        } else {
+            img.addEventListener(
+                "load",
+                () => {
+                    img.classList.add(
+                        "premium-image-ready"
+                    );
+                },
+                { once: true }
+            );
+        }
+    });
+
+
+    /* ---------------------------------------------------------
+       5. SUBTLE PREMIUM CURSOR LIGHT
+       Desktop only
+       --------------------------------------------------------- */
+
+    const finePointer =
+        window.matchMedia(
+            "(pointer: fine)"
+        ).matches;
+
+    if (finePointer) {
+
+        const cursorLight =
+            document.createElement("div");
+
+        cursorLight.className =
+            "premium-cursor-light";
+
+        document.body.appendChild(
+            cursorLight
+        );
+
+
+        const cursorStyle =
+            document.createElement("style");
+
+        cursorStyle.textContent = `
+            .premium-cursor-light {
+                position: fixed;
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9998;
+                opacity: 0;
+                transform: translate(-50%, -50%);
+                background:
+                    radial-gradient(
+                        circle,
+                        rgba(212, 170, 72, 0.09) 0%,
+                        rgba(212, 170, 72, 0.035) 35%,
+                        transparent 70%
+                    );
+                transition:
+                    opacity 0.3s ease;
+            }
+        `;
+
+        document.head.appendChild(
+            cursorStyle
+        );
+
+
+        let cursorX = 0;
+        let cursorY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+
+        document.addEventListener(
+            "mousemove",
+            (event) => {
+
+                cursorX = event.clientX;
+                cursorY = event.clientY;
+
+                cursorLight.style.opacity =
+                    "1";
+            },
+            { passive: true }
+        );
+
+
+        document.addEventListener(
+            "mouseleave",
+            () => {
+                cursorLight.style.opacity =
+                    "0";
+            }
+        );
+
+
+        function animateCursorLight() {
+
+            currentX +=
+                (cursorX - currentX) * 0.12;
+
+            currentY +=
+                (cursorY - currentY) * 0.12;
+
+            cursorLight.style.left =
+                currentX + "px";
+
+            cursorLight.style.top =
+                currentY + "px";
+
+            requestAnimationFrame(
+                animateCursorLight
+            );
+        }
+
+        animateCursorLight();
+    }
+
+
+    /* ---------------------------------------------------------
+       6. PREMIUM CARD HOVER — SAFE
+       --------------------------------------------------------- */
+
+    const cardStyle =
+        document.createElement("style");
+
+    cardStyle.textContent = `
+        .premium-hover-card {
+            transition:
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+        }
+
+        .premium-hover-card:hover {
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.09);
+        }
+    `;
+
+    document.head.appendChild(
+        cardStyle
+    );
+
+
+    const possibleCards =
+        document.querySelectorAll(
+            ".card, " +
+            ".achievement-card, " +
+            ".gallery-item, " +
+            ".department-card, " +
+            ".value-card, " +
+            ".stat-card"
+        );
+
+    possibleCards.forEach((card) => {
+        card.classList.add(
+            "premium-hover-card"
+        );
+    });
+
+
+    /* ---------------------------------------------------------
+       7. EXTERNAL LINKS — SAFER OPENING
+       --------------------------------------------------------- */
+
+    document
+        .querySelectorAll(
+            'a[target="_blank"]'
+        )
+        .forEach((link) => {
+
+            const currentRel =
+                link.getAttribute("rel") || "";
+
+            if (
+                !currentRel.includes(
+                    "noopener"
+                )
+            ) {
+                link.setAttribute(
+                    "rel",
+                    (currentRel + " noopener noreferrer")
+                        .trim()
+                );
+            }
+        });
+
+
+    /* ---------------------------------------------------------
+       8. PREMIUM FOCUS ACCESSIBILITY
+       --------------------------------------------------------- */
+
+    const focusStyle =
+        document.createElement("style");
+
+    focusStyle.textContent = `
+        :focus-visible {
+            outline:
+                2px solid rgba(184, 138, 42, 0.65);
+            outline-offset: 3px;
+        }
+    `;
+
+    document.head.appendChild(
+        focusStyle
+    );
+
+
+    /* ---------------------------------------------------------
+       9. REDUCED MOTION SUPPORT
+       --------------------------------------------------------- */
+
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+    if (reducedMotion.matches) {
+
+        const reducedStyle =
+            document.createElement("style");
+
+        reducedStyle.textContent = `
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        `;
+
+        document.head.appendChild(
+            reducedStyle
+        );
+    }
+
+});
