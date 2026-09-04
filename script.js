@@ -1801,3 +1801,40 @@ function setupEntryAnimations() {
         observer.observe(element);
     });
 }
+/* =========================================================
+   PREMIUM PAGE LOADER
+========================================================= */
+
+function setupPageLoader() {
+    const loader = document.getElementById("pageLoader");
+
+    if (!loader) return;
+
+    const loaderLogo = document.getElementById("loaderLogo");
+
+    if (loaderLogo && SITE_CONFIG?.madrasa?.logo) {
+        loaderLogo.src = convertDriveUrl(
+            SITE_CONFIG.madrasa.logo,
+            500
+        );
+    }
+
+    const hideLoader = () => {
+        setTimeout(() => {
+            loader.classList.add("loader-hidden");
+
+            setTimeout(() => {
+                loader.remove();
+            }, 750);
+
+        }, 900);
+    };
+
+    if (document.readyState === "complete") {
+        hideLoader();
+    } else {
+        window.addEventListener("load", hideLoader, {
+            once: true
+        });
+    }
+}
