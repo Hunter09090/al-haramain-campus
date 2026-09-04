@@ -3514,3 +3514,723 @@ button:focus-visible {
         transition: none !important;
     }
    }
+/* =========================================================
+   AL-HARAMAIN PREMIUM VISUAL ENHANCEMENT
+   ---------------------------------------------------------
+   Existing CSS untouched.
+   এই অংশটি শুধু অতিরিক্ত premium polish যোগ করবে।
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   01. GLOBAL PREMIUM POLISH
+   --------------------------------------------------------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+    background: rgba(196, 154, 58, 0.25);
+    color: inherit;
+}
+
+
+/* ---------------------------------------------------------
+   02. PREMIUM SCROLLBAR
+   --------------------------------------------------------- */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f2e9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        #0d5c46,
+        #c49a3a
+    );
+    border-radius: 20px;
+    border: 2px solid #f5f2e9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        180deg,
+        #094936,
+        #a9802e
+    );
+}
+
+
+/* ---------------------------------------------------------
+   03. HEADER PREMIUM GLASS POLISH
+   --------------------------------------------------------- */
+
+.site-header {
+    backdrop-filter: blur(18px) saturate(135%);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+    transition:
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
+}
+
+.site-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(196, 154, 58, 0.45),
+        transparent
+    );
+}
+
+
+/* ---------------------------------------------------------
+   04. BRAND LOGO PREMIUM EFFECT
+   --------------------------------------------------------- */
+
+.brand-logo {
+    position: relative;
+    isolation: isolate;
+}
+
+.brand-logo::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1px solid rgba(196, 154, 58, 0.25);
+    transform: scale(0.92);
+    opacity: 0;
+    transition:
+        transform 0.45s ease,
+        opacity 0.45s ease;
+    z-index: -1;
+}
+
+.brand:hover .brand-logo::before {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+.brand-logo img {
+    transition:
+        transform 0.45s ease,
+        filter 0.45s ease;
+}
+
+.brand:hover .brand-logo img {
+    transform: scale(1.055);
+}
+
+
+/* ---------------------------------------------------------
+   05. WHATSAPP BUTTON
+   --------------------------------------------------------- */
+
+.header-whatsapp {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.header-whatsapp::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    transform: skewX(-22deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.24),
+        transparent
+    );
+    transition: left 0.65s ease;
+    z-index: -1;
+}
+
+.header-whatsapp:hover::before {
+    left: 150%;
+}
+
+.header-whatsapp:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ---------------------------------------------------------
+   06. HERO PREMIUM CINEMATIC EFFECT
+   --------------------------------------------------------- */
+
+.hero-section {
+    isolation: isolate;
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            transparent 25%,
+            rgba(0, 0, 0, 0.14) 100%
+        );
+    mix-blend-mode: multiply;
+}
+
+.hero-image {
+    transition:
+        transform 8s cubic-bezier(0.2, 0.65, 0.25, 1),
+        filter 1.2s ease;
+}
+
+.hero-slide.active .hero-image {
+    transform: scale(1.045);
+}
+
+.hero-slide:not(.active) .hero-image {
+    transform: scale(1);
+}
+
+
+/* ---------------------------------------------------------
+   07. HERO CONTENT POLISH
+   --------------------------------------------------------- */
+
+.hero-content {
+    animation: premiumHeroContent 1s ease both;
+}
+
+.hero-slide:not(.active) .hero-content {
+    animation: none;
+}
+
+@keyframes premiumHeroContent {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-badge::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 55%;
+    height: 100%;
+    transform: skewX(-20deg);
+    background: rgba(255, 255, 255, 0.2);
+    animation: badgeShine 5s ease-in-out infinite;
+}
+
+@keyframes badgeShine {
+    0%,
+    72%,
+    100% {
+        left: -100%;
+    }
+
+    84% {
+        left: 140%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   08. PREMIUM BUTTONS
+   --------------------------------------------------------- */
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 65%;
+    height: 100%;
+    transform: skewX(-22deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.24),
+        transparent
+    );
+    transition: left 0.65s ease;
+    pointer-events: none;
+}
+
+.btn:hover::before {
+    left: 150%;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+
+/* ---------------------------------------------------------
+   09. STATISTICS CARDS
+   --------------------------------------------------------- */
+
+.stat-card,
+.statistics-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.stat-card::before,
+.statistics-card::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(196, 154, 58, 0.14),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.stat-card:hover,
+.statistics-card:hover {
+    transform: translateY(-7px);
+}
+
+
+/* ---------------------------------------------------------
+   10. GENERIC PREMIUM CARDS
+   --------------------------------------------------------- */
+
+.about-card,
+.value-card,
+.department-card,
+.achievement-card,
+.gallery-item {
+    transition:
+        transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+.about-card:hover,
+.value-card:hover,
+.department-card:hover,
+.achievement-card:hover {
+    transform: translateY(-6px);
+}
+
+
+/* ---------------------------------------------------------
+   11. CARD GOLD TOP LINE
+   --------------------------------------------------------- */
+
+.about-card,
+.value-card,
+.department-card,
+.achievement-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card::after,
+.value-card::after,
+.department-card::after,
+.achievement-card::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(196, 154, 58, 0.65),
+        transparent
+    );
+    opacity: 0;
+    transform: scaleX(0.5);
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.about-card:hover::after,
+.value-card:hover::after,
+.department-card:hover::after,
+.achievement-card:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+
+/* ---------------------------------------------------------
+   12. IMAGE PREMIUM HOVER
+   --------------------------------------------------------- */
+
+.about-image img,
+.director-image img,
+.achievement-image img,
+.gallery-item img {
+    transition:
+        transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.5s ease;
+}
+
+.about-image:hover img,
+.director-image:hover img,
+.achievement-card:hover .achievement-image img,
+.gallery-item:hover img {
+    transform: scale(1.045);
+}
+
+
+/* ---------------------------------------------------------
+   13. GALLERY LUXURY EFFECT
+   --------------------------------------------------------- */
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            135deg,
+            transparent 35%,
+            rgba(255, 255, 255, 0.16) 50%,
+            transparent 65%
+        );
+    transform: translateX(-120%);
+    transition: transform 0.8s ease;
+}
+
+.gallery-item:hover::after {
+    transform: translateX(120%);
+}
+
+
+/* ---------------------------------------------------------
+   14. SECTION HEADING PREMIUM LINE
+   --------------------------------------------------------- */
+
+.section-title {
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 2px;
+    margin: 14px auto 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #c49a3a,
+        transparent
+    );
+    transition:
+        width 0.4s ease;
+}
+
+section:hover .section-title::after {
+    width: 78px;
+}
+
+
+/* ---------------------------------------------------------
+   15. DIRECTOR SECTION
+   --------------------------------------------------------- */
+
+.director-image {
+    position: relative;
+    isolation: isolate;
+}
+
+.director-image::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border: 1px solid rgba(196, 154, 58, 0.25);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    transition:
+        transform 0.5s ease,
+        border-color 0.5s ease;
+}
+
+.director-image:hover::before {
+    transform: rotate(1deg) scale(1.025);
+    border-color: rgba(196, 154, 58, 0.55);
+}
+
+
+/* ---------------------------------------------------------
+   16. ADMISSION / CTA PREMIUM GLOW
+   --------------------------------------------------------- */
+
+.admission-section,
+.final-cta {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.admission-section::before,
+.final-cta::before {
+    content: "";
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    top: -180px;
+    right: -120px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(196, 154, 58, 0.13),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.admission-section::after,
+.final-cta::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    bottom: -150px;
+    left: -100px;
+    border-radius: 50%;
+    border: 1px solid rgba(196, 154, 58, 0.12);
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   17. CONTACT / MAP PREMIUM FRAME
+   --------------------------------------------------------- */
+
+.google-map,
+.map-wrapper,
+.contact-map,
+#googleMap {
+    position: relative;
+    overflow: hidden;
+}
+
+#googleMap iframe {
+    transition:
+        transform 0.7s ease,
+        filter 0.5s ease;
+}
+
+#googleMap:hover iframe {
+    transform: scale(1.012);
+}
+
+
+/* ---------------------------------------------------------
+   18. LIGHTBOX PREMIUM
+   --------------------------------------------------------- */
+
+#lightbox {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#lightboxImage {
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+
+/* ---------------------------------------------------------
+   19. BACK TO TOP
+   --------------------------------------------------------- */
+
+#backToTop {
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+#backToTop:hover {
+    transform: translateY(-5px);
+}
+
+
+/* ---------------------------------------------------------
+   20. SUBTLE FLOATING DECORATION
+   --------------------------------------------------------- */
+
+.section-header::before {
+    content: "✦";
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #c49a3a;
+    opacity: 0.7;
+    animation: premiumStar 4s ease-in-out infinite;
+}
+
+@keyframes premiumStar {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.55;
+    }
+
+    50% {
+        transform: translateY(-3px) rotate(8deg);
+        opacity: 1;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   21. FOOTER PREMIUM TOP BORDER
+   --------------------------------------------------------- */
+
+.site-footer,
+footer {
+    position: relative;
+}
+
+.site-footer::before,
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(196, 154, 58, 0.55),
+        transparent
+    );
+}
+
+
+/* ---------------------------------------------------------
+   22. REVEAL ANIMATION — ONLY IF EXISTING CLASS USES IT
+   --------------------------------------------------------- */
+
+.reveal {
+    will-change: transform, opacity;
+}
+
+
+/* ---------------------------------------------------------
+   23. MOBILE POLISH
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+    .hero-slide.active .hero-image {
+        transform: scale(1.025);
+    }
+
+    .stat-card:hover,
+    .statistics-card:hover,
+    .about-card:hover,
+    .value-card:hover,
+    .department-card:hover,
+    .achievement-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .section-title::after {
+        width: 46px;
+    }
+
+    .section-header::before {
+        margin-bottom: 5px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   24. REDUCED MOTION / ACCESSIBILITY
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+       }
