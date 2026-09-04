@@ -2506,24 +2506,51 @@ ol {
     গুরুত্বপূর্ণ:
     JS কাজ না করলেও content যেন blank না থাকে।
 */
+/* =========================================================
+   ENTRY / SCROLL REVEAL ANIMATION
+   ========================================================= */
 
 .reveal {
-    opacity: 1;
-    transform: none;
+  opacity: 1;
+  transform: none;
 }
 
 .js-ready .reveal {
-    opacity: 0;
-    transform: translateY(35px);
-
-    transition:
-        opacity 0.75s ease,
-        transform 0.75s ease;
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .js-ready .reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Different directions */
+
+.js-ready .reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.js-ready .reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.js-ready .reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+.js-ready .reveal-left.revealed,
+.js-ready .reveal-right.revealed,
+.js-ready .reveal-scale.revealed {
+  opacity: 1;
+  transform: none;
 }
 
 
