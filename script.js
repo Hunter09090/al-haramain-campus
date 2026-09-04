@@ -2354,3 +2354,594 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+/* =========================================================
+   AL-HARAMAIN PREMIUM WEBSITE LOADER
+   Add-only — existing code remains untouched
+   ========================================================= */
+
+(function () {
+    "use strict";
+
+    /* ---------------------------------------------------------
+       PREMIUM LOADER STYLE
+       --------------------------------------------------------- */
+
+    const loaderStyle = document.createElement("style");
+
+    loaderStyle.textContent = `
+        /* Main Loader */
+        #alHaramainPremiumLoader {
+            position: fixed;
+            inset: 0;
+            z-index: 1000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255, 255, 255, 0.035) 0%,
+                    transparent 42%
+                ),
+                linear-gradient(
+                    145deg,
+                    #071b17 0%,
+                    #041410 48%,
+                    #020b08 100%
+                );
+            opacity: 1;
+            visibility: visible;
+            transition:
+                opacity 0.75s cubic-bezier(.65,0,.35,1),
+                visibility 0.75s;
+            overflow: hidden;
+        }
+
+        /* Subtle ambient light */
+        #alHaramainPremiumLoader::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(207, 166, 67, 0.10) 0%,
+                    rgba(207, 166, 67, 0.035) 32%,
+                    transparent 70%
+                );
+            filter: blur(5px);
+            animation:
+                alHaramainLoaderGlow 4s ease-in-out infinite;
+        }
+
+        /* Very subtle Islamic-style corner ornaments */
+        #alHaramainPremiumLoader::after {
+            content: "";
+            position: absolute;
+            inset: 22px;
+            border: 1px solid rgba(211, 174, 82, 0.10);
+            pointer-events: none;
+        }
+
+        #alHaramainPremiumLoader.alh-loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Loader Content */
+        .alh-loader-content {
+            position: relative;
+            z-index: 2;
+            width: min(88%, 430px);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo */
+        .alh-loader-logo {
+            width: 94px;
+            height: 94px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 22px;
+            opacity: 0;
+            transform: translateY(12px) scale(0.94);
+            filter:
+                drop-shadow(
+                    0 8px 22px rgba(0, 0, 0, 0.35)
+                );
+            animation:
+                alHaramainLogoReveal
+                1s cubic-bezier(.22,1,.36,1)
+                0.15s forwards;
+        }
+
+        /* Logo fallback */
+        .alh-loader-logo-fallback {
+            width: 94px;
+            height: 94px;
+            border-radius: 50%;
+            border: 1px solid rgba(215, 177, 76, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d7b14c;
+            font-size: 31px;
+            margin-bottom: 22px;
+            opacity: 0;
+            animation:
+                alHaramainLogoReveal
+                1s cubic-bezier(.22,1,.36,1)
+                0.15s forwards;
+        }
+
+        /* Madrasa Name */
+        .alh-loader-title {
+            margin: 0;
+            color: #f5ead0;
+            font-family:
+                "Noto Serif Bengali",
+                "Noto Sans Bengali",
+                serif;
+            font-size: clamp(21px, 5vw, 30px);
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            animation:
+                alHaramainTextReveal
+                0.9s ease
+                0.5s forwards;
+        }
+
+        /* English Name */
+        .alh-loader-subtitle {
+            margin: 4px 0 0;
+            color: rgba(231, 210, 157, 0.78);
+            font-family:
+                Arial,
+                sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(8px);
+            animation:
+                alHaramainTextReveal
+                0.9s ease
+                0.7s forwards;
+        }
+
+        /* Elegant divider */
+        .alh-loader-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 180px;
+            margin: 23px auto 19px;
+            opacity: 0;
+            animation:
+                alHaramainFadeIn
+                0.8s ease
+                0.9s forwards;
+        }
+
+        .alh-loader-divider-line {
+            height: 1px;
+            flex: 1;
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(207, 166, 67, 0.65)
+                );
+        }
+
+        .alh-loader-divider-line:last-child {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(207, 166, 67, 0.65),
+                    transparent
+                );
+        }
+
+        .alh-loader-diamond {
+            width: 5px;
+            height: 5px;
+            background: #d5ad4b;
+            transform: rotate(45deg);
+            box-shadow:
+                0 0 9px rgba(213, 173, 75, 0.4);
+        }
+
+        /* Loading Track */
+        .alh-loader-track {
+            width: min(250px, 75vw);
+            height: 2px;
+            background:
+                rgba(255, 255, 255, 0.10);
+            border-radius: 20px;
+            overflow: hidden;
+            opacity: 0;
+            animation:
+                alHaramainFadeIn
+                0.8s ease
+                1.05s forwards;
+        }
+
+        /* Loading Bar */
+        .alh-loader-bar {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(
+                    90deg,
+                    #a98232,
+                    #e3c56f,
+                    #a98232
+                );
+            box-shadow:
+                0 0 10px rgba(218, 181, 82, 0.38);
+            transition:
+                width 0.25s ease;
+        }
+
+        /* Loading Text */
+        .alh-loader-status {
+            margin-top: 12px;
+            color: rgba(231, 210, 157, 0.58);
+            font-family:
+                Arial,
+                sans-serif;
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation:
+                alHaramainFadeIn
+                0.8s ease
+                1.15s forwards;
+        }
+
+        /* Animations */
+        @keyframes alHaramainLogoReveal {
+            0% {
+                opacity: 0;
+                transform:
+                    translateY(12px)
+                    scale(0.94);
+            }
+
+            60% {
+                opacity: 1;
+                transform:
+                    translateY(-2px)
+                    scale(1.015);
+            }
+
+            100% {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        @keyframes alHaramainTextReveal {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes alHaramainFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes alHaramainLoaderGlow {
+            0%,
+            100% {
+                transform: scale(0.92);
+                opacity: 0.65;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            #alHaramainPremiumLoader::after {
+                inset: 14px;
+            }
+
+            .alh-loader-logo,
+            .alh-loader-logo-fallback {
+                width: 82px;
+                height: 82px;
+                margin-bottom: 18px;
+            }
+
+            .alh-loader-divider {
+                margin-top: 19px;
+                margin-bottom: 17px;
+            }
+
+            .alh-loader-subtitle {
+                font-size: 9px;
+                letter-spacing: 2.2px;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            #alHaramainPremiumLoader,
+            .alh-loader-logo,
+            .alh-loader-title,
+            .alh-loader-subtitle,
+            .alh-loader-divider,
+            .alh-loader-track,
+            .alh-loader-status,
+            #alHaramainPremiumLoader::before {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .alh-loader-logo,
+            .alh-loader-title,
+            .alh-loader-subtitle,
+            .alh-loader-divider,
+            .alh-loader-track,
+            .alh-loader-status {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    `;
+
+    document.head.appendChild(loaderStyle);
+
+
+    /* ---------------------------------------------------------
+       CREATE LOADER
+       --------------------------------------------------------- */
+
+    const loader = document.createElement("div");
+
+    loader.id = "alHaramainPremiumLoader";
+
+    loader.innerHTML = `
+        <div class="alh-loader-content">
+
+            <div class="alh-loader-logo-wrapper"></div>
+
+            <h1 class="alh-loader-title">
+                আল-হারামাইন মডেল মাদ্রাসা
+            </h1>
+
+            <p class="alh-loader-subtitle">
+                Al Haramain Model Madrasa
+            </p>
+
+            <div class="alh-loader-divider">
+                <span class="alh-loader-divider-line"></span>
+                <span class="alh-loader-diamond"></span>
+                <span class="alh-loader-divider-line"></span>
+            </div>
+
+            <div class="alh-loader-track">
+                <div class="alh-loader-bar"></div>
+            </div>
+
+            <div class="alh-loader-status">
+                Loading
+            </div>
+
+        </div>
+    `;
+
+    document.body.prepend(loader);
+
+
+    /* ---------------------------------------------------------
+       FIND EXISTING WEBSITE LOGO
+       --------------------------------------------------------- */
+
+    const logoWrapper =
+        loader.querySelector(
+            ".alh-loader-logo-wrapper"
+        );
+
+    const existingLogo =
+        document.querySelector(
+            "header img, .site-header img, .brand img, .logo img, img[alt*='logo' i]"
+        );
+
+
+    if (existingLogo && existingLogo.src) {
+
+        const logo = document.createElement("img");
+
+        logo.className =
+            "alh-loader-logo";
+
+        logo.src =
+            existingLogo.currentSrc ||
+            existingLogo.src;
+
+        logo.alt =
+            "Al Haramain Model Madrasa";
+
+        logoWrapper.appendChild(logo);
+
+    } else {
+
+        /* Elegant fallback if no logo is found */
+
+        logoWrapper.innerHTML = `
+            <div
+                class="alh-loader-logo-fallback"
+                aria-hidden="true"
+            >
+                ✦
+            </div>
+        `;
+    }
+
+
+    /* ---------------------------------------------------------
+       LOADING PROGRESS
+       --------------------------------------------------------- */
+
+    const progressBar =
+        loader.querySelector(
+            ".alh-loader-bar"
+        );
+
+    const statusText =
+        loader.querySelector(
+            ".alh-loader-status"
+        );
+
+    let progress = 0;
+
+    const progressTimer =
+        setInterval(() => {
+
+            /*
+             * Progress deliberately slows near 90%
+             * until the actual page is ready.
+             */
+
+            if (progress < 35) {
+                progress += 4;
+            } else if (progress < 70) {
+                progress += 2.5;
+            } else if (progress < 88) {
+                progress += 1;
+            }
+
+            progress =
+                Math.min(progress, 90);
+
+            progressBar.style.width =
+                progress + "%";
+
+        }, 80);
+
+
+    /* ---------------------------------------------------------
+       PAGE READY
+       --------------------------------------------------------- */
+
+    let pageReady = false;
+    let minimumTimePassed = false;
+
+    const minimumDisplayTime =
+        setTimeout(() => {
+
+            minimumTimePassed = true;
+
+            finishLoaderIfReady();
+
+        }, 1100);
+
+
+    function finishLoaderIfReady() {
+
+        if (
+            !pageReady ||
+            !minimumTimePassed
+        ) {
+            return;
+        }
+
+        clearInterval(progressTimer);
+        clearTimeout(minimumDisplayTime);
+
+        progressBar.style.width = "100%";
+
+        statusText.textContent =
+            "Welcome";
+
+        setTimeout(() => {
+
+            loader.classList.add(
+                "alh-loader-hidden"
+            );
+
+            setTimeout(() => {
+
+                loader.remove();
+                loaderStyle.remove();
+
+            }, 800);
+
+        }, 280);
+
+    }
+
+
+    /* ---------------------------------------------------------
+       WAIT FOR COMPLETE PAGE
+       --------------------------------------------------------- */
+
+    if (document.readyState === "complete") {
+
+        pageReady = true;
+        finishLoaderIfReady();
+
+    } else {
+
+        window.addEventListener(
+            "load",
+            () => {
+
+                pageReady = true;
+                finishLoaderIfReady();
+
+            },
+            { once: true }
+        );
+    }
+
+
+    /* ---------------------------------------------------------
+       SAFETY FALLBACK
+       --------------------------------------------------------- */
+
+    setTimeout(() => {
+
+        if (!pageReady) {
+            pageReady = true;
+            finishLoaderIfReady();
+        }
+
+    }, 7000);
+
+})();
