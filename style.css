@@ -3256,3 +3256,261 @@ button:focus-visible {
         transition: none;
     }
 }
+/* =========================================================
+   PREMIUM WEBSITE LOADER
+========================================================= */
+
+#pageLoader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+#pageLoader.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Loader content */
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    animation: loaderContentIn 0.8s ease both;
+}
+
+/* Logo */
+
+.loader-logo {
+    width: 105px;
+    height: 105px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+
+    animation:
+        loaderLogoIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both,
+        loaderLogoFloat 2s ease-in-out 0.9s infinite;
+}
+
+/* Madrasa name */
+
+.loader-title {
+    margin-top: 20px;
+
+    font-size: 1.35rem;
+    font-weight: 700;
+
+    color: #0d5c46;
+
+    letter-spacing: 0.2px;
+
+    animation: loaderTextIn 0.8s ease 0.15s both;
+}
+
+/* English name */
+
+.loader-subtitle {
+    margin-top: 5px;
+
+    font-size: 0.85rem;
+
+    color: #777;
+
+    animation: loaderTextIn 0.8s ease 0.25s both;
+}
+
+/* Loading line */
+
+.loader-line {
+    width: 170px;
+    height: 3px;
+
+    margin-top: 25px;
+
+    overflow: hidden;
+
+    border-radius: 50px;
+
+    background: #e8eeeB;
+
+    position: relative;
+}
+
+.loader-line::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -45%;
+
+    width: 45%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #c9a227;
+
+    animation: loaderProgress 1.2s ease-in-out infinite;
+}
+
+/* Small dots */
+
+.loader-dots {
+    display: flex;
+    gap: 6px;
+
+    margin-top: 16px;
+}
+
+.loader-dots span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #0d5c46;
+
+    animation: loaderDot 1s ease-in-out infinite;
+}
+
+.loader-dots span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.loader-dots span:nth-child(3) {
+    animation-delay: 0.30s;
+}
+
+
+/* =========================================================
+   LOADER ANIMATIONS
+========================================================= */
+
+@keyframes loaderContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loaderLogoIn {
+    from {
+        opacity: 0;
+        transform: scale(0.65) rotate(-8deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes loaderLogoFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes loaderTextIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loaderProgress {
+    0% {
+        left: -45%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes loaderDot {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .loader-logo {
+        width: 85px;
+        height: 85px;
+    }
+
+    .loader-title {
+        font-size: 1.15rem;
+    }
+
+    .loader-subtitle {
+        font-size: 0.78rem;
+    }
+
+    .loader-line {
+        width: 140px;
+    }
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    #pageLoader,
+    .loader-content,
+    .loader-logo,
+    .loader-title,
+    .loader-subtitle,
+    .loader-dots span,
+    .loader-line::after {
+        animation: none !important;
+        transition: none !important;
+    }
+   }
