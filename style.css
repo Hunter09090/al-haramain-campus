@@ -2497,63 +2497,67 @@ ol {
     transform: translateY(-3px);
 }
 
-
-/* =========================================================
-   SAFE REVEAL ANIMATION
-========================================================= */
-
-/*
-    গুরুত্বপূর্ণ:
-    JS কাজ না করলেও content যেন blank না থাকে।
-*/
-/* =========================================================
-   ENTRY / SCROLL REVEAL ANIMATION
-   ========================================================= */
+/* =========================
+   ENTRY / REVEAL ANIMATION
+========================= */
 
 .reveal {
-  opacity: 1;
-  transform: none;
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    will-change: opacity, transform;
 }
 
-.js-ready .reveal {
-  opacity: 0;
-  transform: translateY(35px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
-
-.js-ready .reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 
 /* Different directions */
 
-.js-ready .reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-45px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
-.js-ready .reveal-right {
-  opacity: 0;
-  transform: translateX(40px);
+.reveal-right {
+    opacity: 0;
+    transform: translateX(45px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
-.js-ready .reveal-scale {
-  opacity: 0;
-  transform: scale(0.94);
+.reveal-left.active,
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.js-ready .reveal-left.revealed,
-.js-ready .reveal-right.revealed,
-.js-ready .reveal-scale.revealed {
-  opacity: 1;
-  transform: none;
+/* Smooth stagger for cards */
+
+.achievement-card.reveal,
+.gallery-item.reveal,
+.department-card.reveal {
+    transition-delay: var(--reveal-delay, 0s);
 }
 
+/* Disable animation for users who prefer reduced motion */
 
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-left,
+    .reveal-right {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
 /* =========================================================
    STAGGER ANIMATION
 ========================================================= */
