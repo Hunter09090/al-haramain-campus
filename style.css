@@ -3154,3 +3154,105 @@ button:focus-visible {
     }
 
 }
+/* =========================================================
+   NEW ENTRY ANIMATION SYSTEM
+   Old .reveal animation is intentionally disabled
+========================================================= */
+
+/* Disable old reveal system */
+.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* New animation */
+.entry-animate {
+    opacity: 0;
+    transform: translateY(45px);
+    transition:
+        opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.entry-animate.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Left */
+.entry-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.entry-left.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Right */
+.entry-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.entry-right.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale */
+.entry-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.entry-scale.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stagger */
+.entry-delay-1 { transition-delay: 0.08s; }
+.entry-delay-2 { transition-delay: 0.16s; }
+.entry-delay-3 { transition-delay: 0.24s; }
+.entry-delay-4 { transition-delay: 0.32s; }
+.entry-delay-5 { transition-delay: 0.40s; }
+
+/* Mobile */
+@media (max-width: 850px) {
+    .entry-animate {
+        transform: translateY(30px);
+    }
+
+    .entry-left {
+        transform: translateX(-30px);
+    }
+
+    .entry-right {
+        transform: translateX(30px);
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .entry-animate,
+    .entry-left,
+    .entry-right,
+    .entry-scale {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
