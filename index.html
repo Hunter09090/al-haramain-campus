@@ -2,27 +2,40 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>আল-হারামাইন মডেল মাদ্রাসা | Al Haramain Model Madrasa</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
         content="আল-হারামাইন মডেল মাদ্রাসা — জ্ঞান, নৈতিকতা ও আদর্শের সমন্বিত শিক্ষা।"
     >
 
-    <meta name="theme-color" content="#0d5c46">
+    <meta
+        name="theme-color"
+        content="#0d5c46"
+    >
+
+    <title>
+        আল-হারামাইন মডেল মাদ্রাসা | Al Haramain Model Madrasa
+    </title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
         rel="stylesheet"
     >
 
-    <!-- Icons -->
+    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -35,28 +48,6 @@
 <body>
 
 <!-- =========================================================
-     PAGE LOADER
-========================================================= -->
-
-<div id="pageLoader" class="page-loader">
-
-    <div class="loader-logo">
-        <div class="loader-icon">
-            <i class="fa-solid fa-mosque"></i>
-        </div>
-
-        <h2>আল-হারামাইন</h2>
-        <p>মডেল মাদ্রাসা</p>
-    </div>
-
-    <div class="loader-line">
-        <span></span>
-    </div>
-
-</div>
-
-
-<!-- =========================================================
      HEADER
 ========================================================= -->
 
@@ -64,22 +55,25 @@
 
     <div class="container header-inner">
 
-        <!-- Logo -->
+        <!-- Brand -->
         <a href="#home" class="brand">
 
             <div class="brand-logo">
+
                 <img
                     id="siteLogo"
-                    src="https://drive.google.com/thumbnail?id=1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz&sz=w1600"
-                    alt="Al Haramain Model Madrasa Logo"
+                    src="https://drive.google.com/thumbnail?id=1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz&sz=w800"
+                    alt="আল-হারামাইন মডেল মাদ্রাসার লোগো"
                 >
 
                 <div class="brand-logo-fallback">
                     <i class="fa-solid fa-mosque"></i>
                 </div>
+
             </div>
 
             <div class="brand-text">
+
                 <strong id="brandNameBn">
                     আল-হারামাইন মডেল মাদ্রাসা
                 </strong>
@@ -87,71 +81,107 @@
                 <span id="brandNameEn">
                     Al Haramain Model Madrasa
                 </span>
+
             </div>
 
         </a>
 
 
         <!-- Desktop Navigation -->
-        <nav class="main-nav" id="mainNav">
+        <nav
+            class="main-nav"
+            id="mainNav"
+            aria-label="প্রধান নেভিগেশন"
+        >
 
-            <a href="#home" class="nav-link active">
+            <a
+                href="#home"
+                class="nav-link active"
+            >
                 হোম
             </a>
 
-            <a href="#about" class="nav-link">
+            <a
+                href="#about"
+                class="nav-link"
+            >
                 আমাদের সম্পর্কে
             </a>
 
-            <a href="#departments" class="nav-link">
+            <a
+                href="#departments"
+                class="nav-link"
+            >
                 বিভাগসমূহ
             </a>
 
-            <a href="#achievements" class="nav-link">
+            <a
+                href="#achievements"
+                class="nav-link"
+            >
                 অর্জনসমূহ
             </a>
 
-            <a href="#gallery" class="nav-link">
+            <a
+                href="#gallery"
+                class="nav-link"
+            >
                 গ্যালারি
             </a>
 
-            <a href="#contact" class="nav-link">
+            <a
+                href="#contact"
+                class="nav-link"
+            >
                 যোগাযোগ
             </a>
 
         </nav>
 
 
-        <!-- WhatsApp -->
+        <!-- Header WhatsApp -->
         <a
             id="headerWhatsapp"
             class="header-whatsapp"
-            href="#"
+            href="https://wa.me/8801811178674"
             target="_blank"
-            rel="noopener"
-            aria-label="WhatsApp"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp-এ যোগাযোগ করুন"
         >
+
             <i class="fa-brands fa-whatsapp"></i>
-            <span>WhatsApp</span>
+
+            <span>
+                WhatsApp
+            </span>
+
         </a>
 
 
-        <!-- Mobile Button -->
+        <!-- Mobile Menu -->
         <button
             class="mobile-menu-btn"
             id="mobileMenuBtn"
-            aria-label="Menu"
+            type="button"
+            aria-label="মেনু খুলুন"
             aria-expanded="false"
+            aria-controls="mainNav"
         >
+
             <span></span>
             <span></span>
             <span></span>
+
         </button>
 
     </div>
 
 </header>
 
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main>
 
@@ -160,76 +190,80 @@
      HERO SECTION
 ========================================================= -->
 
-<section class="hero-section" id="home">
+<section
+    class="hero-section"
+    id="home"
+>
 
-    <div class="hero-slider" id="heroSlider">
+    <!-- Hero Slider -->
+    <div
+        class="hero-slider"
+        id="heroSlider"
+    >
 
-        <!--
-        ======================================================
-        HERO IMAGE PLACEHOLDERS
-
-        শুধু Google Drive link বসাবেন।
-        ======================================================
-        -->
-
+        <!-- Hero 01 -->
         <div class="hero-slide active">
 
             <img
                 class="hero-image"
                 data-drive-image="hero1"
                 src="https://drive.google.com/thumbnail?id=1zGEYElVhA1R_ngt4iqjpjfzsuqRt9bK0&sz=w1600"
-                alt="Al Haramain Model Madrasa"
+                alt="আল-হারামাইন মডেল মাদ্রাসা"
             >
 
         </div>
 
 
+        <!-- Hero 02 -->
         <div class="hero-slide">
 
             <img
                 class="hero-image"
                 data-drive-image="hero2"
                 src="https://drive.google.com/thumbnail?id=1mAlWegRbwWaT14-ZnZV2MHYtWF2DQBBR&sz=w1600"
-                alt="Al Haramain Model Madrasa"
+                alt="আল-হারামাইন মডেল মাদ্রাসার শিক্ষা কার্যক্রম"
                 loading="lazy"
             >
 
         </div>
 
 
+        <!-- Hero 03 -->
         <div class="hero-slide">
 
             <img
                 class="hero-image"
                 data-drive-image="hero3"
-                src=""
-                alt="Al Haramain Model Madrasa"
+                src="https://drive.google.com/thumbnail?id=1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz&sz=w1600"
+                alt="আল-হারামাইন মডেল মাদ্রাসা ক্যাম্পাস"
                 loading="lazy"
             >
 
         </div>
 
 
+        <!-- Hero 04 -->
         <div class="hero-slide">
 
             <img
                 class="hero-image"
                 data-drive-image="hero4"
                 src="https://drive.google.com/thumbnail?id=1GlKbDIjmjqTJ0kybdPyKXeZsswPInAxw&sz=w1600"
-                alt="Al Haramain Model Madrasa"
+                alt="মাদ্রাসার শিক্ষার্থীদের কার্যক্রম"
                 loading="lazy"
             >
 
         </div>
 
 
+        <!-- Hero 05 -->
         <div class="hero-slide">
 
             <img
                 class="hero-image"
                 data-drive-image="hero5"
                 src="https://drive.google.com/thumbnail?id=1YbDQtjP-DY1ogLM3w5_EC4WcyQt6qStB&sz=w1600"
-                alt="Al Haramain Model Madrasa"
+                alt="আল-হারামাইন মডেল মাদ্রাসা"
                 loading="lazy"
             >
 
@@ -238,7 +272,7 @@
     </div>
 
 
-    <!-- Dark overlay -->
+    <!-- Overlay -->
     <div class="hero-overlay"></div>
 
 
@@ -246,9 +280,15 @@
     <div class="hero-content container">
 
         <div class="hero-badge">
+
             <span></span>
+
+            <i class="fa-solid fa-star-and-crescent"></i>
+
             স্বাগতম
+
             <span></span>
+
         </div>
 
 
@@ -272,20 +312,30 @@
 
         <div class="hero-buttons">
 
-            <a href="#about" class="btn btn-primary">
+            <a
+                href="#about"
+                class="btn btn-primary"
+            >
+
                 আমাদের সম্পর্কে
+
                 <i class="fa-solid fa-arrow-right"></i>
+
             </a>
+
 
             <a
                 id="heroWhatsapp"
-                href="#"
+                href="https://wa.me/8801811178674"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 class="btn btn-whatsapp"
             >
+
                 <i class="fa-brands fa-whatsapp"></i>
+
                 WhatsApp
+
             </a>
 
         </div>
@@ -293,33 +343,48 @@
     </div>
 
 
-    <!-- Slider Controls -->
+    <!-- Previous -->
     <button
         class="slider-btn slider-prev"
         id="sliderPrev"
-        aria-label="Previous slide"
+        type="button"
+        aria-label="আগের ছবি"
     >
+
         <i class="fa-solid fa-chevron-left"></i>
+
     </button>
 
 
+    <!-- Next -->
     <button
         class="slider-btn slider-next"
         id="sliderNext"
-        aria-label="Next slide"
+        type="button"
+        aria-label="পরের ছবি"
     >
+
         <i class="fa-solid fa-chevron-right"></i>
+
     </button>
 
 
-    <!-- Slider Dots -->
-    <div class="slider-dots" id="sliderDots"></div>
+    <!-- Dots -->
+    <div
+        class="slider-dots"
+        id="sliderDots"
+    ></div>
 
 
-    <!-- Scroll indicator -->
-    <a href="#about" class="scroll-indicator">
+    <!-- Scroll -->
+    <a
+        href="#statistics"
+        class="scroll-indicator"
+    >
 
-        <span>নিচে দেখুন</span>
+        <span>
+            নিচে দেখুন
+        </span>
 
         <i class="fa-solid fa-chevron-down"></i>
 
@@ -328,12 +393,175 @@
 </section>
 
 
-
 <!-- =========================================================
-     ABOUT SECTION
+     STATISTICS
 ========================================================= -->
 
-<section class="about-section section-padding" id="about">
+<section
+    class="statistics-section"
+    id="statistics"
+>
+
+    <div class="container">
+
+        <div class="statistics-grid">
+
+
+            <!-- Teachers -->
+            <article
+                class="stat-card reveal"
+                data-count="15"
+            >
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                </div>
+
+                <div class="stat-number">
+
+                    <span class="counter">
+                        15
+                    </span>
+
+                    <strong>
+                        +
+                    </strong>
+
+                </div>
+
+                <h3>
+                    শিক্ষক ও শিক্ষিকা
+                </h3>
+
+                <p>
+                    অভিজ্ঞ ও যত্নশীল শিক্ষক-শিক্ষিকার সমন্বিত দল
+                </p>
+
+            </article>
+
+
+            <!-- Students -->
+            <article
+                class="stat-card reveal"
+                data-count="400"
+            >
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                </div>
+
+                <div class="stat-number">
+
+                    <span class="counter">
+                        400
+                    </span>
+
+                    <strong>
+                        +
+                    </strong>
+
+                </div>
+
+                <h3>
+                    শিক্ষার্থী
+                </h3>
+
+                <p>
+                    জ্ঞান ও নৈতিক শিক্ষায় বেড়ে ওঠা শিক্ষার্থীদের পরিবার
+                </p>
+
+            </article>
+
+
+            <!-- Departments -->
+            <article
+                class="stat-card reveal"
+                data-count="7"
+            >
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                </div>
+
+                <div class="stat-number">
+
+                    <span class="counter">
+                        7
+                    </span>
+
+                    <strong>
+                        +
+                    </strong>
+
+                </div>
+
+                <h3>
+                    শিক্ষা বিভাগ
+                </h3>
+
+                <p>
+                    বয়স ও প্রয়োজন অনুযায়ী বিভিন্ন শিক্ষা কার্যক্রম
+                </p>
+
+            </article>
+
+
+            <!-- Experience -->
+            <article
+                class="stat-card reveal"
+                data-count="10"
+            >
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-award"></i>
+
+                </div>
+
+                <div class="stat-number">
+
+                    <span class="counter">
+                        10
+                    </span>
+
+                    <strong>
+                        +
+                    </strong>
+
+                </div>
+
+                <h3>
+                    বছরের পথচলা
+                </h3>
+
+                <p>
+                    শিক্ষা ও আদর্শ গঠনের প্রত্যয়ে ধারাবাহিক যাত্রা
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section
+    class="about-section section-padding"
+    id="about"
+>
 
     <div class="container">
 
@@ -349,10 +577,15 @@
 
             <div class="heading-line"></div>
 
+            <p>
+                জ্ঞান, নৈতিকতা ও আদর্শের সমন্বয়ে একটি সুন্দর ভবিষ্যৎ গড়ার প্রত্যয়ে আমাদের পথচলা।
+            </p>
+
         </div>
 
 
         <div class="about-grid">
+
 
             <!-- Image -->
             <div class="about-image-wrapper reveal">
@@ -384,15 +617,15 @@
             </div>
 
 
-            <!-- Text -->
+            <!-- Content -->
             <div class="about-content reveal">
 
                 <span class="small-title">
-                    আমাদের পরিচয়
+                    আমাদের পরিচয়
                 </span>
 
                 <h3 id="aboutTitle">
-                    জ্ঞান ও নৈতিকতার সমন্বয়ে সুন্দর ভবিষ্যৎ
+                    জ্ঞান ও নৈতিকতার সমন্বয়ে সুন্দর ভবিষ্যৎ
                 </h3>
 
 
@@ -401,21 +634,51 @@
                     <p>
                         আল-হারামাইন মডেল মাদ্রাসা একটি আদর্শ ও
                         মানসম্মত শিক্ষা প্রতিষ্ঠান হিসেবে শিক্ষার্থীদের
-                        জ্ঞান, নৈতিকতা ও মানবিক মূল্যবোধের সমন্বিত
-                        বিকাশে কাজ করে যাচ্ছে।
+                        জ্ঞান, নৈতিকতা, শৃঙ্খলা ও মানবিক মূল্যবোধের
+                        সমন্বিত বিকাশে কাজ করে যাচ্ছে।
                     </p>
 
                     <p>
-                        আমাদের লক্ষ্য হলো ইসলামী মূল্যবোধ ও
-                        প্রয়োজনীয় শিক্ষার সমন্বয়ে এমন একটি
-                        প্রজন্ম গড়ে তোলা, যারা জ্ঞানী, আদর্শবান,
-                        দায়িত্বশীল ও মানবিক হবে।
+                        আমাদের শিক্ষা কার্যক্রমে ইসলামী শিক্ষার পাশাপাশি
+                        প্রয়োজনীয় সাধারণ শিক্ষার প্রতি গুরুত্ব দেওয়া হয়।
+                        শিক্ষার্থীদের মেধা, চরিত্র ও দায়িত্ববোধ বিকাশের
+                        জন্য একটি সুন্দর ও নিরাপদ পরিবেশ নিশ্চিত করার
+                        চেষ্টা করা হয়।
+                    </p>
+
+                    <p>
+                        আমাদের লক্ষ্য হলো এমন একটি প্রজন্ম গড়ে তোলা,
+                        যারা জ্ঞানী, আদর্শবান, দায়িত্বশীল, আত্মবিশ্বাসী
+                        এবং সমাজের জন্য কল্যাণকর হবে।
                     </p>
 
                 </div>
 
 
-                <a href="#departments" class="text-link">
+                <div class="about-points">
+
+                    <div>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>ইসলামী ও সাধারণ শিক্ষার সমন্বয়</span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>নৈতিক ও মানবিক মূল্যবোধ</span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>শৃঙ্খলাপূর্ণ শিক্ষা পরিবেশ</span>
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="#departments"
+                    class="text-link"
+                >
 
                     আমাদের বিভাগসমূহ দেখুন
 
@@ -432,7 +695,6 @@
 </section>
 
 
-
 <!-- =========================================================
      DIRECTOR MESSAGE
 ========================================================= -->
@@ -441,16 +703,27 @@
 
     <div class="container">
 
-        <div class="director-card">
+        <div class="director-card reveal">
+
 
             <div class="director-image">
 
                 <img
                     data-drive-image="director"
-                    src="https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w1600"
+                    src="https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w1200"
                     alt="পরিচালক"
                     loading="lazy"
                 >
+
+                <div class="director-image-badge">
+
+                    <i class="fa-solid fa-star-and-crescent"></i>
+
+                    <span>
+                        শিক্ষা ও আদর্শ
+                    </span>
+
+                </div>
 
             </div>
 
@@ -473,9 +746,12 @@
 
                 <blockquote id="directorMessage">
 
-                    “শিক্ষা শুধু জ্ঞান অর্জনের মাধ্যম নয়;
-                    বরং সুন্দর চরিত্র, নৈতিকতা ও মানবিক
-                    মূল্যবোধ গঠনের প্রধান হাতিয়ার।”
+                    “শিক্ষা শুধু জ্ঞান অর্জনের মাধ্যম নয়;
+                    বরং সুন্দর চরিত্র, নৈতিকতা, শৃঙ্খলা ও
+                    মানবিক মূল্যবোধ গঠনের প্রধান হাতিয়ার।
+                    আমাদের প্রত্যাশা—প্রতিটি শিক্ষার্থী জ্ঞানী
+                    হওয়ার পাশাপাশি একজন আদর্শ মানুষ হিসেবে
+                    গড়ে উঠুক।”
 
                 </blockquote>
 
@@ -483,11 +759,11 @@
                 <div class="director-info">
 
                     <strong id="directorName">
-                        পরিচালক
+                        মাওলানা মোঃ আব্দুল্লাহ আল মামুন
                     </strong>
 
                     <span id="directorDesignation">
-                        আল-হারামাইন মডেল মাদ্রাসা
+                        পরিচালক, আল-হারামাইন মডেল মাদ্রাসা
                     </span>
 
                 </div>
@@ -499,7 +775,6 @@
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -526,16 +801,20 @@
             <div class="heading-line"></div>
 
             <p>
-                শিক্ষার্থীদের বয়স, যোগ্যতা ও প্রয়োজন অনুযায়ী
-                আমাদের বিভিন্ন শিক্ষা কার্যক্রম পরিচালিত হয়।
+                শিক্ষার্থীদের বয়স, যোগ্যতা ও প্রয়োজন অনুযায়ী
+                আমাদের বিভিন্ন শিক্ষা কার্যক্রম পরিচালিত হয়।
             </p>
 
         </div>
 
 
-        <div class="departments-grid" id="departmentList">
+        <div
+            class="departments-grid"
+            id="departmentList"
+        >
 
-            <!-- Department 01 -->
+
+            <!-- 01 -->
             <article class="department-card reveal">
 
                 <div class="department-number">
@@ -546,19 +825,28 @@
                     <i class="fa-solid fa-book-quran"></i>
                 </div>
 
+                <span class="department-mini">
+                    QURAN EDUCATION
+                </span>
+
                 <h3>
                     নুরানী বিভাগ
                 </h3>
 
                 <p>
-                    কুরআন শিক্ষার প্রাথমিক ও সুন্দর ভিত্তি গড়ে তোলার
-                    জন্য প্রয়োজনীয় শিক্ষা কার্যক্রম।
+                    কুরআন শিক্ষার প্রাথমিক ও সুন্দর ভিত্তি গড়ে তোলার
+                    জন্য প্রয়োজনীয় শিক্ষা কার্যক্রম।
                 </p>
+
+                <div class="department-link">
+                    বিস্তারিত
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
 
             </article>
 
 
-            <!-- Department 02 -->
+            <!-- 02 -->
             <article class="department-card reveal">
 
                 <div class="department-number">
@@ -569,19 +857,28 @@
                     <i class="fa-solid fa-book-open"></i>
                 </div>
 
+                <span class="department-mini">
+                    PRIMARY EDUCATION
+                </span>
+
                 <h3>
                     ইবতেদায়ী বিভাগ
                 </h3>
 
                 <p>
-                    প্রাথমিক পর্যায়ে ইসলামী ও সাধারণ শিক্ষার
-                    সমন্বিত কার্যক্রম।
+                    প্রাথমিক পর্যায়ে ইসলামী ও সাধারণ শিক্ষার
+                    সমন্বিত শিক্ষা কার্যক্রম।
                 </p>
+
+                <div class="department-link">
+                    বিস্তারিত
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
 
             </article>
 
 
-            <!-- Department 03 -->
+            <!-- 03 -->
             <article class="department-card reveal">
 
                 <div class="department-number">
@@ -592,19 +889,28 @@
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
 
+                <span class="department-mini">
+                    SECONDARY EDUCATION
+                </span>
+
                 <h3>
                     দাখিল বিভাগ
                 </h3>
 
                 <p>
-                    মাধ্যমিক পর্যায়ের শিক্ষার্থীদের জন্য
-                    নিয়মিত ও মানসম্মত শিক্ষা কার্যক্রম।
+                    মাধ্যমিক পর্যায়ের শিক্ষার্থীদের জন্য নিয়মিত,
+                    সুশৃঙ্খল ও মানসম্মত শিক্ষা কার্যক্রম।
                 </p>
+
+                <div class="department-link">
+                    বিস্তারিত
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
 
             </article>
 
 
-            <!-- Department 04 -->
+            <!-- 04 -->
             <article class="department-card reveal">
 
                 <div class="department-number">
@@ -615,6 +921,10 @@
                     <i class="fa-solid fa-star-and-crescent"></i>
                 </div>
 
+                <span class="department-mini">
+                    HIFZ PROGRAM
+                </span>
+
                 <h3>
                     মডেল হিফজ বিভাগ
                 </h3>
@@ -624,14 +934,19 @@
                 </span>
 
                 <p>
-                    পবিত্র কুরআন হিফজের জন্য বিশেষায়িত
-                    শিক্ষা কার্যক্রম।
+                    বালক শিক্ষার্থীদের জন্য পবিত্র কুরআন হিফজের
+                    বিশেষায়িত শিক্ষা কার্যক্রম।
                 </p>
+
+                <div class="department-link">
+                    বিস্তারিত
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
 
             </article>
 
 
-            <!-- Department 05 -->
+            <!-- 05 -->
             <article class="department-card reveal">
 
                 <div class="department-number">
@@ -642,6 +957,10 @@
                     <i class="fa-solid fa-star-and-crescent"></i>
                 </div>
 
+                <span class="department-mini">
+                    HIFZ PROGRAM
+                </span>
+
                 <h3>
                     মডেল হিফজ বিভাগ
                 </h3>
@@ -651,14 +970,19 @@
                 </span>
 
                 <p>
-                    বালিকা শিক্ষার্থীদের জন্য পৃথক হিফজ
-                    শিক্ষা কার্যক্রম।
+                    বালিকা শিক্ষার্থীদের জন্য পৃথক ও সুশৃঙ্খল
+                    হিফজ শিক্ষা কার্যক্রম।
                 </p>
+
+                <div class="department-link">
+                    বিস্তারিত
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
 
             </article>
 
 
-            <!-- Department 06 -->
+            <!-- 06 -->
             <article class="department-card reveal">
 
                 <div class="department-number">
@@ -669,19 +993,28 @@
                     <i class="fa-solid fa-child-reaching"></i>
                 </div>
 
+                <span class="department-mini">
+                    MAKTAB PROGRAM
+                </span>
+
                 <h3>
                     মডেল মক্তব বিভাগ
                 </h3>
 
                 <p>
-                    শিশুদের প্রাথমিক ইসলামী শিক্ষা ও
+                    শিশুদের প্রাথমিক ইসলামী শিক্ষা, আদব-আখলাক ও
                     নৈতিক মূল্যবোধ গঠনের কার্যক্রম।
                 </p>
+
+                <div class="department-link">
+                    বিস্তারিত
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
 
             </article>
 
 
-            <!-- Department 07 -->
+            <!-- 07 -->
             <article class="department-card reveal">
 
                 <div class="department-number">
@@ -692,27 +1025,36 @@
                     <i class="fa-solid fa-users"></i>
                 </div>
 
+                <span class="department-mini">
+                    ADULT EDUCATION
+                </span>
+
                 <h3>
                     মডেল মক্তব বিভাগ
                 </h3>
 
                 <span class="department-label">
-                    বয়স্ক
+                    বয়স্ক
                 </span>
 
                 <p>
-                    বয়স্কদের জন্য প্রয়োজনীয় ইসলামী শিক্ষা
-                    অর্জনের বিশেষ কার্যক্রম।
+                    বয়স্কদের জন্য প্রয়োজনীয় ইসলামী জ্ঞান, কুরআন
+                    শিক্ষা ও আমল সম্পর্কিত বিশেষ কার্যক্রম।
                 </p>
 
+                <div class="department-link">
+                    বিস্তারিত
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
             </article>
+
 
         </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -735,16 +1077,27 @@
 
             <div class="heading-line"></div>
 
+            <p>
+                শিক্ষার্থীর জ্ঞান, চরিত্র ও মানবিক গুণাবলির
+                সমন্বিত বিকাশই আমাদের অন্যতম লক্ষ্য।
+            </p>
+
         </div>
 
 
         <div class="values-grid">
 
+
+            <!-- Value 01 -->
             <article class="value-card reveal">
 
                 <div class="value-icon">
                     <i class="fa-solid fa-book-quran"></i>
                 </div>
+
+                <span>
+                    01
+                </span>
 
                 <h3>
                     মানসম্মত শিক্ষা
@@ -752,71 +1105,86 @@
 
                 <p>
                     শিক্ষার্থীদের জ্ঞান ও দক্ষতা বিকাশে
-                    মানসম্মত শিক্ষার পরিবেশ।
+                    একটি সুন্দর ও কার্যকর শিক্ষার পরিবেশ।
                 </p>
 
             </article>
 
 
+            <!-- Value 02 -->
             <article class="value-card reveal">
 
                 <div class="value-icon">
                     <i class="fa-solid fa-heart"></i>
                 </div>
 
+                <span>
+                    02
+                </span>
+
                 <h3>
                     নৈতিকতা
                 </h3>
 
                 <p>
-                    সুন্দর চরিত্র ও ইসলামী মূল্যবোধ
+                    সুন্দর চরিত্র, আদব-আখলাক ও ইসলামী মূল্যবোধ
                     গঠনের প্রতি বিশেষ গুরুত্ব।
                 </p>
 
             </article>
 
 
+            <!-- Value 03 -->
             <article class="value-card reveal">
 
                 <div class="value-icon">
                     <i class="fa-solid fa-handshake"></i>
                 </div>
 
+                <span>
+                    03
+                </span>
+
                 <h3>
                     মানবিকতা
                 </h3>
 
                 <p>
-                    শিক্ষার্থীদের মানবিক ও সামাজিক
-                    গুণাবলি বিকাশে উৎসাহ প্রদান।
+                    শিক্ষার্থীদের মানবিক, সামাজিক ও
+                    দায়িত্বশীল গুণাবলি বিকাশে উৎসাহ প্রদান।
                 </p>
 
             </article>
 
 
+            <!-- Value 04 -->
             <article class="value-card reveal">
 
                 <div class="value-icon">
                     <i class="fa-solid fa-seedling"></i>
                 </div>
 
+                <span>
+                    04
+                </span>
+
                 <h3>
                     সুন্দর ভবিষ্যৎ
                 </h3>
 
                 <p>
-                    আদর্শ, যোগ্য ও দায়িত্বশীল প্রজন্ম
-                    গড়ে তোলাই আমাদের প্রত্যাশা।
+                    আদর্শ, যোগ্য ও দায়িত্বশীল প্রজন্ম গড়ে
+                    তোলাই আমাদের দীর্ঘমেয়াদি প্রত্যাশা।
                 </p>
 
             </article>
+
 
         </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -843,8 +1211,8 @@
             <div class="heading-line"></div>
 
             <p>
-                আমাদের শিক্ষার্থী ও প্রতিষ্ঠানের বিভিন্ন সাফল্য
-                ও অর্জনের কিছু উল্লেখযোগ্য মুহূর্ত।
+                শিক্ষার্থী ও প্রতিষ্ঠানের বিভিন্ন সাফল্য,
+                কার্যক্রম ও অর্জনের কিছু উল্লেখযোগ্য মুহূর্ত।
             </p>
 
         </div>
@@ -855,23 +1223,201 @@
             id="achievementList"
         >
 
-            <!--
-            ==================================================
-            ACHIEVEMENT CARDS
+            <!-- Achievement 01 -->
+            <article class="achievement-card reveal">
 
-            এখানে JavaScript থেকে data আসবে।
+                <div class="achievement-image">
 
-            নতুন অর্জন যোগ করতে শুধু script.js-এর
-            ACHIEVEMENTS array-তে নতুন item যোগ করবেন।
-            ==================================================
-            -->
+                    <img
+                        src="https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w1200"
+                        alt="শিক্ষার্থীদের সাফল্য"
+                        loading="lazy"
+                    >
+
+                    <span>
+                        ২০২৫
+                    </span>
+
+                </div>
+
+                <div class="achievement-content">
+
+                    <span class="achievement-kicker">
+                        ACADEMIC SUCCESS
+                    </span>
+
+                    <h3>
+                        ধারাবাহিক ভালো ফলাফল
+                    </h3>
+
+                    <p>
+                        নিয়মিত পাঠদান, অনুশীলন ও শিক্ষক-শিক্ষার্থীর
+                        সম্মিলিত প্রচেষ্টায় শিক্ষার্থীদের ভালো ফলাফলের
+                        ধারাবাহিকতা বজায় রাখার চেষ্টা করা হচ্ছে।
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- Achievement 02 -->
+            <article class="achievement-card reveal">
+
+                <div class="achievement-image">
+
+                    <img
+                        src="https://drive.google.com/thumbnail?id=1GlKbDIjmjqTJ0kybdPyKXeZsswPInAxw&sz=w1200"
+                        alt="কুরআন হিফজ কার্যক্রম"
+                        loading="lazy"
+                    >
+
+                    <span>
+                        ২০২৫
+                    </span>
+
+                </div>
+
+                <div class="achievement-content">
+
+                    <span class="achievement-kicker">
+                        HIFZ PROGRAM
+                    </span>
+
+                    <h3>
+                        হিফজ শিক্ষায় অগ্রগতি
+                    </h3>
+
+                    <p>
+                        নিয়মিত সবক, আমুখতা ও পুনরাবৃত্তির মাধ্যমে
+                        শিক্ষার্থীদের কুরআন হিফজ কার্যক্রমকে
+                        আরও সুন্দরভাবে এগিয়ে নেওয়া হচ্ছে।
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- Achievement 03 -->
+            <article class="achievement-card reveal">
+
+                <div class="achievement-image">
+
+                    <img
+                        src="https://drive.google.com/thumbnail?id=1mAlWegRbwWaT14-ZnZV2MHYtWF2DQBBR&sz=w1200"
+                        alt="শিক্ষার্থীদের প্রতিযোগিতা"
+                        loading="lazy"
+                    >
+
+                    <span>
+                        ২০২৫
+                    </span>
+
+                </div>
+
+                <div class="achievement-content">
+
+                    <span class="achievement-kicker">
+                        COMPETITION
+                    </span>
+
+                    <h3>
+                        বিভিন্ন প্রতিযোগিতায় অংশগ্রহণ
+                    </h3>
+
+                    <p>
+                        কুরআন তিলাওয়াত, ইসলামী জ্ঞান, বক্তৃতা ও
+                        সাংস্কৃতিক কার্যক্রমে শিক্ষার্থীদের অংশগ্রহণে
+                        উৎসাহ প্রদান করা হয়।
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- Achievement 04 -->
+            <article class="achievement-card reveal">
+
+                <div class="achievement-image">
+
+                    <img
+                        src="https://drive.google.com/thumbnail?id=1YbDQtjP-DY1ogLM3w5_EC4WcyQt6qStB&sz=w1200"
+                        alt="শিক্ষা কার্যক্রম"
+                        loading="lazy"
+                    >
+
+                    <span>
+                        ২০২৪
+                    </span>
+
+                </div>
+
+                <div class="achievement-content">
+
+                    <span class="achievement-kicker">
+                        EDUCATION
+                    </span>
+
+                    <h3>
+                        নিয়মিত শিক্ষা কার্যক্রম
+                    </h3>
+
+                    <p>
+                        নিয়মিত ক্লাস, মূল্যায়ন ও সহশিক্ষা কার্যক্রমের
+                        মাধ্যমে শিক্ষার্থীদের সামগ্রিক বিকাশে
+                        গুরুত্ব দেওয়া হচ্ছে।
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- Achievement 05 -->
+            <article class="achievement-card reveal">
+
+                <div class="achievement-image">
+
+                    <img
+                        src="https://drive.google.com/thumbnail?id=1zGEYElVhA1R_ngt4iqjpjfzsuqRt9bK0&sz=w1200"
+                        alt="বার্ষিক পুরস্কার"
+                        loading="lazy"
+                    >
+
+                    <span>
+                        ২০২৪
+                    </span>
+
+                </div>
+
+                <div class="achievement-content">
+
+                    <span class="achievement-kicker">
+                        RECOGNITION
+                    </span>
+
+                    <h3>
+                        মেধাবী শিক্ষার্থীদের সম্মাননা
+                    </h3>
+
+                    <p>
+                        ভালো ফলাফল, নিয়মিত উপস্থিতি, শৃঙ্খলা ও
+                        বিভিন্ন কার্যক্রমে কৃতিত্ব অর্জনকারী
+                        শিক্ষার্থীদের উৎসাহিত করা হয়।
+                    </p>
+
+                </div>
+
+            </article>
+
 
         </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -882,10 +1428,12 @@
 
     <div class="container">
 
-        <div class="admission-card">
+        <div class="admission-card reveal">
 
             <div class="admission-decoration">
+
                 <i class="fa-solid fa-graduation-cap"></i>
+
             </div>
 
 
@@ -901,19 +1449,57 @@
 
                 <p id="admissionText">
 
-                    আমাদের বিভিন্ন বিভাগে ভর্তি সংক্রান্ত
-                    বিস্তারিত তথ্য জানতে সরাসরি যোগাযোগ করুন।
+                    আল-হারামাইন মডেল মাদ্রাসার বিভিন্ন বিভাগে
+                    ভর্তি সংক্রান্ত বিস্তারিত তথ্য জানতে
+                    আমাদের সাথে সরাসরি যোগাযোগ করুন।
+                    আসন, বয়স, প্রয়োজনীয় কাগজপত্র ও ভর্তি
+                    প্রক্রিয়া সম্পর্কে অফিস থেকে বিস্তারিত
+                    তথ্য প্রদান করা হবে।
 
                 </p>
+
+
+                <div class="admission-info-grid">
+
+                    <div>
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        <span>
+                            ভর্তি কার্যক্রম
+                        </span>
+
+                        <strong>
+                            সারা বছর যোগাযোগ সাপেক্ষে
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <span>
+                            যোগাযোগের সময়
+                        </span>
+
+                        <strong>
+                            সকাল ৯টা — বিকাল ৫টা
+                        </strong>
+
+                    </div>
+
+                </div>
 
 
                 <div class="admission-buttons">
 
                     <a
                         id="admissionWhatsapp"
-                        href="#"
+                        href="https://wa.me/8801811178674"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                         class="btn btn-whatsapp"
                     >
 
@@ -926,7 +1512,7 @@
 
                     <a
                         id="admissionPhone"
-                        href="8801811178674"
+                        href="tel:+8801811178674"
                         class="btn btn-outline"
                     >
 
@@ -947,7 +1533,6 @@
 </section>
 
 
-
 <!-- =========================================================
      WHATSAPP NOTICE
 ========================================================= -->
@@ -956,7 +1541,7 @@
 
     <div class="container">
 
-        <div class="notice-card">
+        <div class="notice-card reveal">
 
             <div class="notice-icon">
 
@@ -976,9 +1561,9 @@
                 </h2>
 
                 <p>
-                    প্রতিষ্ঠানের সকল গুরুত্বপূর্ণ নোটিশ ও
-                    আপডেট আমাদের অফিসিয়াল WhatsApp Group-এ
-                    প্রকাশ করা হয়।
+                    প্রতিষ্ঠানের সকল গুরুত্বপূর্ণ নোটিশ ও আপডেট
+                    আমাদের অফিসিয়াল WhatsApp Group-এ প্রকাশ করা হয়।
+                    সর্বশেষ তথ্য পেতে গ্রুপে যুক্ত থাকুন।
                 </p>
 
             </div>
@@ -986,9 +1571,9 @@
 
             <a
                 id="noticeWhatsappGroup"
-                href="#"
+                href="https://chat.whatsapp.com/"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 class="notice-button"
             >
 
@@ -1003,7 +1588,6 @@
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -1030,7 +1614,8 @@
             <div class="heading-line"></div>
 
             <p>
-                আল-হারামাইন মডেল মাদ্রাসার কিছু স্মরণীয় মুহূর্ত।
+                আল-হারামাইন মডেল মাদ্রাসার শিক্ষা,
+                কার্যক্রম ও স্মরণীয় কিছু মুহূর্ত।
             </p>
 
         </div>
@@ -1041,14 +1626,188 @@
             id="galleryList"
         >
 
-            <!-- Gallery images JavaScript থেকে আসবে -->
+
+            <!-- Gallery 01 -->
+            <button
+                type="button"
+                class="gallery-item gallery-item-large reveal"
+                data-gallery-index="0"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ১"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- Gallery 02 -->
+            <button
+                type="button"
+                class="gallery-item reveal"
+                data-gallery-index="1"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1YbDQtjP-DY1ogLM3w5_EC4WcyQt6qStB&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ২"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- Gallery 03 -->
+            <button
+                type="button"
+                class="gallery-item reveal"
+                data-gallery-index="2"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1GlKbDIjmjqTJ0kybdPyKXeZsswPInAxw&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ৩"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- Gallery 04 -->
+            <button
+                type="button"
+                class="gallery-item reveal"
+                data-gallery-index="3"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1zGEYElVhA1R_ngt4iqjpjfzsuqRt9bK0&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ৪"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- Gallery 05 -->
+            <button
+                type="button"
+                class="gallery-item reveal"
+                data-gallery-index="4"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1mAlWegRbwWaT14-ZnZV2MHYtWF2DQBBR&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ৫"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- Gallery 06 -->
+            <button
+                type="button"
+                class="gallery-item reveal"
+                data-gallery-index="5"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ৬"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- Gallery 07 -->
+            <button
+                type="button"
+                class="gallery-item reveal"
+                data-gallery-index="6"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1YbDQtjP-DY1ogLM3w5_EC4WcyQt6qStB&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ৭"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- Gallery 08 -->
+            <button
+                type="button"
+                class="gallery-item reveal"
+                data-gallery-index="7"
+            >
+
+                <img
+                    src="https://drive.google.com/thumbnail?id=1GlKbDIjmjqTJ0kybdPyKXeZsswPInAxw&sz=w1600"
+                    alt="মাদ্রাসার স্মরণীয় মুহূর্ত ৮"
+                    loading="lazy"
+                >
+
+                <span class="gallery-overlay">
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </span>
+
+            </button>
+
 
         </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -1074,18 +1833,28 @@
 
             <div class="heading-line"></div>
 
+            <p>
+                ভর্তি, শিক্ষা কার্যক্রম অথবা যেকোনো প্রয়োজনীয়
+                তথ্যের জন্য আমাদের সাথে যোগাযোগ করুন।
+            </p>
+
         </div>
 
 
         <div class="contact-grid">
 
-            <!-- Contact information -->
+
+            <!-- Contact Information -->
             <div class="contact-info">
 
-                <div class="contact-item">
+
+                <!-- Address -->
+                <div class="contact-item reveal">
 
                     <div class="contact-icon">
+
                         <i class="fa-solid fa-location-dot"></i>
+
                     </div>
 
                     <div>
@@ -1095,7 +1864,7 @@
                         </span>
 
                         <strong id="schoolAddress">
-                        সোনার পাড়া, ইনানী, উখিয়া, কক্সবাজার 
+                            সোনার পাড়া, ইনানী, উখিয়া, কক্সবাজার
                         </strong>
 
                     </div>
@@ -1103,10 +1872,13 @@
                 </div>
 
 
-                <div class="contact-item">
+                <!-- Phone -->
+                <div class="contact-item reveal">
 
                     <div class="contact-icon">
+
                         <i class="fa-solid fa-phone"></i>
+
                     </div>
 
                     <div>
@@ -1117,9 +1889,9 @@
 
                         <a
                             id="schoolPhone"
-                            href="8801811178674"
+                            href="tel:+8801811178674"
                         >
-                            মোবাইল নম্বর
+                            01811-178674
                         </a>
 
                     </div>
@@ -1127,10 +1899,13 @@
                 </div>
 
 
-                <div class="contact-item">
+                <!-- Email -->
+                <div class="contact-item reveal">
 
                     <div class="contact-icon">
+
                         <i class="fa-solid fa-envelope"></i>
+
                     </div>
 
                     <div>
@@ -1141,9 +1916,9 @@
 
                         <a
                             id="schoolEmail"
-                            href="alharamainidealnoraniacademy@gmail.com"
+                            href="mailto:alharamainidealnoraniacademy@gmail.com"
                         >
-                            ইমেইল
+                            alharamainidealnoraniacademy@gmail.com
                         </a>
 
                     </div>
@@ -1151,10 +1926,13 @@
                 </div>
 
 
-                <div class="contact-item">
+                <!-- WhatsApp -->
+                <div class="contact-item reveal">
 
                     <div class="contact-icon whatsapp-contact">
+
                         <i class="fa-brands fa-whatsapp"></i>
+
                     </div>
 
                     <div>
@@ -1165,9 +1943,9 @@
 
                         <a
                             id="schoolWhatsapp"
-                            href="8801811178674"
+                            href="https://wa.me/8801811178674"
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                         >
                             WhatsApp-এ যোগাযোগ করুন
                         </a>
@@ -1176,20 +1954,46 @@
 
                 </div>
 
+
+                <!-- Office Hours -->
+                <div class="contact-item reveal">
+
+                    <div class="contact-icon">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            অফিস সময়
+                        </span>
+
+                        <strong>
+                            সকাল ৯টা — বিকাল ৫টা
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
             </div>
 
 
             <!-- Map -->
-            <div class="map-wrapper">
+            <div class="map-wrapper reveal">
 
                 <iframe
                     id="googleMap"
-                    src=""
+                    src="https://www.google.com/maps?q=Inani%2C%20Ukhia%2C%20Cox%27s%20Bazar%2C%20Bangladesh&output=embed"
                     title="Al Haramain Model Madrasa Location"
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
                     allowfullscreen
                 ></iframe>
+
 
                 <div
                     id="mapPlaceholder"
@@ -1199,19 +2003,19 @@
                     <i class="fa-solid fa-map-location-dot"></i>
 
                     <span>
-                        Google Map Link বসালে এখানে Map দেখা যাবে
+                        Google Map
                     </span>
 
                 </div>
 
             </div>
 
+
         </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -1222,32 +2026,50 @@
 
     <div class="container">
 
-        <div class="final-cta-content">
+        <div class="final-cta-content reveal">
 
             <span>
                 AL HARAMAIN MODEL MADRASA
             </span>
 
             <h2>
-                শিক্ষার আলোয় আলোকিত হোক ভবিষ্যৎ
+                শিক্ষার আলোয় আলোকিত হোক ভবিষ্যৎ
             </h2>
 
             <p>
-                জ্ঞান, নৈতিকতা ও আদর্শের সমন্বয়ে
-                আমরা গড়তে চাই সুন্দর আগামী।
+                জ্ঞান, নৈতিকতা ও আদর্শের সমন্বয়ে
+                আমরা গড়তে চাই সুন্দর আগামী।
             </p>
 
 
-            <a
-                href="#contact"
-                class="btn btn-primary"
-            >
+            <div class="final-cta-buttons">
 
-                যোগাযোগ করুন
+                <a
+                    href="#contact"
+                    class="btn btn-primary"
+                >
 
-                <i class="fa-solid fa-arrow-right"></i>
+                    যোগাযোগ করুন
 
-            </a>
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+                <a
+                    href="https://wa.me/8801811178674"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-whatsapp"
+                >
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    WhatsApp
+
+                </a>
+
+            </div>
 
         </div>
 
@@ -1255,8 +2077,8 @@
 
 </section>
 
-</main>
 
+</main>
 
 
 <!-- =========================================================
@@ -1269,6 +2091,7 @@
 
         <div class="footer-main">
 
+
             <!-- Brand -->
             <div class="footer-brand">
 
@@ -1276,12 +2099,14 @@
 
                     <img
                         id="footerLogo"
-                        src=""
+                        src="https://drive.google.com/thumbnail?id=1eAGdWLkRvvwvU6Y_ElfXwP-YkVK6tOrz&sz=w800"
                         alt="Al Haramain Model Madrasa"
                     >
 
                     <div class="footer-logo-fallback">
+
                         <i class="fa-solid fa-mosque"></i>
+
                     </div>
 
                 </div>
@@ -1298,16 +2123,16 @@
 
                 <p class="footer-description">
 
-                    জ্ঞান, নৈতিকতা ও আদর্শের সমন্বয়ে
-                    একটি সুন্দর ও আলোকিত প্রজন্ম গড়ার
-                    প্রত্যয়ে আমাদের পথচলা।
+                    জ্ঞান, নৈতিকতা ও আদর্শের সমন্বয়ে
+                    একটি সুন্দর ও আলোকিত প্রজন্ম গড়ার
+                    প্রত্যয়ে আমাদের পথচলা।
 
                 </p>
 
             </div>
 
 
-            <!-- Quick links -->
+            <!-- Quick Links -->
             <div class="footer-column">
 
                 <h4>
@@ -1361,17 +2186,25 @@
                 </span>
 
                 <span>
-                    মডেল হিফজ বিভাগ
+                    মডেল হিফজ — বালক
+                </span>
+
+                <span>
+                    মডেল হিফজ — বালিকা
                 </span>
 
                 <span>
                     মডেল মক্তব বিভাগ
                 </span>
 
+                <span>
+                    মডেল মক্তব — বয়স্ক
+                </span>
+
             </div>
 
 
-            <!-- Social -->
+            <!-- Contact -->
             <div class="footer-column footer-social">
 
                 <h4>
@@ -1385,9 +2218,9 @@
 
                 <a
                     id="footerWhatsapp"
-                    href="8801811178674"
+                    href="https://wa.me/8801811178674"
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     class="footer-whatsapp"
                     aria-label="WhatsApp"
                 >
@@ -1407,39 +2240,49 @@
                         id="facebookLink"
                         href="https://www.facebook.com/profile.php?id=61571161346418"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                         aria-label="Facebook"
                     >
+
                         <i class="fa-brands fa-facebook-f"></i>
+
                     </a>
 
 
                     <a
                         id="youtubeLink"
-                        href="#"
+                        href="https://www.youtube.com/"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                         aria-label="YouTube"
                     >
+
                         <i class="fa-brands fa-youtube"></i>
+
                     </a>
 
                 </div>
 
             </div>
 
+
         </div>
 
 
-        <!-- Footer bottom -->
+        <!-- Footer Bottom -->
         <div class="footer-bottom">
 
             <div>
 
                 <span>
-                    © <span id="currentYear"></span>
+
+                    ©
+                    <span id="currentYear"></span>
+
                     Al Haramain Model Madrasa.
+
                     All Rights Reserved.
+
                 </span>
 
             </div>
@@ -1457,9 +2300,9 @@
 
                 <a
                     id="developerWhatsapp"
-                    href=" +8801884-197276"
-                    target=""
-                    rel="noopener"
+                    href="https://wa.me/8801884197276"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="Contact AKTER HOSSEN on WhatsApp"
                 >
 
@@ -1476,7 +2319,6 @@
 </footer>
 
 
-
 <!-- =========================================================
      IMAGE LIGHTBOX
 ========================================================= -->
@@ -1490,24 +2332,30 @@
     <button
         class="lightbox-close"
         id="lightboxClose"
-        aria-label="Close"
+        type="button"
+        aria-label="বন্ধ করুন"
     >
+
         <i class="fa-solid fa-xmark"></i>
+
     </button>
 
 
     <button
         class="lightbox-prev"
         id="lightboxPrev"
-        aria-label="Previous image"
+        type="button"
+        aria-label="আগের ছবি"
     >
+
         <i class="fa-solid fa-chevron-left"></i>
+
     </button>
 
 
     <img
         id="lightboxImage"
-        src=""
+        src="https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w1600"
         alt="Gallery Preview"
     >
 
@@ -1515,13 +2363,15 @@
     <button
         class="lightbox-next"
         id="lightboxNext"
-        aria-label="Next image"
+        type="button"
+        aria-label="পরের ছবি"
     >
+
         <i class="fa-solid fa-chevron-right"></i>
+
     </button>
 
 </div>
-
 
 
 <!-- =========================================================
@@ -1531,13 +2381,13 @@
 <button
     id="backToTop"
     class="back-to-top"
-    aria-label="Back to top"
+    type="button"
+    aria-label="উপরে যান"
 >
 
     <i class="fa-solid fa-chevron-up"></i>
 
 </button>
-
 
 
 <!-- =========================================================
