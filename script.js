@@ -3159,3 +3159,240 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 })();
+/* =========================================================
+   AL-HARAMAIN SCROLL REVEAL ANIMATION
+   Add-only — existing code remains untouched
+   ========================================================= */
+
+(function () {
+    "use strict";
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* -----------------------------------------------------
+           PREMIUM SCROLL REVEAL STYLE
+           ----------------------------------------------------- */
+
+        const revealStyle =
+            document.createElement("style");
+
+        revealStyle.textContent = `
+            .alh-scroll-reveal {
+                opacity: 0;
+                transform: translateY(35px);
+                transition:
+                    opacity 0.85s cubic-bezier(.22,1,.36,1),
+                    transform 0.85s cubic-bezier(.22,1,.36,1);
+                will-change: opacity, transform;
+            }
+
+            .alh-scroll-reveal.alh-revealed {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Slightly different animation for headings */
+            .alh-scroll-reveal.alh-reveal-heading {
+                transform: translateY(25px);
+            }
+
+            /* Cards come in a little more elegantly */
+            .alh-scroll-reveal.alh-reveal-card {
+                transform: translateY(40px);
+            }
+
+            /* Reduced motion accessibility */
+            @media (prefers-reduced-motion: reduce) {
+                .alh-scroll-reveal,
+                .alh-scroll-reveal.alh-reveal-heading,
+                .alh-scroll-reveal.alh-reveal-card {
+                    opacity: 1 !important;
+                    transform: none !important;
+                    transition: none !important;
+                }
+            }
+        `;
+
+        document.head.appendChild(
+            revealStyle
+        );
+
+
+        /* -----------------------------------------------------
+           ELEMENTS TO REVEAL
+           ----------------------------------------------------- */
+
+        const revealSelectors = [
+
+            /* Section headings */
+            "section h2",
+            "section h3",
+
+            /* Paragraphs */
+            "section p",
+
+            /* Main content blocks */
+            "section .about-content",
+            "section .director-content",
+            "section .admission-content",
+
+            /* Cards */
+            ".department-card",
+            ".achievement-card",
+            ".value-card",
+            ".stat-card",
+            ".statistics-card",
+
+            /* Gallery */
+            ".gallery-item",
+
+            /* Contact */
+            ".contact-item",
+            ".contact-card",
+
+            /* Map */
+            ".map-wrapper",
+            ".google-map"
+
+        ];
+
+
+        const elements = [];
+
+        revealSelectors.forEach(function (selector) {
+
+            document
+                .querySelectorAll(selector)
+                .forEach(function (element) {
+
+                    if (!elements.includes(element)) {
+                        elements.push(element);
+                    }
+
+                });
+
+        });
+
+
+        /* -----------------------------------------------------
+           ADD REVEAL CLASS
+           ----------------------------------------------------- */
+
+        elements.forEach(function (element) {
+
+            /* Don't touch hidden/lightbox elements */
+            if (
+                element.closest("#lightbox") ||
+                element.closest("#alHaramainPremiumLoader")
+            ) {
+                return;
+            }
+
+            element.classList.add(
+                "alh-scroll-reveal"
+            );
+
+            /* Heading */
+            if (
+                element.matches(
+                    "section h2, section h3"
+                )
+            ) {
+                element.classList.add(
+                    "alh-reveal-heading"
+                );
+            }
+
+            /* Card */
+            if (
+                element.matches(
+                    ".department-card, " +
+                    ".achievement-card, " +
+                    ".value-card, " +
+                    ".stat-card, " +
+                    ".statistics-card, " +
+                    ".gallery-item, " +
+                    ".contact-card"
+                )
+            ) {
+                element.classList.add(
+                    "alh-reveal-card"
+                );
+            }
+
+        });
+
+
+        /* -----------------------------------------------------
+           INTERSECTION OBSERVER
+           ----------------------------------------------------- */
+
+        if (
+            "IntersectionObserver" in window
+        ) {
+
+            const observer =
+                new IntersectionObserver(
+                    function (entries, obs) {
+
+                        entries.forEach(
+                            function (entry) {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    entry.target.classList.add(
+                                        "alh-revealed"
+                                    );
+
+                                    obs.unobserve(
+                                        entry.target
+                                    );
+                                }
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold: 0.12,
+
+                        rootMargin:
+                            "0px 0px -60px 0px"
+                    }
+                );
+
+
+            elements.forEach(function (element) {
+
+                if (
+                    !element.closest("#lightbox") &&
+                    !element.classList.contains(
+                        "alh-revealed"
+                    )
+                ) {
+                    observer.observe(
+                        element
+                    );
+                }
+
+            });
+
+        } else {
+
+            /* Older browser fallback */
+
+            elements.forEach(function (element) {
+
+                element.classList.add(
+                    "alh-revealed"
+                );
+
+            });
+
+        }
+
+    });
+
+})();
