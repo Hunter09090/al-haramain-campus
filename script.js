@@ -1770,3 +1770,34 @@ function setupMobileMenu() {
   }
 
 });
+/* =========================================================
+   NEW ENTRY ANIMATION
+========================================================= */
+
+function setupEntryAnimations() {
+    const elements = document.querySelectorAll(
+        ".entry-animate, .entry-left, .entry-right, .entry-scale"
+    );
+
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+        (entries, observerInstance) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+
+                entry.target.classList.add("show");
+
+                observerInstance.unobserve(entry.target);
+            });
+        },
+        {
+            threshold: 0.12,
+            rootMargin: "0px 0px -70px 0px"
+        }
+    );
+
+    elements.forEach((element) => {
+        observer.observe(element);
+    });
+}
