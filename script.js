@@ -1109,67 +1109,116 @@ $$("[data-map-link]").forEach((element) => {
      MOBILE MENU
      ======================================================= */
 
-  function setupMobileMenu() {
-  const menuButton = document.querySelector("#mobileMenuBtn");
-  const navigation = document.querySelector("#mainNav");
+  /* =======================================================
+   MOBILE MENU
+======================================================= */
 
-  if (!menuButton || !navigation) {
-    console.warn("Mobile menu elements not found.");
-    return;
-  }
+function setupMobileMenu() {
 
-  function openMenu() {
-    navigation.classList.add("active");
-    menuButton.classList.add("active");
-    menuButton.setAttribute("aria-expanded", "true");
-    document.body.classList.add("menu-open");
-  }
+    const menuButton =
+        document.querySelector("#mobileMenuBtn") ||
+        document.querySelector(".mobile-menu-btn");
 
-  function closeMenu() {
-    navigation.classList.remove("active");
-    menuButton.classList.remove("active");
-    menuButton.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("menu-open");
-  }
+    const navigation =
+        document.querySelector("#mainNav") ||
+        document.querySelector(".main-nav");
 
-  menuButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (navigation.classList.contains("active")) {
-      closeMenu();
-    } else {
-      openMenu();
+    if (!menuButton || !navigation) {
+        console.warn("Mobile menu elements not found.");
+        return;
     }
-  });
 
-  navigation.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      closeMenu();
+    function openMenu() {
+
+        navigation.classList.add("open");
+        menuButton.classList.add("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        document.body.classList.add("menu-open");
+    }
+
+
+    function closeMenu() {
+
+        navigation.classList.remove("open");
+        menuButton.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        document.body.classList.remove("menu-open");
+    }
+
+
+    menuButton.addEventListener("click", function(event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (navigation.classList.contains("open")) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+
     });
-  });
 
-  document.addEventListener("click", (event) => {
-    if (
-      navigation.classList.contains("active") &&
-      !navigation.contains(event.target) &&
-      !menuButton.contains(event.target)
-    ) {
-      closeMenu();
-    }
-  });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeMenu();
-    }
-  });
+    /* Menu link click করলে menu বন্ধ হবে */
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 900) {
-      closeMenu();
-    }
-  });
+    navigation
+        .querySelectorAll(".nav-link")
+        .forEach(function(link) {
+
+            link.addEventListener("click", function() {
+                closeMenu();
+            });
+
+        });
+
+
+    /* Menu-এর বাইরে click করলে বন্ধ হবে */
+
+    document.addEventListener("click", function(event) {
+
+        if (
+            navigation.classList.contains("open") &&
+            !navigation.contains(event.target) &&
+            !menuButton.contains(event.target)
+        ) {
+            closeMenu();
+        }
+
+    });
+
+
+    /* Escape চাপলে বন্ধ হবে */
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+
+    });
+
+
+    /* Desktop-এ গেলে menu বন্ধ */
+
+    window.addEventListener("resize", function() {
+
+        if (window.innerWidth > 850) {
+            closeMenu();
+        }
+
+    });
+
 }
 
 
