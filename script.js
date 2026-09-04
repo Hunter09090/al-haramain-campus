@@ -1102,7 +1102,11 @@ document.addEventListener("DOMContentLoaded", () => {
       element.href = SITE_CONFIG.social.whatsapp;
     });
   }
-
+$$("[data-map-link]").forEach((element) => {
+  element.href = SITE_CONFIG.map.link;
+  element.target = "_blank";
+  element.rel = "noopener";
+});
 
   /* =======================================================
      MOBILE MENU
