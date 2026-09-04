@@ -2945,3 +2945,217 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 7000);
 
 })();
+/* =========================================================
+   AL-HARAMAIN MENU — FACEBOOK + NOTICE
+   Add-only — existing code remains untouched
+   ========================================================= */
+
+(function () {
+    "use strict";
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* -----------------------------------------------------
+           LINKS
+           ----------------------------------------------------- */
+
+        const FACEBOOK_URL =
+            "https://www.facebook.com/profile.php?id=61571161346418";
+
+        const NOTICE_URL =
+            "https://chat.whatsapp.com/LOju3X4Im3VFTBLm0hNTeK";
+
+
+        /* -----------------------------------------------------
+           FIND EXISTING MENU
+           ----------------------------------------------------- */
+
+        const menu =
+            document.querySelector(
+                "nav ul, .nav-menu, .menu, .navbar-nav"
+            );
+
+        if (!menu) {
+            return;
+        }
+
+
+        /* -----------------------------------------------------
+           PREMIUM MENU STYLE
+           ----------------------------------------------------- */
+
+        const style =
+            document.createElement("style");
+
+        style.textContent = `
+
+            .alh-extra-menu-item {
+                position: relative;
+            }
+
+            .alh-extra-menu-item a {
+                display: inline-flex;
+                align-items: center;
+                gap: 7px;
+                text-decoration: none;
+            }
+
+            .alh-menu-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 18px;
+                height: 18px;
+                line-height: 1;
+                font-size: 11px;
+                font-weight: 700;
+            }
+
+            /* Facebook icon */
+            .alh-facebook-menu .alh-menu-icon {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+            }
+
+            /* Notice underline */
+            .alh-notice-menu a {
+                position: relative;
+            }
+
+            .alh-notice-menu a::after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                bottom: -5px;
+                width: 0;
+                height: 2px;
+                transform: translateX(-50%);
+                background: currentColor;
+                transition: width 0.3s ease;
+            }
+
+            .alh-notice-menu a:hover::after {
+                width: 65%;
+            }
+
+            /* Facebook hover */
+            .alh-facebook-menu a {
+                transition:
+                    transform 0.25s ease,
+                    opacity 0.25s ease;
+            }
+
+            .alh-facebook-menu a:hover {
+                transform: translateY(-1px);
+                opacity: 0.85;
+            }
+
+            /* Mobile */
+            @media (max-width: 768px) {
+
+                .alh-extra-menu-item a {
+                    gap: 8px;
+                }
+
+                .alh-menu-icon {
+                    width: 20px;
+                    height: 20px;
+                }
+
+            }
+        `;
+
+        document.head.appendChild(style);
+
+
+        /* -----------------------------------------------------
+           REMOVE DUPLICATE ITEMS IF SCRIPT RUNS AGAIN
+           ----------------------------------------------------- */
+
+        const oldFacebook =
+            menu.querySelector(
+                ".alh-facebook-menu"
+            );
+
+        const oldNotice =
+            menu.querySelector(
+                ".alh-notice-menu"
+            );
+
+        if (oldFacebook) {
+            oldFacebook.remove();
+        }
+
+        if (oldNotice) {
+            oldNotice.remove();
+        }
+
+
+        /* -----------------------------------------------------
+           FACEBOOK MENU ITEM
+           ----------------------------------------------------- */
+
+        const facebookItem =
+            document.createElement("li");
+
+        facebookItem.className =
+            "alh-extra-menu-item alh-facebook-menu";
+
+        facebookItem.innerHTML = `
+            <a
+                href="${FACEBOOK_URL}"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+            >
+                <span
+                    class="alh-menu-icon"
+                    aria-hidden="true"
+                >
+                    f
+                </span>
+
+                <span>Facebook</span>
+            </a>
+        `;
+
+        menu.appendChild(
+            facebookItem
+        );
+
+
+        /* -----------------------------------------------------
+           NOTICE MENU ITEM
+           ----------------------------------------------------- */
+
+        const noticeItem =
+            document.createElement("li");
+
+        noticeItem.className =
+            "alh-extra-menu-item alh-notice-menu";
+
+        noticeItem.innerHTML = `
+            <a
+                href="${NOTICE_URL}"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="নোটিশ"
+            >
+                <span
+                    class="alh-menu-icon"
+                    aria-hidden="true"
+                >
+                    🔔
+                </span>
+
+                <span>নোটিশ</span>
+            </a>
+        `;
+
+        menu.appendChild(
+            noticeItem
+        );
+
+    });
+
+})();
