@@ -228,10 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     map: {
   embed:
-
-
-  link:
-    "https://maps.app.goo.gl/WeTLJ1xUvPcTFkh3A"
+    "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d473168.5078467583!2d92.0792055!3d22.1019824!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30adc561448c4d09%3A0xc87fe36dd2d5dddb!2z4KaG4KayLeCmueCmvuCmsOCmruCmvuCmh-CmqCDgpobgpqbgprDgp43gprYg4Kao4KeC4Kaw4Ka-4Kao4KeAIOCmj-CmleCmvuCmoeCnh-CmruCmvw!5e0!3m2!1sen!2sbd!4v1788498717329!5m2!1sen!2sbd"
 },
 
     /* =====================================================
