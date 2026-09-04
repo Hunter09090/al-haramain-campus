@@ -25,14 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
       logo:
         "https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w500",
 
-      established: "২০১০",
-      location: "ঢাকা, বাংলাদেশ",
+      established: "২০১৩",
+      location: "সোনার পাড়া, উখিয়া, কক্সবাজার",
 
       phone: "01884197276",
-      email: "info@alharamainmadrasa.edu.bd",
+      email: "alharamainidealnoraniacademy@gmail.com",
 
       address:
-        "আল-হারামাইন মডেল মাদ্রাসা, ঢাকা, বাংলাদেশ"
+        "আল-হারামাইন মডেল মাদ্রাসা, সোনার পাড়া, উখিয়া, কক্সবাজার"
     },
 
     /* =====================================================
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
        ===================================================== */
 
     director: {
-      name: "মোঃ আব্দুল্লাহ আল মামুন",
+      name: "মাওঃ মোঃ জুনাইদ বোগদাদী",
       designation: "পরিচালক",
       image:
         "https://drive.google.com/thumbnail?id=1sEPJXs7VAlU3LVMT2cSXeEytQ8Cc870X&sz=w800",
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     map: {
       embed:
-        "https://www.google.com/maps?q=Dhaka,Bangladesh&output=embed"
+        "https://maps.app.goo.gl/WeTLJ1xUvPcTFkh3A"
     },
 
     /* =====================================================
