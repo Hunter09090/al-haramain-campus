@@ -1344,45 +1344,88 @@ function setupMobileMenu() {
      REVEAL ANIMATION
      -------------------------------------------------------
      Important:
-     function setupRevealAnimations() {
-    const revealElements = document.querySelectorAll(
-        ".reveal, .reveal-left, .reveal-right"
-    );
+     .reveal is visible by default in CSS.
 
-    if (!revealElements.length) return;
+     JS adds .js-ready only after the script has loaded.
+     If observer fails, fallback reveals everything.
+     ======================================================= */
+
+  function setupRevealAnimations() {
+
+  /*
+   * JS successfully loaded.
+   * এখন CSS animation চালু হবে।
+   */
+  document.documentElement.classList.add("js-ready");
+
+  const elements = document.querySelectorAll(".reveal");
+
+  if (!elements.length) {
+    return;
+  }
+
+  const reveal = (element) => {
+    element.classList.add("revealed");
+  };
+
+
+  /*
+   * Intersection Observer
+   */
+  if ("IntersectionObserver" in window) {
 
     const observer = new IntersectionObserver(
-        (entries, obs) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
+      (entries) => {
 
-                entry.target.classList.add("active");
-                obs.unobserve(entry.target);
-            });
-        },
-        {
-            threshold: 0.12,
-            rootMargin: "0px 0px -60px 0px"
-        }
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            reveal(entry.target);
+
+            observer.unobserve(entry.target);
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -50px 0px"
+      }
     );
 
-    revealElements.forEach((element, index) => {
-        /* Small stagger effect */
-        if (
-            element.classList.contains("achievement-card") ||
-            element.classList.contains("gallery-item") ||
-            element.classList.contains("department-card")
-        ) {
-            const delay = Math.min((index % 5) * 0.08, 0.32);
-            element.style.setProperty(
-                "--reveal-delay",
-                `${delay}s`
-            );
-        }
 
-        observer.observe(element);
+    elements.forEach((element) => {
+      observer.observe(element);
     });
+
+
+    /*
+     * Safety fallback:
+     * কোনো কারণে observer কাজ না করলেও
+     * 2.5 সেকেন্ড পর সব content visible হবে।
+     */
+    setTimeout(() => {
+
+      elements.forEach((element) => {
+        reveal(element);
+      });
+
+    }, 2500);
+
+  } else {
+
+    /*
+     * Old browser fallback
+     */
+    elements.forEach((element) => {
+      reveal(element);
+    });
+
+  }
 }
+
 
   /* =======================================================
      STATISTICS COUNT UP
