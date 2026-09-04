@@ -1318,60 +1318,80 @@ $$("[data-map-link]").forEach((element) => {
      ======================================================= */
 
   function setupRevealAnimations() {
-    document.documentElement.classList.add("js-ready");
 
-    const elements = $$(".reveal");
+  /*
+   * JS successfully loaded.
+   * এখন CSS animation চালু হবে।
+   */
+  document.documentElement.classList.add("js-ready");
 
-    if (!elements.length) {
-      return;
-    }
+  const elements = document.querySelectorAll(".reveal");
 
-    let revealedCount = 0;
-
-    const revealElement = (element) => {
-      if (!element.classList.contains("revealed")) {
-        element.classList.add("revealed");
-        revealedCount++;
-      }
-    };
-
-    if ("IntersectionObserver" in window) {
-      const observer =
-        new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                revealElement(entry.target);
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          {
-            threshold: 0.08,
-            rootMargin: "0px 0px -40px 0px"
-          }
-        );
-
-      elements.forEach((element) => {
-        observer.observe(element);
-      });
-
-      /*
-       * Absolute fallback:
-       * Nothing remains invisible forever.
-       */
-      window.setTimeout(() => {
-        elements.forEach((element) => {
-          revealElement(element);
-        });
-      }, 2200);
-
-    } else {
-      elements.forEach((element) => {
-        revealElement(element);
-      });
-    }
+  if (!elements.length) {
+    return;
   }
+
+  const reveal = (element) => {
+    element.classList.add("revealed");
+  };
+
+
+  /*
+   * Intersection Observer
+   */
+  if ("IntersectionObserver" in window) {
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            reveal(entry.target);
+
+            observer.unobserve(entry.target);
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+
+
+    /*
+     * Safety fallback:
+     * কোনো কারণে observer কাজ না করলেও
+     * 2.5 সেকেন্ড পর সব content visible হবে।
+     */
+    setTimeout(() => {
+
+      elements.forEach((element) => {
+        reveal(element);
+      });
+
+    }, 2500);
+
+  } else {
+
+    /*
+     * Old browser fallback
+     */
+    elements.forEach((element) => {
+      reveal(element);
+    });
+
+  }
+}
 
 
   /* =======================================================
