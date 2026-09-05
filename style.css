@@ -4493,3 +4493,132 @@ footer a:hover {
         transition: none;
     }
    }
+/* =========================================================
+   PREMIUM MOBILE MENU POLISH
+   Additive only — existing menu CSS untouched
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* Mobile navigation panel */
+    .nav-menu,
+    nav ul,
+    .navbar-nav {
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+    }
+
+    /* Menu items */
+    .nav-menu li,
+    nav ul li,
+    .navbar-nav li {
+        transition: transform 0.25s ease;
+    }
+
+    .nav-menu li:hover,
+    nav ul li:hover,
+    .navbar-nav li:hover {
+        transform: translateX(4px);
+    }
+
+    /* Menu links */
+    .nav-menu li a,
+    nav ul li a,
+    .navbar-nav li a {
+        position: relative;
+        transition:
+            color 0.25s ease,
+            padding-left 0.25s ease;
+    }
+
+    .nav-menu li a::after,
+    nav ul li a::after,
+    .navbar-nav li a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 4px;
+        width: 0;
+        height: 1px;
+        transition: width 0.25s ease;
+        background: currentColor;
+    }
+
+    .nav-menu li a:hover::after,
+    nav ul li a:hover::after,
+    .navbar-nav li a:hover::after {
+        width: 28px;
+    }
+
+    /* Facebook & Notice menu items */
+    .nav-menu li:last-child a,
+    nav ul li:last-child a,
+    .navbar-nav li:last-child a {
+        border-radius: 10px;
+    }
+
+    /* Mobile menu button */
+    .menu-toggle,
+    .mobile-menu-toggle,
+    .hamburger,
+    .menu-btn {
+        transition:
+            transform 0.25s ease,
+            opacity 0.25s ease;
+    }
+
+    .menu-toggle:hover,
+    .mobile-menu-toggle:hover,
+    .hamburger:hover,
+    .menu-btn:hover {
+        transform: scale(1.06);
+    }
+
+    /* Active/open menu */
+    .nav-menu.open,
+    nav ul.open,
+    .navbar-nav.open {
+        animation: mobileMenuReveal 0.3s ease both;
+    }
+}
+
+/* Mobile menu entrance */
+@keyframes mobileMenuReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+
+    .nav-menu li a,
+    nav ul li a,
+    .navbar-nav li a {
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .nav-menu li,
+    nav ul li,
+    .navbar-nav li,
+    .nav-menu li a,
+    nav ul li a,
+    .navbar-nav li a,
+    .menu-toggle,
+    .mobile-menu-toggle,
+    .hamburger,
+    .menu-btn {
+        transition: none;
+        animation: none;
+    }
+}
