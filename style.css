@@ -4707,3 +4707,194 @@ footer a:hover {
         transition: none;
     }
 }
+/* =========================================================
+   PREMIUM HEADER BRANDING
+   বাংলা নাম + English নাম + Registration
+   Additive only — existing code untouched
+   ========================================================= */
+
+/* Main Bengali Madrasa Name */
+#brandNameBn {
+    position: relative;
+    display: inline-block;
+
+    color: var(--primary-dark);
+
+    font-family: "Hind Siliguri", sans-serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.15;
+
+    letter-spacing: -0.2px;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Elegant small golden accent */
+#brandNameBn::after {
+    content: "";
+    display: block;
+
+    width: 34px;
+    height: 2px;
+
+    margin-top: 4px;
+
+    background: linear-gradient(
+        90deg,
+        var(--gold),
+        rgba(196, 154, 69, 0.15)
+    );
+
+    border-radius: 999px;
+}
+
+/* English Name */
+#brandNameEn {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #66736d;
+
+    font-family: "Playfair Display", serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+
+    letter-spacing: 0.25px;
+    line-height: 1.2;
+}
+
+/* =========================================================
+   REGISTRATION NUMBER
+   ========================================================= */
+
+/*
+   Registration number যদি header-এর existing
+   registration element/class দিয়ে থাকে,
+   নিচের common selectors সেটাকে ধরবে।
+*/
+
+.registration-no,
+.registration-number,
+.registration,
+#registrationNo,
+[data-registration] {
+    display: inline-flex;
+    align-items: center;
+
+    margin-top: 4px;
+
+    padding: 2px 9px;
+
+    border: 1px solid rgba(196, 154, 69, 0.28);
+    border-radius: 999px;
+
+    background: rgba(196, 154, 69, 0.07);
+
+    color: #77746c;
+
+    font-family: "Playfair Display", serif;
+    font-size: 0.57rem;
+    font-weight: 500;
+
+    letter-spacing: 0.45px;
+    line-height: 1.35;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* Registration number prefix */
+.registration-no::before,
+.registration-number::before,
+.registration::before,
+#registrationNo::before,
+[data-registration]::before {
+    content: "Registration";
+
+    margin-right: 5px;
+
+    color: var(--primary);
+    font-family: "Hind Siliguri", sans-serif;
+    font-size: 0.55rem;
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+/* =========================================================
+   MOBILE — MOST IMPORTANT
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    /* Bengali name */
+    #brandNameBn {
+        font-size: 0.91rem;
+        line-height: 1.1;
+        letter-spacing: -0.25px;
+
+        max-width: 255px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #brandNameBn::after {
+        width: 27px;
+        height: 1.5px;
+        margin-top: 3px;
+    }
+
+    /* English name */
+    #brandNameEn {
+        margin-top: 3px;
+
+        font-size: 0.58rem;
+        letter-spacing: 0.15px;
+    }
+
+    /* Registration */
+    .registration-no,
+    .registration-number,
+    .registration,
+    #registrationNo,
+    [data-registration] {
+        margin-top: 3px;
+        padding: 1px 7px;
+
+        font-size: 0.50rem;
+        letter-spacing: 0.3px;
+    }
+
+    .registration-no::before,
+    .registration-number::before,
+    .registration::before,
+    #registrationNo::before,
+    [data-registration]::before {
+        font-size: 0.48rem;
+        margin-right: 4px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+
+    #brandNameBn {
+        font-size: 0.82rem;
+        max-width: 220px;
+    }
+
+    #brandNameEn {
+        font-size: 0.53rem;
+    }
+
+    .registration-no,
+    .registration-number,
+    .registration,
+    #registrationNo,
+    [data-registration] {
+        font-size: 0.46rem;
+    }
+}
