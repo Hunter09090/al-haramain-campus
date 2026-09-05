@@ -4333,3 +4333,163 @@ footer::before {
         transition: none;
     }
 }
+/* =========================================================
+   PREMIUM FOOTER + DEVELOPER CREDIT
+   Additive only — existing footer code untouched
+   ========================================================= */
+
+footer {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Elegant top glow line */
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 140px;
+    height: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #c9a227,
+        transparent
+    );
+    opacity: 0.9;
+}
+
+/* Footer links */
+footer a {
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+footer a:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+/* Developer credit area */
+.developer-credit {
+    position: relative;
+    margin-top: 28px;
+    padding-top: 22px;
+    text-align: center;
+}
+
+/* Divider */
+.developer-credit::before {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 1px;
+    margin: 0 auto 18px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(201, 162, 39, 0.8),
+        transparent
+    );
+}
+
+/* "Developed and designed by" */
+.developer-credit .developer-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.65;
+}
+
+/* AKTER HOSSEN */
+.developer-credit .developer-name {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    background: linear-gradient(
+        90deg,
+        #b8860b,
+        #e5c45a,
+        #b8860b
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition:
+        transform 0.3s ease,
+        letter-spacing 0.3s ease;
+}
+
+.developer-credit .developer-name:hover {
+    transform: translateY(-2px);
+    letter-spacing: 2px;
+}
+
+/* Web Designer & Developer */
+.developer-credit .developer-role {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    opacity: 0.55;
+}
+
+/* Developer WhatsApp */
+.developer-credit .developer-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 7px 13px;
+    border: 1px solid rgba(37, 211, 102, 0.25);
+    border-radius: 30px;
+    font-size: 11px;
+    text-decoration: none;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.developer-credit .developer-whatsapp:hover {
+    background: rgba(37, 211, 102, 0.08);
+    border-color: rgba(37, 211, 102, 0.55);
+    transform: translateY(-2px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .developer-credit {
+        margin-top: 24px;
+        padding-top: 19px;
+    }
+
+    .developer-credit .developer-name {
+        font-size: 16px;
+    }
+
+    .developer-credit .developer-label {
+        font-size: 10px;
+        letter-spacing: 1.6px;
+    }
+
+    .developer-credit .developer-role {
+        font-size: 10px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    footer a,
+    .developer-credit .developer-name,
+    .developer-credit .developer-whatsapp {
+        transition: none;
+    }
+   }
