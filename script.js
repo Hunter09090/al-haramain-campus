@@ -3867,3 +3867,62 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 })();
+/* =========================================================
+   FLOATING WHATSAPP NOTICE GROUP BUTTON
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
+
+    // Prevent duplicate button
+    if (document.querySelector(".floating-whatsapp-notice")) {
+        return;
+    }
+
+    const noticeGroupLink =
+        "https://chat.whatsapp.com/LOju3X4Im3VFTBLm0hNTeK";
+
+    const button = document.createElement("a");
+
+    button.className = "floating-whatsapp-notice";
+    button.href = noticeGroupLink;
+    button.target = "_blank";
+    button.rel = "noopener noreferrer";
+    button.setAttribute(
+        "aria-label",
+        "WhatsApp Notice Group"
+    );
+    button.setAttribute(
+        "title",
+        "নোটিশ গ্রুপে যোগ দিন"
+    );
+
+    button.innerHTML = `
+        <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+        >
+            <path d="M20.52 3.48A11.82 11.82 0 0 0 12.08 0
+            C5.55 0 .24 5.31.24 11.84c0 2.09.55 4.13
+            1.6 5.93L.14 24l6.39-1.67a11.83 11.83
+            0 0 0 5.55 1.38h.01c6.53 0 11.84-5.31
+            11.84-11.84 0-3.17-1.23-6.15-3.41-8.39ZM12.09
+            21.72h-.01a9.86 9.86 0 0 1-5.02-1.37l-.36-.21
+            -3.79.99 1.01-3.7-.23-.38a9.85 9.85 0 1 1
+            8.4 4.67Zm5.41-7.39c-.3-.15-1.77-.87-2.05-.97
+            -.27-.1-.47-.15-.67.15-.2.3-.77.97-.94
+            1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47
+            -2.42-1.5-.89-.79-1.5-1.76-1.67-2.06-.17-.3
+            -.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17
+            .2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67
+            -1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57
+            c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04
+            2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.21
+            5.09 4.5.71.31 1.27.5 1.7.64.72.23 1.38
+            .2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7
+            .25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+        </svg>
+    `;
+
+    document.body.appendChild(button);
+});
