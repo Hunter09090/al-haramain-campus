@@ -3396,3 +3396,474 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 })();
+/* =========================================================
+   AL-HARAMAIN FORCE PREMIUM SCROLL REVEAL
+   Independent animation system
+   Existing animation code remains untouched
+   ========================================================= */
+
+(function () {
+    "use strict";
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* -----------------------------------------------------
+           PREMIUM REVEAL CSS
+           ----------------------------------------------------- */
+
+        const style = document.createElement("style");
+
+        style.textContent = `
+            /*
+             * Independent reveal system.
+             * Uses its own class names so existing
+             * .reveal / .active / .revealed rules
+             * cannot block the animation.
+             */
+
+            .alh-force-reveal {
+                opacity: 0 !important;
+
+                transform:
+                    translate3d(0, 42px, 0)
+                    !important;
+
+                transition:
+                    opacity 0.9s cubic-bezier(.22,1,.36,1),
+                    transform 0.9s cubic-bezier(.22,1,.36,1)
+                    !important;
+
+                will-change:
+                    opacity,
+                    transform;
+
+            }
+
+
+            .alh-force-reveal.alh-force-visible {
+
+                opacity: 1 !important;
+
+                transform:
+                    translate3d(0, 0, 0)
+                    !important;
+
+            }
+
+
+            /* Left-side reveal */
+
+            .alh-force-left {
+
+                opacity: 0 !important;
+
+                transform:
+                    translate3d(-45px, 0, 0)
+                    !important;
+
+                transition:
+                    opacity 0.9s cubic-bezier(.22,1,.36,1),
+                    transform 0.9s cubic-bezier(.22,1,.36,1)
+                    !important;
+
+            }
+
+
+            .alh-force-left.alh-force-visible {
+
+                opacity: 1 !important;
+
+                transform:
+                    translate3d(0, 0, 0)
+                    !important;
+
+            }
+
+
+            /* Right-side reveal */
+
+            .alh-force-right {
+
+                opacity: 0 !important;
+
+                transform:
+                    translate3d(45px, 0, 0)
+                    !important;
+
+                transition:
+                    opacity 0.9s cubic-bezier(.22,1,.36,1),
+                    transform 0.9s cubic-bezier(.22,1,.36,1)
+                    !important;
+
+            }
+
+
+            .alh-force-right.alh-force-visible {
+
+                opacity: 1 !important;
+
+                transform:
+                    translate3d(0, 0, 0)
+                    !important;
+
+            }
+
+
+            /* Cards */
+
+            .alh-force-card {
+
+                opacity: 0 !important;
+
+                transform:
+                    translate3d(0, 48px, 0)
+                    scale(0.985)
+                    !important;
+
+                transition:
+                    opacity 0.85s cubic-bezier(.22,1,.36,1),
+                    transform 0.85s cubic-bezier(.22,1,.36,1)
+                    !important;
+
+            }
+
+
+            .alh-force-card.alh-force-visible {
+
+                opacity: 1 !important;
+
+                transform:
+                    translate3d(0, 0, 0)
+                    scale(1)
+                    !important;
+
+            }
+
+
+            /* Stagger */
+
+            .alh-force-card:nth-child(2) {
+                transition-delay: 0.08s !important;
+            }
+
+            .alh-force-card:nth-child(3) {
+                transition-delay: 0.16s !important;
+            }
+
+            .alh-force-card:nth-child(4) {
+                transition-delay: 0.24s !important;
+            }
+
+            .alh-force-card:nth-child(5) {
+                transition-delay: 0.32s !important;
+            }
+
+            .alh-force-card:nth-child(6) {
+                transition-delay: 0.40s !important;
+            }
+
+            .alh-force-card:nth-child(7) {
+                transition-delay: 0.48s !important;
+            }
+
+
+            /*
+             * Accessibility:
+             * If reduced motion is enabled,
+             * content remains visible.
+             */
+
+            @media (prefers-reduced-motion: reduce) {
+
+                .alh-force-reveal,
+                .alh-force-left,
+                .alh-force-right,
+                .alh-force-card {
+
+                    opacity: 1 !important;
+
+                    transform: none !important;
+
+                    transition: none !important;
+
+                }
+
+            }
+        `;
+
+        document.head.appendChild(style);
+
+
+        /* -----------------------------------------------------
+           SELECT IMPORTANT CONTENT
+           ----------------------------------------------------- */
+
+        const selectors = [
+
+            /* Section headings */
+            "section .section-heading",
+            "section .section-header",
+
+            /* Section titles */
+            "section h2",
+
+            /* Intro paragraphs */
+            "section > .container > p",
+
+            /* About */
+            ".about-content",
+
+            /* Director */
+            ".director-content",
+
+            /* Department cards */
+            ".department-card",
+
+            /* Value cards */
+            ".value-card",
+
+            /* Achievement cards */
+            ".achievement-card",
+
+            /* Statistics */
+            ".stat-card",
+            ".statistics-card",
+
+            /* Gallery */
+            ".gallery-item",
+
+            /* Admission */
+            ".admission-content",
+            ".admission-info-grid",
+
+            /* Contact */
+            ".contact-item",
+            ".contact-card",
+
+            /* Map */
+            ".map-wrapper",
+
+            /* Final CTA */
+            ".final-cta-content"
+
+        ];
+
+
+        const elements = [];
+
+
+        selectors.forEach(function (selector) {
+
+            document
+                .querySelectorAll(selector)
+                .forEach(function (element) {
+
+                    if (
+                        !elements.includes(element)
+                    ) {
+
+                        elements.push(element);
+
+                    }
+
+                });
+
+        });
+
+
+        /* -----------------------------------------------------
+           REMOVE POSSIBLE CONFLICT FROM OUR NEW CLASS ONLY
+           ----------------------------------------------------- */
+
+        elements.forEach(function (element) {
+
+            /*
+             * Don't animate loader/lightbox.
+             */
+
+            if (
+                element.closest(
+                    "#alHaramainPremiumLoader"
+                )
+            ) {
+                return;
+            }
+
+            if (
+                element.closest(
+                    "#lightbox"
+                )
+            ) {
+                return;
+            }
+
+
+            /* Don't reveal hero elements */
+            if (
+                element.closest(
+                    ".hero-section"
+                )
+            ) {
+                return;
+            }
+
+
+            /* Cards get special animation */
+
+            const isCard =
+                element.matches(
+                    ".department-card, " +
+                    ".value-card, " +
+                    ".achievement-card, " +
+                    ".stat-card, " +
+                    ".statistics-card, " +
+                    ".gallery-item"
+                );
+
+
+            if (isCard) {
+
+                element.classList.add(
+                    "alh-force-card"
+                );
+
+            } else {
+
+                element.classList.add(
+                    "alh-force-reveal"
+                );
+
+            }
+
+        });
+
+
+        /* -----------------------------------------------------
+           INTERSECTION OBSERVER
+           ----------------------------------------------------- */
+
+        const revealElement =
+            function (element) {
+
+                element.classList.add(
+                    "alh-force-visible"
+                );
+
+            };
+
+
+        if (
+            "IntersectionObserver" in window
+        ) {
+
+            const observer =
+                new IntersectionObserver(
+                    function (entries) {
+
+                        entries.forEach(
+                            function (entry) {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    revealElement(
+                                        entry.target
+                                    );
+
+                                    /*
+                                     * Observe only once.
+                                     * After appearing, it stays visible.
+                                     */
+
+                                    observer.unobserve(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold: 0.08,
+
+                        rootMargin:
+                            "0px 0px -70px 0px"
+                    }
+                );
+
+
+            elements.forEach(function (element) {
+
+                if (
+                    !element.closest(
+                        ".hero-section"
+                    )
+                ) {
+
+                    observer.observe(
+                        element
+                    );
+
+                }
+
+            });
+
+
+        } else {
+
+            /*
+             * Browser fallback
+             */
+
+            elements.forEach(
+                revealElement
+            );
+
+        }
+
+
+        /* -----------------------------------------------------
+           SAFETY: CONTENT CAN NEVER REMAIN HIDDEN
+           ----------------------------------------------------- */
+
+        setTimeout(function () {
+
+            elements.forEach(function (element) {
+
+                if (
+                    !element.classList.contains(
+                        "alh-force-visible"
+                    )
+                ) {
+
+                    /*
+                     * Only reveal elements that are
+                     * still far below or observer missed.
+                     */
+
+                    const rect =
+                        element.getBoundingClientRect();
+
+                    if (
+                        rect.top <
+                        window.innerHeight + 150
+                    ) {
+
+                        revealElement(
+                            element
+                        );
+
+                    }
+
+                }
+
+            });
+
+        }, 4000);
+
+    });
+
+})();
