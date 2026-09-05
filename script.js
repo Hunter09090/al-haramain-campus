@@ -3926,3 +3926,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.appendChild(button);
 });
+/* =========================================================
+   FLOATING FACEBOOK BUTTON
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
+
+    // Prevent duplicate Facebook button
+    if (document.querySelector(".floating-facebook")) {
+        return;
+    }
+
+    const facebookLink =
+        "https://www.facebook.com/profile.php?id=61571161346418";
+
+    const facebookButton = document.createElement("a");
+
+    facebookButton.className = "floating-facebook";
+    facebookButton.href = facebookLink;
+    facebookButton.target = "_blank";
+    facebookButton.rel = "noopener noreferrer";
+
+    facebookButton.setAttribute(
+        "aria-label",
+        "Al Haramain Model Madrasa Facebook Page"
+    );
+
+    facebookButton.setAttribute(
+        "title",
+        "Facebook Page"
+    );
+
+    facebookButton.innerHTML = `
+        <span class="floating-facebook-icon" aria-hidden="true">
+            f
+        </span>
+    `;
+
+    document.body.appendChild(facebookButton);
+});
